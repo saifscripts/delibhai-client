@@ -8,7 +8,7 @@ const navLinks = [
   {
     text: 'রেজিস্ট্রেশন করুন',
     icon: <MdAppRegistration />,
-    to: '/register',
+    to: '/signup',
     highlight: true,
   },
 ];
