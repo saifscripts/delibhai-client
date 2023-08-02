@@ -9,7 +9,7 @@ export default function DHero() {
     <div className='bg-secondary min-h-screen'>
       <Navbar bgColor='secondary' />
       <PageContainer>
-        <Title title='ডেলিভাই বাহন' />
+        <Title color='white' title='ডেলিভাই বাহন' />
         <Categories categories={vehicles} />
       </PageContainer>
     </div>

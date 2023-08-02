@@ -9,7 +9,7 @@ const Services = () => {
     <div className='bg-secondary min-h-screen'>
       <Navbar bgColor='secondary' />
       <PageContainer>
-        <Title title='ডেলিভাই সার্ভিস সমূহ' />
+        <Title color='white' title='ডেলিভাই সার্ভিস সমূহ' />
         <Categories categories={services} />
       </PageContainer>
     </div>

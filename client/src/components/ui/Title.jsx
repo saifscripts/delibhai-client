@@ -1,7 +1,8 @@
 // eslint-disable-next-line react/prop-types
-const Title = ({ title }) => {
+const Title = ({ title, color }) => {
   return (
-    <h1 className='text-white text-3xl text-center font-bold mt-10 mb-6 lg:text-4xl'>
+    <h1
+      className={`text-${color} text-2xl text-center font-bold py-4 border-b border-gray-300 lg:text-4x`}>
       {title}
     </h1>
   );
