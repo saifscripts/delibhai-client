@@ -1,13 +1,16 @@
+/* eslint-disable react-refresh/only-export-components */
 import { RxCross1 } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
 import minilogo from '../../../assets/images/minilogo.png';
 import links from '../data/navLinks';
+import React from 'react';
 
 // eslint-disable-next-line react/prop-types
-export const Sidebar = ({ isSidebarOpen, handleSidebarToggle }) => {
+const Sidebar = ({ isSidebarOpen, handleSidebarToggle }, ref) => {
   const navLinks = links.map(({ text, icon, to }, index) => {
     return (
       <NavLink
+        ref={ref}
         key={index}
         onClick={handleSidebarToggle}
         to={to}
@@ -45,3 +48,5 @@ export const Sidebar = ({ isSidebarOpen, handleSidebarToggle }) => {
     </div>
   );
 };
+
+export default React.forwardRef(Sidebar);

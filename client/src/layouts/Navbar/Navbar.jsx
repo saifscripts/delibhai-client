@@ -1,7 +1,7 @@
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import { Sidebar } from './components/Sidebar';
+import  Sidebar  from './components/Sidebar';
 import links from './data/navLinks';
 import useSidebar from './hooks/useSidebar';
 
@@ -30,7 +30,7 @@ const Navbar = ({ bgColor }) => {
 
   return (
     <nav
-      ref={sidebarRef}
+      
       className={`bg-${
         bgColor || '[transparent]'
       } sticky top-0 lg:shadow-sm z-50`}>
@@ -39,7 +39,10 @@ const Navbar = ({ bgColor }) => {
           className={`lg:hidden text-3xl ${
             bgColor === 'secondary' && 'text-white'
           }`}
-          onClick={handleSidebarToggle}
+          onClick={(e)=> {
+            e.stopPropagation();
+            handleSidebarToggle()
+          }}
         />
 
         <Link className='hidden lg:block' to={'/'}>
@@ -47,6 +50,7 @@ const Navbar = ({ bgColor }) => {
         </Link>
 
         <Sidebar
+        ref={sidebarRef}
           isSidebarOpen={isSidebarOpen}
           handleSidebarToggle={handleSidebarToggle}
         />
