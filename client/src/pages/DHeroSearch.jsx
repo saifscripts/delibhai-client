@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import Title from '../components/ui/Title';
-import Navbar from '../layouts/Navbar/Navbar';
 import PageContainer from '../layouts/PageContainer';
+import TopPanel from '../layouts/TopPanel';
 
 export default function DHeroSearch() {
   const { vehicle } = useParams();
@@ -9,7 +9,7 @@ export default function DHeroSearch() {
 
   return (
     <div className='min-h-screen'>
-      <Navbar />
+      <TopPanel />
       <PageContainer>
         <Title color='black' title='ডেলিভাই হিরো (সার্চ)' />
       </PageContainer>
