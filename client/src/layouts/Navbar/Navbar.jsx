@@ -1,7 +1,7 @@
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import  Sidebar  from './components/Sidebar';
+import Sidebar from './components/Sidebar';
 import links from './data/navLinks';
 import useSidebar from './hooks/useSidebar';
 
@@ -15,7 +15,7 @@ const Navbar = ({ bgColor }) => {
         key={index}
         to={to}
         style={{ borderRadius: '8px' }}
-        className={({ isActive }) => isActive ? 'bg-neutral' : ''}>
+        className={({ isActive }) => (isActive ? 'bg-neutral' : '')}>
         <div
           className={`${
             highlight
@@ -30,31 +30,34 @@ const Navbar = ({ bgColor }) => {
 
   return (
     <nav
-      
       className={`bg-${
         bgColor || '[transparent]'
       } sticky top-0 lg:shadow-sm z-50`}>
       <div className='container flex justify-between items-center h-16 sm:h-24'>
-        <RxHamburgerMenu
-          className={`lg:hidden text-3xl ${
-            bgColor === 'secondary' && 'text-white'
-          }`}
-          onClick={(e)=> {
-            e.stopPropagation();
-            handleSidebarToggle()
-          }}
-        />
-
-        <Link className='hidden lg:block' to={'/'}>
-          <img src={logo} alt='deliBhai Logo' className='w-28 sm:w-44' />
-        </Link>
-
+        {/* Sidebar */}
         <Sidebar
-        ref={sidebarRef}
+          ref={sidebarRef}
           isSidebarOpen={isSidebarOpen}
           handleSidebarToggle={handleSidebarToggle}
         />
 
+        {/* Hamburger Button */}
+        <RxHamburgerMenu
+          className={`lg:hidden text-3xl ${
+            bgColor === 'secondary' && 'text-white'
+          }`}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSidebarToggle();
+          }}
+        />
+
+        {/* Logo */}
+        <Link className='hidden lg:block' to={'/'}>
+          <img src={logo} alt='deliBhai Logo' className='w-28 sm:w-44' />
+        </Link>
+
+        {/* Nav menu */}
         <ul className='hidden lg:flex gap-2'>{navLinks}</ul>
       </div>
     </nav>

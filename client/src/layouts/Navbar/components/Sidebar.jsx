@@ -1,9 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
+import React from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
 import minilogo from '../../../assets/images/minilogo.png';
 import links from '../data/navLinks';
-import React from 'react';
 
 // eslint-disable-next-line react/prop-types
 const Sidebar = ({ isSidebarOpen, handleSidebarToggle }, ref) => {
@@ -14,7 +14,7 @@ const Sidebar = ({ isSidebarOpen, handleSidebarToggle }, ref) => {
         key={index}
         onClick={handleSidebarToggle}
         to={to}
-        className={({ isActive }) => isActive ? 'bg-slate-700' : ''}>
+        className={({ isActive }) => (isActive ? 'bg-slate-700' : '')}>
         <div
           className={`hover:cursor-pointer active:bg-primary  border-b border-slate-700 px-8 py-4 flex gap-5 items-center text-sm`}>
           <span className='lg:hidden text-2xl'>{icon}</span>
