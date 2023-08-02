@@ -15,7 +15,7 @@ const Navbar = ({ bgColor }) => {
         key={index}
         to={to}
         style={{ borderRadius: '8px' }}
-        className={({ isActive }) => isActive && `bg-neutral`}>
+        className={({ isActive }) => isActive ? 'bg-neutral' : ''}>
         <div
           className={`${
             highlight

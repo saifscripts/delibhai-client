@@ -11,7 +11,7 @@ export const Sidebar = ({ isSidebarOpen, handleSidebarToggle }) => {
         key={index}
         onClick={handleSidebarToggle}
         to={to}
-        className={({ isActive }) => isActive && 'bg-slate-700'}>
+        className={({ isActive }) => isActive ? 'bg-slate-700' : ''}>
         <div
           className={`hover:cursor-pointer active:bg-primary  border-b border-slate-700 px-8 py-4 flex gap-5 items-center text-sm`}>
           <span className='lg:hidden text-2xl'>{icon}</span>
