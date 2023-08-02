@@ -1,5 +1,5 @@
 import dhero from '../assets/icons/bike.svg';
-import bloodlagbe from '../assets/icons/bloodlagbe.svg';
+import bloodlagbe from '../assets/icons/bloodlagbe.png';
 import delifood from '../assets/icons/delifood.svg';
 import dlabour from '../assets/icons/dlabour.svg';
 import dsend from '../assets/icons/dsend.svg';
