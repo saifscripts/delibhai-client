@@ -1,6 +1,6 @@
 import Navbar from '../layouts/Navbar/Navbar';
 
-const Home = () => {
+const Signup = () => {
   return (
     <div>
       <Navbar />
@@ -8,4 +8,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Signup;
