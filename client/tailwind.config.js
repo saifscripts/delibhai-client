@@ -12,6 +12,7 @@ export default {
       fontFamily: {
         noto: "'Noto Serif Bengali', serif;",
         hind: "'Hind Siliguri', sans-serif",
+        inter: "'Inter', sans-serif",
       },
       boxShadow: {
         '3xl': '0 4px 4px rgba(0, 0, 0, 0.25)',
