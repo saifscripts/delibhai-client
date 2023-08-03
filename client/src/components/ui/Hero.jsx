@@ -27,7 +27,7 @@ export default function Hero({ details }) {
           <Link to={`/profile/${id}`}>
             <PrimaryButton icon={<PiPaperPlaneTiltFill />} />
           </Link>
-          <Link to={`tel:${mobile}}`}>
+          <Link to={`tel:${mobile}`}>
             <PrimaryButton icon={<BsTelephoneFill />} />
           </Link>
         </div>
