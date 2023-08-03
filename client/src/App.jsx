@@ -5,6 +5,7 @@ import DHeroSearch from './pages/DHeroSearch';
 import DHeroSearchResult from './pages/DHeroSearchResult';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 import Services from './pages/Services';
 import Signup from './pages/Signup';
 
@@ -18,6 +19,7 @@ function App() {
       <Route path='/services/dhero/search' element={<DHeroSearchResult />} />
       <Route path='/login' element={<Login />} />
       <Route path='/signup' element={<Signup />} />
+      <Route path='/profile/:id' element={<Profile />} />
     </Routes>
   );
 }
