@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { BiSearchAlt } from 'react-icons/bi';
-import { useParams } from 'react-router-dom';
-import Button from '../components/forms/Button';
+import { Link, useParams } from 'react-router-dom';
 import SelectInput from '../components/forms/SelectInput';
+import Button from '../components/ui/Button';
 import SearchOption from '../components/ui/SearchOption';
 import Title from '../components/ui/Title';
 import PageContainer from '../layouts/PageContainer';
@@ -55,7 +55,9 @@ export default function DHeroSearch() {
               selected='ওয়ার্ড নম্বর নির্বাচন করুন'
             />
             <SelectInput options={divisions} selected='গ্রাম নির্বাচন করুন' />
-            <Button type='submit' value='Search' icon={<BiSearchAlt />} />
+            <Link to='/services/dhero/search'>
+              <Button type='submit' value='Search' icon={<BiSearchAlt />} />
+            </Link>
           </form>
         )}
       </PageContainer>
