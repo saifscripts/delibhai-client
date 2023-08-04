@@ -11,7 +11,7 @@ export default function DHeroSearchResult() {
       <PageContainer>
         <Title color='black' title='ডেলিভাই হিরো' />
 
-        <div className='my-8 flex flex-col gap-8 w-fit max-w-full mx-auto'>
+        <div className='my-8 flex flex-col gap-4 w-fit max-w-full mx-auto'>
           {heros.map((hero) => (
             <Hero details={hero} key={hero.id} />
           ))}

@@ -11,7 +11,7 @@ export default function Hero({ details }) {
 
   return (
     <Link to={`/profile/${id}`}>
-      <div className='flex items-center gap-5'>
+      <div className='flex items-center gap-5 p-4 hover:bg-neutral active:bg-neutral rounded-lg'>
         <div className='w-28 rounded-full'>
           <img src={image} alt='name' className='w-full rounded-full' />
         </div>
