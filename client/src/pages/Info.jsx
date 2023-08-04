@@ -7,7 +7,15 @@ export default function Info({ info, type, icon }) {
         <img src={icon} alt={type} className='w-full' />
       </div>
       <div className='text-medium'>
-        <p className='font-bold text-lg'>{info}</p>
+        {Array.isArray(info) ? (
+          info.map((info, index) => (
+            <p key={index} className='font-bold text-lg'>
+              {info}
+            </p>
+          ))
+        ) : (
+          <p className='font-bold text-lg'>{info}</p>
+        )}
         <p>{type}</p>
       </div>
     </div>

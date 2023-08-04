@@ -14,8 +14,8 @@ export default function InfoCategory({
     <div
       onClick={() => setActiveCategory(id)}
       className={`flex flex-col flex-shrink-0 justify-center items-center w-24 p-1 ${
-        active && 'border-b'
-      } border-[#00E1A9]`}>
+        active && 'border-b-2'
+      } border-secondary`}>
       <div className='relative'>
         <CircularProgressbar
           counterClockwise
