@@ -5,7 +5,7 @@ export default function InfoContainer({ type, children }) {
   return (
     <div className='mb-3'>
       <div className='flex justify-between items-center mb-2'>
-        <h4 className='text-xl'>{type}</h4>
+        <h4 className='text-xl font-bold'>{type}</h4>
         <Edit />
       </div>
 
