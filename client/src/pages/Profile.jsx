@@ -12,13 +12,15 @@ export default function Profile() {
     <div>
       <TopPanel />
       <PageContainer>
-        <Showcase
-          id={id}
-          name='বাবলু খান'
-          image={image}
-          vehicle='কার'
-          vehicleImage={car}
-        />
+        <div className='max-w-lg mx-auto'>
+          <Showcase
+            id={id}
+            name='বাবলু খান'
+            image={image}
+            vehicle='কার'
+            vehicleImage={car}
+          />
+        </div>
       </PageContainer>
     </div>
   );

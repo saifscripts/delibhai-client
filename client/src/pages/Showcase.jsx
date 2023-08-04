@@ -3,7 +3,7 @@ import { FaCamera } from 'react-icons/fa';
 // eslint-disable-next-line react/prop-types
 export default function Showcase({ name, id, vehicle, image, vehicleImage }) {
   return (
-    <div className='grid grid-cols-[3fr_4fr] items-center gap-5 max-w-lg mx-auto'>
+    <div className='grid grid-cols-[3fr_4fr] items-center gap-5'>
       <div className='w-full rounded-xl aspect-square relative'>
         <img src={image} alt='name' className='w-full rounded-xl' />
         <div className='absolute right-[5%] bottom-[5%] rounded-full bg-neutral w-[20%] aspect-square flex justify-center items-center text-xl'>
