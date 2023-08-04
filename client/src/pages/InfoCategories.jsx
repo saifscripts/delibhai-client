@@ -5,7 +5,7 @@ import InfoCategory from './InfoCategory';
 
 export default function InfoCategories({ activeCategory, setActiveCategory }) {
   return (
-    <div className='overflow-y-hidden'>
+    <div className='overflow-y-hidden mb-6'>
       <div className='mt-8 flex gap-2 overflow-x-scroll pb-5 -mb-5'>
         {categories.map(({ id, text, icon, percent }) => (
           <InfoCategory

@@ -8,6 +8,8 @@ export default {
         secondary: '#30D0A7',
         accent: '#707070',
         neutral: '#D9D9D9',
+        medium: '#515050',
+        light: '#EBEBEB',
       },
       fontFamily: {
         noto: "'Noto Serif Bengali', serif;",
