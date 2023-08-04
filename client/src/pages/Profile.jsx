@@ -23,8 +23,8 @@ import vehicleType from '../assets/icons/profile/vehicle.svg';
 // others
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import car from '../assets/icons/car.svg';
 import heros from '../data/users';
+import vehicles from '../data/vehicles';
 import PageContainer from '../layouts/PageContainer';
 import TopPanel from '../layouts/TopPanel';
 import convertNumber from '../utils/convertNumber';
@@ -121,7 +121,9 @@ export default function Profile() {
             name={user.name}
             image={user.image}
             vehicle={user.vehicleType}
-            vehicleImage={car}
+            vehicleImage={
+              vehicles.find(({ title }) => title === user.vehicleType)?.icon
+            }
           />
 
           <InfoCategories
