@@ -33,6 +33,7 @@ import Info from './Info';
 import InfoCategories from './InfoCategories';
 import InfoContainer from './InfoContainer';
 import Showcase from './Showcase';
+import VehiclePhotos from './VehiclePhotos';
 
 export default function Profile() {
   const { id } = useParams();
@@ -167,7 +168,9 @@ export default function Profile() {
                 ))}
               </InfoContainer>
 
-              <InfoContainer type='গাড়ির ছবি'></InfoContainer>
+              <InfoContainer type='গাড়ির ছবি'>
+                <VehiclePhotos photos={user?.vehiclePhotos} />
+              </InfoContainer>
             </>
           )}
 

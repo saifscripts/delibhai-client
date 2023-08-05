@@ -67,6 +67,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
   {
     id: 'DH002',
@@ -132,6 +138,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
   {
     id: 'DH003',
@@ -197,6 +209,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
   {
     id: 'DH004',
@@ -262,6 +280,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
   {
     id: 'DH005',
@@ -327,6 +351,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
   {
     id: 'DH006',
@@ -392,6 +422,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
   {
     id: 'DH007',
@@ -457,6 +493,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
   {
     id: 'DH008',
@@ -522,6 +564,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
   {
     id: 'DH009',
@@ -587,6 +635,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
   {
     id: 'DH010',
@@ -652,6 +706,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
   {
     id: 'DH011',
@@ -717,6 +777,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
   {
     id: 'DH012',
@@ -782,6 +848,12 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    vehiclePhotos: [
+      'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
+      'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
+      'https://i.ibb.co/T4HVfR8/46ed566c7d77fbeb3f145cfc731e4892.png',
+      'https://i.ibb.co/mt1ktQn/adcd0399448005416800b42963624119.jpg',
+    ],
   },
 ];
 
