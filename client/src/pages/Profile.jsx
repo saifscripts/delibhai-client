@@ -22,7 +22,9 @@ import vehicleType from '../assets/icons/profile/vehicle.svg';
 
 // others
 import { useEffect, useState } from 'react';
+import { CiLocationOn } from 'react-icons/ci';
 import { useParams } from 'react-router-dom';
+import map from '../assets/map.png';
 import heros from '../data/heros';
 import vehicles from '../data/vehicles';
 import PageContainer from '../layouts/PageContainer';
@@ -186,7 +188,20 @@ export default function Profile() {
 
           {activeCategory === 4 && (
             <>
-              <InfoContainer type='GPS Location'></InfoContainer>
+              <InfoContainer type='GPS Location'>
+                <div className='p-3 flex justify-center items-center gap-2 border border-light rounded-md mb-3 text-medium'>
+                  <CiLocationOn />
+                  <p>
+                    {'Heyako Bazar, Ramgarh Khagrachari Road, Fatikchhari, Chittagong, Bangladesh'.slice(
+                      0,
+                      30
+                    ) + ' . . .'}
+                  </p>
+                </div>
+                <div className='border border-light rounded-md'>
+                  <img src={map} alt='Map' className='w-full' />
+                </div>
+              </InfoContainer>
 
               <InfoContainer type='ম্যানুয়াল লোকেশন'>
                 {location.map(({ info, type, icon }, index) => (
