@@ -1,4 +1,4 @@
-import { FaCamera } from 'react-icons/fa';
+import camera from '../assets/icons/profile/camera.svg';
 
 // eslint-disable-next-line react/prop-types
 export default function Showcase({ name, id, vehicle, image, vehicleImage }) {
@@ -6,8 +6,8 @@ export default function Showcase({ name, id, vehicle, image, vehicleImage }) {
     <div className='flex items-center gap-5'>
       <div className='w-32 min-[400px]:w-40 rounded-2xl aspect-square relative'>
         <img src={image} alt='name' className='w-full rounded-xl' />
-        <div className='absolute right-[5%] bottom-[5%] rounded-full bg-neutral w-[20%] aspect-square flex justify-center items-center max-[280px]:text-xs text-md sm:text-lg'>
-          <FaCamera />
+        <div className='absolute right-[5%] bottom-[5%] rounded-full bg-neutral w-[20%] aspect-square flex justify-center items-center'>
+          <img src={camera} alt='Camera' />
         </div>
       </div>
 
@@ -18,7 +18,7 @@ export default function Showcase({ name, id, vehicle, image, vehicleImage }) {
           #{id}
         </span>
 
-        <div className='relative bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] pl-4 pr-10 min-[400px]:pr-12 min-[500px]:pr-16 py-3 rounded-full text-xs min-[500px]:text-base'>
+        <div className='relative bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] pl-4 pr-10 min-[400px]:pr-12 min-[500px]:pr-16 py-3 rounded-full text-xs min-[500px]:text-base w-fit'>
           <span>{vehicle} রাইডার</span>
           <div className='absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-16'>
             <img src={vehicleImage} alt={vehicle} className='w-full' />

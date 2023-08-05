@@ -265,7 +265,7 @@ const heros = [
   },
   {
     id: 'DH005',
-    name: 'সাইফ এলহাম',
+    name: 'সাইফ এলহাম এলহাম',
     image: elham,
     father: 'মোঃ ইউসুফ আলী',
     sex: 'পুরুষ',
