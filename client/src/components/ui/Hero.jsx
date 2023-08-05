@@ -7,7 +7,7 @@ import PrimaryButton from './PrimaryButton';
 // eslint-disable-next-line react/prop-types
 export default function Hero({ details }) {
   // eslint-disable-next-line react/prop-types
-  const { name, image, distance, id, mobile } = details;
+  const { name, image, distance, id, mobile1 } = details;
 
   return (
     <Link to={`/profile/${id}`}>
@@ -29,7 +29,7 @@ export default function Hero({ details }) {
               <PrimaryButton icon={<PiPaperPlaneTiltFill />} />
             </Link>
 
-            <Link to={`tel:${mobile}`} onClick={(e) => e.stopPropagation()}>
+            <Link to={`tel:${mobile1}`} onClick={(e) => e.stopPropagation()}>
               <PrimaryButton icon={<BsTelephoneFill />} />
             </Link>
           </div>

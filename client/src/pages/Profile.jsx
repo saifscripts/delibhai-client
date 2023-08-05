@@ -23,7 +23,7 @@ import vehicleType from '../assets/icons/profile/vehicle.svg';
 // others
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import heros from '../data/users';
+import heros from '../data/heros';
 import vehicles from '../data/vehicles';
 import PageContainer from '../layouts/PageContainer';
 import TopPanel from '../layouts/TopPanel';
