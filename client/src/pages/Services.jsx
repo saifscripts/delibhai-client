@@ -1,8 +1,8 @@
-import Categories from '../components/ui/Categories';
-import Title from '../components/ui/Title';
 import services from '../data/services';
+import Categories from '../layouts/Categories';
 import Navbar from '../layouts/Navbar/Navbar';
 import PageContainer from '../layouts/PageContainer';
+import Title from '../layouts/Title';
 
 const Services = () => {
   return (

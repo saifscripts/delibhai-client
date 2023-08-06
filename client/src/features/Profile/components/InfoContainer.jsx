@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import Edit from '../components/ui/Edit';
+import Edit from '../../../components/ui/Edit';
 
 export default function InfoContainer({ type, children }) {
   return (

@@ -1,6 +1,6 @@
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/logos/logo.png';
 import Sidebar from './components/Sidebar';
 import links from './data/navLinks';
 import useSidebar from './hooks/useSidebar';

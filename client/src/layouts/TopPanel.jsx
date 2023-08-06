@@ -1,7 +1,7 @@
 import { BiArrowBack } from 'react-icons/bi';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
-import logo from '../assets/images/logo.svg';
+import logo from '../assets/logos/logo.svg';
 
 export default function TopPanel() {
   const navigate = useNavigate();

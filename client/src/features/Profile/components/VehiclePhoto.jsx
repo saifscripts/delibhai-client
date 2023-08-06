@@ -1,4 +1,4 @@
-import camera from '../assets/icons/profile/camera.svg';
+import camera from '../assets/icons/camera.svg';
 
 // eslint-disable-next-line react/prop-types
 export default function VehiclePhoto({ url }) {

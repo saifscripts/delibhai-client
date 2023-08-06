@@ -3,15 +3,17 @@ import { useState } from 'react';
 import { CiLocationOn } from 'react-icons/ci';
 import { useParams } from 'react-router-dom';
 import map from '../assets/map.png';
-import vehicles from '../data/vehicles';
+import { vehicles } from '../features/DHero/index';
+import {
+  Info,
+  InfoCategories,
+  InfoContainer,
+  Showcase,
+  VehiclePhotos,
+  useUserInfo,
+} from '../features/Profile/index';
 import PageContainer from '../layouts/PageContainer';
 import TopPanel from '../layouts/TopPanel';
-import Info from './Info';
-import InfoCategories from './InfoCategories';
-import InfoContainer from './InfoContainer';
-import Showcase from './Showcase';
-import VehiclePhotos from './VehiclePhotos';
-import useUserInfo from './useUserInfo.js';
 
 export default function Profile() {
   const { id } = useParams();

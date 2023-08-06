@@ -1,30 +1,30 @@
 // icons
-import nid from '../assets/icons/profile/NID.svg';
-import age from '../assets/icons/profile/age.svg';
-import bloodGroup from '../assets/icons/profile/blood-group.svg';
-import clock from '../assets/icons/profile/clock.svg';
-import email from '../assets/icons/profile/email.svg';
-import facebook from '../assets/icons/profile/facebook.svg';
-import father from '../assets/icons/profile/father.svg';
-import marker from '../assets/icons/profile/marker.svg';
-import phone from '../assets/icons/profile/phone.svg';
-import serviceArea from '../assets/icons/profile/service-area.svg';
-import serviceType from '../assets/icons/profile/service-type.svg';
-import sex from '../assets/icons/profile/sex.svg';
-import station from '../assets/icons/profile/station.svg';
-import steering from '../assets/icons/profile/steering.svg';
-import person from '../assets/icons/profile/user.svg';
-import vehicleName from '../assets/icons/profile/vehicle--name.svg';
-import vehicleBrand from '../assets/icons/profile/vehicle-brand.svg';
-import vehicleModel from '../assets/icons/profile/vehicle-model.svg';
-import vehicleNumber from '../assets/icons/profile/vehicle-number.svg';
-import vehicleType from '../assets/icons/profile/vehicle.svg';
+import nid from '../assets/icons/NID.svg';
+import age from '../assets/icons/age.svg';
+import bloodGroup from '../assets/icons/blood-group.svg';
+import clock from '../assets/icons/clock.svg';
+import email from '../assets/icons/email.svg';
+import facebook from '../assets/icons/facebook.svg';
+import father from '../assets/icons/father.svg';
+import marker from '../assets/icons/marker.svg';
+import phone from '../assets/icons/phone.svg';
+import serviceArea from '../assets/icons/service-area.svg';
+import serviceType from '../assets/icons/service-type.svg';
+import sex from '../assets/icons/sex.svg';
+import station from '../assets/icons/station.svg';
+import steering from '../assets/icons/steering.svg';
+import person from '../assets/icons/user.svg';
+import vehicleName from '../assets/icons/vehicle--name.svg';
+import vehicleBrand from '../assets/icons/vehicle-brand.svg';
+import vehicleModel from '../assets/icons/vehicle-model.svg';
+import vehicleNumber from '../assets/icons/vehicle-number.svg';
+import vehicleType from '../assets/icons/vehicle.svg';
 
 // others
 import { useEffect, useState } from 'react';
-import heros from '../data/heros';
-import convertNumber from '../utils/convertNumber';
-import { getServiceTime } from '../utils/convertTime';
+import heros from '../../../data/heros';
+import convertNumber from '../../../utils/convertNumber';
+import { getServiceTime } from '../../../utils/convertTime';
 
 const useUserInfo = (id) => {
   const [userInfo, setUserInfo] = useState({});

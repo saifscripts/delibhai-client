@@ -1,7 +1,7 @@
-import Hero from '../components/ui/Hero';
-import Title from '../components/ui/Title';
 import heros from '../data/heros';
+import { Hero } from '../features/DHero/index';
 import PageContainer from '../layouts/PageContainer';
+import Title from '../layouts/Title';
 import TopPanel from '../layouts/TopPanel';
 
 export default function DHeroSearchResult() {

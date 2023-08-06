@@ -2,7 +2,7 @@
 import React from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import { Link, NavLink } from 'react-router-dom';
-import minilogo from '../../../assets/images/minilogo.png';
+import minilogo from '../../../assets/logos/minilogo.png';
 import links from '../data/navLinks';
 
 // eslint-disable-next-line react/prop-types
