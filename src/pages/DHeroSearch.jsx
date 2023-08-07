@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { BiSearchAlt } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
 import Select from '../components/forms/Select';
@@ -29,7 +30,15 @@ export default function DHeroSearch() {
           <SearchOption
             fill={activeOption === 1}
             text='Location Tracking (Nearest)'
-            handleSelectSearchOption={() => setActiveOption(1)}
+            handleSelectSearchOption={() =>
+              toast.error(
+                'এই সার্ভিসটি আপডেটের কাজ চলমান! দয়া করে "Manual Search" অপশনটি নির্বাচন করুন',
+                {
+                  duration: 4000,
+                  position: 'top-center',
+                }
+              )
+            }
           />
           <SearchOption
             fill={activeOption === 2}
