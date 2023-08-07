@@ -1,10 +1,10 @@
-import dhero from '../assets/icons/bike.svg';
-import bloodlagbe from '../assets/icons/bloodlagbe.svg';
-import delifood from '../assets/icons/delifood.svg';
-import dlabour from '../assets/icons/dlabour.svg';
-import dsend from '../assets/icons/dsend.svg';
-import dshop from '../assets/icons/dshop.svg';
-import gaslagbe from '../assets/icons/gaslagbe.svg';
+import dhero from '../../../client/src/assets/icons/bike.svg';
+import bloodlagbe from '../../../client/src/assets/icons/bloodlagbe.svg';
+import delifood from '../../../client/src/assets/icons/delifood.svg';
+import dlabour from '../../../client/src/assets/icons/dlabour.svg';
+import dsend from '../../../client/src/assets/icons/dsend.svg';
+import dshop from '../../../client/src/assets/icons/dshop.svg';
+import gaslagbe from '../../../client/src/assets/icons/gaslagbe.svg';
 
 const services = [
   { id: 1, icon: dhero, title: 'dHero', to: 'dhero' },
