@@ -36,6 +36,9 @@ export default function DHeroSearch() {
                 {
                   duration: 4000,
                   position: 'top-center',
+                  style: {
+                    backgroundColor: '#efef8d',
+                  },
                 }
               )
             }
