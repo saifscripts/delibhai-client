@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import DHero from './pages/DHero';
@@ -11,16 +12,19 @@ import Signup from './pages/Signup';
 
 function App() {
   return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/services' element={<Services />} />
-      <Route path='/services/dhero' element={<DHero />} />
-      <Route path='/services/dhero/:vehicle' element={<DHeroSearch />} />
-      <Route path='/services/dhero/search' element={<DHeroSearchResult />} />
-      <Route path='/login' element={<Login />} />
-      <Route path='/signup' element={<Signup />} />
-      <Route path='/profile/:id' element={<Profile />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/services' element={<Services />} />
+        <Route path='/services/dhero' element={<DHero />} />
+        <Route path='/services/dhero/:vehicle' element={<DHeroSearch />} />
+        <Route path='/services/dhero/search' element={<DHeroSearchResult />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/profile/:id' element={<Profile />} />
+      </Routes>
+      <Toaster />
+    </>
   );
 }
 
