@@ -1,6 +1,7 @@
 // others
 import { useState } from 'react';
 import { CiLocationOn } from 'react-icons/ci';
+import ReactPlayer from 'react-player/youtube';
 import { useParams } from 'react-router-dom';
 import map from '../assets/map.png';
 import { vehicles } from '../features/DHero/index';
@@ -123,6 +124,22 @@ export default function Profile() {
               {location.map(({ info, type, icon }, index) => (
                 <Info key={index} info={info} type={type} icon={icon} />
               ))}
+            </InfoContainer>
+          </>
+        )}
+
+        {/* Video */}
+        {activeCategory === 5 && (
+          <>
+            <InfoContainer type='ডিহিরোর অভিব্যক্তি'>
+              <div className='w-full max-w-lg aspect-[1/1.8] bg-black flex justify-center items-center rounded-lg overflow-hidden'>
+                <ReactPlayer
+                  width='100%'
+                  height='100%'
+                  loop
+                  url='https://youtu.be/_HgpFMdZ16c'
+                />
+              </div>
             </InfoContainer>
           </>
         )}
