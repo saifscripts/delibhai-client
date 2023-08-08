@@ -1,4 +1,5 @@
 // Components
+import Achievement from './components/Achievement';
 import Info from './components/Info';
 import InfoCategories from './components/InfoCategories';
 import InfoCategory from './components/InfoCategory';
@@ -14,6 +15,7 @@ import categories from './data/categories';
 import useUserInfo from './hooks/useUserInfo';
 
 export {
+  Achievement,
   Info,
   InfoCategories,
   InfoCategory,

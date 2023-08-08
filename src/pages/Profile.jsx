@@ -1,11 +1,13 @@
 // others
 import { useState } from 'react';
+import { AiFillStar } from 'react-icons/ai';
 import { CiLocationOn } from 'react-icons/ci';
 import ReactPlayer from 'react-player/youtube';
 import { useParams } from 'react-router-dom';
 import map from '../assets/map.png';
 import { vehicles } from '../features/DHero/index';
 import {
+  Achievement,
   Info,
   InfoCategories,
   InfoContainer,
@@ -141,6 +143,24 @@ export default function Profile() {
                 />
               </div>
             </InfoContainer>
+          </>
+        )}
+
+        {/* Review */}
+        {activeCategory === 6 && (
+          <>
+            <InfoContainer type='রাইডার এক্টিভিটি'>
+              <div className='flex gap-8 justify-center items-center'>
+                <Achievement
+                  title='21K রিভিও'
+                  stat='4.3'
+                  icon={<AiFillStar />}
+                />
+                <Achievement title='রাইড শেয়ার' stat='30K' />
+                <Achievement title='রিসিভড কল' stat='35K' />
+              </div>
+            </InfoContainer>
+            <InfoContainer type='রেটিং এবং রিভিও'></InfoContainer>
           </>
         )}
       </PageContainer>
