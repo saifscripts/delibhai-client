@@ -150,7 +150,7 @@ export default function Profile() {
         {activeCategory === 6 && (
           <>
             <InfoContainer type='রাইডার এক্টিভিটি'>
-              <div className='flex gap-8 justify-center items-center'>
+              <div className='flex gap-8 justify-center items-center py-3 border-b border-light'>
                 <Achievement
                   title='21K রিভিও'
                   stat='4.3'
