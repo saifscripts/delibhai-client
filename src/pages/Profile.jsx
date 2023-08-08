@@ -8,9 +8,11 @@ import map from '../assets/map.png';
 import { vehicles } from '../features/DHero/index';
 import {
   Achievement,
+  AverageRating,
   Info,
   InfoCategories,
   InfoContainer,
+  RatingBars,
   Showcase,
   VehiclePhotos,
   useUserInfo,
@@ -160,7 +162,13 @@ export default function Profile() {
                 <Achievement title='রিসিভড কল' stat='35K' />
               </div>
             </InfoContainer>
-            <InfoContainer type='রেটিং এবং রিভিও'></InfoContainer>
+
+            <InfoContainer type='রেটিং এবং রিভিও'>
+              <div className='grid grid-cols-[1fr_3fr] gap-8 items-center px-2 py-3 border-b border-light'>
+                <AverageRating average='3.7' total='21,000' />
+                <RatingBars percentages={[70, 20, 10, 3, 2]} />
+              </div>
+            </InfoContainer>
           </>
         )}
       </PageContainer>
