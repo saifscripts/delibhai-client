@@ -13,6 +13,7 @@ import {
   InfoCategories,
   InfoContainer,
   RatingBars,
+  Review,
   Showcase,
   VehiclePhotos,
   useUserInfo,
@@ -25,6 +26,7 @@ export default function Profile() {
   const [activeCategory, setActiveCategory] = useState(1);
   const [userInfo, modifiedInfo] = useUserInfo(id);
 
+  const { reviews } = userInfo;
   const { personal, contact, address, vehicle, owner, service, location } =
     modifiedInfo;
 
@@ -165,8 +167,26 @@ export default function Profile() {
 
             <InfoContainer type='রেটিং এবং রিভিও'>
               <div className='grid grid-cols-[1fr_3fr] gap-8 items-center px-2 py-3 border-b border-light'>
-                <AverageRating average='3.7' total='21,000' />
+                <AverageRating rating='3.7' total='21,000' />
                 <RatingBars percentages={[70, 20, 10, 3, 2]} />
+              </div>
+            </InfoContainer>
+
+            <InfoContainer>
+              <div className='grid gap-8 px-2 py-3'>
+                {reviews?.map(
+                  ({ id, userImage, userName, rating, date, review }) => (
+                    <Review
+                      key={id}
+                      id={id}
+                      image={userImage}
+                      name={userName}
+                      rating={rating}
+                      date={date}
+                      review={review}
+                    />
+                  )
+                )}
               </div>
             </InfoContainer>
           </>

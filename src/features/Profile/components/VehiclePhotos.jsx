@@ -1,4 +1,4 @@
-import VehiclePhoto from './VehiclePhoto';
+import { VehiclePhoto } from '../index';
 
 // eslint-disable-next-line react/prop-types
 export default function VehiclePhotos({ photos = [] }) {

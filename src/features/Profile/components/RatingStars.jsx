@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 
-export default function RatingStars({ average }) {
-  const numberOfFullStars = Math.floor(average);
-  const isHalfStars = average - numberOfFullStars >= 0.5;
+export default function RatingStars({ rating }) {
+  const numberOfFullStars = Math.floor(rating);
+  const isHalfStars = rating - numberOfFullStars >= 0.5;
   const numberOfEmptyStars = 5 - numberOfFullStars - (isHalfStars ? 1 : 0);
 
   const fullStars = Array(numberOfFullStars)

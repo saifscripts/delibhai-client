@@ -1,11 +1,14 @@
 // Components
 import Achievement from './components/Achievement';
+import Avatar from './components/Avatar';
 import AverageRating from './components/AverageRating';
 import Info from './components/Info';
 import InfoCategories from './components/InfoCategories';
 import InfoCategory from './components/InfoCategory';
 import InfoContainer from './components/InfoContainer';
 import RatingBars from './components/RatingBars';
+import RatingStars from './components/RatingStars';
+import Review from './components/Review';
 import Showcase from './components/Showcase';
 import VehiclePhoto from './components/VehiclePhoto';
 import VehiclePhotos from './components/VehiclePhotos';
@@ -18,12 +21,15 @@ import useUserInfo from './hooks/useUserInfo';
 
 export {
   Achievement,
+  Avatar,
   AverageRating,
   Info,
   InfoCategories,
   InfoCategory,
   InfoContainer,
   RatingBars,
+  RatingStars,
+  Review,
   Showcase,
   VehiclePhoto,
   VehiclePhotos,
