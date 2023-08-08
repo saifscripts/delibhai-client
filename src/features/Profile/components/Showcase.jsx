@@ -1,15 +1,10 @@
-import camera from '../assets/icons/camera.svg';
+import { Avatar } from '../index';
 
 // eslint-disable-next-line react/prop-types
 export default function Showcase({ name, id, vehicle, image, vehicleImage }) {
   return (
     <div className='flex items-center gap-5'>
-      <div className='w-32 min-[400px]:w-40 rounded-2xl aspect-square relative'>
-        <img src={image} alt='name' className='w-full rounded-xl' />
-        <div className='absolute right-[5%] bottom-[5%] rounded-full bg-neutral w-[20%] aspect-square flex justify-center items-center'>
-          <img src={camera} alt='Camera' />
-        </div>
-      </div>
+      <Avatar className='w-32 min-[400px]:w-40' image={image} edit />
 
       <div>
         <h3 className='text-2xl mb-1'>{name}</h3>

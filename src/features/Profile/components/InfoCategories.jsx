@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import 'react-circular-progressbar/dist/styles.css';
 import categories from '../data/categories';
-import InfoCategory from './InfoCategory';
+import { InfoCategory } from '../index';
 
 export default function InfoCategories({ activeCategory, setActiveCategory }) {
   return (
