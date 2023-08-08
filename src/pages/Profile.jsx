@@ -50,19 +50,19 @@ export default function Profile() {
         {/* General Information */}
         {activeCategory === 1 && (
           <>
-            <InfoContainer type='ব্যক্তিগত তথ্য'>
+            <InfoContainer type='ব্যক্তিগত তথ্য' edit>
               {personal.map(({ info, type, icon }, index) => (
                 <Info key={index} info={info} type={type} icon={icon} />
               ))}
             </InfoContainer>
 
-            <InfoContainer type='কন্টাক্ট ইনফো'>
+            <InfoContainer type='কন্টাক্ট ইনফো' edit>
               {contact.map(({ info, type, icon }, index) => (
                 <Info key={index} info={info} type={type} icon={icon} />
               ))}
             </InfoContainer>
 
-            <InfoContainer type='ঠিকানা'>
+            <InfoContainer type='ঠিকানা' edit>
               {address.map(({ info, type, icon }, index) => (
                 <Info key={index} info={info} type={type} icon={icon} />
               ))}
@@ -73,13 +73,13 @@ export default function Profile() {
         {/* Vehicle Information */}
         {activeCategory === 2 && (
           <>
-            <InfoContainer type='গাড়ির সাধারণ তথ্য'>
+            <InfoContainer type='গাড়ির সাধারণ তথ্য' edit>
               {vehicle.map(({ info, type, icon }, index) => (
                 <Info key={index} info={info} type={type} icon={icon} />
               ))}
             </InfoContainer>
 
-            <InfoContainer type='গাড়ির মালিকানার তথ্য'>
+            <InfoContainer type='গাড়ির মালিকানার তথ্য' edit>
               {owner.map(({ info, type, icon }, index) => (
                 <Info key={index} info={info} type={type} icon={icon} />
               ))}
@@ -94,7 +94,7 @@ export default function Profile() {
         {/* Service Information */}
         {activeCategory === 3 && (
           <>
-            <InfoContainer type='সার্ভিস তথ্য'>
+            <InfoContainer type='সার্ভিস তথ্য' edit>
               {service.map(({ info, type, icon }, index) => (
                 <Info key={index} info={info} type={type} icon={icon} />
               ))}
@@ -105,7 +105,7 @@ export default function Profile() {
         {/* Location Information */}
         {activeCategory === 4 && (
           <>
-            <InfoContainer type='GPS Location'>
+            <InfoContainer type='GPS Location' edit>
               <div className='p-3 flex justify-center items-center gap-2 border border-light rounded-md mb-3 text-medium'>
                 <CiLocationOn />
                 <p>
@@ -120,7 +120,7 @@ export default function Profile() {
               </div>
             </InfoContainer>
 
-            <InfoContainer type='ম্যানুয়াল লোকেশন'>
+            <InfoContainer type='ম্যানুয়াল লোকেশন' edit>
               {location.map(({ info, type, icon }, index) => (
                 <Info key={index} info={info} type={type} icon={icon} />
               ))}
@@ -131,7 +131,7 @@ export default function Profile() {
         {/* Video */}
         {activeCategory === 5 && (
           <>
-            <InfoContainer type='ডিহিরোর অভিব্যক্তি'>
+            <InfoContainer type='ডিহিরোর অভিব্যক্তি' edit>
               <div className='w-full max-w-lg aspect-[1/1.8] bg-black flex justify-center items-center rounded-lg overflow-hidden'>
                 <ReactPlayer
                   width='100%'
