@@ -14,7 +14,7 @@ export default function DHeroSearch() {
   const { vehicle } = useParams();
   console.log(vehicle);
 
-  const [activeOption, setActiveOption] = useState(2);
+  const [activeOption, setActiveOption] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +30,8 @@ export default function DHeroSearch() {
           <SearchOption
             fill={activeOption === 1}
             text='Location Tracking (Nearest)'
-            handleSelectSearchOption={() =>
+            handleSelectSearchOption={() => {
+              setActiveOption(1);
               toast.error(
                 'এই সার্ভিসটি আপডেটের কাজ চলমান! দয়া করে "Manual Search" অপশনটি নির্বাচন করুন',
                 {
@@ -40,8 +41,8 @@ export default function DHeroSearch() {
                     backgroundColor: '#efef8d',
                   },
                 }
-              )
-            }
+              );
+            }}
           />
           <SearchOption
             fill={activeOption === 2}
