@@ -1,12 +1,15 @@
 /* eslint-disable react/prop-types */
 
-export default function EditOption({ icon, text }) {
+export default function EditOption({ icon, text, type }) {
   return (
-    <div className='flex gap-3 items-center'>
+    <label
+      className='flex gap-3 items-center hover:bg-[#ccc] active:bg-[#ccc] hover:cursor-pointer px-7 py-2'
+      htmlFor={text}>
       <div className='w-10 aspect-square rounded-full bg-light flex justify-center items-center text-xl'>
         {icon}
       </div>
-      <div className='text-xl'>{text}</div>
-    </div>
+      <input id={text} className='text-xl hidden' type={type} />
+      {text}
+    </label>
   );
 }
