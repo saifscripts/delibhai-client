@@ -5,10 +5,10 @@ import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { EditOption } from '../index.js';
 
 const options = [
-  { icon: <GiResize />, text: 'ছবি রিসাইজ' },
-  { icon: <GrAttachment />, text: 'ফাইল থেকে আপলোড' },
-  { icon: <AiFillCamera />, text: 'নতুন ছবি তুলুন' },
-  { icon: <RiDeleteBin5Fill />, text: 'ছবি ডিলিট করুন' },
+  { icon: <GiResize />, text: 'ছবি রিসাইজ', type: 'button' },
+  { icon: <GrAttachment />, text: 'ফাইল থেকে আপলোড', type: 'file' },
+  { icon: <AiFillCamera />, text: 'নতুন ছবি তুলুন', type: 'button' },
+  { icon: <RiDeleteBin5Fill />, text: 'ছবি ডিলিট করুন', type: 'button' },
 ];
 
 /* eslint-disable react/prop-types */
@@ -25,9 +25,9 @@ export default function EditAvatar({ handleEdit, edit }) {
           edit ? 'translate-y-0' : 'translate-y-full'
         }`}>
         <div className={`w-10 h-1 bg-accent rounded-full mx-auto mt-2`}></div>
-        <div className='p-7 flex flex-col gap-5'>
-          {options.map(({ icon, text }, index) => (
-            <EditOption key={index} icon={icon} text={text} />
+        <div className='py-7 flex flex-col gap-2'>
+          {options.map(({ icon, text, type }, index) => (
+            <EditOption key={index} icon={icon} text={text} type={type} />
           ))}
         </div>
       </div>
