@@ -1,16 +1,74 @@
-import { useState } from 'react';
-import { Avatar, EditAvatar } from '../index';
+/* eslint-disable react/prop-types */
+import 'cropperjs/dist/cropper.css';
+import { useEffect, useState } from 'react';
+import { Avatar, EditAvatar, ResizeAvatar } from '../index';
 
 // eslint-disable-next-line react/prop-types
-export default function Showcase({ name, id, vehicle, image, vehicleImage }) {
+export default function Showcase({
+  name,
+  id,
+  vehicle,
+  image: dp,
+  vehicleImage,
+}) {
+  const [image, setImage] = useState('#');
+
+  // const [cropData, setCropData] = useState('#');
   const [edit, setEdit] = useState(false);
+  const [resize, setResize] = useState(false);
+
+  useEffect(() => {
+    setImage(dp);
+  }, [dp]);
+
+  const onFileChoose = (e) => {
+    e.preventDefault();
+    let files;
+    if (e.dataTransfer) {
+      files = e.dataTransfer.files;
+    } else if (e.target) {
+      files = e.target.files;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+    reader.readAsDataURL(files[0]);
+
+    setEdit(false);
+    setResize(!resize);
+  };
+
   const handleEdit = () => {
     setEdit(!edit);
   };
 
+  const handleResize = () => {
+    setResize(!resize);
+  };
+
+  // const getCropData = () => {
+  //   if (typeof cropperRef.current?.cropper !== 'undefined') {
+  //     setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
+  //   }
+  // };
+
   return (
     <>
-      {<EditAvatar handleEdit={handleEdit} edit={edit} />}
+      {
+        <EditAvatar
+          onFileChoose={onFileChoose}
+          handleEdit={handleEdit}
+          edit={edit}
+        />
+      }
+      {
+        <ResizeAvatar
+          handleResize={handleResize}
+          resize={resize}
+          image={image}
+        />
+      }
       <div className='flex items-center gap-5'>
         <Avatar
           className='w-32 min-[400px]:w-40'

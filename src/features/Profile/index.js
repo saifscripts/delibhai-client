@@ -10,6 +10,7 @@ import InfoCategory from './components/InfoCategory';
 import InfoContainer from './components/InfoContainer';
 import RatingBars from './components/RatingBars';
 import RatingStars from './components/RatingStars';
+import ResizeAvatar from './components/ResizeAvatar';
 import Review from './components/Review';
 import Showcase from './components/Showcase';
 import VehiclePhoto from './components/VehiclePhoto';
@@ -33,6 +34,7 @@ export {
   InfoContainer,
   RatingBars,
   RatingStars,
+  ResizeAvatar,
   Review,
   Showcase,
   VehiclePhoto,
