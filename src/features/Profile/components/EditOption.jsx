@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-export default function EditOption({ icon, text, type, onChange }) {
+export default function EditOption({ icon, text, type, onChange, onClick }) {
   return (
     <label
       className='flex gap-3 items-center hover:bg-[#ccc] active:bg-[#ccc] hover:cursor-pointer px-7 py-2'
@@ -13,6 +13,7 @@ export default function EditOption({ icon, text, type, onChange }) {
         className='text-xl hidden'
         type={type}
         onChange={onChange}
+        onClick={onClick}
       />
       {text}
     </label>

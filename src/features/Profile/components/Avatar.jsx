@@ -1,11 +1,21 @@
 import camera from '../assets/icons/camera.svg';
 
 /* eslint-disable react/prop-types */
-export default function Avatar({ className, image, edit, handleEdit }) {
+export default function Avatar({
+  className,
+  image,
+  edit,
+  handleEdit,
+  cropData,
+}) {
   return (
     <div
       className={`rounded-2xl aspect-square overflow-hidden relative ${className}`}>
-      <img src={image} alt='name' className='w-full rounded-xl' />
+      <img
+        src={cropData !== '#' ? cropData : image}
+        alt='name'
+        className='w-full rounded-xl'
+      />
       {edit && handleEdit && (
         <div
           onClick={handleEdit}
