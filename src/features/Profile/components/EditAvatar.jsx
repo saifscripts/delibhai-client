@@ -1,21 +1,39 @@
 import { AiFillCamera } from 'react-icons/ai';
 import { GiResize } from 'react-icons/gi';
-import { GrAttachment } from 'react-icons/gr';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { EditOption } from '../index.js';
 
 /* eslint-disable react/prop-types */
-export default function EditAvatar({ onFileChoose, handleEdit, edit }) {
+export default function EditAvatar({
+  onFileChoose,
+  handleEdit,
+  showResize,
+  removeImage,
+  cropData,
+  edit,
+}) {
   const options = [
-    { icon: <GiResize />, text: 'ছবি রিসাইজ', type: 'button' },
     {
-      icon: <GrAttachment />,
-      text: 'ফাইল থেকে আপলোড',
+      icon: <GiResize />,
+      text: 'ছবি রিসাইজ',
+      type: 'button',
+      onClick: showResize,
+      show: cropData !== '#',
+    },
+    {
+      icon: <AiFillCamera />,
+      text: 'ছবি আপলোড',
       type: 'file',
       onChange: onFileChoose,
+      show: true,
     },
-    { icon: <AiFillCamera />, text: 'নতুন ছবি তুলুন', type: 'button' },
-    { icon: <RiDeleteBin5Fill />, text: 'ছবি ডিলিট করুন', type: 'button' },
+    {
+      icon: <RiDeleteBin5Fill />,
+      text: 'ছবি ডিলিট করুন',
+      type: 'button',
+      onClick: removeImage,
+      show: true,
+    },
   ];
 
   return (
@@ -31,15 +49,20 @@ export default function EditAvatar({ onFileChoose, handleEdit, edit }) {
         }`}>
         <div className={`w-10 h-1 bg-accent rounded-full mx-auto mt-2`}></div>
         <div className='py-7 flex flex-col gap-2'>
-          {options.map(({ icon, text, type, onChange }, index) => (
-            <EditOption
-              key={index}
-              icon={icon}
-              text={text}
-              type={type}
-              onChange={onChange}
-            />
-          ))}
+          {options.map(
+            ({ icon, text, type, onChange, onClick, show }, index) =>
+              show && (
+                <EditOption
+                  key={index}
+                  icon={icon}
+                  text={text}
+                  type={type}
+                  onChange={onChange}
+                  onClick={onClick}
+                  show={show}
+                />
+              )
+          )}
         </div>
       </div>
     </>

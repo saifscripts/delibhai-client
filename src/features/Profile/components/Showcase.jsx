@@ -1,25 +1,17 @@
 /* eslint-disable react/prop-types */
 import 'cropperjs/dist/cropper.css';
-import { useEffect, useState } from 'react';
+import { createRef, useState } from 'react';
+import dp from '../../../assets/default.jpg';
 import { Avatar, EditAvatar, ResizeAvatar } from '../index';
 
 // eslint-disable-next-line react/prop-types
-export default function Showcase({
-  name,
-  id,
-  vehicle,
-  image: dp,
-  vehicleImage,
-}) {
+export default function Showcase({ name, id, vehicle, vehicleImage }) {
   const [image, setImage] = useState('#');
-
-  // const [cropData, setCropData] = useState('#');
+  const [cropData, setCropData] = useState('#');
   const [edit, setEdit] = useState(false);
   const [resize, setResize] = useState(false);
 
-  useEffect(() => {
-    setImage(dp);
-  }, [dp]);
+  const cropperRef = createRef();
 
   const onFileChoose = (e) => {
     e.preventDefault();
@@ -36,22 +28,33 @@ export default function Showcase({
     reader.readAsDataURL(files[0]);
 
     setEdit(false);
-    setResize(!resize);
+    setResize(true);
+  };
+
+  const removeImage = () => {
+    setImage('#');
+    setCropData('#');
+    setEdit(false);
   };
 
   const handleEdit = () => {
     setEdit(!edit);
   };
 
-  const handleResize = () => {
-    setResize(!resize);
+  const hideResize = () => {
+    setResize(false);
   };
 
-  // const getCropData = () => {
-  //   if (typeof cropperRef.current?.cropper !== 'undefined') {
-  //     setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
-  //   }
-  // };
+  const showResize = () => {
+    setResize(true);
+    setEdit(false);
+  };
+
+  const getCropData = () => {
+    if (typeof cropperRef.current?.cropper !== 'undefined') {
+      setCropData(cropperRef.current?.cropper.getCroppedCanvas().toDataURL());
+    }
+  };
 
   return (
     <>
@@ -60,21 +63,27 @@ export default function Showcase({
           onFileChoose={onFileChoose}
           handleEdit={handleEdit}
           edit={edit}
+          showResize={showResize}
+          removeImage={removeImage}
+          cropData={cropData}
         />
       }
       {
         <ResizeAvatar
-          handleResize={handleResize}
+          hideResize={hideResize}
           resize={resize}
           image={image}
+          getCropData={getCropData}
+          ref={cropperRef}
         />
       }
       <div className='flex items-center gap-5'>
         <Avatar
           className='w-32 min-[400px]:w-40'
-          image={image}
+          image={dp}
           edit
           handleEdit={handleEdit}
+          cropData={cropData}
         />
 
         <div>
