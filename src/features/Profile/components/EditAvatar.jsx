@@ -32,7 +32,7 @@ export default function EditAvatar({
       text: 'ছবি ডিলিট করুন',
       type: 'button',
       onClick: removeImage,
-      show: true,
+      show: cropData !== '#',
     },
   ];
 
