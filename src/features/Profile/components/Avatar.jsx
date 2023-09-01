@@ -3,7 +3,8 @@ import camera from '../assets/icons/camera.svg';
 /* eslint-disable react/prop-types */
 export default function Avatar({ className, image, edit, handleEdit }) {
   return (
-    <div className={`rounded-2xl aspect-square relative ${className}`}>
+    <div
+      className={`rounded-2xl aspect-square overflow-hidden relative ${className}`}>
       <img src={image} alt='name' className='w-full rounded-xl' />
       {edit && handleEdit && (
         <div
