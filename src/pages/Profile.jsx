@@ -65,7 +65,7 @@ export default function Profile() {
               )}
             </InfoContainer>
 
-            <InfoContainer type='কন্টাক্ট ইনফো' edit>
+            <InfoContainer type='কন্টাক্ট ইনফো' fields={contact} edit>
               {contact.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (

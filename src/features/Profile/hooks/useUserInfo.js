@@ -69,10 +69,25 @@ const useUserInfo = (id) => {
       },
     ],
     contact: [
-      { info: userInfo.mobile1, label: 'মোবাইল নম্বর', icon: phone },
-      { info: userInfo.mobile2, label: 'বিকল্প মোবাইল নম্বর', icon: phone },
-      { info: userInfo.email, label: 'ই-মেইল', icon: email },
-      { info: userInfo.facebook, label: 'ফেইসবুক লিংক', icon: facebook },
+      {
+        type: 'number',
+        info: userInfo.mobile1,
+        label: 'মোবাইল নম্বর',
+        icon: phone,
+      },
+      {
+        type: 'number',
+        info: userInfo.mobile2,
+        label: 'বিকল্প মোবাইল নম্বর',
+        icon: phone,
+      },
+      { type: 'email', info: userInfo.email, label: 'ই-মেইল', icon: email },
+      {
+        type: 'text',
+        info: userInfo.facebook,
+        label: 'ফেইসবুক লিংক',
+        icon: facebook,
+      },
     ],
     address: [
       { info: userInfo.presentAddress, label: 'বর্তমান ঠিকানা', icon: marker },
