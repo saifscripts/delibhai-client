@@ -56,22 +56,31 @@ export default function Profile() {
         {/* General Information */}
         {activeCategory === 1 && (
           <>
-            <InfoContainer type='ব্যক্তিগত তথ্য' edit>
-              {personal.map(({ info, type, icon }, index) => (
-                <Info key={index} info={info} type={type} icon={icon} />
-              ))}
+            <InfoContainer type='ব্যক্তিগত তথ্য' fields={personal} edit>
+              {personal.map(
+                ({ info, label, icon, editOnly }, index) =>
+                  editOnly || (
+                    <Info key={index} info={info} label={label} icon={icon} />
+                  )
+              )}
             </InfoContainer>
 
             <InfoContainer type='কন্টাক্ট ইনফো' edit>
-              {contact.map(({ info, type, icon }, index) => (
-                <Info key={index} info={info} type={type} icon={icon} />
-              ))}
+              {contact.map(
+                ({ info, label, icon, editOnly }, index) =>
+                  editOnly || (
+                    <Info key={index} info={info} label={label} icon={icon} />
+                  )
+              )}
             </InfoContainer>
 
             <InfoContainer type='ঠিকানা' edit>
-              {address.map(({ info, type, icon }, index) => (
-                <Info key={index} info={info} type={type} icon={icon} />
-              ))}
+              {address.map(
+                ({ info, label, icon, editOnly }, index) =>
+                  editOnly || (
+                    <Info key={index} info={info} label={label} icon={icon} />
+                  )
+              )}
             </InfoContainer>
           </>
         )}
@@ -80,15 +89,21 @@ export default function Profile() {
         {activeCategory === 2 && (
           <>
             <InfoContainer type='গাড়ির সাধারণ তথ্য' edit>
-              {vehicle.map(({ info, type, icon }, index) => (
-                <Info key={index} info={info} type={type} icon={icon} />
-              ))}
+              {vehicle.map(
+                ({ info, label, icon, editOnly }, index) =>
+                  editOnly || (
+                    <Info key={index} info={info} label={label} icon={icon} />
+                  )
+              )}
             </InfoContainer>
 
             <InfoContainer type='গাড়ির মালিকানার তথ্য' edit>
-              {owner.map(({ info, type, icon }, index) => (
-                <Info key={index} info={info} type={type} icon={icon} />
-              ))}
+              {owner.map(
+                ({ info, label, icon, editOnly }, index) =>
+                  editOnly || (
+                    <Info key={index} info={info} label={label} icon={icon} />
+                  )
+              )}
             </InfoContainer>
 
             <InfoContainer type='গাড়ির ছবি'>
@@ -101,9 +116,12 @@ export default function Profile() {
         {activeCategory === 3 && (
           <>
             <InfoContainer type='সার্ভিস তথ্য' edit>
-              {service.map(({ info, type, icon }, index) => (
-                <Info key={index} info={info} type={type} icon={icon} />
-              ))}
+              {service.map(
+                ({ info, label, icon, editOnly }, index) =>
+                  editOnly || (
+                    <Info key={index} info={info} label={label} icon={icon} />
+                  )
+              )}
             </InfoContainer>
           </>
         )}
@@ -127,9 +145,12 @@ export default function Profile() {
             </InfoContainer>
 
             <InfoContainer type='ম্যানুয়াল লোকেশন' edit>
-              {location.map(({ info, type, icon }, index) => (
-                <Info key={index} info={info} type={type} icon={icon} />
-              ))}
+              {location.map(
+                ({ info, label, icon, editOnly }, index) =>
+                  editOnly || (
+                    <Info key={index} info={info} label={label} icon={icon} />
+                  )
+              )}
             </InfoContainer>
           </>
         )}

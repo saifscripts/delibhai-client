@@ -7,7 +7,7 @@ import { Avatar, EditAvatar, ResizeAvatar } from '../index';
 // eslint-disable-next-line react/prop-types
 export default function Showcase({ name, id, vehicle, vehicleImage }) {
   const [image, setImage] = useState('#');
-  const [cropData, setCropData] = useState('#');
+  const [cropData, setCropData] = useState(null);
   const [edit, setEdit] = useState(false);
   const [resize, setResize] = useState(false);
 
@@ -15,12 +15,14 @@ export default function Showcase({ name, id, vehicle, vehicleImage }) {
 
   const onFileChoose = (e) => {
     e.preventDefault();
+
     let files;
     if (e.dataTransfer) {
       files = e.dataTransfer.files;
     } else if (e.target) {
       files = e.target.files;
     }
+
     const reader = new FileReader();
     reader.onload = () => {
       setImage(reader.result);
@@ -33,7 +35,7 @@ export default function Showcase({ name, id, vehicle, vehicleImage }) {
 
   const removeImage = () => {
     setImage('#');
-    setCropData('#');
+    setCropData(null);
     setEdit(false);
   };
 

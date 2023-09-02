@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 
-export default function Info({ info, type, icon }) {
+export default function Info({ info, label, icon }) {
   return (
     <div className='flex items-start gap-3 border-b border-light py-2'>
       <div className='w-12 aspect-square flex-shrink-0 rounded-full bg-light flex justify-center items-center'>
-        <img src={icon} alt={type} className='w-full' />
+        <img src={icon} alt={label} className='w-full' />
       </div>
 
       <div className='text-medium'>
@@ -17,7 +17,7 @@ export default function Info({ info, type, icon }) {
         ) : (
           <p className='font-bold text-lg'>{info}</p>
         )}
-        <p>{type}</p>
+        <p>{label}</p>
       </div>
     </div>
   );

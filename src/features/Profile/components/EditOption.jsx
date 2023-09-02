@@ -14,7 +14,7 @@ export default function EditOption({ icon, text, type, onChange, onClick }) {
         type={type}
         onChange={onChange}
         onClick={onClick}
-        accept='image/png, image/gif, image/jpeg'
+        accept={type === 'file' ? 'image/png, image/gif, image/jpeg' : ''}
       />
       {text}
     </label>
