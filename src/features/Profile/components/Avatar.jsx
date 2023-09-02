@@ -12,7 +12,7 @@ export default function Avatar({
     <div
       className={`rounded-2xl aspect-square overflow-hidden relative ${className}`}>
       <img
-        src={cropData !== '#' ? cropData : image}
+        src={cropData ? cropData : image}
         alt='name'
         className='w-full rounded-xl'
       />

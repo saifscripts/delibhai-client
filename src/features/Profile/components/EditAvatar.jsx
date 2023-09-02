@@ -18,7 +18,7 @@ export default function EditAvatar({
       text: 'ছবি রিসাইজ',
       type: 'button',
       onClick: showResize,
-      show: cropData !== '#',
+      show: Boolean(cropData),
     },
     {
       icon: <AiFillCamera />,
@@ -32,7 +32,7 @@ export default function EditAvatar({
       text: 'ছবি ডিলিট করুন',
       type: 'button',
       onClick: removeImage,
-      show: true,
+      show: Boolean(cropData),
     },
   ];
 

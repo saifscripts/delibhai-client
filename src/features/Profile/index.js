@@ -3,6 +3,7 @@ import Achievement from './components/Achievement';
 import Avatar from './components/Avatar';
 import AverageRating from './components/AverageRating';
 import EditAvatar from './components/EditAvatar';
+import EditInfo from './components/EditInfo';
 import EditOption from './components/EditOption';
 import Info from './components/Info';
 import InfoCategories from './components/InfoCategories';
@@ -27,6 +28,7 @@ export {
   Avatar,
   AverageRating,
   EditAvatar,
+  EditInfo,
   EditOption,
   Info,
   InfoCategories,
