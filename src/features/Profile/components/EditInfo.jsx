@@ -38,7 +38,7 @@ const EditInfo = () => {
     <>
       <TopPanel />
       <Title
-        title={`ডিহিরো ${title}`}
+        title={title}
         subtitle='অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন'
       />
       <PageContainer>

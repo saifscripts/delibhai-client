@@ -88,7 +88,7 @@ export default function Profile() {
         {/* Vehicle Information */}
         {activeCategory === 2 && (
           <>
-            <InfoContainer type='গাড়ির সাধারণ তথ্য' edit>
+            <InfoContainer type='গাড়ির সাধারণ তথ্য' fields={vehicle} edit>
               {vehicle.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (

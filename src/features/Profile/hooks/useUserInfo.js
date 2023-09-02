@@ -94,19 +94,37 @@ const useUserInfo = (id) => {
       { info: userInfo.permanentAddress, label: 'স্থায়ী ঠিকানা', icon: marker },
     ],
     vehicle: [
-      { info: userInfo.vehicleType, label: 'গাড়ির ধরণ', icon: vehicleType },
       {
+        type: 'select',
+        options: ['বাইক', 'কার', 'সিএনজি', 'টমটম'],
+        info: userInfo.vehicleType,
+        label: 'গাড়ির ধরণ',
+        icon: vehicleType,
+      },
+      {
+        type: 'text',
         info: userInfo.vehicleBrand,
         label: 'গাড়ির ব্র্যান্ড',
         icon: vehicleBrand,
       },
-      { info: userInfo.vehicleModel, label: 'গাড়ির মডেল', icon: vehicleModel },
       {
+        type: 'text',
+        info: userInfo.vehicleModel,
+        label: 'গাড়ির মডেল',
+        icon: vehicleModel,
+      },
+      {
+        type: 'text',
         info: userInfo.vehicleNumber,
         label: 'গাড়ির নম্বর',
         icon: vehicleNumber,
       },
-      { info: userInfo.vehicleName, label: 'গাড়ির নাম', icon: vehicleName },
+      {
+        type: 'text',
+        info: userInfo.vehicleName,
+        label: 'গাড়ির নাম',
+        icon: vehicleName,
+      },
     ],
     owner: [
       { info: userInfo.ownerName, label: 'কোম্পানির নাম', icon: person },
