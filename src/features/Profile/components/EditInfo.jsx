@@ -90,7 +90,9 @@ const EditInfo = () => {
 
               if (type === 'category') {
                 return (
-                  <p key={index} className='font-bold mt-4 mb-1'>
+                  <p
+                    key={index}
+                    className='font-bold mt-4 mb-3 py-3 border-b border-light'>
                     {label}
                   </p>
                 );
