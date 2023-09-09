@@ -99,7 +99,7 @@ export default function Profile() {
               )}
             </InfoContainer>
 
-            <InfoContainer type='গাড়ির মালিকানার তথ্য' edit>
+            <InfoContainer type='গাড়ির মালিকানার তথ্য' fields={owner} edit>
               {owner.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (
