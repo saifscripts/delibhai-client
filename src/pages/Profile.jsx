@@ -16,6 +16,7 @@ import {
   Review,
   Showcase,
   VehiclePhotos,
+  useAddressFields,
   useUserInfo,
 } from '../features/Profile/index';
 import PageContainer from '../layouts/PageContainer';
@@ -25,6 +26,7 @@ export default function Profile() {
   const { id } = useParams();
   const [activeCategory, setActiveCategory] = useState(1);
   const [userInfo, modifiedInfo] = useUserInfo(id);
+  const addressFields = useAddressFields();
 
   const { reviews } = userInfo;
   const { personal, contact, address, vehicle, owner, service, location } =
@@ -74,7 +76,7 @@ export default function Profile() {
               )}
             </InfoContainer>
 
-            <InfoContainer type='ঠিকানা' edit>
+            <InfoContainer type='ঠিকানা' fields={addressFields} edit>
               {address.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (

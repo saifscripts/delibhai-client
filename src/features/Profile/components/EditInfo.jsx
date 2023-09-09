@@ -5,6 +5,7 @@ import Button from '../../../components/ui/Button';
 import PageContainer from '../../../layouts/PageContainer';
 import Title from '../../../layouts/Title';
 import TopPanel from '../../../layouts/TopPanel';
+import { Input, RadioInput, SelectInput } from '../index';
 
 const EditInfo = () => {
   const navigate = useNavigate();
@@ -12,22 +13,59 @@ const EditInfo = () => {
   const { title, fields = [] } = state;
 
   const [inputFields, setInputFields] = useState([]);
+  // const [permanentAddress, setPermanentAddress] = useState(false);
 
   useEffect(() => {
     setInputFields(fields);
   }, [fields]);
 
+  // useEffect(() => {
+  //   if (permanentAddress) {
+  //     const address = inputFields.filter(({ type }) => type === 'select');
+
+  //     const newInputFields = [...inputFields, ...address];
+
+  //     setInputFields(newInputFields);
+  //   } else {
+  //     setInputFields(fields);
+  //   }
+  // }, [permanentAddress]);
+
   const onInputChange = (e, i) => {
-    const value = e.target.value;
+    const target = e.target;
+    const value = target.type === 'radio' ? target.checked : target.value;
 
     const clonedInputFields = [...inputFields];
 
     clonedInputFields[i].data = clonedInputFields[i].data && value;
     clonedInputFields[i].info = value;
 
+    if (target.type === 'radio') {
+      clonedInputFields.forEach((v, j) => {
+        clonedInputFields[j].checked = false;
+      });
+
+      clonedInputFields[i].checked = value;
+      // setPermanentAddress(!permanentAddress);
+    }
+
     setInputFields(clonedInputFields);
   };
 
+  const toggleHiddenInput = () => {
+    const clonedInputFields = [...inputFields];
+    clonedInputFields.forEach((input) => {
+      const { hidden } = input;
+
+      if (hidden === true) {
+        input.hidden = false;
+      }
+
+      if (hidden === false) {
+        input.hidden = true;
+      }
+    });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,28 +82,57 @@ const EditInfo = () => {
       <PageContainer>
         <form onSubmit={handleSubmit} className='mb-5'>
           {inputFields.map(
-            ({ label, data, info, type, options = [] }, index) => (
-              <label key={index}>
-                <p className='font-bold mt-4 mb-1'>{label}</p>
-                {type === 'select' ? (
-                  <select
-                    onChange={(e) => onInputChange(e, index)}
-                    value={info}
-                    className='w-full py-3 border-b border-primary bg-transparent'>
-                    {options.map((option) => (
-                      <option key={option}>{option}</option>
-                    ))}
-                  </select>
-                ) : (
-                  <input
-                    type={type}
-                    value={data || info}
-                    onChange={(e) => onInputChange(e, index)}
-                    className='w-full py-3 border-b border-primary'
+            (
+              { label, data, info, type, options = [], checked, name, hidden },
+              index
+            ) => {
+              if (hidden) return;
+
+              if (type === 'category') {
+                return (
+                  <p key={index} className='font-bold mt-4 mb-1'>
+                    {label}
+                  </p>
+                );
+              }
+
+              if (type === 'select') {
+                return (
+                  <SelectInput
+                    key={index}
+                    label={label}
+                    onInputChange={(e) => onInputChange(e, index)}
+                    info={info}
+                    options={options}
                   />
-                )}
-              </label>
-            )
+                );
+              }
+
+              if (type === 'radio') {
+                return (
+                  <RadioInput
+                    key={index}
+                    name={name}
+                    label={label}
+                    checked={checked}
+                    onInputChange={onInputChange}
+                    index={index}
+                    toggleHiddenInput={toggleHiddenInput}
+                  />
+                );
+              }
+
+              return (
+                <Input
+                  key={index}
+                  label={label}
+                  data={data}
+                  info={info}
+                  type={type}
+                  onInputChange={(e) => onInputChange(e, index)}
+                />
+              );
+            }
           )}
 
           <Button type='submit' value='সংরক্ষণ করুন' />

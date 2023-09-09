@@ -16,10 +16,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'কার',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
@@ -116,10 +126,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'অটো রিক্সা',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
@@ -216,10 +236,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'কার',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
@@ -316,10 +346,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'কার',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
@@ -416,10 +456,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'বাইক',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
@@ -516,10 +566,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'কার',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
@@ -616,10 +676,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'কার',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
@@ -716,10 +786,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'অটো রিক্সা',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
@@ -816,10 +896,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'কার',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
@@ -916,10 +1006,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'কার',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
@@ -1016,10 +1116,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'বাইক',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
@@ -1116,10 +1226,20 @@ const heros = [
     mobile2: '01886232353',
     email: 'bkctg540@gmail.com',
     facebook: 'www.fb.com/bablo540',
-    presentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
-    permanentAddress:
-      'বাসা/হোল্ডিং: ০৭২, গ্রাম/রাস্তা:  পূর্বপাড়া,  হেয়াকো - 4327, ফটিকছড়ি, চট্টগ্রাম।',
+    presentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
+    permanentAddress: {
+      district: 'চট্টগ্রাম',
+      subDistrict: 'ফটিকছড়ি',
+      post: 'হেয়াকো',
+      zip: '4327',
+      street: 'হোল্ডিং: ০৭২, গ্রাম: পূর্ব পাড়া',
+    },
     vehicleType: 'কার',
     vehicleBrand: 'BMW',
     vehicleModel: 'BMW2023 v.3',
