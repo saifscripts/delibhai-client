@@ -31,6 +31,8 @@ const useUserInfo = (id) => {
 
   useEffect(() => setUserInfo(heros.find((hero) => hero.id === id)), [id]);
 
+  const { presentAddress = {}, permanentAddress = {} } = userInfo;
+
   const modifiedInfo = {
     personal: [
       { type: 'text', info: userInfo.name, label: 'নিজের নাম', icon: person },
@@ -90,8 +92,16 @@ const useUserInfo = (id) => {
       },
     ],
     address: [
-      { info: userInfo.presentAddress, label: 'বর্তমান ঠিকানা', icon: marker },
-      { info: userInfo.permanentAddress, label: 'স্থায়ী ঠিকানা', icon: marker },
+      {
+        info: `${presentAddress.street}, ${presentAddress.post} - ${presentAddress.zip}, ${presentAddress.subDistrict}, ${presentAddress.district}।`,
+        label: 'বর্তমান ঠিকানা',
+        icon: marker,
+      },
+      {
+        info: `${permanentAddress.street}, ${permanentAddress.post} - ${permanentAddress.zip}, ${permanentAddress.subDistrict}, ${permanentAddress.district}।`,
+        label: 'স্থায়ী ঠিকানা',
+        icon: marker,
+      },
     ],
     vehicle: [
       {
