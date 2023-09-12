@@ -146,7 +146,7 @@ export default function Profile() {
               </div>
             </InfoContainer>
 
-            <InfoContainer type='ম্যানুয়াল লোকেশন' edit>
+            <InfoContainer type='ম্যানুয়াল লোকেশন' fields={location} edit>
               {location.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (
