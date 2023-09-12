@@ -29,7 +29,7 @@ export default function Profile() {
   const addressFields = useAddressFields();
 
   const { reviews } = userInfo;
-  const { personal, contact, address, vehicle, owner, service, location } =
+  const { personal, contact, address, vehicle, owner, service, location, videoURL } =
     modifiedInfo;
 
   return (
@@ -160,13 +160,13 @@ export default function Profile() {
         {/* Video */}
         {activeCategory === 5 && (
           <>
-            <InfoContainer type='ডিহিরোর অভিব্যক্তি' edit>
+            <InfoContainer type='ডিহিরোর অভিব্যক্তি' fields={videoURL} edit>
               <div className='w-full max-w-lg aspect-[1/1.8] bg-black flex justify-center items-center rounded-lg overflow-hidden'>
                 <ReactPlayer
                   width='100%'
                   height='100%'
                   loop
-                  url='https://youtu.be/_HgpFMdZ16c'
+                  url={userInfo.videoURL}
                 />
               </div>
             </InfoContainer>

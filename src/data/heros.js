@@ -83,6 +83,7 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: 'https://youtu.be/_HgpFMdZ16c',
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -199,6 +200,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -315,6 +319,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -431,6 +438,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -547,6 +557,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -663,6 +676,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -779,6 +795,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -895,6 +914,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -1011,6 +1033,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -1127,6 +1152,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -1243,6 +1271,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -1359,6 +1390,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',

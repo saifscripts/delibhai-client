@@ -326,6 +326,14 @@ const useUserInfo = (id) => {
         icon: station
       },
     ],
+    videoURL: [
+      {
+        type: 'text',
+        info: userInfo.videoURL,
+        label: 'ভিডিও লিংক',
+        editOnly: true
+      }
+    ]
   };
 
   return [userInfo, modifiedInfo];
