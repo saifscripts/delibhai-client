@@ -117,7 +117,7 @@ export default function Profile() {
         {/* Service Information */}
         {activeCategory === 3 && (
           <>
-            <InfoContainer type='সার্ভিস তথ্য' edit>
+            <InfoContainer type='সার্ভিস তথ্য' fields={service} edit>
               {service.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (

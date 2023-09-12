@@ -5,7 +5,7 @@ import Button from '../../../components/ui/Button';
 import PageContainer from '../../../layouts/PageContainer';
 import Title from '../../../layouts/Title';
 import TopPanel from '../../../layouts/TopPanel';
-import { Input, RadioInput, SelectInput } from '../index';
+import { Input, RadioInput, SelectInput,Checkbox, TimeInput } from '../index';
 
 const EditInfo = () => {
   const navigate = useNavigate();
@@ -19,17 +19,6 @@ const EditInfo = () => {
     setInputFields(fields);
   }, [fields]);
 
-  // useEffect(() => {
-  //   if (permanentAddress) {
-  //     const address = inputFields.filter(({ type }) => type === 'select');
-
-  //     const newInputFields = [...inputFields, ...address];
-
-  //     setInputFields(newInputFields);
-  //   } else {
-  //     setInputFields(fields);
-  //   }
-  // }, [permanentAddress]);
 
   const onInputChange = (e, i) => {
     const target = e.target;
@@ -51,6 +40,23 @@ const EditInfo = () => {
 
     setInputFields(clonedInputFields);
   };
+
+  const onChecked = (e, i) => {
+    const checked = e.target.checked;
+    const value = e.target.value;
+    
+    const clonedInputFields = [...inputFields];
+
+    if(checked) {
+      clonedInputFields[i].data.push(value)
+    } else {
+      const newData = clonedInputFields[i].data.filter((d) => d !== value);
+
+      clonedInputFields[i].data = newData;
+    }
+
+    setInputFields(clonedInputFields);
+  }
 
   const toggleHiddenInput = () => {
     const clonedInputFields = [...inputFields];
@@ -120,6 +126,31 @@ const EditInfo = () => {
                     onInputChange={onInputChange}
                     index={index}
                     toggleHiddenInput={toggleHiddenInput}
+                  />
+                );
+              }
+
+              if (type === 'checkbox') {
+                return (
+                  <Checkbox
+                    key={index}
+                    label={label}
+                    onInputChange={(e) => onChecked(e, index)}
+                    data={data}
+                    options={options}
+                  />
+                );
+              }
+              
+              if (type === 'time') {
+                return (
+                  <TimeInput
+                    key={index}
+                    index={index}
+                    label={label}
+                    inputFields={inputFields}
+                    setInputFields={setInputFields}
+                    data={data}
                   />
                 );
               }
