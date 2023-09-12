@@ -56,7 +56,7 @@ function TimeInput({ label,
 
             setInputFields(clonedInputFields)
         }
-        
+
     return (
       <>
         <p className='font-bold mt-4 mb-1'>{label}</p>
@@ -68,17 +68,20 @@ function TimeInput({ label,
             </div>)}
         </div>
 
-        <div className="flex my-6 justify-between items-center">
-            <label className="bg-light p-2 rounded-lg flex gap-1 items-center">
-                শুরু
+        <div className="flex my-6 flex-col gap-2 p-3 bg-accent rounded-lg">
+            <label className="bg-light p-2 rounded-lg flex justify-between items-center">
+                শুরুর সময়
                 <input className="bg-inherit rounded-lg border border-accent p-1" type="time" value={startTime} onChange={onStartTimeChange} />
             </label>
-            <label className="bg-light p-2 rounded-lg flex gap-1 items-center">
-                শেষ
+            <label className="bg-light p-2 rounded-lg flex justify-between items-center">
+                শেষের সময়
                 <input className="bg-inherit rounded-lg border border-accent p-1" type="time" value={endTime} onChange={onEndTimeChange} />
             </label>
             
-            <button onClick={addTime} className="bg-blue-400 px-2 py-4 text-white rounded-md" ><AiFillPlusSquare /></button>
+            <button onClick={addTime} className="bg-blue-400 px-2 py-2 text-white text-xl rounded-lg flex gap-2 justify-center items-center" >
+                <AiFillPlusSquare />
+                <span>যোগ করুন</span>
+            </button>
         </div>
         
       </>
