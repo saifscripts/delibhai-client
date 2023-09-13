@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import Submit from "../../../components/forms/Submit";
 import PageContainer from "../../../layouts/PageContainer"
 import Title from "../../../layouts/Title"
 import TopPanel from "../../../layouts/TopPanel"
@@ -43,6 +44,19 @@ function OTPVerification() {
     setOTP(["", "", "", "", "", ""])
 }
 
+function preventUpDown(event) {
+    if (event.keyCode === 38 || event.keyCode === 40) { // 38 is the up arrow key, 40 is the down arrow key
+        event.preventDefault();
+        return false;
+    }
+}
+
+const handleOTPSubmit = () => {
+    console.log(otp.join(''))
+}
+
+
+
   return (
     <>
       <TopPanel />
@@ -57,10 +71,11 @@ function OTPVerification() {
             {otp.map((digit, index) => (
                 <input
                 key={index}
-                type="text"
+                type="number"
                 ref={inputRefs[index]}
                 value={digit}
                 onChange={(e) => handleChange(e, index)}
+                onKeyDown={preventUpDown}
                 maxLength="1"
                 className="w-12 aspect-square text-xl px-4 border border-secondary rounded-lg focus:outline-none focus:border-primary"
                 />
@@ -68,6 +83,8 @@ function OTPVerification() {
         </div>
 
         <p className="w-fit mx-auto my-4">আমি কোনো কোড পাই নি. <button onClick={resendOTP} disabled={timerRunning} className={`text-${timerRunning ? 'accent': 'secondary'}`}>পুনরায় পাঠান</button></p>
+
+        <Submit value='সাবমিট করুন' onClick={handleOTPSubmit} className='rounded-lg' />
       </PageContainer>
     </>
   )
