@@ -16,7 +16,6 @@ import Review from './components/Review';
 import Showcase from './components/Showcase';
 import VehiclePhoto from './components/VehiclePhoto';
 import VehiclePhotos from './components/VehiclePhotos';
-import Input from './components/form/Input';
 import RadioInput from './components/form/RadioInput';
 import SelectInput from './components/form/SelectInput';
 import Checkbox from './components/form/Checkbox';
@@ -40,7 +39,6 @@ export {
   InfoCategories,
   InfoCategory,
   InfoContainer,
-  Input,
   RadioInput,
   RatingBars,
   RatingStars,
