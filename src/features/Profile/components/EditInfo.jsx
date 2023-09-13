@@ -5,7 +5,8 @@ import Button from '../../../components/ui/Button';
 import PageContainer from '../../../layouts/PageContainer';
 import Title from '../../../layouts/Title';
 import TopPanel from '../../../layouts/TopPanel';
-import { Input, RadioInput, SelectInput,Checkbox, TimeInput } from '../index';
+import Input from '../../../components/forms/Input'
+import { RadioInput, SelectInput,Checkbox, TimeInput } from '../index';
 
 const EditInfo = () => {
   const navigate = useNavigate();

@@ -1,6 +1,7 @@
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { OTPVerification, Signup } from './features/Authentication';
 import { EditInfo } from './features/Profile';
 import DHero from './pages/DHero';
 import DHeroSearch from './pages/DHeroSearch';
@@ -9,7 +10,6 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Services from './pages/Services';
-import Signup from './pages/Signup';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
         <Route path='/services/dhero/search' element={<DHeroSearchResult />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/otp-verification' element={<OTPVerification />} />
         <Route path='/profile/:id' element={<Profile />} />
         <Route path='/profile/edit' element={<EditInfo />} />
       </Routes>
