@@ -21,7 +21,7 @@ export default function VehiclePhotos({ photos = [] }) {
           {urls.map((url, index) => (
             <VehiclePhoto url={url} key={index} index={index} deleteBtn={deleteBtn} setDeleteBtn={setDeleteBtn} urls={urls} setUrls={setUrls} />
           ))}
-          <div type='file' className='relative bg-accent z-10 w-28 aspect-square rounded-lg flex justify-center items-center'>
+          <div className='relative bg-accent z-10 w-28 aspect-square rounded-lg flex flex-col flex-shrink-0 justify-center items-center'>
             <img src={camera} alt='Camera' />
             <input type="file" className='absolute top-0 bottom-0 right-0 left-0 z-20 opacity-0' />
           </div>
