@@ -271,24 +271,69 @@ const useUserInfo = (id) => {
       },
     ],
     location: [
-      { info: userInfo.location?.division, label: 'বিভাগ', icon: marker },
-      { info: userInfo.location?.district, label: 'জেলা', icon: marker },
       {
+        info: `${userInfo.location?.post}, ${userInfo.location?.thana}, ${userInfo.location?.subDistrict}, ${userInfo.location?.district}।`,
+        label: 'ঠিকানা',
+        icon: marker,
+        hidden: true
+      },
+      { 
+        type: 'select',
+        options: ['চট্টগ্রাম', 'ঢাকা'],
+        info: userInfo.location?.division, 
+        label: 'বিভাগ', 
+        editOnly:true
+      },
+      { 
+        type: 'select',
+        options: ['চট্টগ্রাম', 'ঢাকা'],
+        info: userInfo.location?.district, 
+        label: 'জেলা', 
+        editOnly:true
+      },
+      {
+        type: 'select',
+        options: ['চট্টগ্রাম', 'ঢাকা'],
         info: userInfo.location?.subDistrict,
-        label: 'উপজেলা/পৌরসভা',
-        icon: marker,
+        label: 'উপজেলা/পৌরসভা/সিটি কর্পোরেশন',
+        editOnly:true
       },
-      { info: userInfo.location?.thana, label: 'থানা', icon: marker },
       {
+        type: 'select',
+        options: ['চট্টগ্রাম', 'ঢাকা'],
         info: userInfo.location?.union,
-        label: 'ইউনিয়ন/সিটি কর্পোরেশন',
-        icon: marker,
+        label: 'ইউনিয়ন',
+        editOnly:true
       },
-      { info: userInfo.location?.PO, label: 'পোস্ট অফিস', icon: marker },
-      { info: userInfo.location?.zip, label: 'পোস্ট কোড', icon: marker },
-      { info: userInfo.location?.village, label: 'গ্রাম/মহল্লা', icon: marker },
-      { info: userInfo.location?.station, label: 'স্ট্যাশন', icon: marker },
+      { 
+        type: 'select',
+        options: ['চট্টগ্রাম', 'ঢাকা'],
+        info: userInfo.location?.post, 
+        label: 'পোস্ট অফিস', 
+        editOnly:true
+      },
+      { 
+        type: 'number',
+        info: userInfo.location?.zip, 
+        label: 'পোস্ট কোড', 
+        editOnly:true
+      },
+      { 
+        type: 'select',
+        options: ['চট্টগ্রাম', 'ঢাকা'],
+        info: userInfo.location?.station, 
+        label: 'স্ট্যাশন', 
+        icon: station
+      },
     ],
+    videoURL: [
+      {
+        type: 'text',
+        info: userInfo.videoURL,
+        label: 'ভিডিও লিংক',
+        editOnly: true
+      }
+    ]
   };
 
   return [userInfo, modifiedInfo];

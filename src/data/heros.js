@@ -75,7 +75,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -83,6 +83,7 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: 'https://youtu.be/_HgpFMdZ16c',
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -191,7 +192,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -199,6 +200,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -307,7 +311,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -315,6 +319,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -423,7 +430,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -431,6 +438,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -539,7 +549,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -547,6 +557,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -655,7 +668,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -663,6 +676,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -771,7 +787,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -779,6 +795,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -887,7 +906,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -895,6 +914,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -1003,7 +1025,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -1011,6 +1033,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -1119,7 +1144,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -1127,6 +1152,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -1235,7 +1263,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -1243,6 +1271,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
@@ -1351,7 +1382,7 @@ const heros = [
       subDistrict: 'ফটিকছড়ি',
       thana: 'ভুজপুর',
       union: 'দাঁতমারা',
-      PO: 'হেয়াকো',
+      post: 'হেয়াকো',
       zip: '4327',
       village: 'অলিপুর',
       station: 'হেয়াকো বাজার',
@@ -1359,6 +1390,9 @@ const heros = [
 
     available: true,
     distance: 1.02,
+    videoURL: {
+      url: 'https://youtu.be/_HgpFMdZ16c'
+    },
     vehiclePhotos: [
       'https://i.ibb.co/6Z1tp9j/fbb02907e25b00efa162805844486f59.jpg',
       'https://i.ibb.co/QYSP65x/97f8374c30112b73b458afd99327bd0e.jpg',
