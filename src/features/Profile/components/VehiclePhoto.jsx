@@ -35,10 +35,7 @@ export default function VehiclePhoto({ url, urls, setUrls, index, deleteBtn, set
       style={{
         backgroundImage: `url(${url})`,
       }}
-      className={`relative group flex flex-col flex-shrink-0 justify-center items-center w-28 aspect-square p-1 bg-center bg-contain bg-no-repeat rounded-md overflow-hidden`}>
-      {/* <div className='absolute top-0 bottom-0 left-0 right-0 bg-black z-10 bg-opacity-40 hidden group-hover:flex group-active:flex justify-center items-center'>
-        <img src={camera} alt='Camera' />
-      </div> */}
+      className={`relative flex flex-col flex-shrink-0 justify-center items-center w-28 aspect-square p-1 bg-center bg-contain bg-no-repeat rounded-lg overflow-hidden`}>
       <BsThreeDotsVertical className='absolute right-0 top-0' onClick={showDeleteBtn} />
       <button onClick={removePhoto} className={`absolute right-4 top-0 bg-white px-3 py-1 rounded-lg ${deleteBtn === index ? 'flex': 'hidden'} gap-3 items-center shadow-lg`}>
         <span className='text-sm'>ডিলিট</span>
