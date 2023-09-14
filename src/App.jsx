@@ -1,13 +1,12 @@
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { OTPVerification, Signup } from './features/Authentication';
+import { Login, OTPVerification, Signup } from './features/Authentication';
 import { EditInfo } from './features/Profile';
 import DHero from './pages/DHero';
 import DHeroSearch from './pages/DHeroSearch';
 import DHeroSearchResult from './pages/DHeroSearchResult';
 import Home from './pages/Home';
-import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Services from './pages/Services';
 
