@@ -3,9 +3,17 @@ import Submit from "../../../components/forms/Submit";
 import PageContainer from "../../../layouts/PageContainer"
 import Title from "../../../layouts/Title"
 import TopPanel from "../../../layouts/TopPanel"
-import {Timer} from '../index'
+import {SubmitModal, Timer} from '../index'
 
 function OTPVerification() {
+    const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+    const openSubmitModal = () => {
+      setIsSubmitModalOpen(true)
+    }
+    const closeSubmitModal = () => {
+      setIsSubmitModalOpen(false)
+    }
+
     const [timerRunning, setTimerRunning] = useState(true);
     const [otp, setOTP] = useState(["", "", "", "", "", ""]);
     const inputRefs = [
@@ -51,10 +59,9 @@ function preventUpDown(event) {
     }
 }
 
-const handleOTPSubmit = () => {
-    console.log(otp.join(''))
-}
-
+// const handleOTPSubmit = () => {
+//     console.log(otp.join(''))
+// }
 
 
   return (
@@ -84,8 +91,9 @@ const handleOTPSubmit = () => {
 
         <p className="w-fit mx-auto my-4">আমি কোনো কোড পাই নি. <button onClick={resendOTP} disabled={timerRunning} className={`text-${timerRunning ? 'accent': 'secondary'}`}>পুনরায় পাঠান</button></p>
 
-        <Submit value='সাবমিট করুন' onClick={handleOTPSubmit} className='rounded-lg' />
+        <Submit value='সাবমিট করুন' onClick={openSubmitModal} className='rounded-lg' />
       </PageContainer>
+      <SubmitModal isOpen={isSubmitModalOpen} onClose={closeSubmitModal} />
     </>
   )
 }
