@@ -10,7 +10,7 @@ import marker from '../assets/icons/marker.svg';
 import phone from '../assets/icons/phone.svg';
 import serviceArea from '../assets/icons/service-area.svg';
 import serviceType from '../assets/icons/service-type.svg';
-import sex from '../assets/icons/sex.svg';
+import gender from '../assets/icons/sex.svg';
 import station from '../assets/icons/station.svg';
 import steering from '../assets/icons/steering.svg';
 import person from '../assets/icons/user.svg';
@@ -40,9 +40,9 @@ const useUserInfo = (id) => {
       {
         type: 'select',
         options: ['পুরুষ', 'মহিলা', 'অন্যান্য'],
-        info: userInfo.sex,
+        info: userInfo.gender,
         label: 'লিঙ্গ',
-        icon: sex,
+        icon: gender,
       },
       {
         type: 'select',
