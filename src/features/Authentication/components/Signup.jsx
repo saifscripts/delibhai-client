@@ -6,6 +6,18 @@ import Submit from "../../../components/forms/Submit";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
+// import { object, string, number, date, InferType } from 'yup';
+
+// const userSchema = object({
+//   name: string().required().trim().min(3, 'Name must be at least 3 characters long'),
+//   // genter:,
+//   // email:,
+//   // mobile:,
+//   // password:,
+//   // confirmPassword:,
+// })
+
+// console.log(userSchema);
 
 const signupFields = [
   {
