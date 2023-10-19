@@ -1,23 +1,68 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { isStrongPassword } from "validator";
+import * as yup from "yup";
 import Input from "../../../components/forms/Input";
 import SelectInput from "../../../components/forms/SelectInput";
 import Submit from "../../../components/forms/Submit";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
-// import { object, string, number, date, InferType } from 'yup';
+import { isMobilePhone } from "../../../utils/isMobilePhone";
 
-// const userSchema = object({
-//   name: string().required().trim().min(3, 'Name must be at least 3 characters long'),
-//   // genter:,
-//   // email:,
-//   // mobile:,
-//   // password:,
-//   // confirmPassword:,
-// })
+const userSchema = yup.object({
+  name: yup
+    .string()
+    .trim()
+    .required("name is required")
+    .min(3, "name must be at least 3 characters long"),
+  gender: yup
+    .string()
+    .trim()
+    .required("gender is required")
+    .oneOf(
+      ["পুরুষ", "মহিলা", "অন্যান্য"],
+      "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য"
+    ),
+  email: yup.string().trim().lowercase().email("email is not valid"),
+  mobile: yup
+    .string()
+    .trim()
+    .required("mobile number is required")
+    .test("isMobilePhone", `mobile number is invalid`, isMobilePhone("bn-BD")),
+  password: yup
+    .string()
+    .required("password is required")
+    .test(
+      "isStrongPassword",
+      "password must be at least 4 characters long",
+      (value) =>
+        isStrongPassword(value, {
+          minLength: 4,
+          minLowercase: 0,
+          minNumbers: 0,
+          minUppercase: 0,
+          minSymbols: 0,
+        })
+    ),
+  confirmPassword: yup
+    .string()
+    .required("please confirm your password")
+    .test("isMatchedPassword", `passwords don't match`, function (value) {
+      return value === this.parent.password;
+    }),
+});
 
-// console.log(userSchema);
+console.log(
+  userSchema.validateSync({
+    name: "mds",
+    gender: "পুরুষ",
+    // email: "saifullahH@gmail.com",
+    mobile: "01592295956",
+    password: "12345",
+    confirmPassword: "12345",
+  })
+);
 
 const signupFields = [
   {
@@ -56,7 +101,7 @@ const signupFields = [
 function Signup() {
   const [inputFields, setInputFields] = useState(signupFields);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onInputChange = (e, i) => {
     const clonedInputFields = [...inputFields];
@@ -67,35 +112,36 @@ function Signup() {
   };
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
+    e.preventDefault();
+    // try {
+    //   e.preventDefault();
 
-      const userInfo = {
-        name: inputFields[0].data,
-        gender: inputFields[1].data,
-        email: inputFields[2].data,
-        mobile: inputFields[3].data,
-        password: inputFields[4].data,
-        confirmPassword: inputFields[5].data,
-      };
+    //   const userInfo = {
+    //     name: inputFields[0].data,
+    //     gender: inputFields[1].data,
+    //     email: inputFields[2].data,
+    //     mobile: inputFields[3].data,
+    //     password: inputFields[4].data,
+    //     confirmPassword: inputFields[5].data,
+    //   };
 
-      console.log(userInfo);
-      const response = await fetch("http://localhost:5000/api/v1/user/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfo),
-      });
+    //   console.log(userInfo);
+    //   const response = await fetch("http://localhost:5000/api/v1/user/signup", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(userInfo),
+    //   });
 
-      const result = await response.json();
+    //   const result = await response.json();
 
-      if (result.success) {
-        navigate("/otp-verification");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    //   if (result.success) {
+    //     navigate("/otp-verification");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
