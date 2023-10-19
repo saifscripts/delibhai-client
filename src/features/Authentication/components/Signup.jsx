@@ -73,7 +73,7 @@ const signupFields = [
   {
     type: "select",
     options: ["পুরুষ", "মহিলা", "অন্যান্য"],
-    data: "পুরুষ",
+    value: "পুরুষ",
     label: "লিঙ্গ",
   },
   {
@@ -106,42 +106,42 @@ function Signup() {
   const onInputChange = (e, i) => {
     const clonedInputFields = [...inputFields];
 
-    clonedInputFields[i].data = e.target.value;
+    clonedInputFields[i].value = e.target.value;
 
     setInputFields(clonedInputFields);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    //   e.preventDefault();
+    try {
+      e.preventDefault();
 
-    //   const userInfo = {
-    //     name: inputFields[0].data,
-    //     gender: inputFields[1].data,
-    //     email: inputFields[2].data,
-    //     mobile: inputFields[3].data,
-    //     password: inputFields[4].data,
-    //     confirmPassword: inputFields[5].data,
-    //   };
+      const userInfo = {
+        name: inputFields[0].value,
+        gender: inputFields[1].value,
+        email: inputFields[2].value,
+        mobile: inputFields[3].value,
+        password: inputFields[4].value,
+        confirmPassword: inputFields[5].value,
+      };
 
-    //   console.log(userInfo);
-    //   const response = await fetch("http://localhost:5000/api/v1/user/signup", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(userInfo),
-    //   });
+      console.log(userInfo);
+      // const response = await fetch("http://localhost:5000/api/v1/user/signup", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(userInfo),
+      // });
 
-    //   const result = await response.json();
+      // const result = await response.json();
 
-    //   if (result.success) {
-    //     navigate("/otp-verification");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      // if (result.success) {
+      //   navigate("/otp-verification");
+      // }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -155,14 +155,14 @@ function Signup() {
       <PageContainer>
         <form onSubmit={handleSubmit}>
           {inputFields.map(
-            ({ label, data, type, placeholder, options }, index) => {
+            ({ label, value, type, placeholder, options }, index) => {
               if (type === "select") {
                 return (
                   <SelectInput
                     key={label}
                     label={label}
                     onInputChange={(e) => onInputChange(e, index)}
-                    data={data || ""}
+                    value={value || ""}
                     options={options}
                   />
                 );
@@ -172,7 +172,7 @@ function Signup() {
                 <Input
                   key={label}
                   label={label}
-                  data={data || ""}
+                  value={value || ""}
                   type={type}
                   placeholder={placeholder}
                   onInputChange={(e) => onInputChange(e, index)}
