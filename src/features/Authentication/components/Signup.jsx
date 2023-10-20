@@ -1,9 +1,10 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-import { isStrongPassword } from "validator";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import isEmail from "validator/lib/isEmail";
+import isStrongPassword from "validator/lib/isStrongPassword";
 import * as yup from "yup";
-import Input from "../../../components/forms/Input";
-import SelectInput from "../../../components/forms/SelectInput";
 import Submit from "../../../components/forms/Submit";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
@@ -24,7 +25,12 @@ const userSchema = yup.object({
       ["পুরুষ", "মহিলা", "অন্যান্য"],
       "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য"
     ),
-  email: yup.string().trim().lowercase().email("email is not valid"),
+  email: yup
+    .string()
+    .trim()
+    .lowercase()
+    .email("")
+    .test("isValidEmail", `email is not valid`, isEmail),
   mobile: yup
     .string()
     .trim()
@@ -53,95 +59,49 @@ const userSchema = yup.object({
     }),
 });
 
-console.log(
-  userSchema.validateSync({
-    name: "mds",
-    gender: "পুরুষ",
-    // email: "saifullahH@gmail.com",
-    mobile: "01592295956",
-    password: "12345",
-    confirmPassword: "12345",
-  })
-);
-
-const signupFields = [
-  {
-    type: "text",
-    label: "পুরো নাম",
-    placeholder: "পুরো নাম লিখুন",
-  },
-  {
-    type: "select",
-    options: ["পুরুষ", "মহিলা", "অন্যান্য"],
-    value: "পুরুষ",
-    label: "লিঙ্গ",
-  },
-  {
-    type: "email",
-    label: "ই-মেইল",
-    placeholder: "ই-মেইল লিখুন",
-  },
-  {
-    type: "text",
-    label: "মোবাইল নাম্বার",
-    placeholder: "মোবাইল নাম্বার লিখুন",
-  },
-  {
-    type: "password",
-    label: "পাসওয়ার্ড",
-    placeholder: "পাসওয়ার্ড দিন",
-  },
-  {
-    type: "password",
-    label: "কনফার্ম পাসওয়ার্ড",
-    placeholder: "পুনরায় পাসওয়ার্ড দিন",
-  },
-];
-
 function Signup() {
-  const [inputFields, setInputFields] = useState(signupFields);
+  const navigate = useNavigate();
 
-  // const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm({
+    resolver: yupResolver(userSchema),
+  });
 
-  const onInputChange = (e, i) => {
-    const clonedInputFields = [...inputFields];
+  const [loading, setLoading] = useState(false);
 
-    clonedInputFields[i].value = e.target.value;
+  const onSubmit = async (userData) => {
+    setLoading(true);
+    const response = await fetch("http://localhost:5000/api/v1/user/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
 
-    setInputFields(clonedInputFields);
-  };
+    const result = await response.json();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      e.preventDefault();
-
-      const userInfo = {
-        name: inputFields[0].value,
-        gender: inputFields[1].value,
-        email: inputFields[2].value,
-        mobile: inputFields[3].value,
-        password: inputFields[4].value,
-        confirmPassword: inputFields[5].value,
-      };
-
-      console.log(userInfo);
-      // const response = await fetch("http://localhost:5000/api/v1/user/signup", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(userInfo),
-      // });
-
-      // const result = await response.json();
-
-      // if (result.success) {
-      //   navigate("/otp-verification");
-      // }
-    } catch (error) {
-      console.log(error);
+    if (result.success) {
+      navigate("/otp-verification", { state: { id: result.userId } });
     }
+
+    if (result?.error?.keyPattern?.mobile) {
+      setError("mobile", {
+        message: "a user already exist with this mobile number",
+      });
+    }
+
+    if (result?.error?.keyPattern?.email) {
+      setError("email", {
+        message: "a user already exist with this email address",
+      });
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -153,34 +113,82 @@ function Signup() {
       />
 
       <PageContainer>
-        <form onSubmit={handleSubmit}>
-          {inputFields.map(
-            ({ label, value, type, placeholder, options }, index) => {
-              if (type === "select") {
-                return (
-                  <SelectInput
-                    key={label}
-                    label={label}
-                    onInputChange={(e) => onInputChange(e, index)}
-                    value={value || ""}
-                    options={options}
-                  />
-                );
-              }
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mt-4 mb-1">
+            <label className="font-bold">পুরো নাম</label>
+            <input
+              {...register("name")}
+              type="text"
+              placeholder="পুরো নাম লিখুন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
+            />
+            <p className="text-red-400">{errors.name?.message}</p>
+          </div>
 
-              return (
-                <Input
-                  key={label}
-                  label={label}
-                  value={value || ""}
-                  type={type}
-                  placeholder={placeholder}
-                  onInputChange={(e) => onInputChange(e, index)}
-                />
-              );
-            }
-          )}
-          <Submit value="ওটিপি কোড পাঠান" />
+          <div className="mt-4 mb-1">
+            <label className="font-bold">লিঙ্গ</label>
+            <select
+              {...register("gender")}
+              disabled={loading}
+              className="w-full py-3 border-b border-primary bg-transparent"
+            >
+              <option value="পুরুষ">পুরুষ</option>
+              <option value="মহিলা">মহিলা</option>
+              <option value="অন্যান্য">অন্যান্য</option>
+            </select>
+            <p className="text-red-400">{errors.gender?.message}</p>
+          </div>
+
+          <div className="mt-4 mb-1">
+            <label className="font-bold">ই-মেইল</label>
+            <input
+              {...register("email")}
+              type="email"
+              placeholder="ই-মেইল লিখুন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
+            />
+            <p className="text-red-400">{errors.email?.message}</p>
+          </div>
+
+          <div className="mt-4 mb-1">
+            <label className="font-bold">মোবাইল নাম্বার</label>
+            <input
+              {...register("mobile")}
+              type="text"
+              placeholder="মোবাইল নাম্বার লিখুন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
+            />
+            <p className="text-red-400">{errors.mobile?.message}</p>
+          </div>
+
+          <div className="mt-4 mb-1">
+            <label className="font-bold">পাসওয়ার্ড</label>
+            <input
+              {...register("password")}
+              type="password"
+              placeholder="পাসওয়ার্ড দিন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
+            />
+            <p className="text-red-400">{errors.password?.message}</p>
+          </div>
+
+          <div className="mt-4 mb-1">
+            <label className="font-bold">কনফার্ম পাসওয়ার্ড</label>
+            <input
+              {...register("confirmPassword")}
+              type="password"
+              placeholder="পুনরায় পাসওয়ার্ড দিন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
+            />
+            <p className="text-red-400">{errors.confirmPassword?.message}</p>
+          </div>
+
+          <Submit disabled={loading} value="ওটিপি কোড পাঠান" />
         </form>
       </PageContainer>
     </>
