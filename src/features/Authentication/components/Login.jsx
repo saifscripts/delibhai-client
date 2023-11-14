@@ -1,41 +1,68 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-import Input from "../../../components/forms/Input";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
+import { isMobilePhone } from "../../../utils/isMobilePhone";
 
-const loginFields = [
-  {
-    type: "number",
-    label: "মোবাইল নাম্বার",
-    placeholder: "মোবাইল নাম্বার লিখুন",
-  },
-  {
-    type: "password",
-    label: "পাসওয়ার্ড",
-    placeholder: "পাসওয়ার্ড দিন",
-  },
-];
+const userSchema = yup.object({
+  mobile: yup
+    .string()
+    .trim()
+    .required("Mobile number is required.")
+    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
+  password: yup.string().required("Password is required."),
+});
 
 function Login() {
-  const [inputFields, setInputFields] = useState(loginFields);
+  const navigate = useNavigate();
 
-  // const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm({
+    resolver: yupResolver(userSchema),
+  });
 
-  const onInputChange = (e, i) => {
-    const clonedInputFields = [...inputFields];
+  const [loading, setLoading] = useState(false);
 
-    clonedInputFields[i].data = e.target.value;
+  const onSubmit = async (userData) => {
+    setLoading(true);
+    const response = await fetch(
+      "https://dev-delibhai.onrender.com/api/v1/user/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    );
 
-    setInputFields(clonedInputFields);
-  };
+    const result = await response.json();
+    console.log(result);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    if (result.success) {
+      const { token, user } = result.data;
+      const { _id } = user;
 
-    // navigate('/')
+      localStorage.setItem("authToken", token);
+      return navigate(`/profile/${_id}`);
+    } else if (result?.code === "mobileNotExist") {
+      setError("mobile", {
+        message: result.message,
+      });
+    } else {
+      setError("general", { message: result.message });
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -47,18 +74,34 @@ function Login() {
       />
 
       <PageContainer>
-        <form onSubmit={handleSubmit}>
-          {inputFields.map(({ label, data, type, placeholder }, index) => (
-            <Input
-              key={label}
-              label={label}
-              data={data || ""}
-              type={type}
-              placeholder={placeholder}
-              onInputChange={(e) => onInputChange(e, index)}
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mt-4 mb-1">
+            <label className="font-bold">মোবাইল নাম্বার</label>
+            <input
+              {...register("mobile")}
+              type="text"
+              placeholder="মোবাইল নাম্বার লিখুন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
             />
-          ))}
-          <Submit value="লগিন" />
+            <p className="text-red-400">{errors.mobile?.message}</p>
+          </div>
+
+          <div className="mt-4 mb-1">
+            <label className="font-bold">পাসওয়ার্ড</label>
+            <input
+              {...register("password")}
+              type="password"
+              placeholder="পাসওয়ার্ড দিন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
+            />
+            <p className="text-red-400">{errors.password?.message}</p>
+          </div>
+
+          <p className="text-red-400">{errors.general?.message}</p>
+
+          <Submit disabled={loading} value="লগিন" />
         </form>
       </PageContainer>
     </>
