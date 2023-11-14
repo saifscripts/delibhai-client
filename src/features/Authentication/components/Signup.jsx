@@ -29,7 +29,6 @@ const userSchema = yup.object({
     .string()
     .trim()
     .lowercase()
-    .email("")
     .test("isValidEmail", `email is not valid`, isEmail),
   mobile: yup
     .string()
@@ -75,18 +74,22 @@ function Signup() {
 
   const onSubmit = async (userData) => {
     setLoading(true);
-    const response = await fetch("http://localhost:5000/api/v1/user/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
+    const response = await fetch(
+      "https://dev-delibhai.onrender.com/api/v1/user/signup",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    );
 
     const result = await response.json();
+    console.log(result);
 
     if (result.success) {
-      navigate("/otp-verification", { state: { id: result.userId } });
+      navigate("/otp-verification", { state: { id: result.data.id } });
     }
 
     if (result?.error?.keyPattern?.mobile) {
@@ -95,9 +98,9 @@ function Signup() {
       });
     }
 
-    if (result?.error?.keyPattern?.email) {
+    if (result?.code === "duplicateEmail") {
       setError("email", {
-        message: "a user already exist with this email address",
+        message: result.message,
       });
     }
 
@@ -144,7 +147,7 @@ function Signup() {
             <label className="font-bold">ই-মেইল</label>
             <input
               {...register("email")}
-              type="email"
+              type="text"
               placeholder="ই-মেইল লিখুন"
               disabled={loading}
               className="w-full py-3 border-b border-primary"
