@@ -1,89 +1,110 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Input from "../../../components/forms/Input";
-import SelectInput from "../../../components/forms/SelectInput";
+import isEmail from "validator/lib/isEmail";
+import isStrongPassword from "validator/lib/isStrongPassword";
+import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
+import { isMobilePhone } from "../../../utils/isMobilePhone";
 
-const signupFields = [
-  {
-    type: "text",
-    label: "পুরো নাম",
-    placeholder: "পুরো নাম লিখুন",
-  },
-  {
-    type: "select",
-    options: ["পুরুষ", "মহিলা", "অন্যান্য"],
-    data: "পুরুষ",
-    label: "লিঙ্গ",
-  },
-  {
-    type: "email",
-    label: "ই-মেইল",
-    placeholder: "ই-মেইল লিখুন",
-  },
-  {
-    type: "text",
-    label: "মোবাইল নাম্বার",
-    placeholder: "মোবাইল নাম্বার লিখুন",
-  },
-  {
-    type: "password",
-    label: "পাসওয়ার্ড",
-    placeholder: "পাসওয়ার্ড দিন",
-  },
-  {
-    type: "password",
-    label: "কনফার্ম পাসওয়ার্ড",
-    placeholder: "পুনরায় পাসওয়ার্ড দিন",
-  },
-];
+const userSchema = yup.object({
+  name: yup
+    .string()
+    .trim()
+    .required("name is required")
+    .min(3, "name must be at least 3 characters long"),
+  gender: yup
+    .string()
+    .trim()
+    .required("gender is required")
+    .oneOf(
+      ["পুরুষ", "মহিলা", "অন্যান্য"],
+      "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য"
+    ),
+  email: yup
+    .string()
+    .trim()
+    .lowercase()
+    .test("isValidEmail", `email is not valid`, isEmail),
+  mobile: yup
+    .string()
+    .trim()
+    .required("mobile number is required")
+    .test("isMobilePhone", `mobile number is invalid`, isMobilePhone("bn-BD")),
+  password: yup
+    .string()
+    .required("password is required")
+    .test(
+      "isStrongPassword",
+      "password must be at least 4 characters long",
+      (value) =>
+        isStrongPassword(value, {
+          minLength: 4,
+          minLowercase: 0,
+          minNumbers: 0,
+          minUppercase: 0,
+          minSymbols: 0,
+        })
+    ),
+  confirmPassword: yup
+    .string()
+    .required("please confirm your password")
+    .test("isMatchedPassword", `passwords don't match`, function (value) {
+      return value === this.parent.password;
+    }),
+});
 
 function Signup() {
-  const [inputFields, setInputFields] = useState(signupFields);
-
   const navigate = useNavigate();
 
-  const onInputChange = (e, i) => {
-    const clonedInputFields = [...inputFields];
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm({
+    resolver: yupResolver(userSchema),
+  });
 
-    clonedInputFields[i].data = e.target.value;
+  const [loading, setLoading] = useState(false);
 
-    setInputFields(clonedInputFields);
-  };
-
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-
-      const userInfo = {
-        name: inputFields[0].data,
-        gender: inputFields[1].data,
-        email: inputFields[2].data,
-        mobile: inputFields[3].data,
-        password: inputFields[4].data,
-        confirmPassword: inputFields[5].data,
-      };
-
-      console.log(userInfo);
-      const response = await fetch("http://localhost:5000/api/v1/user/signup", {
+  const onSubmit = async (userData) => {
+    setLoading(true);
+    const response = await fetch(
+      "https://dev-delibhai.onrender.com/api/v1/user/signup",
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userInfo),
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        navigate("/otp-verification");
+        body: JSON.stringify(userData),
       }
-    } catch (error) {
-      console.log(error);
+    );
+
+    const result = await response.json();
+    console.log(result);
+
+    if (result.success) {
+      navigate("/otp-verification", { state: { id: result.data.id } });
     }
+
+    if (result?.error?.keyPattern?.mobile) {
+      setError("mobile", {
+        message: "a user already exist with this mobile number",
+      });
+    }
+
+    if (result?.code === "duplicateEmail") {
+      setError("email", {
+        message: result.message,
+      });
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -95,34 +116,82 @@ function Signup() {
       />
 
       <PageContainer>
-        <form onSubmit={handleSubmit}>
-          {inputFields.map(
-            ({ label, data, type, placeholder, options }, index) => {
-              if (type === "select") {
-                return (
-                  <SelectInput
-                    key={label}
-                    label={label}
-                    onInputChange={(e) => onInputChange(e, index)}
-                    data={data || ""}
-                    options={options}
-                  />
-                );
-              }
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mt-4 mb-1">
+            <label className="font-bold">পুরো নাম</label>
+            <input
+              {...register("name")}
+              type="text"
+              placeholder="পুরো নাম লিখুন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
+            />
+            <p className="text-red-400">{errors.name?.message}</p>
+          </div>
 
-              return (
-                <Input
-                  key={label}
-                  label={label}
-                  data={data || ""}
-                  type={type}
-                  placeholder={placeholder}
-                  onInputChange={(e) => onInputChange(e, index)}
-                />
-              );
-            }
-          )}
-          <Submit value="ওটিপি কোড পাঠান" />
+          <div className="mt-4 mb-1">
+            <label className="font-bold">লিঙ্গ</label>
+            <select
+              {...register("gender")}
+              disabled={loading}
+              className="w-full py-3 border-b border-primary bg-transparent"
+            >
+              <option value="পুরুষ">পুরুষ</option>
+              <option value="মহিলা">মহিলা</option>
+              <option value="অন্যান্য">অন্যান্য</option>
+            </select>
+            <p className="text-red-400">{errors.gender?.message}</p>
+          </div>
+
+          <div className="mt-4 mb-1">
+            <label className="font-bold">ই-মেইল</label>
+            <input
+              {...register("email")}
+              type="text"
+              placeholder="ই-মেইল লিখুন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
+            />
+            <p className="text-red-400">{errors.email?.message}</p>
+          </div>
+
+          <div className="mt-4 mb-1">
+            <label className="font-bold">মোবাইল নাম্বার</label>
+            <input
+              {...register("mobile")}
+              type="text"
+              placeholder="মোবাইল নাম্বার লিখুন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
+            />
+            <p className="text-red-400">{errors.mobile?.message}</p>
+          </div>
+
+          <div className="mt-4 mb-1">
+            <label className="font-bold">পাসওয়ার্ড</label>
+            <input
+              {...register("password")}
+              type="password"
+              placeholder="পাসওয়ার্ড দিন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
+            />
+            <p className="text-red-400">{errors.password?.message}</p>
+          </div>
+
+          <div className="mt-4 mb-1">
+            <label className="font-bold">কনফার্ম পাসওয়ার্ড</label>
+            <input
+              {...register("confirmPassword")}
+              type="password"
+              placeholder="পুনরায় পাসওয়ার্ড দিন"
+              disabled={loading}
+              className="w-full py-3 border-b border-primary"
+            />
+            <p className="text-red-400">{errors.confirmPassword?.message}</p>
+          </div>
+
+          <Submit disabled={loading} value="ওটিপি কোড পাঠান" />
         </form>
       </PageContainer>
     </>
