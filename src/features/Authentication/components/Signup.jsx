@@ -15,32 +15,32 @@ const userSchema = yup.object({
   name: yup
     .string()
     .trim()
-    .required("name is required")
-    .min(3, "name must be at least 3 characters long"),
+    .required("Name is required.")
+    .min(3, "Name must be at least 3 characters long."),
   gender: yup
     .string()
     .trim()
-    .required("gender is required")
+    .required("Gender is required.")
     .oneOf(
       ["পুরুষ", "মহিলা", "অন্যান্য"],
-      "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য"
+      "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য."
     ),
   email: yup
     .string()
     .trim()
     .lowercase()
-    .test("isValidEmail", `email is not valid`, isEmail),
+    .test("isValidEmail", `Email is not valid.`, isEmail),
   mobile: yup
     .string()
     .trim()
-    .required("mobile number is required")
-    .test("isMobilePhone", `mobile number is invalid`, isMobilePhone("bn-BD")),
+    .required("Mobile number is required.")
+    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
   password: yup
     .string()
-    .required("password is required")
+    .required("Password is required.")
     .test(
       "isStrongPassword",
-      "password must be at least 4 characters long",
+      "Password must be at least 4 characters long.",
       (value) =>
         isStrongPassword(value, {
           minLength: 4,
@@ -52,8 +52,8 @@ const userSchema = yup.object({
     ),
   confirmPassword: yup
     .string()
-    .required("please confirm your password")
-    .test("isMatchedPassword", `passwords don't match`, function (value) {
+    .required("Please confirm your password.")
+    .test("isMatchedPassword", "Passwords don't match.", function (value) {
       return value === this.parent.password;
     }),
 });
@@ -94,7 +94,7 @@ function Signup() {
 
     if (result?.error?.keyPattern?.mobile) {
       setError("mobile", {
-        message: "a user already exist with this mobile number",
+        message: "A user already exist with this mobile number.",
       });
     }
 
