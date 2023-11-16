@@ -76,7 +76,7 @@ function Signup() {
     const { data, error } = await postData("/v1/user/signup", userData);
 
     if (data?.success) {
-      navigate("/otp-verification", { state: { id: data.data.id } });
+      return navigate("/otp-verification", { state: { id: data.data.id } });
     }
 
     if (error?.error?.keyPattern?.mobile) {
@@ -89,6 +89,10 @@ function Signup() {
       setError("email", {
         message: error.message,
       });
+    }
+
+    if (error?.name === "AxiosError") {
+      setError("general", { message: error?.message });
     }
   };
 
@@ -175,6 +179,8 @@ function Signup() {
             />
             <p className="text-red-400">{errors.confirmPassword?.message}</p>
           </div>
+
+          <p className="text-red-400">{errors.general?.message}</p>
 
           <Submit disabled={isLoading} value="ওটিপি কোড পাঠান" />
         </form>
