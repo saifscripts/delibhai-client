@@ -1,10 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import * as yup from "yup";
+import { usePostData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
@@ -70,41 +70,26 @@ function Signup() {
     resolver: yupResolver(userSchema),
   });
 
-  const [loading, setLoading] = useState(false);
+  const { postData, isLoading } = usePostData();
 
   const onSubmit = async (userData) => {
-    setLoading(true);
-    const response = await fetch(
-      "https://dev-delibhai.onrender.com/api/v1/user/signup",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      }
-    );
+    const { data, error } = await postData("/v1/user/signup", userData);
 
-    const result = await response.json();
-    console.log(result);
-
-    if (result.success) {
-      navigate("/otp-verification", { state: { id: result.data.id } });
+    if (data?.success) {
+      navigate("/otp-verification", { state: { id: data.data.id } });
     }
 
-    if (result?.error?.keyPattern?.mobile) {
+    if (error?.error?.keyPattern?.mobile) {
       setError("mobile", {
         message: "A user already exist with this mobile number.",
       });
     }
 
-    if (result?.code === "duplicateEmail") {
+    if (error?.code === "duplicateEmail") {
       setError("email", {
-        message: result.message,
+        message: error.message,
       });
     }
-
-    setLoading(false);
   };
 
   return (
@@ -123,7 +108,7 @@ function Signup() {
               {...register("name")}
               type="text"
               placeholder="পুরো নাম লিখুন"
-              disabled={loading}
+              disabled={isLoading}
               className="w-full py-3 border-b border-primary"
             />
             <p className="text-red-400">{errors.name?.message}</p>
@@ -133,7 +118,7 @@ function Signup() {
             <label className="font-bold">লিঙ্গ</label>
             <select
               {...register("gender")}
-              disabled={loading}
+              disabled={isLoading}
               className="w-full py-3 border-b border-primary bg-transparent"
             >
               <option value="পুরুষ">পুরুষ</option>
@@ -149,7 +134,7 @@ function Signup() {
               {...register("email")}
               type="text"
               placeholder="ই-মেইল লিখুন"
-              disabled={loading}
+              disabled={isLoading}
               className="w-full py-3 border-b border-primary"
             />
             <p className="text-red-400">{errors.email?.message}</p>
@@ -161,7 +146,7 @@ function Signup() {
               {...register("mobile")}
               type="text"
               placeholder="মোবাইল নাম্বার লিখুন"
-              disabled={loading}
+              disabled={isLoading}
               className="w-full py-3 border-b border-primary"
             />
             <p className="text-red-400">{errors.mobile?.message}</p>
@@ -173,7 +158,7 @@ function Signup() {
               {...register("password")}
               type="password"
               placeholder="পাসওয়ার্ড দিন"
-              disabled={loading}
+              disabled={isLoading}
               className="w-full py-3 border-b border-primary"
             />
             <p className="text-red-400">{errors.password?.message}</p>
@@ -185,13 +170,13 @@ function Signup() {
               {...register("confirmPassword")}
               type="password"
               placeholder="পুনরায় পাসওয়ার্ড দিন"
-              disabled={loading}
+              disabled={isLoading}
               className="w-full py-3 border-b border-primary"
             />
             <p className="text-red-400">{errors.confirmPassword?.message}</p>
           </div>
 
-          <Submit disabled={loading} value="ওটিপি কোড পাঠান" />
+          <Submit disabled={isLoading} value="ওটিপি কোড পাঠান" />
         </form>
       </PageContainer>
     </>
