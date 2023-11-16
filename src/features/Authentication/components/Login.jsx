@@ -1,8 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import { usePostData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
@@ -30,39 +30,28 @@ function Login() {
     resolver: yupResolver(userSchema),
   });
 
-  const [loading, setLoading] = useState(false);
+  const { postData, isLoading } = usePostData();
 
   const onSubmit = async (userData) => {
-    setLoading(true);
-    const response = await fetch(
-      "https://dev-delibhai.onrender.com/api/v1/user/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      }
-    );
+    const { data, error } = await postData("/v1/user/login", userData);
 
-    const result = await response.json();
-    console.log(result);
-
-    if (result.success) {
-      const { token, user } = result.data;
+    if (data?.success) {
+      const { token, user } = data.data;
       const { _id } = user;
 
       localStorage.setItem("authToken", token);
       return navigate(`/profile/${_id}`);
-    } else if (result?.code === "mobileNotExist") {
-      setError("mobile", {
-        message: result.message,
-      });
-    } else {
-      setError("general", { message: result.message });
     }
 
-    setLoading(false);
+    if (error?.code === "mobileNotExist") {
+      setError("mobile", {
+        message: error.message,
+      });
+    }
+
+    if (error?.name === "AxiosError") {
+      setError("general", { message: error?.message });
+    }
   };
 
   return (
@@ -81,7 +70,7 @@ function Login() {
               {...register("mobile")}
               type="text"
               placeholder="মোবাইল নাম্বার লিখুন"
-              disabled={loading}
+              disabled={isLoading}
               className="w-full py-3 border-b border-primary"
             />
             <p className="text-red-400">{errors.mobile?.message}</p>
@@ -93,7 +82,7 @@ function Login() {
               {...register("password")}
               type="password"
               placeholder="পাসওয়ার্ড দিন"
-              disabled={loading}
+              disabled={isLoading}
               className="w-full py-3 border-b border-primary"
             />
             <p className="text-red-400">{errors.password?.message}</p>
@@ -101,7 +90,7 @@ function Login() {
 
           <p className="text-red-400">{errors.general?.message}</p>
 
-          <Submit disabled={loading} value="লগিন" />
+          <Submit disabled={isLoading} value="লগিন" />
         </form>
       </PageContainer>
     </>
