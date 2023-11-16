@@ -43,12 +43,16 @@ function Login() {
       return navigate(`/profile/${_id}`);
     }
 
+    // Handle app level errors
     if (error?.code === "mobileNotExist") {
       setError("mobile", {
         message: error.message,
       });
+    } else {
+      setError("general", { message: error?.message });
     }
 
+    // Handle AxiosError
     if (error?.name === "AxiosError") {
       setError("general", { message: error?.message });
     }
