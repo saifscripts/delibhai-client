@@ -123,7 +123,7 @@ function OTPVerification() {
 
               <Submit
                 value="সাবমিট করুন"
-                disabled={isLoading}
+                disabled={isLoading || OTP.some((field) => field === "")}
                 className="rounded-lg"
               />
             </form>
