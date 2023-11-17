@@ -40,7 +40,8 @@ function Login() {
       const { _id } = user;
 
       localStorage.setItem("authToken", token);
-      return navigate(`/profile/${_id}`);
+      // return navigate(`/profile/${_id}`);
+      return navigate("/");
     }
 
     // Handle app level errors
