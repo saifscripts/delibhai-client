@@ -72,7 +72,7 @@ function OTPVerification() {
       setError("");
       setIsSubmitModalOpen(true);
     } else {
-      setError(error?.error);
+      setError(error?.message);
     }
   };
 
