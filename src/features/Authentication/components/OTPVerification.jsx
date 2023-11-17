@@ -11,7 +11,7 @@ function OTPVerification() {
   const { state } = useLocation();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(true);
-  const [otp, setOTP] = useState(["", "", "", "", "", ""]);
+  const [OTP, setOTP] = useState(["", "", "", "", "", ""]);
   const [error, setError] = useState("");
 
   const inputRefs = [
@@ -27,21 +27,21 @@ function OTPVerification() {
 
   const handleChange = (e, index) => {
     const value = e.target.value;
-    const updatedOTP = [...otp];
+    const _OTP = [...OTP];
 
     if (e.nativeEvent.inputType === "deleteContentBackward" && index > 0) {
-      updatedOTP[index] = "";
-      setOTP(updatedOTP);
+      _OTP[index] = "";
+      setOTP(_OTP);
       inputRefs[index - 1].current.focus();
       return;
     }
 
     if (!isNaN(value) && value.length <= 1) {
-      updatedOTP[index] = value;
-      setOTP(updatedOTP);
+      _OTP[index] = value;
+      setOTP(_OTP);
 
       // Move to the next input field if there's a value
-      if (value && index < otp.length - 1) {
+      if (value && index < OTP.length - 1) {
         inputRefs[index + 1].current.focus();
       }
     }
@@ -65,7 +65,7 @@ function OTPVerification() {
 
     const { data, error } = await postData("/v1/user/verify-otp", {
       id: state.id,
-      otp: otp.join(""),
+      otp: OTP.join(""),
     });
 
     if (data?.success) {
@@ -95,7 +95,7 @@ function OTPVerification() {
             />
             <form onSubmit={handleSubmit}>
               <div className="flex justify-center gap-2">
-                {otp.map((digit, index) => (
+                {OTP.map((digit, index) => (
                   <input
                     key={index}
                     type="number"
