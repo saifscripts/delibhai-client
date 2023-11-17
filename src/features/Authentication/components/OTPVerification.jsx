@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { usePostData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
@@ -11,7 +12,6 @@ function OTPVerification() {
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(true);
   const [otp, setOTP] = useState(["", "", "", "", "", ""]);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const inputRefs = [
@@ -22,6 +22,8 @@ function OTPVerification() {
     useRef(null),
     useRef(null),
   ];
+
+  const { isLoading, postData } = usePostData();
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -59,35 +61,18 @@ function OTPVerification() {
   }
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      setLoading(true);
-      const response = await fetch(
-        "https://dev-delibhai.onrender.com/api/v1/user/verify-otp",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: state.id,
-            otp: otp.join(""),
-          }),
-        }
-      );
+    e.preventDefault();
 
-      const result = await response.json();
+    const { data, error } = await postData("/v1/user/verify-otp", {
+      id: state.id,
+      otp: otp.join(""),
+    });
 
-      if (result.success) {
-        setError("");
-        setIsSubmitModalOpen(true);
-      } else {
-        setError(result.error);
-      }
-
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
+    if (data?.success) {
+      setError("");
+      setIsSubmitModalOpen(true);
+    } else {
+      setError(error?.error);
     }
   };
 
@@ -119,7 +104,7 @@ function OTPVerification() {
                     onChange={(e) => handleChange(e, index)}
                     onKeyDown={preventUpDown}
                     maxLength="1"
-                    disabled={loading}
+                    disabled={isLoading}
                     className="w-12 aspect-square text-xl px-4 border border-secondary rounded-lg focus:outline-none focus:border-primary"
                   />
                 ))}
@@ -138,7 +123,7 @@ function OTPVerification() {
 
               <Submit
                 value="সাবমিট করুন"
-                disabled={loading}
+                disabled={isLoading}
                 className="rounded-lg"
               />
             </form>
