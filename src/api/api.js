@@ -8,11 +8,14 @@ export const useFetchData = () => {
 
   // fetchData method directly returns data/error
   const fetchData = async (route) => {
+    const token = localStorage.getItem('authToken');
     let data, error;
 
     try {
       setIsLoading(true);
-      const response = await axios.get("/api" + route);
+      const response = await axios.get("/api" + route, {
+        headers: {'authorization': token ? `Bearer ${token}`: null},
+      }); 
       data = response.data;
     } catch (err) {
       console.log(err)
@@ -36,11 +39,14 @@ export const usePostData = () => {
 
   // postData method directly returns data/error
   const postData = async (route, body) => {
+    const token = localStorage.getItem('authToken');
     let data, error;
 
     try {
       setIsLoading(true);
-      const response = await axios.post("/api" + route, body);
+      const response = await axios.post("/api" + route, body, {
+        headers: {'authorization': token ? `Bearer ${token}`: null},
+      });
       data = response.data;
     } catch (err) {
       const appError = err?.response?.data;
