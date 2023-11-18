@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { usePostData } from "../../../api/api";
+import { useFetchData, usePostData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
@@ -24,6 +24,7 @@ function OTPVerification() {
   ];
 
   const { isLoading, postData } = usePostData();
+  const { fetchData } = useFetchData();
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -47,9 +48,18 @@ function OTPVerification() {
     }
   };
 
-  const resendOTP = () => {
-    setTimerRunning(true);
-    setOTP(["", "", "", "", "", ""]);
+  const resendOTP = async (e) => {
+    e.preventDefault();
+
+    const { data, error } = await fetchData(`/v1/user/resendOTP/${state.id}`);
+
+    if (data?.success) {
+      setError("");
+      setTimerRunning(true);
+      setOTP(["", "", "", "", "", ""]);
+    } else {
+      setError(error?.message);
+    }
   };
 
   function preventUpDown(event) {
@@ -93,7 +103,7 @@ function OTPVerification() {
               timerRunning={timerRunning}
               setTimerRunning={setTimerRunning}
             />
-            <form onSubmit={handleSubmit}>
+            <form>
               <div className="flex justify-center gap-2">
                 {OTP.map((digit, index) => (
                   <input
@@ -125,6 +135,7 @@ function OTPVerification() {
                 value="সাবমিট করুন"
                 disabled={isLoading || OTP.some((field) => field === "")}
                 className="rounded-lg"
+                onClick={handleSubmit}
               />
             </form>
           </PageContainer>
