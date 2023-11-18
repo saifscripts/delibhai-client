@@ -2,8 +2,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { usePostData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
+import { useAuth } from "../../../contexts/AuthContext";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
@@ -30,16 +30,12 @@ function Login() {
     resolver: yupResolver(userSchema),
   });
 
-  const { postData, isLoading } = usePostData();
+  const { isLoading, login } = useAuth();
 
   const onSubmit = async (userData) => {
-    const { data, error } = await postData("/v1/user/login", userData);
+    const { data, error } = await login(userData);
 
     if (data?.success) {
-      const { token, user } = data.data;
-      const { _id } = user;
-
-      localStorage.setItem("authToken", token);
       // return navigate(`/profile/${_id}`);
       return navigate("/");
     }
