@@ -51,7 +51,7 @@ function OTPVerification() {
   const resendOTP = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await fetchData(`/v1/user/resendOTP/${state.id}`);
+    const { data, error } = await fetchData(`/v1/user/resend-otp/${state.id}`);
 
     if (data?.success) {
       setError("");
