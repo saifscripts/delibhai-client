@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import * as yup from "yup";
-import { usePostData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
+import { useAuth } from "../../../contexts/AuthContext";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
@@ -70,13 +70,15 @@ function Signup() {
     resolver: yupResolver(userSchema),
   });
 
-  const { postData, isLoading } = usePostData();
+  const { signup, isLoading } = useAuth();
 
   const onSubmit = async (userData) => {
-    const { data, error } = await postData("/v1/user/signup", userData);
+    const { data, error } = await signup(userData);
 
     if (data?.success) {
-      return navigate("/otp-verification", { state: { id: data.data.id } });
+      return navigate("/otp-verification", {
+        state: { id: data.data.user._id },
+      });
     }
 
     if (error?.error?.keyPattern?.mobile) {
