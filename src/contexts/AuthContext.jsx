@@ -52,8 +52,15 @@ export const AuthProvider = ({ children }) => {
     return { data, error };
   };
 
+  const logout = () => {
+    localStorage.removeItem("authToken");
+    setCurrentUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoading, currentUser, signup, login }}>
+    <AuthContext.Provider
+      value={{ isLoading, currentUser, signup, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

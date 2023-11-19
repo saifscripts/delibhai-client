@@ -1,9 +1,8 @@
 import { useAuth } from "../contexts/AuthContext";
-import Navbar from "../layouts/Navbar/Navbar";
+import { Navbar } from "../layouts/Navbar/";
 
 const Home = () => {
   const { currentUser } = useAuth();
-  console.log(currentUser);
   return (
     <div>
       <Navbar />
