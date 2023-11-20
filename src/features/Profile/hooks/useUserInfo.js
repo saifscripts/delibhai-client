@@ -22,14 +22,17 @@ import vehicleType from '../assets/icons/vehicle.svg';
 
 // others
 import { useEffect, useState } from 'react';
-import heros from '../../../data/heros';
+import { useFetchData } from '../../../api/api';
 import convertNumber from '../../../utils/convertNumber';
 import { getServiceTime } from '../../../utils/convertTime';
 
 const useUserInfo = (id) => {
   const [userInfo, setUserInfo] = useState({});
+  const { fetchData} = useFetchData();
 
-  useEffect(() => setUserInfo(heros.find((hero) => hero.id === id)), [id]);
+  useEffect(() => {
+    fetchData(`/v1/user/${id}`).then(({data})=> setUserInfo(data.data))
+  }, [id]);
 
   const modifiedInfo = {
     personal: [
@@ -71,7 +74,7 @@ const useUserInfo = (id) => {
     contact: [
       {
         type: 'number',
-        info: userInfo?.mobile1,
+        info: userInfo?.mobile,
         label: 'মোবাইল নম্বর',
         icon: phone,
       },
