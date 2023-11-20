@@ -31,36 +31,34 @@ const useUserInfo = (id) => {
 
   useEffect(() => setUserInfo(heros.find((hero) => hero.id === id)), [id]);
 
-  const { presentAddress = {}, permanentAddress = {} } = userInfo;
-
   const modifiedInfo = {
     personal: [
-      { type: 'text', info: userInfo.name, label: 'নিজের নাম', icon: person },
-      { type: 'text', info: userInfo.father, label: 'পিতার নাম', icon: father },
+      { type: 'text', info: userInfo?.name, label: 'নিজের নাম', icon: person },
+      { type: 'text', info: userInfo?.father, label: 'পিতার নাম', icon: father },
       {
         type: 'select',
         options: ['পুরুষ', 'মহিলা', 'অন্যান্য'],
-        info: userInfo.gender,
+        info: userInfo?.gender,
         label: 'লিঙ্গ',
         icon: gender,
       },
       {
         type: 'select',
         options: ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'],
-        info: userInfo.bloodGroup,
+        info: userInfo?.bloodGroup,
         label: 'রক্তের গ্রুপ',
         icon: bloodGroup,
       },
       {
         type: 'number',
-        data: userInfo.age,
-        info: `${convertNumber(userInfo.age)} বছর`,
+        data: userInfo?.age,
+        info: `${convertNumber(userInfo?.age)} বছর`,
         label: 'বয়স',
         icon: age,
       },
       {
         type: 'text',
-        info: userInfo.nid,
+        info: userInfo?.nid,
         label: 'জন্মনিবন্ধন/NID নম্বর',
         icon: nid,
       },
@@ -73,32 +71,32 @@ const useUserInfo = (id) => {
     contact: [
       {
         type: 'number',
-        info: userInfo.mobile1,
+        info: userInfo?.mobile1,
         label: 'মোবাইল নম্বর',
         icon: phone,
       },
       {
         type: 'number',
-        info: userInfo.mobile2,
+        info: userInfo?.mobile2,
         label: 'বিকল্প মোবাইল নম্বর',
         icon: phone,
       },
-      { type: 'email', info: userInfo.email, label: 'ই-মেইল', icon: email },
+      { type: 'email', info: userInfo?.email, label: 'ই-মেইল', icon: email },
       {
         type: 'text',
-        info: userInfo.facebook,
+        info: userInfo?.facebook,
         label: 'ফেইসবুক লিংক',
         icon: facebook,
       },
     ],
     address: [
       {
-        info: `${presentAddress.street}, ${presentAddress.post} - ${presentAddress.zip}, ${presentAddress.subDistrict}, ${presentAddress.district}।`,
+        info: `${userInfo?.presentAddress?.street}, ${userInfo?.presentAddress?.post} - ${userInfo?.presentAddress?.zip}, ${userInfo?.presentAddress?.subDistrict}, ${userInfo?.presentAddress?.district}।`,
         label: 'বর্তমান ঠিকানা',
         icon: marker,
       },
       {
-        info: `${permanentAddress.street}, ${permanentAddress.post} - ${permanentAddress.zip}, ${permanentAddress.subDistrict}, ${permanentAddress.district}।`,
+        info: `${userInfo?.permanentAddress?.street}, ${userInfo?.permanentAddress?.post} - ${userInfo?.permanentAddress?.zip}, ${userInfo?.permanentAddress?.subDistrict}, ${userInfo?.permanentAddress?.district}।`,
         label: 'স্থায়ী ঠিকানা',
         icon: marker,
       },
@@ -107,31 +105,31 @@ const useUserInfo = (id) => {
       {
         type: 'select',
         options: ['বাইক', 'কার', 'সিএনজি', 'টমটম'],
-        info: userInfo.vehicleType,
+        info: userInfo?.vehicleType,
         label: 'গাড়ির ধরণ',
         icon: vehicleType,
       },
       {
         type: 'text',
-        info: userInfo.vehicleBrand,
+        info: userInfo?.vehicleBrand,
         label: 'গাড়ির ব্র্যান্ড',
         icon: vehicleBrand,
       },
       {
         type: 'text',
-        info: userInfo.vehicleModel,
+        info: userInfo?.vehicleModel,
         label: 'গাড়ির মডেল',
         icon: vehicleModel,
       },
       {
         type: 'text',
-        info: userInfo.vehicleNumber,
+        info: userInfo?.vehicleNumber,
         label: 'গাড়ির নম্বর',
         icon: vehicleNumber,
       },
       {
         type: 'text',
-        info: userInfo.vehicleName,
+        info: userInfo?.vehicleName,
         label: 'গাড়ির নাম',
         icon: vehicleName,
       },
@@ -139,7 +137,7 @@ const useUserInfo = (id) => {
     owner: [
       {
         type: 'text',
-        info: userInfo.ownerName,
+        info: userInfo?.ownerName,
         label: 'কোম্পানি/মালিকের নাম',
         icon: person,
       },
@@ -193,40 +191,40 @@ const useUserInfo = (id) => {
         editOnly: true,
       },
       {
-        info: userInfo.ownerAddress,
+        info: userInfo?.ownerAddress,
         label: 'ঠিকানা',
         icon: marker,
         hidden: true,
       },
       {
         type: 'text',
-        info: userInfo.ownerMobile,
+        info: userInfo?.ownerMobile,
         label: 'মোবাইল',
         icon: phone,
       },
       {
         type: 'emeil',
-        info: userInfo.ownerEmail,
+        info: userInfo?.ownerEmail,
         label: 'ই-মেইল',
         icon: email,
       },
     ],
     service: [
-      { type: 'select', options:['ব্যক্তিগত', 'ভাড়ায় চালিত'], info: userInfo.serviceUsage, label: 'গাড়ির ব্যবহার', icon: steering },
-      { type: 'select',options:['লোকাল ভাড়া', 'রিজার্ভ ভাড়া', 'লোকাল ও রিজার্ভ ভাড়া', 'কন্টাক্ট ভাড়া'], info: userInfo.serviceType, label: 'গাড়ির সেবা', icon: serviceType },
+      { type: 'select', options:['ব্যক্তিগত', 'ভাড়ায় চালিত'], info: userInfo?.serviceUsage, label: 'গাড়ির ব্যবহার', icon: steering },
+      { type: 'select',options:['লোকাল ভাড়া', 'রিজার্ভ ভাড়া', 'লোকাল ও রিজার্ভ ভাড়া', 'কন্টাক্ট ভাড়া'], info: userInfo?.serviceType, label: 'গাড়ির সেবা', icon: serviceType },
       { type: 'category', label: 'সার্ভিস প্রদানের এলাকা', editOnly: true },
       
       {
         type: 'select',
         options: ['চট্টগ্রাম', 'ঢাকা'],
-        info: userInfo.serviceArea?.district,
+        info: userInfo?.serviceArea?.district,
         label: 'জেলা',
         editOnly: true,
       },
       {
         type: 'select',
         options: ['ফটিকছড়ি', 'হাটহাজারি'],
-        info: userInfo.serviceArea?.subDistrict,
+        info: userInfo?.serviceArea?.subDistrict,
         label: 'উপজেলা/পৌরসভা/সিটি কর্পোরেশন',
         editOnly: true,
       },
@@ -234,17 +232,17 @@ const useUserInfo = (id) => {
       {
         type: 'select',
         options: ['বিবিরহাট', 'হেয়াকো'],
-        info: userInfo.serviceArea?.post,
+        info: userInfo?.serviceArea?.post,
         label: 'পোস্ট অফিস',
         editOnly: true,
       },
       {
         type: 'number',
         label: 'পোস্ট কোড',
-        info: userInfo.serviceArea?.zip,
+        info: userInfo?.serviceArea?.zip,
         editOnly: true,
       },
-      { type: 'text', info: userInfo.mainStation, label: 'প্রধান স্ট্যাশন', icon: station },
+      { type: 'text', info: userInfo?.mainStation, label: 'প্রধান স্ট্যাশন', icon: station },
       {
         type: 'checkbox',
         options: [
@@ -257,22 +255,22 @@ const useUserInfo = (id) => {
           'পূর্ব পাড়া',
           'সরকার পাড়া'
         ],
-        info: userInfo.serviceArea?.areas?.join(', '),
-        data: userInfo.serviceArea?.areas,
+        info: userInfo?.serviceArea?.areas?.join(', '),
+        data: userInfo?.serviceArea?.areas,
         label: 'সার্ভিস প্রদানের এলাকা সমূহ',
         icon: serviceArea,
       },
       {
         type: 'time',
-        info: getServiceTime(userInfo.serviceTime),
-        data: userInfo.serviceTime,
+        info: getServiceTime(userInfo?.serviceTime),
+        data: userInfo?.serviceTime,
         label: 'সার্ভিস প্রদানের সময়',
         icon: clock,
       },
     ],
     location: [
       {
-        info: `${userInfo.location?.post}, ${userInfo.location?.thana}, ${userInfo.location?.subDistrict}, ${userInfo.location?.district}।`,
+        info: `${userInfo?.location?.post}, ${userInfo?.location?.thana}, ${userInfo?.location?.subDistrict}, ${userInfo?.location?.district}।`,
         label: 'ঠিকানা',
         icon: marker,
         hidden: true
@@ -280,48 +278,48 @@ const useUserInfo = (id) => {
       { 
         type: 'select',
         options: ['চট্টগ্রাম', 'ঢাকা'],
-        info: userInfo.location?.division, 
+        info: userInfo?.location?.division, 
         label: 'বিভাগ', 
         editOnly:true
       },
       { 
         type: 'select',
         options: ['চট্টগ্রাম', 'ঢাকা'],
-        info: userInfo.location?.district, 
+        info: userInfo?.location?.district, 
         label: 'জেলা', 
         editOnly:true
       },
       {
         type: 'select',
         options: ['চট্টগ্রাম', 'ঢাকা'],
-        info: userInfo.location?.subDistrict,
+        info: userInfo?.location?.subDistrict,
         label: 'উপজেলা/পৌরসভা/সিটি কর্পোরেশন',
         editOnly:true
       },
       {
         type: 'select',
         options: ['চট্টগ্রাম', 'ঢাকা'],
-        info: userInfo.location?.union,
+        info: userInfo?.location?.union,
         label: 'ইউনিয়ন',
         editOnly:true
       },
       { 
         type: 'select',
         options: ['চট্টগ্রাম', 'ঢাকা'],
-        info: userInfo.location?.post, 
+        info: userInfo?.location?.post, 
         label: 'পোস্ট অফিস', 
         editOnly:true
       },
       { 
         type: 'number',
-        info: userInfo.location?.zip, 
+        info: userInfo?.location?.zip, 
         label: 'পোস্ট কোড', 
         editOnly:true
       },
       { 
         type: 'select',
         options: ['চট্টগ্রাম', 'ঢাকা'],
-        info: userInfo.location?.station, 
+        info: userInfo?.location?.station, 
         label: 'স্ট্যাশন', 
         icon: station
       },
@@ -329,7 +327,7 @@ const useUserInfo = (id) => {
     videoURL: [
       {
         type: 'text',
-        info: userInfo.videoURL,
+        info: userInfo?.videoURL,
         label: 'ভিডিও লিংক',
         editOnly: true
       }
