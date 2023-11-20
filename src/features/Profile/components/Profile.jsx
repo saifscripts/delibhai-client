@@ -21,6 +21,7 @@ import {
   Showcase,
   VehiclePhotos,
 } from "../index";
+import PersonalInfo from "./PersonalInfo";
 
 export const Profile = () => {
   const { id } = useParams();
@@ -28,16 +29,8 @@ export const Profile = () => {
   const [userInfo, modifiedInfo] = useUserInfo(id);
   const addressFields = useAddressFields();
 
-  const {
-    personal,
-    contact,
-    address,
-    vehicle,
-    owner,
-    service,
-    location,
-    videoURL,
-  } = modifiedInfo;
+  const { contact, address, vehicle, owner, service, location, videoURL } =
+    modifiedInfo;
 
   return (
     <div>
@@ -65,14 +58,7 @@ export const Profile = () => {
         {/* General Information */}
         {activeCategory === 1 && (
           <>
-            <InfoContainer type="ব্যক্তিগত তথ্য" fields={personal} edit>
-              {personal.map(
-                ({ info, label, icon, editOnly }, index) =>
-                  editOnly || (
-                    <Info key={index} info={info} label={label} icon={icon} />
-                  )
-              )}
-            </InfoContainer>
+            <PersonalInfo />
 
             <InfoContainer type="কন্টাক্ট ইনফো" fields={contact} edit>
               {contact.map(

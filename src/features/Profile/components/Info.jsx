@@ -13,7 +13,9 @@ export const Info = ({ info, label, icon }) => {
             </p>
           ))
         ) : (
-          <p className="font-bold text-lg">{info}</p>
+          <p className={`font-bold text-lg ${info || "text-red-300"}`}>
+            {info || "তথ্য প্রদান করুন"}
+          </p>
         )}
         <p>{label}</p>
       </div>

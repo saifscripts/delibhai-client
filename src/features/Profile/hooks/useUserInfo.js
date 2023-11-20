@@ -1,16 +1,11 @@
 // icons
-import nid from '../assets/icons/NID.svg';
-import age from '../assets/icons/age.svg';
-import bloodGroup from '../assets/icons/blood-group.svg';
 import clock from '../assets/icons/clock.svg';
 import email from '../assets/icons/email.svg';
 import facebook from '../assets/icons/facebook.svg';
-import father from '../assets/icons/father.svg';
 import marker from '../assets/icons/marker.svg';
 import phone from '../assets/icons/phone.svg';
 import serviceArea from '../assets/icons/service-area.svg';
 import serviceType from '../assets/icons/service-type.svg';
-import gender from '../assets/icons/sex.svg';
 import station from '../assets/icons/station.svg';
 import steering from '../assets/icons/steering.svg';
 import person from '../assets/icons/user.svg';
@@ -23,7 +18,6 @@ import vehicleType from '../assets/icons/vehicle.svg';
 // others
 import { useEffect, useState } from 'react';
 import { useFetchData } from '../../../api/api';
-import convertNumber from '../../../utils/convertNumber';
 import { getServiceTime } from '../../../utils/convertTime';
 
 const useUserInfo = (id) => {
@@ -35,42 +29,7 @@ const useUserInfo = (id) => {
   }, [id]);
 
   const modifiedInfo = {
-    personal: [
-      { type: 'text', info: userInfo?.name, label: 'নিজের নাম', icon: person },
-      { type: 'text', info: userInfo?.father, label: 'পিতার নাম', icon: father },
-      {
-        type: 'select',
-        options: ['পুরুষ', 'মহিলা', 'অন্যান্য'],
-        info: userInfo?.gender,
-        label: 'লিঙ্গ',
-        icon: gender,
-      },
-      {
-        type: 'select',
-        options: ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'],
-        info: userInfo?.bloodGroup,
-        label: 'রক্তের গ্রুপ',
-        icon: bloodGroup,
-      },
-      {
-        type: 'number',
-        data: userInfo?.age,
-        info: `${convertNumber(userInfo?.age)} বছর`,
-        label: 'বয়স',
-        icon: age,
-      },
-      {
-        type: 'text',
-        info: userInfo?.nid,
-        label: 'জন্মনিবন্ধন/NID নম্বর',
-        icon: nid,
-      },
-      {
-        type: 'file',
-        label: 'জন্মনিবন্ধন/NID এর ছবি',
-        editOnly: true,
-      },
-    ],
+    
     contact: [
       {
         type: 'number',
