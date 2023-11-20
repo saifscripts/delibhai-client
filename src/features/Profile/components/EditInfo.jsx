@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Button from '../../../components/ui/Button';
-import PageContainer from '../../../layouts/PageContainer';
-import Title from '../../../layouts/Title';
-import TopPanel from '../../../layouts/TopPanel';
-import Input from '../../../components/forms/Input'
-import { RadioInput, SelectInput,Checkbox, TimeInput } from '../index';
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Input from "../../../components/forms/Input";
+import Button from "../../../components/ui/Button";
+import PageContainer from "../../../layouts/PageContainer";
+import Title from "../../../layouts/Title";
+import TopPanel from "../../../layouts/TopPanel";
+import { Checkbox, RadioInput, SelectInput, TimeInput } from "../index";
 
 const EditInfo = () => {
   const navigate = useNavigate();
@@ -20,17 +20,16 @@ const EditInfo = () => {
     setInputFields(fields);
   }, [fields]);
 
-
   const onInputChange = (e, i) => {
     const target = e.target;
-    const value = target.type === 'radio' ? target.checked : target.value;
+    const value = target.type === "radio" ? target.checked : target.value;
 
     const clonedInputFields = [...inputFields];
 
     clonedInputFields[i].data = clonedInputFields[i].data && value;
     clonedInputFields[i].info = value;
 
-    if (target.type === 'radio') {
+    if (target.type === "radio") {
       clonedInputFields.forEach((v, j) => {
         clonedInputFields[j].checked = false;
       });
@@ -45,11 +44,11 @@ const EditInfo = () => {
   const onChecked = (e, i) => {
     const checked = e.target.checked;
     const value = e.target.value;
-    
+
     const clonedInputFields = [...inputFields];
 
-    if(checked) {
-      clonedInputFields[i].data.push(value)
+    if (checked) {
+      clonedInputFields[i].data.push(value);
     } else {
       const newData = clonedInputFields[i].data.filter((d) => d !== value);
 
@@ -57,7 +56,7 @@ const EditInfo = () => {
     }
 
     setInputFields(clonedInputFields);
-  }
+  };
 
   const toggleHiddenInput = () => {
     const clonedInputFields = [...inputFields];
@@ -84,10 +83,10 @@ const EditInfo = () => {
       <TopPanel />
       <Title
         title={title}
-        subtitle='অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন'
+        subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
       />
       <PageContainer>
-        <form onSubmit={handleSubmit} className='mb-5'>
+        <form onSubmit={handleSubmit} className="mb-5">
           {inputFields.map(
             (
               { label, data, info, type, options = [], checked, name, hidden },
@@ -95,17 +94,18 @@ const EditInfo = () => {
             ) => {
               if (hidden) return;
 
-              if (type === 'category') {
+              if (type === "category") {
                 return (
                   <p
                     key={index}
-                    className='font-bold mt-4 mb-3 py-3 border-b border-light'>
+                    className="font-bold mt-4 mb-3 py-3 border-b border-light"
+                  >
                     {label}
                   </p>
                 );
               }
 
-              if (type === 'select') {
+              if (type === "select") {
                 return (
                   <SelectInput
                     key={index}
@@ -117,7 +117,7 @@ const EditInfo = () => {
                 );
               }
 
-              if (type === 'radio') {
+              if (type === "radio") {
                 return (
                   <RadioInput
                     key={index}
@@ -131,7 +131,7 @@ const EditInfo = () => {
                 );
               }
 
-              if (type === 'checkbox') {
+              if (type === "checkbox") {
                 return (
                   <Checkbox
                     key={index}
@@ -142,8 +142,8 @@ const EditInfo = () => {
                   />
                 );
               }
-              
-              if (type === 'time') {
+
+              if (type === "time") {
                 return (
                   <TimeInput
                     key={index}
@@ -169,11 +169,11 @@ const EditInfo = () => {
             }
           )}
 
-          <Button type='submit' value='সংরক্ষণ করুন' />
+          <Button type="submit" value="সংরক্ষণ করুন" />
         </form>
       </PageContainer>
     </>
   );
 };
 
-export default EditInfo;
+export { EditInfo };

@@ -4,8 +4,12 @@ import { AiFillStar } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
 import ReactPlayer from "react-player/youtube";
 import { useParams } from "react-router-dom";
-import map from "../assets/map.png";
-import { vehicles } from "../features/DHero/index";
+import map from "../../../assets/map.png";
+import PageContainer from "../../../layouts/PageContainer";
+import TopPanel from "../../../layouts/TopPanel";
+import { vehicles } from "../../DHero/index";
+import useAddressFields from "../hooks/useAddressFields";
+import useUserInfo from "../hooks/useUserInfo";
 import {
   Achievement,
   AverageRating,
@@ -16,13 +20,9 @@ import {
   Review,
   Showcase,
   VehiclePhotos,
-  useAddressFields,
-  useUserInfo,
-} from "../features/Profile/index";
-import PageContainer from "../layouts/PageContainer";
-import TopPanel from "../layouts/TopPanel";
+} from "../index";
 
-export default function Profile() {
+export const Profile = () => {
   const { id } = useParams();
   const [activeCategory, setActiveCategory] = useState(1);
   const [userInfo, modifiedInfo] = useUserInfo(id);
@@ -224,4 +224,4 @@ export default function Profile() {
       </PageContainer>
     </div>
   );
-}
+};

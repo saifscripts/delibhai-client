@@ -1,36 +1,35 @@
-import { AiFillCamera } from 'react-icons/ai';
-import { GiResize } from 'react-icons/gi';
-import { RiDeleteBin5Fill } from 'react-icons/ri';
-import { EditOption } from '../index.js';
+import { AiFillCamera } from "react-icons/ai";
+import { GiResize } from "react-icons/gi";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+import { EditOption } from "./EditOption";
 
-/* eslint-disable react/prop-types */
-export default function EditAvatar({
+export const EditAvatar = ({
   onFileChoose,
   handleEdit,
   showResize,
   removeImage,
   cropData,
   edit,
-}) {
+}) => {
   const options = [
     {
       icon: <GiResize />,
-      text: 'ছবি রিসাইজ',
-      type: 'button',
+      text: "ছবি রিসাইজ",
+      type: "button",
       onClick: showResize,
       show: Boolean(cropData),
     },
     {
       icon: <AiFillCamera />,
-      text: 'ছবি আপলোড',
-      type: 'file',
+      text: "ছবি আপলোড",
+      type: "file",
       onChange: onFileChoose,
       show: true,
     },
     {
       icon: <RiDeleteBin5Fill />,
-      text: 'ছবি ডিলিট করুন',
-      type: 'button',
+      text: "ছবি ডিলিট করুন",
+      type: "button",
       onClick: removeImage,
       show: Boolean(cropData),
     },
@@ -41,14 +40,16 @@ export default function EditAvatar({
       <div
         onClick={handleEdit}
         className={`top-0 bottom-0 left-0 right-0 bg-black  z-40  transition-opacity ${
-          edit ? 'fixed opacity-40' : 'hidden opacity-0'
-        }`}></div>
+          edit ? "fixed opacity-40" : "hidden opacity-0"
+        }`}
+      ></div>
       <div
         className={`fixed bottom-0 left-0 right-0 bg-white z-50 rounded-t-xl transition-transform ${
-          edit ? 'translate-y-0' : 'translate-y-full'
-        }`}>
+          edit ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
         <div className={`w-10 h-1 bg-accent rounded-full mx-auto mt-2`}></div>
-        <div className='py-7 flex flex-col gap-2'>
+        <div className="py-7 flex flex-col gap-2">
           {options.map(
             ({ icon, text, type, onChange, onClick, show }, index) =>
               show && (
@@ -67,4 +68,4 @@ export default function EditAvatar({
       </div>
     </>
   );
-}
+};

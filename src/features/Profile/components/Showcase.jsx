@@ -4,8 +4,7 @@ import { createRef, useState } from "react";
 import dp from "../../../assets/default.jpg";
 import { Avatar, EditAvatar, ResizeAvatar } from "../index";
 
-// eslint-disable-next-line react/prop-types
-export default function Showcase({ name, id, vehicle, vehicleImage }) {
+export const Showcase = ({ name, id, vehicle, vehicleImage }) => {
   const [image, setImage] = useState("#");
   const [cropData, setCropData] = useState(null);
   const [edit, setEdit] = useState(false);
@@ -107,4 +106,4 @@ export default function Showcase({ name, id, vehicle, vehicleImage }) {
       </div>
     </>
   );
-}
+};

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
+import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 
-export default function RatingStars({ rating }) {
+export const RatingStars = ({ rating }) => {
   const numberOfFullStars = Math.floor(rating);
   const isHalfStars = rating - numberOfFullStars >= 0.5;
   const numberOfEmptyStars = 5 - numberOfFullStars - (isHalfStars ? 1 : 0);
@@ -17,8 +17,8 @@ export default function RatingStars({ rating }) {
     .map((n, i) => <BsStar key={i} />);
 
   return (
-    <div className='flex justify-center gap-1 text-primary text-sm'>
+    <div className="flex justify-center gap-1 text-primary text-sm">
       {fullStars} {halfStar} {emptyStars}
     </div>
   );
-}
+};

@@ -8,10 +8,10 @@ function RadioInput({
   index,
 }) {
   return (
-    <div className='flex gap-2 items-center ml-4'>
+    <div className="flex gap-2 items-center ml-4">
       <input
-        className='accent-primary focus:border-primary'
-        type='radio'
+        className="accent-primary focus:border-primary"
+        type="radio"
         id={label}
         name={name}
         value={label}
@@ -26,4 +26,4 @@ function RadioInput({
   );
 }
 
-export default RadioInput;
+export { RadioInput };
