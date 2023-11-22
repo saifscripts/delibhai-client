@@ -5,6 +5,7 @@ import dlabour from '../assets/icons/dlabour.svg';
 import dsend from '../assets/icons/dsend.svg';
 import dshop from '../assets/icons/dshop.svg';
 import gaslagbe from '../assets/icons/gaslagbe.svg';
+import tutor from '../assets/icons/tutor.svg';
 
 const services = [
   { id: 1, icon: dhero, title: 'dHero', to: 'dhero' },
@@ -14,6 +15,7 @@ const services = [
   { id: 5, icon: bloodlagbe, title: 'Blood Lagbe?', to: 'bloodlagbe' },
   { id: 6, icon: gaslagbe, title: 'Gas Lagbe?', to: 'gaslagbe' },
   { id: 7, icon: delifood, title: 'delifood', to: 'delifood' },
+  { id: 8, icon: tutor, title: 'Tutor', to: 'tutor' },
 ];
 
 export default services;
