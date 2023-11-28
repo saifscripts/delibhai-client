@@ -2,7 +2,7 @@ import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
-import { EditInfo, Profile } from "./features/Profile";
+import { EditInfo, EditPersonalInfo, Profile } from "./features/Profile";
 import DHero from "./pages/DHero";
 import DHeroSearch from "./pages/DHeroSearch";
 import DHeroSearchResult from "./pages/DHeroSearchResult";
@@ -23,6 +23,10 @@ function App() {
         <Route path="/otp-verification" element={<OTPVerification />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/profile/edit" element={<EditInfo />} />
+        <Route
+          path="/profile/edit/personal-info"
+          element={<EditPersonalInfo />}
+        />
       </Routes>
       <Toaster />
     </>

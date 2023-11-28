@@ -4,6 +4,7 @@ export { AverageRating } from "./components/AverageRating";
 export { EditAvatar } from "./components/EditAvatar";
 export { EditInfo } from "./components/EditInfo";
 export { EditOption } from "./components/EditOption";
+export { EditPersonalInfo } from "./components/EditPersonalInfo";
 export { Info } from "./components/Info";
 export { InfoCategories } from "./components/InfoCategories";
 export { InfoCategory } from "./components/InfoCategory";

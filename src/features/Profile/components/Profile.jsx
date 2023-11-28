@@ -60,7 +60,11 @@ export const Profile = () => {
           <>
             <PersonalInfo />
 
-            <InfoContainer type="কন্টাক্ট ইনফো" fields={contact} edit>
+            <InfoContainer
+              type="কন্টাক্ট ইনফো"
+              fields={contact}
+              editRoute="/profile/edit"
+            >
               {contact.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (
@@ -69,7 +73,11 @@ export const Profile = () => {
               )}
             </InfoContainer>
 
-            <InfoContainer type="ঠিকানা" fields={addressFields} edit>
+            <InfoContainer
+              type="ঠিকানা"
+              fields={addressFields}
+              editRoute="/profile/edit"
+            >
               {address.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (
@@ -83,7 +91,11 @@ export const Profile = () => {
         {/* Vehicle Information */}
         {activeCategory === 2 && (
           <>
-            <InfoContainer type="গাড়ির সাধারণ তথ্য" fields={vehicle} edit>
+            <InfoContainer
+              type="গাড়ির সাধারণ তথ্য"
+              fields={vehicle}
+              editRoute="/profile/edit"
+            >
               {vehicle.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (
@@ -92,7 +104,11 @@ export const Profile = () => {
               )}
             </InfoContainer>
 
-            <InfoContainer type="গাড়ির মালিকানার তথ্য" fields={owner} edit>
+            <InfoContainer
+              type="গাড়ির মালিকানার তথ্য"
+              fields={owner}
+              editRoute="/profile/edit"
+            >
               {owner.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (
@@ -110,7 +126,11 @@ export const Profile = () => {
         {/* Service Information */}
         {activeCategory === 3 && (
           <>
-            <InfoContainer type="সার্ভিস তথ্য" fields={service} edit>
+            <InfoContainer
+              type="সার্ভিস তথ্য"
+              fields={service}
+              editRoute="/profile/edit"
+            >
               {service.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (
@@ -124,7 +144,7 @@ export const Profile = () => {
         {/* Location Information */}
         {activeCategory === 4 && (
           <>
-            <InfoContainer type="GPS Location" edit>
+            <InfoContainer type="GPS Location" editRoute="/profile/edit">
               <div className="p-3 flex justify-center items-center gap-2 border border-light rounded-md mb-3 text-medium">
                 <CiLocationOn />
                 <p>
@@ -139,7 +159,11 @@ export const Profile = () => {
               </div>
             </InfoContainer>
 
-            <InfoContainer type="ম্যানুয়াল লোকেশন" fields={location} edit>
+            <InfoContainer
+              type="ম্যানুয়াল লোকেশন"
+              fields={location}
+              editRoute="/profile/edit"
+            >
               {location.map(
                 ({ info, label, icon, editOnly }, index) =>
                   editOnly || (
@@ -153,7 +177,11 @@ export const Profile = () => {
         {/* Video */}
         {activeCategory === 5 && (
           <>
-            <InfoContainer type="ডিহিরোর অভিব্যক্তি" fields={videoURL} edit>
+            <InfoContainer
+              type="ডিহিরোর অভিব্যক্তি"
+              fields={videoURL}
+              editRoute="/profile/edit"
+            >
               <div className="w-full max-w-lg aspect-[1/1.8] bg-black flex justify-center items-center rounded-lg overflow-hidden">
                 <ReactPlayer
                   width="100%"

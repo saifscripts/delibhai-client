@@ -17,7 +17,12 @@ const PersonalInfo = () => {
 
   const fields = [
     { type: "text", info: userInfo?.name, label: "নিজের নাম", icon: person },
-    { type: "text", info: userInfo?.father, label: "পিতার নাম", icon: father },
+    {
+      type: "text",
+      info: userInfo?.fatherName,
+      label: "পিতার নাম",
+      icon: father,
+    },
     {
       type: "select",
       options: ["পুরুষ", "মহিলা", "অন্যান্য"],
@@ -52,7 +57,11 @@ const PersonalInfo = () => {
     },
   ];
   return (
-    <InfoContainer type="ব্যক্তিগত তথ্য" fields={fields} edit>
+    <InfoContainer
+      type="ব্যক্তিগত তথ্য"
+      fields={fields}
+      editRoute="/profile/edit/personal-info"
+    >
       {fields.map(
         ({ info, label, icon, editOnly }, index) =>
           editOnly || <Info key={index} info={info} label={label} icon={icon} />
