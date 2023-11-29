@@ -10,6 +10,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
+import { isNID } from "../../../utils/isNID";
 
 const userSchema = yup.object({
   name: yup
@@ -35,7 +36,7 @@ const userSchema = yup.object({
       "${value} is an invalid blood group."
     ),
   age: yup.number().integer("{value} is not an integer value"),
-  nid: yup.number().integer("{VALUE} is not an integer value"),
+  nid: yup.string().test("isValidNID", "NID is not valid", isNID),
   nidURL: yup.mixed(),
 });
 
