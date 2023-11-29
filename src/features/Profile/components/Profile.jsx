@@ -8,10 +8,10 @@ import map from "../../../assets/map.png";
 import PageContainer from "../../../layouts/PageContainer";
 import TopPanel from "../../../layouts/TopPanel";
 import { vehicles } from "../../DHero/index";
-import useAddressFields from "../hooks/useAddressFields";
 import useUserInfo from "../hooks/useUserInfo";
 import {
   Achievement,
+  Address,
   AverageRating,
   ContactInfo,
   Info,
@@ -28,9 +28,8 @@ export const Profile = () => {
   const { id } = useParams();
   const [activeCategory, setActiveCategory] = useState(1);
   const [userInfo, modifiedInfo] = useUserInfo(id);
-  const addressFields = useAddressFields();
 
-  const { address, vehicle, owner, service, location, videoURL } = modifiedInfo;
+  const { vehicle, owner, service, location, videoURL } = modifiedInfo;
 
   return (
     <div>
@@ -60,19 +59,7 @@ export const Profile = () => {
           <>
             <PersonalInfo />
             <ContactInfo />
-
-            <InfoContainer
-              type="ঠিকানা"
-              fields={addressFields}
-              editRoute="/profile/edit"
-            >
-              {address.map(
-                ({ info, label, icon, editOnly }, index) =>
-                  editOnly || (
-                    <Info key={index} info={info} label={label} icon={icon} />
-                  )
-              )}
-            </InfoContainer>
+            <Address />
           </>
         )}
 

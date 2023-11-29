@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import {
+  EditAddress,
   EditContactInfo,
   EditInfo,
   EditPersonalInfo,
@@ -36,6 +37,7 @@ function App() {
           path="/profile/edit/contact-info"
           element={<EditContactInfo />}
         />
+        <Route path="/profile/edit/address" element={<EditAddress />} />
       </Routes>
       <Toaster />
     </>

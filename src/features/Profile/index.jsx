@@ -1,7 +1,9 @@
 export { Achievement } from "./components/Achievement";
+export { Address } from "./components/Address";
 export { Avatar } from "./components/Avatar";
 export { AverageRating } from "./components/AverageRating";
 export { ContactInfo } from "./components/ContactInfo";
+export { EditAddress } from "./components/EditAddress";
 export { EditAvatar } from "./components/EditAvatar";
 export { EditContactInfo } from "./components/EditContactInfo";
 export { EditInfo } from "./components/EditInfo";
