@@ -2,7 +2,12 @@ import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
-import { EditInfo, EditPersonalInfo, Profile } from "./features/Profile";
+import {
+  EditContactInfo,
+  EditInfo,
+  EditPersonalInfo,
+  Profile,
+} from "./features/Profile";
 import DHero from "./pages/DHero";
 import DHeroSearch from "./pages/DHeroSearch";
 import DHeroSearchResult from "./pages/DHeroSearchResult";
@@ -26,6 +31,10 @@ function App() {
         <Route
           path="/profile/edit/personal-info"
           element={<EditPersonalInfo />}
+        />
+        <Route
+          path="/profile/edit/contact-info"
+          element={<EditContactInfo />}
         />
       </Routes>
       <Toaster />

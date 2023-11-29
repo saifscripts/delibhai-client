@@ -13,6 +13,7 @@ import useUserInfo from "../hooks/useUserInfo";
 import {
   Achievement,
   AverageRating,
+  ContactInfo,
   Info,
   InfoCategories,
   InfoContainer,
@@ -29,8 +30,7 @@ export const Profile = () => {
   const [userInfo, modifiedInfo] = useUserInfo(id);
   const addressFields = useAddressFields();
 
-  const { contact, address, vehicle, owner, service, location, videoURL } =
-    modifiedInfo;
+  const { address, vehicle, owner, service, location, videoURL } = modifiedInfo;
 
   return (
     <div>
@@ -59,19 +59,7 @@ export const Profile = () => {
         {activeCategory === 1 && (
           <>
             <PersonalInfo />
-
-            <InfoContainer
-              type="কন্টাক্ট ইনফো"
-              fields={contact}
-              editRoute="/profile/edit"
-            >
-              {contact.map(
-                ({ info, label, icon, editOnly }, index) =>
-                  editOnly || (
-                    <Info key={index} info={info} label={label} icon={icon} />
-                  )
-              )}
-            </InfoContainer>
+            <ContactInfo />
 
             <InfoContainer
               type="ঠিকানা"
