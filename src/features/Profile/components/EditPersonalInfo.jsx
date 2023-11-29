@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -35,14 +36,16 @@ const userSchema = yup.object({
       ["এ+", "বি+", "এবি+", "ও+", "এ-", "বি-", "এবি-", "ও-"],
       "${value} is an invalid blood group."
     ),
-  age: yup.number().integer("{value} is not an integer value"),
-  nid: yup.string().test("isValidNID", "NID is not valid", isNID),
+  age: yup.number().integer("{value} is not an integer value."),
+  nid: yup.string().test("isValidNID", "NID is not valid.", isNID),
   nidURL: yup.mixed(),
 });
 
 const EditPersonalInfo = () => {
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const { currentUser, setCurrentUser } = useAuth();
+  const { updateData } = useUpdateData();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -61,40 +64,39 @@ const EditPersonalInfo = () => {
     },
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-  const { updateData } = useUpdateData();
-
   const onSubmit = async (userData) => {
     setIsLoading(true);
 
+    // If user select nid image
     if (userData.nidURL[0]) {
+      // Create formData and append the image file
       const formData = new FormData();
       formData.append("image", userData.nidURL[0]);
 
-      const res = await fetch(
+      // Upload the image to the imagebb
+      const imgbbResult = await axios.post(
         `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_IMGBB_API_KEY
         }`,
-        {
-          method: "POST",
-          body: formData,
-        }
+        formData
       );
 
-      const imgbbResult = await res.json();
-
-      if (imgbbResult?.success) {
-        userData.nidURL = imgbbResult.data.url;
-      } else {
+      // If image upload is not successful, setError message and return
+      if (!imgbbResult?.data?.success) {
         setIsLoading(false);
         return setError("general", {
-          message: imgbbResult.error.message || "Something went wrong",
+          message: imgbbResult.data.error.message || "Something went wrong",
         });
       }
+
+      // If image upload is successful, set the url as nidURL field value
+      userData.nidURL = imgbbResult.data.data.url;
     } else {
+      // If user doesn't select any image to upload, set nidURL = undefined
       userData.nidURL = undefined;
     }
 
+    // Update data
     const { data, error } = await updateData(
       `/v1/user/${currentUser._id}`,
       userData
@@ -214,7 +216,7 @@ const EditPersonalInfo = () => {
 
           <p className="text-red-400">{errors.general?.message}</p>
 
-          <Button type="submit" value="সংরক্ষণ করুন" />
+          <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
         </form>
       </PageContainer>
     </>
