@@ -111,4 +111,4 @@ const Address = ({ address, setAddress, isLoading }) => {
   );
 };
 
-export default Address;
+export { Address };

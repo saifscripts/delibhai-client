@@ -8,7 +8,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
-import Address from "./Address";
+import { Address } from "./Address";
 import { RadioInput } from "./form/RadioInput";
 
 const EditAddressInfo = () => {

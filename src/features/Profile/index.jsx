@@ -1,5 +1,5 @@
-export { Address } from "./component/Address";
 export { Achievement } from "./components/Achievement";
+export { Address } from "./components/Address";
 export { AddressInfo } from "./components/AddressInfo";
 export { Avatar } from "./components/Avatar";
 export { AverageRating } from "./components/AverageRating";
