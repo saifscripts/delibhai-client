@@ -11,7 +11,7 @@ import { vehicles } from "../../DHero/index";
 import useUserInfo from "../hooks/useUserInfo";
 import {
   Achievement,
-  Address,
+  AddressInfo,
   AverageRating,
   ContactInfo,
   Info,
@@ -59,7 +59,7 @@ export const Profile = () => {
           <>
             <PersonalInfo />
             <ContactInfo />
-            <Address />
+            <AddressInfo />
           </>
         )}
 

@@ -8,10 +8,10 @@ import { useAuth } from "../../../contexts/AuthContext";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
-import EditAddressFields from "./EditAddressFields";
+import Address from "./Address";
 import { RadioInput } from "./form/RadioInput";
 
-const EditAddress = () => {
+const EditAddressInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPermanentAddress, setShowPermanentAddress] = useState(false);
 
@@ -82,10 +82,7 @@ const EditAddress = () => {
             বর্তমান ঠিকানা
           </p>
 
-          <EditAddressFields
-            address={presentAddress}
-            setAddress={setPresentAddress}
-          />
+          <Address address={presentAddress} setAddress={setPresentAddress} />
 
           <p className="font-bold mt-4 mb-3 py-3 border-b border-light">
             স্থায়ী ঠিকানা
@@ -103,7 +100,7 @@ const EditAddress = () => {
           />
 
           {showPermanentAddress && (
-            <EditAddressFields
+            <Address
               address={permanentAddress}
               setAddress={setPermanentAddress}
             />
@@ -116,4 +113,4 @@ const EditAddress = () => {
   );
 };
 
-export { EditAddress };
+export { EditAddressInfo };

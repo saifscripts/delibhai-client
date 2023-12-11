@@ -1,67 +1,114 @@
-// icons
-import { useParams } from "react-router-dom";
-import marker from "../assets/icons/marker.svg";
-import useUserInfo from "../hooks/useUserInfo";
-import { Info } from "./Info";
-import { InfoContainer } from "./InfoContainer";
+import * as _ from "lodash";
+import { getDistricts, getUnions, getUpazilas } from "../utils/getAddress";
 
-const Address = () => {
-  const { id } = useParams();
-  const [userInfo] = useUserInfo(id);
+const Address = ({ address, setAddress, isLoading }) => {
+  const handleChange = (e, currentField) => {
+    const currentValue = e.target.value;
+    const _address = _.cloneDeep(address);
 
-  const fields = [
-    {
-      info:
-        userInfo?.presentAddress &&
-        `${
-          userInfo?.presentAddress?.union
-            ? userInfo?.presentAddress?.union + ", "
-            : ""
-        }${
-          userInfo?.presentAddress?.upazila
-            ? userInfo?.presentAddress?.upazila + ", "
-            : ""
-        }${
-          userInfo?.presentAddress?.district
-            ? userInfo?.presentAddress?.district + ", "
-            : ""
-        }${userInfo?.presentAddress?.division || ""}।`,
-      label: "বর্তমান ঠিকানা",
-      icon: marker,
-    },
-    {
-      info:
-        userInfo?.permanentAddress &&
-        `${
-          userInfo?.permanentAddress?.union
-            ? userInfo?.permanentAddress?.union + ", "
-            : ""
-        }${
-          userInfo?.permanentAddress?.upazila
-            ? userInfo?.permanentAddress?.upazila + ", "
-            : ""
-        }${
-          userInfo?.permanentAddress?.district
-            ? userInfo?.permanentAddress?.district + ", "
-            : ""
-        }${userInfo?.permanentAddress?.division || ""}।`,
-      label: "স্থায়ী ঠিকানা",
-      icon: marker,
-    },
-  ];
+    // Make current value selected to show the selected value on UI
+    _address[currentField] = _address[currentField].map((fieldValue) => {
+      if (fieldValue.title === currentValue) {
+        fieldValue.selected = true;
+      } else {
+        fieldValue.selected = false;
+      }
+
+      return fieldValue;
+    });
+
+    // Update other lower level fields
+    switch (currentField) {
+      case "division":
+        _address.district = getDistricts(currentValue);
+        _address.upazila = null;
+        _address.union = null;
+        break;
+
+      case "district":
+        _address.upazila = getUpazilas(currentValue);
+        _address.union = null;
+        break;
+
+      case "upazila":
+        _address.union = getUnions(currentValue);
+        break;
+    }
+
+    setAddress(_address);
+  };
 
   return (
-    <InfoContainer
-      type="ঠিকানা"
-      fields={fields}
-      editRoute="/profile/edit/address"
-    >
-      {fields.map(
-        ({ info, label, icon, editOnly }, index) =>
-          editOnly || <Info key={index} info={info} label={label} icon={icon} />
-      )}
-    </InfoContainer>
+    <div>
+      <div className="mt-4 mb-1">
+        <label className="font-bold">বিভাগ</label>
+        <select
+          disabled={isLoading}
+          value={address.division?.find(({ selected }) => selected)?.title}
+          className="w-full py-3 border-b border-primary bg-transparent"
+          onChange={(e) => handleChange(e, "division")}
+        >
+          <option>সিলেক্ট করুন</option>
+          {address.division?.map(({ title }) => (
+            <option key={title} value={title}>
+              {title}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="mt-4 mb-1">
+        <label className="font-bold">জেলা</label>
+        <select
+          value={address.district?.find(({ selected }) => selected)?.title}
+          disabled={isLoading}
+          className="w-full py-3 border-b border-primary bg-transparent"
+          onChange={(e) => handleChange(e, "district")}
+        >
+          <option>সিলেক্ট করুন</option>
+          {address.district?.map(({ title }) => (
+            <option key={title} value={title}>
+              {title}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="mt-4 mb-1">
+        <label className="font-bold">উপজেলা</label>
+        <select
+          value={address.upazila?.find(({ selected }) => selected)?.title}
+          disabled={isLoading}
+          className="w-full py-3 border-b border-primary bg-transparent"
+          onChange={(e) => handleChange(e, "upazila")}
+        >
+          <option>সিলেক্ট করুন</option>
+          {address.upazila?.map(({ title }) => (
+            <option key={title} value={title}>
+              {title}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="mt-4 mb-1">
+        <label className="font-bold">ইউনিয়ন</label>
+        <select
+          value={address.union?.find(({ selected }) => selected)?.title}
+          disabled={isLoading}
+          className="w-full py-3 border-b border-primary bg-transparent"
+          onChange={(e) => handleChange(e, "union")}
+        >
+          <option>সিলেক্ট করুন</option>
+          {address.union?.map(({ title }) => (
+            <option key={title} value={title}>
+              {title}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
   );
 };
 
-export { Address };
+export default Address;
