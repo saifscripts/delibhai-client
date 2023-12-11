@@ -11,12 +11,40 @@ const Address = () => {
 
   const fields = [
     {
-      info: `${userInfo?.presentAddress?.street}, ${userInfo?.presentAddress?.post} - ${userInfo?.presentAddress?.zip}, ${userInfo?.presentAddress?.subDistrict}, ${userInfo?.presentAddress?.district}।`,
+      info:
+        userInfo?.presentAddress &&
+        `${
+          userInfo?.presentAddress?.union
+            ? userInfo?.presentAddress?.union + ", "
+            : ""
+        }${
+          userInfo?.presentAddress?.upazila
+            ? userInfo?.presentAddress?.upazila + ", "
+            : ""
+        }${
+          userInfo?.presentAddress?.district
+            ? userInfo?.presentAddress?.district + ", "
+            : ""
+        }${userInfo?.presentAddress?.division || ""}।`,
       label: "বর্তমান ঠিকানা",
       icon: marker,
     },
     {
-      info: `${userInfo?.permanentAddress?.street}, ${userInfo?.permanentAddress?.post} - ${userInfo?.permanentAddress?.zip}, ${userInfo?.permanentAddress?.subDistrict}, ${userInfo?.permanentAddress?.district}।`,
+      info:
+        userInfo?.permanentAddress &&
+        `${
+          userInfo?.permanentAddress?.union
+            ? userInfo?.permanentAddress?.union + ", "
+            : ""
+        }${
+          userInfo?.permanentAddress?.upazila
+            ? userInfo?.permanentAddress?.upazila + ", "
+            : ""
+        }${
+          userInfo?.permanentAddress?.district
+            ? userInfo?.permanentAddress?.district + ", "
+            : ""
+        }${userInfo?.permanentAddress?.division || ""}।`,
       label: "স্থায়ী ঠিকানা",
       icon: marker,
     },
