@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
 import { getAllDivision } from "bd-divisions-to-unions";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUpdateData } from "../../../api/api";
 import Button from "../../../components/ui/Button";
+import { useAuth } from "../../../contexts/AuthContext";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
@@ -26,6 +29,10 @@ const EditAddress = () => {
     union: null,
   });
 
+  const { currentUser, setCurrentUser } = useAuth();
+  const { updateData } = useUpdateData();
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -46,7 +53,18 @@ const EditAddress = () => {
       )?.title;
     }
 
+    if (!showPermanentAddress) {
+      address.permanentAddress = address.presentAddress;
+    }
+
     console.log(address);
+    // Update data
+    const { data } = await updateData(`/v1/user/${currentUser._id}`, address);
+
+    if (data?.success) {
+      setCurrentUser(data.data);
+      return navigate(-1);
+    }
 
     setIsLoading(false);
   };
