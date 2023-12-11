@@ -7,7 +7,7 @@ import { Sidebar } from "./Sidebar";
 
 // eslint-disable-next-line react/prop-types
 const Navbar = ({ bgColor }) => {
-  const { sidebarRef, isSidebarOpen, handleSidebarToggle } = useSidebar();
+  const { isSidebarOpen, handleSidebarToggle } = useSidebar();
 
   return (
     <nav
@@ -18,7 +18,6 @@ const Navbar = ({ bgColor }) => {
       <div className="container flex justify-between items-center h-16 sm:h-24">
         {/* Sidebar */}
         <Sidebar
-          ref={sidebarRef}
           isSidebarOpen={isSidebarOpen}
           handleSidebarToggle={handleSidebarToggle}
         />
