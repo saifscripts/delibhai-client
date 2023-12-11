@@ -2,6 +2,7 @@
 import { useParams } from "react-router-dom";
 import marker from "../assets/icons/marker.svg";
 import useUserInfo from "../hooks/useUserInfo";
+import getAddressText from "../utils/getAddressText";
 import { Info } from "./Info";
 import { InfoContainer } from "./InfoContainer";
 
@@ -11,40 +12,12 @@ const AddressInfo = () => {
 
   const fields = [
     {
-      info:
-        userInfo?.presentAddress &&
-        `${
-          userInfo?.presentAddress?.union
-            ? userInfo?.presentAddress?.union + ", "
-            : ""
-        }${
-          userInfo?.presentAddress?.upazila
-            ? userInfo?.presentAddress?.upazila + ", "
-            : ""
-        }${
-          userInfo?.presentAddress?.district
-            ? userInfo?.presentAddress?.district + ", "
-            : ""
-        }${userInfo?.presentAddress?.division || ""}।`,
+      info: getAddressText(userInfo?.presentAddress),
       label: "বর্তমান ঠিকানা",
       icon: marker,
     },
     {
-      info:
-        userInfo?.permanentAddress &&
-        `${
-          userInfo?.permanentAddress?.union
-            ? userInfo?.permanentAddress?.union + ", "
-            : ""
-        }${
-          userInfo?.permanentAddress?.upazila
-            ? userInfo?.permanentAddress?.upazila + ", "
-            : ""
-        }${
-          userInfo?.permanentAddress?.district
-            ? userInfo?.permanentAddress?.district + ", "
-            : ""
-        }${userInfo?.permanentAddress?.division || ""}।`,
+      info: getAddressText(userInfo?.permanentAddress),
       label: "স্থায়ী ঠিকানা",
       icon: marker,
     },
