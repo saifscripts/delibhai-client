@@ -9,113 +9,35 @@ import { useAuth } from "../../../contexts/AuthContext";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
-import { getDistricts, getUnions, getUpazilas } from "../utils/getAddress";
+import getSelectedAddress from "../utils/getSelectedAdress";
+import restoreAddressState from "../utils/restoreAddressState";
 import { Address } from "./Address";
 import { RadioInput } from "./form/RadioInput";
+
+const defaultAddressValue = {
+  division: getAllDivision(),
+  district: null,
+  upazila: null,
+  union: null,
+};
 
 const EditAddressInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAddressEqual, setIsAddressEqual] = useState(true);
-
-  const [presentAddress, setPresentAddress] = useState({
-    division: getAllDivision(),
-    district: null,
-    upazila: null,
-    union: null,
-  });
-
-  const [permanentAddress, setPermanentAddress] = useState({
-    division: getAllDivision(),
-    district: null,
-    upazila: null,
-    union: null,
-  });
+  const [presentAddress, setPresentAddress] = useState(defaultAddressValue);
+  const [permanentAddress, setPermanentAddress] = useState(defaultAddressValue);
 
   const { currentUser, setCurrentUser } = useAuth();
 
   useEffect(() => {
-    const _presentAddress = currentUser?.presentAddress;
-    const _permanentAddress = currentUser?.permanentAddress;
+    const presentAddress = currentUser?.presentAddress;
+    const permanentAddress = currentUser?.permanentAddress;
 
-    setIsAddressEqual(isEqual(_presentAddress, _permanentAddress));
+    presentAddress && setPresentAddress(restoreAddressState(presentAddress));
+    permanentAddress &&
+      setPermanentAddress(restoreAddressState(permanentAddress));
 
-    setPresentAddress({
-      division: getAllDivision()?.map((division) => {
-        if (division.title === _presentAddress?.division) {
-          division.selected = true;
-        } else {
-          division.selected = false;
-        }
-
-        return division;
-      }),
-      district: getDistricts(_presentAddress?.division)?.map((district) => {
-        if (district.title === _presentAddress?.district) {
-          district.selected = true;
-        } else {
-          district.selected = false;
-        }
-
-        return district;
-      }),
-      upazila: getUpazilas(_presentAddress?.district)?.map((upazila) => {
-        if (upazila.title === _presentAddress?.upazila) {
-          upazila.selected = true;
-        } else {
-          upazila.selected = false;
-        }
-
-        return upazila;
-      }),
-      union: getUnions(_presentAddress?.upazila)?.map((union) => {
-        if (union.title === _presentAddress?.union) {
-          union.selected = true;
-        } else {
-          union.selected = false;
-        }
-
-        return union;
-      }),
-    });
-
-    setPermanentAddress({
-      division: getAllDivision()?.map((division) => {
-        if (division.title === _permanentAddress?.division) {
-          division.selected = true;
-        } else {
-          division.selected = false;
-        }
-
-        return division;
-      }),
-      district: getDistricts(_permanentAddress?.division)?.map((district) => {
-        if (district.title === _permanentAddress?.district) {
-          district.selected = true;
-        } else {
-          district.selected = false;
-        }
-
-        return district;
-      }),
-      upazila: getUpazilas(_permanentAddress?.district)?.map((upazila) => {
-        if (upazila.title === _permanentAddress?.upazila) {
-          upazila.selected = true;
-        } else {
-          upazila.selected = false;
-        }
-
-        return upazila;
-      }),
-      union: getUnions(_permanentAddress?.upazila)?.map((union) => {
-        if (union.title === _permanentAddress?.union) {
-          union.selected = true;
-        } else {
-          union.selected = false;
-        }
-
-        return union;
-      }),
-    });
+    setIsAddressEqual(isEqual(presentAddress, permanentAddress));
   }, [currentUser]);
 
   const { updateData } = useUpdateData();
@@ -126,20 +48,9 @@ const EditAddressInfo = () => {
     setIsLoading(true);
 
     const address = {
-      presentAddress: {},
-      permanentAddress: {},
+      presentAddress: getSelectedAddress(presentAddress),
+      permanentAddress: getSelectedAddress(permanentAddress),
     };
-
-    // Get selected field values
-    for (const field in presentAddress) {
-      address.presentAddress[field] = presentAddress[field]?.find(
-        ({ selected }) => selected
-      )?.title;
-
-      address.permanentAddress[field] = permanentAddress[field]?.find(
-        ({ selected }) => selected
-      )?.title;
-    }
 
     if (isAddressEqual) {
       address.permanentAddress = address.presentAddress;
