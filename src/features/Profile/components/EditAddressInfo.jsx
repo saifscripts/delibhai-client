@@ -15,7 +15,7 @@ import { RadioInput } from "./form/RadioInput";
 
 const EditAddressInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [showPermanentAddress, setShowPermanentAddress] = useState(false);
+  const [isAddressEqual, setIsAddressEqual] = useState(true);
 
   const [presentAddress, setPresentAddress] = useState({
     division: getAllDivision(),
@@ -36,7 +36,8 @@ const EditAddressInfo = () => {
   useEffect(() => {
     const _presentAddress = currentUser?.presentAddress;
     const _permanentAddress = currentUser?.permanentAddress;
-    setShowPermanentAddress(!isEqual(_presentAddress, _permanentAddress));
+
+    setIsAddressEqual(isEqual(_presentAddress, _permanentAddress));
 
     setPresentAddress({
       division: getAllDivision()?.map((division) => {
@@ -140,7 +141,7 @@ const EditAddressInfo = () => {
       )?.title;
     }
 
-    if (!showPermanentAddress) {
+    if (isAddressEqual) {
       address.permanentAddress = address.presentAddress;
     }
 
@@ -176,16 +177,16 @@ const EditAddressInfo = () => {
 
           <RadioInput
             label="বর্তমান ও স্থায়ী ঠিকানা একই"
-            checked={!showPermanentAddress}
-            onClick={() => setShowPermanentAddress(false)}
+            checked={isAddressEqual}
+            onClick={() => setIsAddressEqual(true)}
           />
           <RadioInput
             label="বর্তমান ও স্থায়ী ঠিকানা একই নয়"
-            checked={showPermanentAddress}
-            onClick={() => setShowPermanentAddress(true)}
+            checked={!isAddressEqual}
+            onClick={() => setIsAddressEqual(false)}
           />
 
-          {showPermanentAddress && (
+          {!isAddressEqual && (
             <Address
               address={permanentAddress}
               setAddress={setPermanentAddress}
