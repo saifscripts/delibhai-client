@@ -1,5 +1,5 @@
 import { getAllDivision } from "bd-divisions-to-unions";
-import { getDistricts, getUnions, getUpazilas } from "./getAddress";
+import { getDistricts, getUnions, getUpazilas } from "./getGeoLocation";
 import selectObjectByTitle from "./selectObjectByTitle";
 
 const restoreAddressState = (address) => {

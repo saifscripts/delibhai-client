@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { getDistricts, getUnions, getUpazilas } from "../utils/getAddress";
+import { getDistricts, getUnions, getUpazilas } from "../utils/getGeoLocation";
 
 const Address = ({ address, setAddress, isLoading }) => {
   const handleChange = (e, currentField) => {
