@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { getAllDivision } from "bd-divisions-to-unions";
-import { useState } from "react";
+import { isEqual } from "lodash";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUpdateData } from "../../../api/api";
 import Button from "../../../components/ui/Button";
@@ -8,6 +9,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
+import { getDistricts, getUnions, getUpazilas } from "../utils/getAddress";
 import { Address } from "./Address";
 import { RadioInput } from "./form/RadioInput";
 
@@ -30,6 +32,91 @@ const EditAddressInfo = () => {
   });
 
   const { currentUser, setCurrentUser } = useAuth();
+
+  useEffect(() => {
+    const _presentAddress = currentUser?.presentAddress;
+    const _permanentAddress = currentUser?.permanentAddress;
+    setShowPermanentAddress(!isEqual(_presentAddress, _permanentAddress));
+
+    setPresentAddress({
+      division: getAllDivision()?.map((division) => {
+        if (division.title === _presentAddress?.division) {
+          division.selected = true;
+        } else {
+          division.selected = false;
+        }
+
+        return division;
+      }),
+      district: getDistricts(_presentAddress?.division)?.map((district) => {
+        if (district.title === _presentAddress?.district) {
+          district.selected = true;
+        } else {
+          district.selected = false;
+        }
+
+        return district;
+      }),
+      upazila: getUpazilas(_presentAddress?.district)?.map((upazila) => {
+        if (upazila.title === _presentAddress?.upazila) {
+          upazila.selected = true;
+        } else {
+          upazila.selected = false;
+        }
+
+        return upazila;
+      }),
+      union: getUnions(_presentAddress?.upazila)?.map((union) => {
+        if (union.title === _presentAddress?.union) {
+          union.selected = true;
+        } else {
+          union.selected = false;
+        }
+
+        return union;
+      }),
+    });
+
+    setPermanentAddress({
+      division: getAllDivision()?.map((division) => {
+        if (division.title === _permanentAddress?.division) {
+          division.selected = true;
+        } else {
+          division.selected = false;
+        }
+
+        return division;
+      }),
+      district: getDistricts(_permanentAddress?.division)?.map((district) => {
+        if (district.title === _permanentAddress?.district) {
+          district.selected = true;
+        } else {
+          district.selected = false;
+        }
+
+        return district;
+      }),
+      upazila: getUpazilas(_permanentAddress?.district)?.map((upazila) => {
+        if (upazila.title === _permanentAddress?.upazila) {
+          upazila.selected = true;
+        } else {
+          upazila.selected = false;
+        }
+
+        return upazila;
+      }),
+      union: getUnions(_permanentAddress?.upazila)?.map((union) => {
+        if (union.title === _permanentAddress?.union) {
+          union.selected = true;
+        } else {
+          union.selected = false;
+        }
+
+        return union;
+      }),
+    });
+  }, [currentUser]);
+
   const { updateData } = useUpdateData();
   const navigate = useNavigate();
 
@@ -57,7 +144,6 @@ const EditAddressInfo = () => {
       address.permanentAddress = address.presentAddress;
     }
 
-    console.log(address);
     // Update data
     const { data } = await updateData(`/v1/user/${currentUser._id}`, address);
 
