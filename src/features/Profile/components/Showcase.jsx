@@ -4,7 +4,13 @@ import { createRef, useState } from "react";
 import dp from "../../../assets/default.jpg";
 import { Avatar, EditAvatar, ResizeAvatar } from "../index";
 
-export const Showcase = ({ name, id, vehicle, vehicleImage }) => {
+export const Showcase = ({
+  name,
+  id,
+  vehicleType,
+  vehicleImage,
+  serviceUsage,
+}) => {
   const [image, setImage] = useState("#");
   const [cropData, setCropData] = useState(null);
   const [edit, setEdit] = useState(false);
@@ -94,10 +100,15 @@ export const Showcase = ({ name, id, vehicle, vehicleImage }) => {
             #{id.slice(0, 5)}
           </span>
 
-          <div className="relative bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] pl-4 pr-10 min-[400px]:pr-12 min-[500px]:pr-16 py-3 rounded-full text-xs min-[500px]:text-base w-fit">
-            <span>{vehicle} রাইডার</span>
+          <div className="relative bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] pl-4 pr-10 min-[400px]:pr-12 min-[500px]:pr-16 py-3 rounded-full text-xs min-[500px]:text-base h-10 flex items-center">
+            <span>
+              {(vehicleType &&
+                serviceUsage === "ব্যক্তিগত" &&
+                vehicleType + " মালিক") ||
+                (vehicleType && vehicleType + " রাইডার")}
+            </span>
             <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-16">
-              <img src={vehicleImage} alt={vehicle} className="w-full" />
+              <img src={vehicleImage} alt={vehicleType} className="w-full" />
             </div>
             <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-24 aspect-square rounded-full bg-secondary opacity-10 p-4 -z-20"></div>
             <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-[76px] aspect-square rounded-full bg-secondary opacity-20 -z-10"></div>

@@ -44,10 +44,11 @@ export const Profile = () => {
           id={id}
           name={userInfo?.name}
           image={userInfo?.image}
-          vehicle={userInfo?.vehicleType}
+          vehicleType={userInfo?.vehicleType}
           vehicleImage={
             vehicles.find(({ title }) => title === userInfo?.vehicleType)?.icon
           }
+          serviceUsage={userInfo?.serviceUsage}
         />
 
         {/* Info Categories */}
