@@ -14,6 +14,7 @@ export { Info } from "./components/Info";
 export { InfoCategories } from "./components/InfoCategories";
 export { InfoCategory } from "./components/InfoCategory";
 export { InfoContainer } from "./components/InfoContainer";
+export { OwnerInfo } from "./components/OwnerInfo";
 export { Profile } from "./components/Profile";
 export { RatingBars } from "./components/RatingBars";
 export { RatingStars } from "./components/RatingStars";
