@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import camera from "../assets/icons/camera.svg";
 import { VehiclePhoto } from "../index";
 
 export const VehiclePhotos = ({ photos = [] }) => {
-  const [urls, setUrls] = useState([]);
+  const [urls, setUrls] = useState(photos);
   const [deleteBtn, setDeleteBtn] = useState(-1);
-
-  useEffect(() => {
-    setUrls(photos);
-  }, [photos]);
 
   return (
     <div>
