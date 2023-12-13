@@ -9,6 +9,7 @@ import {
   EditPersonalInfo,
   Profile,
 } from "./features/Profile";
+import { EditVehicleInfo } from "./features/Profile/components/EditVehicleInfo";
 import DHero from "./pages/DHero";
 import DHeroSearch from "./pages/DHeroSearch";
 import DHeroSearchResult from "./pages/DHeroSearchResult";
@@ -38,6 +39,10 @@ function App() {
           element={<EditContactInfo />}
         />
         <Route path="/profile/edit/address" element={<EditAddressInfo />} />
+        <Route
+          path="/profile/edit/vehicle-info"
+          element={<EditVehicleInfo />}
+        />
       </Routes>
       <Toaster />
     </>

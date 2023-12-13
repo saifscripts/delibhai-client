@@ -20,6 +20,7 @@ export { RatingStars } from "./components/RatingStars";
 export { ResizeAvatar } from "./components/ResizeAvatar";
 export { Review } from "./components/Review";
 export { Showcase } from "./components/Showcase";
+export { VehicleInfo } from "./components/VehicleInfo";
 export { VehiclePhoto } from "./components/VehiclePhoto";
 export { VehiclePhotos } from "./components/VehiclePhotos";
 export { Checkbox } from "./components/form/Checkbox";

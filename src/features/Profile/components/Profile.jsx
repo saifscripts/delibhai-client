@@ -5,9 +5,9 @@ import { CiLocationOn } from "react-icons/ci";
 import ReactPlayer from "react-player/youtube";
 import { useParams } from "react-router-dom";
 import map from "../../../assets/map.png";
+import vehicles from "../../../data/vehicles";
 import PageContainer from "../../../layouts/PageContainer";
 import TopPanel from "../../../layouts/TopPanel";
-import { vehicles } from "../../DHero/index";
 import useUserInfo from "../hooks/useUserInfo";
 import {
   Achievement,
@@ -20,6 +20,7 @@ import {
   RatingBars,
   Review,
   Showcase,
+  VehicleInfo,
   VehiclePhotos,
 } from "../index";
 import PersonalInfo from "./PersonalInfo";
@@ -29,7 +30,7 @@ export const Profile = () => {
   const [activeCategory, setActiveCategory] = useState(1);
   const [userInfo, modifiedInfo] = useUserInfo(id);
 
-  const { vehicle, owner, service, location, videoURL } = modifiedInfo;
+  const { owner, service, location, videoURL } = modifiedInfo;
 
   return (
     <div>
@@ -66,18 +67,7 @@ export const Profile = () => {
         {/* Vehicle Information */}
         {activeCategory === 2 && (
           <>
-            <InfoContainer
-              type="গাড়ির সাধারণ তথ্য"
-              fields={vehicle}
-              editRoute="/profile/edit"
-            >
-              {vehicle.map(
-                ({ info, label, icon, editOnly }, index) =>
-                  editOnly || (
-                    <Info key={index} info={info} label={label} icon={icon} />
-                  )
-              )}
-            </InfoContainer>
+            <VehicleInfo />
 
             <InfoContainer
               type="গাড়ির মালিকানার তথ্য"

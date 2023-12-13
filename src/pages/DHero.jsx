@@ -1,4 +1,4 @@
-import { vehicles } from "../features/DHero/index";
+import vehicles from "../data/vehicles";
 import Categories from "../layouts/Categories";
 import { Navbar } from "../layouts/Navbar/";
 import PageContainer from "../layouts/PageContainer";
