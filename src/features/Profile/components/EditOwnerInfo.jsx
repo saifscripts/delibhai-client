@@ -13,7 +13,7 @@ import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
-import getSelectedAddress from "../utils/getSelectedAdress";
+import getSelectedAddress from "../utils/getSelectedAddress";
 import restoreAddressState from "../utils/restoreAddressState";
 import { Address } from "./Address";
 

@@ -9,7 +9,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
-import getSelectedAddress from "../utils/getSelectedAdress";
+import getSelectedAddress from "../utils/getSelectedAddress";
 import restoreAddressState from "../utils/restoreAddressState";
 import { Address } from "./Address";
 import { RadioInput } from "./form/RadioInput";
