@@ -20,6 +20,7 @@ import {
   OwnerInfo,
   RatingBars,
   Review,
+  ServiceInfo,
   Showcase,
   VehicleInfo,
   VehiclePhotos,
@@ -31,7 +32,7 @@ export const Profile = () => {
   const [activeCategory, setActiveCategory] = useState(1);
   const [userInfo, modifiedInfo] = useUserInfo(id);
 
-  const { service, location, videoURL } = modifiedInfo;
+  const { location, videoURL } = modifiedInfo;
 
   return (
     <div>
@@ -81,18 +82,7 @@ export const Profile = () => {
         {/* Service Information */}
         {activeCategory === 3 && (
           <>
-            <InfoContainer
-              type="সার্ভিস তথ্য"
-              fields={service}
-              editRoute="/profile/edit"
-            >
-              {service.map(
-                ({ info, label, icon, editOnly }, index) =>
-                  editOnly || (
-                    <Info key={index} info={info} label={label} icon={icon} />
-                  )
-              )}
-            </InfoContainer>
+            <ServiceInfo />
           </>
         )}
 

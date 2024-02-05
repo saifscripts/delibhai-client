@@ -29,5 +29,5 @@ export const getServiceTime = (timeArray = []) => {
     outputArray.push(`${convertTimeFormat(start)}-${convertTimeFormat(end)}`);
   });
 
-  return outputArray;
+  return outputArray.length && outputArray;
 };

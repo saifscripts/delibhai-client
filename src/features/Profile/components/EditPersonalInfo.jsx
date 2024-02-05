@@ -175,7 +175,7 @@ const EditPersonalInfo = () => {
               <option value="এবি-">এবি-</option>
               <option value="ও-">ও-</option>
             </select>
-            <p className="text-red-400">{errors.gender?.message}</p>
+            <p className="text-red-400">{errors.bloodGroup?.message}</p>
           </div>
 
           <div className="mt-4 mb-1">

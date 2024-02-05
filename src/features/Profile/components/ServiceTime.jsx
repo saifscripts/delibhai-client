@@ -1,6 +1,7 @@
+import { cloneDeep } from "lodash";
 import { useState } from "react";
 import { AiFillDelete, AiFillPlusSquare } from "react-icons/ai";
-import { convertTimeFormat } from "../../../../utils/convertTime";
+import { convertTimeFormat } from "../../../utils/convertTime";
 
 const getCurrentTime = () => {
   var currentDate = new Date();
@@ -15,7 +16,7 @@ const getCurrentTime = () => {
   return timeString; // Output the current time string
 };
 
-function TimeInput({ label, index, inputFields, setInputFields, data = [] }) {
+function ServiceTime({ serviceTime, setServiceTime }) {
   const [startTime, setStartTime] = useState(getCurrentTime());
   const [endTime, setEndTime] = useState(getCurrentTime());
 
@@ -29,11 +30,11 @@ function TimeInput({ label, index, inputFields, setInputFields, data = [] }) {
 
   const addTime = (e) => {
     e.preventDefault();
-    const clonedInputFields = [...inputFields];
+    const _data = cloneDeep(serviceTime);
 
-    clonedInputFields[index].data.push({ start: startTime, end: endTime });
+    _data.push({ start: startTime, end: endTime });
 
-    setInputFields(clonedInputFields);
+    setServiceTime(_data);
     setStartTime(getCurrentTime());
     setEndTime(getCurrentTime());
   };
@@ -41,22 +42,20 @@ function TimeInput({ label, index, inputFields, setInputFields, data = [] }) {
   const removeTime = (e, startTime, endTime) => {
     e.preventDefault();
 
-    const clonedInputFields = [...inputFields];
-    const newData = data.filter(
+    let _data = cloneDeep(serviceTime);
+    _data = serviceTime.filter(
       ({ start, end }) => !(start === startTime && end === endTime)
     );
 
-    clonedInputFields[index].data = newData;
-
-    setInputFields(clonedInputFields);
+    setServiceTime(_data);
   };
 
   return (
     <>
-      <p className="font-bold mt-4 mb-1">{label}</p>
+      <p className="font-bold mt-4 mb-1">সার্ভিস প্রদানের সময়</p>
 
       <div className="flex flex-col gap-2">
-        {data.map(({ start, end }, index) => (
+        {serviceTime.map(({ start, end }, index) => (
           <div
             key={index}
             className="px-3 py-2 bg-light rounded-lg flex justify-between items-center"
@@ -106,4 +105,5 @@ function TimeInput({ label, index, inputFields, setInputFields, data = [] }) {
   );
 }
 
-export { TimeInput };
+export { ServiceTime };
+

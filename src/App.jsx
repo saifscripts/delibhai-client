@@ -7,6 +7,7 @@ import {
   EditContactInfo,
   EditInfo,
   EditPersonalInfo,
+  EditServiceInfo,
   Profile,
 } from "./features/Profile";
 import { EditOwnerInfo } from "./features/Profile/components/EditOwnerInfo";
@@ -45,6 +46,10 @@ function App() {
           element={<EditVehicleInfo />}
         />
         <Route path="/profile/edit/owner-info" element={<EditOwnerInfo />} />
+        <Route
+          path="/profile/edit/service-info"
+          element={<EditServiceInfo />}
+        />
       </Routes>
       <Toaster />
     </>
