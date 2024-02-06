@@ -6,7 +6,7 @@ import Button from "../../../components/ui/Button";
 import PageContainer from "../../../layouts/PageContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
-import { Checkbox, RadioInput, SelectInput, TimeInput } from "../index";
+import { Checkbox, RadioInput, SelectInput } from "../index";
 
 const EditInfo = () => {
   const navigate = useNavigate();
@@ -139,19 +139,6 @@ const EditInfo = () => {
                     onInputChange={(e) => onChecked(e, index)}
                     data={data}
                     options={options}
-                  />
-                );
-              }
-
-              if (type === "time") {
-                return (
-                  <TimeInput
-                    key={index}
-                    index={index}
-                    label={label}
-                    inputFields={inputFields}
-                    setInputFields={setInputFields}
-                    data={data}
                   />
                 );
               }
