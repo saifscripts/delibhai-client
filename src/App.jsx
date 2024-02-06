@@ -6,6 +6,7 @@ import {
   EditAddressInfo,
   EditContactInfo,
   EditInfo,
+  EditManualLocationInfo,
   EditPersonalInfo,
   EditServiceInfo,
   Profile,
@@ -49,6 +50,10 @@ function App() {
         <Route
           path="/profile/edit/service-info"
           element={<EditServiceInfo />}
+        />
+        <Route
+          path="/profile/edit/manual-location-info"
+          element={<EditManualLocationInfo />}
         />
       </Routes>
       <Toaster />

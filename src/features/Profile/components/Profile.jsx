@@ -14,9 +14,9 @@ import {
   AddressInfo,
   AverageRating,
   ContactInfo,
-  Info,
   InfoCategories,
   InfoContainer,
+  ManualLocationInfo,
   OwnerInfo,
   RatingBars,
   Review,
@@ -32,7 +32,7 @@ export const Profile = () => {
   const [activeCategory, setActiveCategory] = useState(1);
   const [userInfo, modifiedInfo] = useUserInfo(id);
 
-  const { location, videoURL } = modifiedInfo;
+  const { videoURL } = modifiedInfo;
 
   return (
     <div>
@@ -104,18 +104,7 @@ export const Profile = () => {
               </div>
             </InfoContainer>
 
-            <InfoContainer
-              type="ম্যানুয়াল লোকেশন"
-              fields={location}
-              editRoute="/profile/edit"
-            >
-              {location.map(
-                ({ info, label, icon, editOnly }, index) =>
-                  editOnly || (
-                    <Info key={index} info={info} label={label} icon={icon} />
-                  )
-              )}
-            </InfoContainer>
+            <ManualLocationInfo />
           </>
         )}
 
