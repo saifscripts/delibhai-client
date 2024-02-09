@@ -2,10 +2,12 @@ import { cloneDeep } from "lodash";
 import { useEffect } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { useUpdateData } from "../../../api/api";
 import { useAuth } from "../../../contexts/AuthContext";
 
 export const VehiclePhoto = ({ url, index, deleteBtn, setDeleteBtn }) => {
   const { currentUser, setCurrentUser } = useAuth();
+  const { updateData } = useUpdateData();
 
   useEffect(() => {
     const hideDeleteBtn = () => {
@@ -19,11 +21,20 @@ export const VehiclePhoto = ({ url, index, deleteBtn, setDeleteBtn }) => {
     };
   }, [setDeleteBtn]);
 
-  const removePhoto = () => {
+  const removePhoto = async () => {
     const _currentUser = cloneDeep(currentUser);
-    const photos = [..._currentUser.vehiclePhotos];
-    photos.splice(index, 1);
-    setCurrentUser({ ..._currentUser, vehiclePhotos: photos });
+    const _vehiclePhotos = [..._currentUser.vehiclePhotos];
+    _vehiclePhotos.splice(index, 1);
+
+    const { data, error } = await updateData(`/v1/user/${currentUser._id}`, {
+      vehiclePhotos: _vehiclePhotos,
+    });
+
+    if (data?.success) {
+      setCurrentUser(data.data);
+    } else {
+      console.log(error);
+    }
   };
 
   const showDeleteBtn = (e) => {

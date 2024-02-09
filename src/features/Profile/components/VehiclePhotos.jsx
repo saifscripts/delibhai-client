@@ -40,7 +40,6 @@ export const VehiclePhotos = () => {
     });
 
     if (data?.success) {
-      console.log(data);
       setCurrentUser(data.data);
     } else {
       console.log(error);
