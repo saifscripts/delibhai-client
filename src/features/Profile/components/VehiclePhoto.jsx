@@ -37,7 +37,7 @@ export const VehiclePhoto = ({ url, index, deleteBtn, setDeleteBtn }) => {
       style={{
         backgroundImage: `url(${url})`,
       }}
-      className={`relative flex flex-col flex-shrink-0 justify-center items-center w-28 aspect-square p-1 bg-center bg-contain bg-no-repeat rounded-lg overflow-hidden`}
+      className={`relative flex flex-col flex-shrink-0 justify-center items-center w-28 aspect-square p-1 bg-center bg-cover bg-no-repeat rounded-lg overflow-hidden`}
     >
       <BsThreeDotsVertical
         className="absolute right-0 top-0"
