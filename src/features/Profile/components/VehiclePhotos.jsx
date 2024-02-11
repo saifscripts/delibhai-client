@@ -62,11 +62,14 @@ export const VehiclePhotos = () => {
               setDeleteBtn={setDeleteBtn}
             />
           ))}
-          <form className="relative bg-accent z-10 w-28 aspect-square rounded-lg flex flex-col flex-shrink-0 justify-center items-center">
+          <form
+            className={`relative bg-accent z-10 w-28 aspect-square rounded-lg flex flex-col flex-shrink-0 justify-center items-center ${
+              isLoading && "opacity-30"
+            }`}
+          >
             <img src={camera} alt="Camera" />
             <input
               type="file"
-              multiple="multiple"
               accept="image/*"
               disabled={isLoading}
               className="absolute top-0 bottom-0 right-0 left-0 z-20 opacity-0"

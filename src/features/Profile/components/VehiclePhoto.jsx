@@ -1,11 +1,14 @@
 import { cloneDeep } from "lodash";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { useUpdateData } from "../../../api/api";
 import { useAuth } from "../../../contexts/AuthContext";
 
 export const VehiclePhoto = ({ url, index, deleteBtn, setDeleteBtn }) => {
   const { currentUser, setCurrentUser } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const { updateData } = useUpdateData();
 
   useEffect(() => {
     const hideDeleteBtn = () => {
@@ -19,11 +22,24 @@ export const VehiclePhoto = ({ url, index, deleteBtn, setDeleteBtn }) => {
     };
   }, [setDeleteBtn]);
 
-  const removePhoto = () => {
+  const removePhoto = async () => {
+    setIsLoading(true);
+
     const _currentUser = cloneDeep(currentUser);
-    const photos = [..._currentUser.vehiclePhotos];
-    photos.splice(index, 1);
-    setCurrentUser({ ..._currentUser, vehiclePhotos: photos });
+    const _vehiclePhotos = _currentUser?.vehiclePhotos || [];
+    _vehiclePhotos.splice(index, 1);
+
+    const { data, error } = await updateData(`/v1/user/${currentUser._id}`, {
+      vehiclePhotos: _vehiclePhotos,
+    });
+
+    if (data?.success) {
+      setCurrentUser(data.data);
+    } else {
+      console.log(error);
+    }
+
+    setIsLoading(false);
   };
 
   const showDeleteBtn = (e) => {
@@ -37,7 +53,9 @@ export const VehiclePhoto = ({ url, index, deleteBtn, setDeleteBtn }) => {
       style={{
         backgroundImage: `url(${url})`,
       }}
-      className={`relative flex flex-col flex-shrink-0 justify-center items-center w-28 aspect-square p-1 bg-center bg-cover bg-no-repeat rounded-lg overflow-hidden`}
+      className={`relative flex flex-col flex-shrink-0 justify-center items-center w-28 aspect-square p-1 bg-center bg-cover bg-no-repeat rounded-lg overflow-hidden ${
+        isLoading && "opacity-30"
+      }`}
     >
       <BsThreeDotsVertical
         className="absolute right-0 top-0"
