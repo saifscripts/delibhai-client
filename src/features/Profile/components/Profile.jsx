@@ -114,7 +114,7 @@ export const Profile = () => {
             <InfoContainer
               type="ডিহিরোর অভিব্যক্তি"
               fields={videoURL}
-              editRoute="/profile/edit"
+              editRoute="/profile/edit/video"
             >
               {userInfo?.videoURL ? (
                 <div className="w-full max-w-lg aspect-[1/1.8] bg-black flex justify-center items-center rounded-lg overflow-hidden">

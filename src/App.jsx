@@ -9,6 +9,7 @@ import {
   EditManualLocationInfo,
   EditPersonalInfo,
   EditServiceInfo,
+  EditVideoURL,
   Profile,
 } from "./features/Profile";
 import { EditOwnerInfo } from "./features/Profile/components/EditOwnerInfo";
@@ -55,6 +56,7 @@ function App() {
           path="/profile/edit/manual-location-info"
           element={<EditManualLocationInfo />}
         />
+        <Route path="/profile/edit/video" element={<EditVideoURL />} />
       </Routes>
       <Toaster />
     </>

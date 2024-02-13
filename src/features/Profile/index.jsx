@@ -12,6 +12,7 @@ export { EditManualLocationInfo } from "./components/EditManualLocationInfo";
 export { EditOption } from "./components/EditOption";
 export { EditPersonalInfo } from "./components/EditPersonalInfo";
 export { EditServiceInfo } from "./components/EditServiceInfo";
+export { EditVideoURL } from "./components/EditVideoURL";
 export { Info } from "./components/Info";
 export { InfoCategories } from "./components/InfoCategories";
 export { InfoCategory } from "./components/InfoCategory";
