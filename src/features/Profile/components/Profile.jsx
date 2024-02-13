@@ -116,14 +116,20 @@ export const Profile = () => {
               fields={videoURL}
               editRoute="/profile/edit"
             >
-              <div className="w-full max-w-lg aspect-[1/1.8] bg-black flex justify-center items-center rounded-lg overflow-hidden">
-                <ReactPlayer
-                  width="100%"
-                  height="100%"
-                  loop
-                  url={userInfo?.videoURL}
-                />
-              </div>
+              {userInfo?.videoURL ? (
+                <div className="w-full max-w-lg aspect-[1/1.8] bg-black flex justify-center items-center rounded-lg overflow-hidden">
+                  <ReactPlayer
+                    width="100%"
+                    height="100%"
+                    loop
+                    url={userInfo?.videoURL}
+                  />
+                </div>
+              ) : (
+                <p className="text-red-400 text-center text-2xl">
+                  ভিডিও আপডেট করুন
+                </p>
+              )}
             </InfoContainer>
           </>
         )}
