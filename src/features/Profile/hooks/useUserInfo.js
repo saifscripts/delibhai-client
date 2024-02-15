@@ -8,6 +8,7 @@ const useUserInfo = (id) => {
   const { fetchData} = useFetchData();
 
   useEffect(() => {
+    console.log('here')
     fetchData(`/v1/user/${id}`).then(({data})=> setUserInfo(data.data))
   }, [id]);
 

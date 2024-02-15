@@ -33,12 +33,9 @@ export const Profile = () => {
   const [userInfo] = useUserInfo(id);
 
   return (
-    <div>
-      {/* Top Panel */}
+    <>
       <TopPanel />
-      {/* Page Container */}
       <PageContainer>
-        {/* Showcase */}
         <Showcase
           id={id}
           name={userInfo?.name}
@@ -50,7 +47,6 @@ export const Profile = () => {
           serviceUsage={userInfo?.serviceUsage}
         />
 
-        {/* Info Categories */}
         <InfoCategories
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
@@ -59,17 +55,17 @@ export const Profile = () => {
         {/* General Information */}
         {activeCategory === 1 && (
           <>
-            <PersonalInfo />
-            <ContactInfo />
-            <AddressInfo />
+            <PersonalInfo userInfo={userInfo} />
+            <ContactInfo userInfo={userInfo} />
+            <AddressInfo userInfo={userInfo} />
           </>
         )}
 
         {/* Vehicle Information */}
         {activeCategory === 2 && (
           <>
-            <VehicleInfo />
-            <OwnerInfo />
+            <VehicleInfo userInfo={userInfo} />
+            <OwnerInfo userInfo={userInfo} />
 
             <InfoContainer type="গাড়ির ছবি">
               <VehiclePhotos photos={userInfo?.vehiclePhotos} />
@@ -78,11 +74,7 @@ export const Profile = () => {
         )}
 
         {/* Service Information */}
-        {activeCategory === 3 && (
-          <>
-            <ServiceInfo />
-          </>
-        )}
+        {activeCategory === 3 && <ServiceInfo userInfo={userInfo} />}
 
         {/* Location Information */}
         {activeCategory === 4 && (
@@ -102,34 +94,31 @@ export const Profile = () => {
               </div>
             </InfoContainer>
 
-            <ManualLocationInfo />
+            <ManualLocationInfo userInfo={userInfo} />
           </>
         )}
 
         {/* Video */}
         {activeCategory === 5 && (
-          <>
-            <InfoContainer
-              type="ডিহিরোর অভিব্যক্তি"
-              // fields={videoURL}
-              editRoute="/profile/edit/video"
-            >
-              {userInfo?.videoURL ? (
-                <div className="w-full max-w-lg aspect-[1/1.8] bg-black flex justify-center items-center rounded-lg overflow-hidden">
-                  <ReactPlayer
-                    width="100%"
-                    height="100%"
-                    loop
-                    url={userInfo?.videoURL}
-                  />
-                </div>
-              ) : (
-                <p className="text-red-400 text-center text-2xl">
-                  ভিডিও আপডেট করুন
-                </p>
-              )}
-            </InfoContainer>
-          </>
+          <InfoContainer
+            type="ডিহিরোর অভিব্যক্তি"
+            editRoute="/profile/edit/video"
+          >
+            {userInfo?.videoURL ? (
+              <div className="w-full max-w-lg aspect-[1/1.8] bg-black flex justify-center items-center rounded-lg overflow-hidden">
+                <ReactPlayer
+                  width="100%"
+                  height="100%"
+                  loop
+                  url={userInfo?.videoURL}
+                />
+              </div>
+            ) : (
+              <p className="text-red-400 text-center text-2xl">
+                ভিডিও আপডেট করুন
+              </p>
+            )}
+          </InfoContainer>
         )}
 
         {/* Review */}
@@ -174,6 +163,6 @@ export const Profile = () => {
           </>
         )}
       </PageContainer>
-    </div>
+    </>
   );
 };

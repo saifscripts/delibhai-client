@@ -1,15 +1,10 @@
 // icons
-import { useParams } from "react-router-dom";
 import marker from "../assets/icons/marker.svg";
-import useUserInfo from "../hooks/useUserInfo";
 import getAddressText from "../utils/getAddressText";
 import { Info } from "./Info";
 import { InfoContainer } from "./InfoContainer";
 
-const AddressInfo = () => {
-  const { id } = useParams();
-  const [userInfo] = useUserInfo(id);
-
+const AddressInfo = ({ userInfo }) => {
   const fields = [
     {
       info: getAddressText(userInfo?.presentAddress),
@@ -24,15 +19,10 @@ const AddressInfo = () => {
   ];
 
   return (
-    <InfoContainer
-      type="ঠিকানা"
-      fields={fields}
-      editRoute="/profile/edit/address"
-    >
-      {fields.map(
-        ({ info, label, icon, editOnly }, index) =>
-          editOnly || <Info key={index} info={info} label={label} icon={icon} />
-      )}
+    <InfoContainer type="ঠিকানা" editRoute="/profile/edit/address">
+      {fields.map(({ info, label, icon }, index) => (
+        <Info key={index} info={info} label={label} icon={icon} />
+      ))}
     </InfoContainer>
   );
 };
