@@ -30,9 +30,7 @@ import PersonalInfo from "./PersonalInfo";
 export const Profile = () => {
   const { id } = useParams();
   const [activeCategory, setActiveCategory] = useState(1);
-  const [userInfo, modifiedInfo] = useUserInfo(id);
-
-  const { videoURL } = modifiedInfo;
+  const [userInfo] = useUserInfo(id);
 
   return (
     <div>
@@ -113,7 +111,7 @@ export const Profile = () => {
           <>
             <InfoContainer
               type="ডিহিরোর অভিব্যক্তি"
-              fields={videoURL}
+              // fields={videoURL}
               editRoute="/profile/edit/video"
             >
               {userInfo?.videoURL ? (
