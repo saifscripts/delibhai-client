@@ -6,12 +6,12 @@ import vehicle from '../../../assets/icons/vehicle.svg';
 import video from '../../../assets/icons/video.svg';
 
 const categories = [
-  { id: 1, text: 'সাধারণ তথ্য', icon: user, percent: 60 },
-  { id: 2, text: 'বাহনের তথ্য', icon: vehicle, percent: 0 },
-  { id: 3, text: 'সেবাদান তথ্য', icon: service, percent: 20 },
-  { id: 4, text: 'মাই লোকেশন', icon: location, percent: 50 },
-  { id: 5, text: 'ভিডিও', icon: video, percent: 30 },
-  { id: 6, text: 'রিভিও', icon: star, percent: 100 },
+  { type: 'general', text: 'সাধারণ তথ্য', icon: user, percent: 60 },
+  { type: 'vehicle', text: 'বাহনের তথ্য', icon: vehicle, percent: 0 },
+  { type: 'service', text: 'সেবাদান তথ্য', icon: service, percent: 20 },
+  { type: 'location', text: 'মাই লোকেশন', icon: location, percent: 50 },
+  { type: 'video', text: 'ভিডিও', icon: video, percent: 30 },
+  { type: 'review', text: 'রিভিও', icon: star, percent: 100 },
 ];
 
 export default categories;

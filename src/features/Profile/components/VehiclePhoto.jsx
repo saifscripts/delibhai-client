@@ -5,10 +5,11 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { useUpdateData } from "../../../api/api";
 import { useAuth } from "../../../contexts/AuthContext";
 
-export const VehiclePhoto = ({ url, index, deleteBtn, setDeleteBtn }) => {
+export const VehiclePhoto = ({ url, index }) => {
   const { currentUser, setCurrentUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const { updateData } = useUpdateData();
+  const [deleteBtn, setDeleteBtn] = useState(-1);
 
   useEffect(() => {
     const hideDeleteBtn = () => {

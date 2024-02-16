@@ -29,7 +29,7 @@ import PersonalInfo from "./PersonalInfo";
 
 export const Profile = () => {
   const { id } = useParams();
-  const [activeCategory, setActiveCategory] = useState(1);
+  const [activeCategory, setActiveCategory] = useState("general");
   const [userInfo] = useUserInfo(id);
 
   return (
@@ -53,7 +53,7 @@ export const Profile = () => {
         />
 
         {/* General Information */}
-        {activeCategory === 1 && (
+        {activeCategory === "general" && (
           <>
             <PersonalInfo userInfo={userInfo} />
             <ContactInfo userInfo={userInfo} />
@@ -62,22 +62,19 @@ export const Profile = () => {
         )}
 
         {/* Vehicle Information */}
-        {activeCategory === 2 && (
+        {activeCategory === "vehicle" && (
           <>
             <VehicleInfo userInfo={userInfo} />
             <OwnerInfo userInfo={userInfo} />
-
-            <InfoContainer type="গাড়ির ছবি">
-              <VehiclePhotos photos={userInfo?.vehiclePhotos} />
-            </InfoContainer>
+            <VehiclePhotos userInfo={userInfo} />
           </>
         )}
 
         {/* Service Information */}
-        {activeCategory === 3 && <ServiceInfo userInfo={userInfo} />}
+        {activeCategory === "service" && <ServiceInfo userInfo={userInfo} />}
 
         {/* Location Information */}
-        {activeCategory === 4 && (
+        {activeCategory === "location" && (
           <>
             <InfoContainer type="GPS Location" editRoute="/profile/edit">
               <div className="p-3 flex justify-center items-center gap-2 border border-light rounded-md mb-3 text-medium">
@@ -99,7 +96,7 @@ export const Profile = () => {
         )}
 
         {/* Video */}
-        {activeCategory === 5 && (
+        {activeCategory === "video" && (
           <InfoContainer
             type="ডিহিরোর অভিব্যক্তি"
             editRoute="/profile/edit/video"
@@ -122,7 +119,7 @@ export const Profile = () => {
         )}
 
         {/* Review */}
-        {activeCategory === 6 && (
+        {activeCategory === "review" && (
           <>
             <InfoContainer type="রাইডার এক্টিভিটি">
               <div className="flex gap-8 justify-center items-center py-3 border-b border-light">

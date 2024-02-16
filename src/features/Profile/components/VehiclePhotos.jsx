@@ -3,10 +3,9 @@ import { useState } from "react";
 import { useUpdateData } from "../../../api/api";
 import { useAuth } from "../../../contexts/AuthContext";
 import camera from "../assets/icons/camera.svg";
-import { VehiclePhoto } from "../index";
+import { InfoContainer, VehiclePhoto } from "../index";
 
-export const VehiclePhotos = () => {
-  const [deleteBtn, setDeleteBtn] = useState(-1);
+export const VehiclePhotos = ({ userInfo }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { updateData } = useUpdateData();
   const { currentUser, setCurrentUser } = useAuth();
@@ -54,20 +53,16 @@ export const VehiclePhotos = () => {
     setIsLoading(false);
   };
 
+  const vehiclePhotos = currentUser?.vehiclePhotos || userInfo?.vehiclePhotos;
+
   return (
-    <div>
+    <InfoContainer type="গাড়ির ছবি">
       <div className="overflow-y-hidden mb-6">
         <div className="flex gap-2 overflow-x-scroll pb-5 -mb-5">
-          {currentUser?.vehiclePhotos?.map((url, index) => (
-            <VehiclePhoto
-              url={url}
-              key={index}
-              index={index}
-              deleteBtn={deleteBtn}
-              setDeleteBtn={setDeleteBtn}
-            />
+          {vehiclePhotos?.map((url, index) => (
+            <VehiclePhoto url={url} key={url} index={index} />
           ))}
-          {currentUser?.vehiclePhotos?.length < 4 && (
+          {vehiclePhotos?.length < 4 && (
             <form
               className={`relative bg-accent z-10 w-28 aspect-square rounded-lg flex flex-col flex-shrink-0 justify-center items-center ${
                 isLoading && "opacity-30"
@@ -85,6 +80,6 @@ export const VehiclePhotos = () => {
           )}
         </div>
       </div>
-    </div>
+    </InfoContainer>
   );
 };
