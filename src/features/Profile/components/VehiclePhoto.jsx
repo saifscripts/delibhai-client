@@ -1,4 +1,3 @@
-import { cloneDeep } from "lodash";
 import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -6,10 +5,10 @@ import { useUpdateData } from "../../../api/api";
 import { useAuth } from "../../../contexts/AuthContext";
 
 export const VehiclePhoto = ({ url, index }) => {
-  const { currentUser, setCurrentUser } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
-  const { updateData } = useUpdateData();
   const [deleteBtn, setDeleteBtn] = useState(-1);
+  const [isLoading, setIsLoading] = useState(false);
+  const { currentUser, setCurrentUser } = useAuth();
+  const { updateData } = useUpdateData();
 
   useEffect(() => {
     const hideDeleteBtn = () => {
@@ -26,12 +25,11 @@ export const VehiclePhoto = ({ url, index }) => {
   const removePhoto = async () => {
     setIsLoading(true);
 
-    const _currentUser = cloneDeep(currentUser);
-    const _vehiclePhotos = _currentUser?.vehiclePhotos || [];
-    _vehiclePhotos.splice(index, 1);
+    const vehiclePhotos = currentUser?.vehiclePhotos;
+    vehiclePhotos?.splice(index, 1);
 
     const { data, error } = await updateData(`/v1/user/${currentUser._id}`, {
-      vehiclePhotos: _vehiclePhotos,
+      vehiclePhotos,
     });
 
     if (data?.success) {
@@ -45,7 +43,6 @@ export const VehiclePhoto = ({ url, index }) => {
 
   const showDeleteBtn = (e) => {
     e.stopPropagation();
-
     setDeleteBtn(index);
   };
 
@@ -64,9 +61,9 @@ export const VehiclePhoto = ({ url, index }) => {
       />
       <button
         onClick={removePhoto}
-        className={`absolute right-4 top-0 bg-white px-3 py-1 rounded-lg ${
+        className={`absolute right-4 top-0 bg-white px-3 py-1 rounded-lg gap-3 items-center shadow-lg ${
           deleteBtn === index ? "flex" : "hidden"
-        } gap-3 items-center shadow-lg`}
+        }`}
       >
         <span className="text-sm">ডিলিট</span>
         <span className="p-1 rounded-full bg-neutral">{<AiFillDelete />}</span>
