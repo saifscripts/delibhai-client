@@ -5,7 +5,6 @@ import { Login, OTPVerification, Signup } from "./features/Authentication";
 import {
   EditAddressInfo,
   EditContactInfo,
-  EditInfo,
   EditManualLocationInfo,
   EditPersonalInfo,
   EditServiceInfo,
@@ -33,7 +32,6 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/otp-verification" element={<OTPVerification />} />
         <Route path="/profile/:id" element={<Profile />} />
-        <Route path="/profile/edit" element={<EditInfo />} />
         <Route
           path="/profile/edit/personal-info"
           element={<EditPersonalInfo />}
