@@ -1,10 +1,8 @@
 // others
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
-import { CiLocationOn } from "react-icons/ci";
 import ReactPlayer from "react-player/youtube";
 import { useParams } from "react-router-dom";
-import map from "../../../assets/map.png";
 import vehicles from "../../../data/vehicles";
 import PageContainer from "../../../layouts/PageContainer";
 import TopPanel from "../../../layouts/TopPanel";
@@ -25,6 +23,7 @@ import {
   VehicleInfo,
   VehiclePhotos,
 } from "../index";
+import GPSLocationInfo from "./GPSLocationInfo";
 import PersonalInfo from "./PersonalInfo";
 
 export const Profile = () => {
@@ -76,21 +75,7 @@ export const Profile = () => {
         {/* Location Information */}
         {activeCategory === "location" && (
           <>
-            <InfoContainer type="GPS Location" editRoute="/profile/edit">
-              <div className="p-3 flex justify-center items-center gap-2 border border-light rounded-md mb-3 text-medium">
-                <CiLocationOn />
-                <p>
-                  {"Heyako Bazar, Ramgarh Khagrachari Road, Fatikchhari, Chittagong, Bangladesh".slice(
-                    0,
-                    30
-                  ) + " . . ."}
-                </p>
-              </div>
-              <div className="border border-light rounded-md">
-                <img src={map} alt="Map" className="w-full" />
-              </div>
-            </InfoContainer>
-
+            <GPSLocationInfo />
             <ManualLocationInfo userInfo={userInfo} />
           </>
         )}
