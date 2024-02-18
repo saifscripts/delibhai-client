@@ -100,7 +100,7 @@ export const Showcase = ({
             #{id.slice(0, 5)}
           </span>
 
-          <div className="relative bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] pl-4 pr-10 min-[400px]:pr-12 min-[500px]:pr-16 py-3 rounded-full text-xs min-[500px]:text-base h-10 flex items-center">
+          <div className="relative z-10 bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] pl-4 pr-10 min-[400px]:pr-12 min-[500px]:pr-16 py-3 rounded-full text-xs min-[500px]:text-base h-10 flex items-center">
             <span>
               {(vehicleType &&
                 serviceUsage === "ব্যক্তিগত" &&

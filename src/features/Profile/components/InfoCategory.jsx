@@ -13,7 +13,7 @@ export const InfoCategory = ({
   return (
     <div
       onClick={() => setActiveCategory(type)}
-      className={`flex flex-col flex-shrink-0 justify-center items-center w-24 p-1 ${
+      className={`relative z-10 flex flex-col flex-shrink-0 justify-center items-center w-24 p-1 ${
         active && "border-b-2"
       } border-secondary`}
     >

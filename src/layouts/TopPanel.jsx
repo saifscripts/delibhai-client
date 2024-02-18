@@ -1,7 +1,7 @@
-import { BiArrowBack } from 'react-icons/bi';
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logos/logo.svg';
+import { BiArrowBack } from "react-icons/bi";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import logo from "../assets/logos/logo.svg";
 
 export default function TopPanel() {
   const navigate = useNavigate();
@@ -11,9 +11,9 @@ export default function TopPanel() {
   };
 
   return (
-    <div className='container flex justify-between items-center sticky top-0 z-40 h-16 sm:h-24 text-2xl xl:text-4xl bg-white'>
+    <div className="container flex justify-between items-center sticky top-0 z-40 h-16 sm:h-24 text-2xl xl:text-4xl bg-white lg:shadow-sm">
       <BiArrowBack onClick={handleGoBack} />
-      <img src={logo} alt='deliBhai logo' className='w-8 xl:w-12' />
+      <img src={logo} alt="deliBhai logo" className="w-8 xl:w-12" />
       <BsThreeDotsVertical />
     </div>
   );
