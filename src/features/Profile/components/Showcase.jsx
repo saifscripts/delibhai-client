@@ -87,10 +87,8 @@ export const Showcase = ({
       <div className="flex items-center gap-5">
         <Avatar
           className="w-32 min-[400px]:w-40"
-          image={dp}
-          edit
+          image={cropData || dp}
           handleEdit={handleEdit}
-          cropData={cropData}
         />
 
         <div>
