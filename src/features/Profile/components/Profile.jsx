@@ -42,6 +42,7 @@ export const Profile = () => {
         />
 
         <InfoCategories
+          userInfo={userInfo}
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
         />
@@ -66,20 +67,16 @@ export const Profile = () => {
           </InfoContainer>
         ))}
 
-        {/* Vehicle Information */}
         {activeCategory === "vehicleInfo" && (
           <VehiclePhotos userInfo={userInfo} />
         )}
 
-        {/* Location Information */}
         {activeCategory === "locationInfo" && <GPSLocationInfo />}
 
-        {/* Video */}
         {activeCategory === "videoInfo" && (
           <VideoInfo videoURL={userInfo?.videoURL} />
         )}
 
-        {/* Review */}
         {activeCategory === "review" && (
           <>
             <InfoContainer category="রাইডার এক্টিভিটি">
