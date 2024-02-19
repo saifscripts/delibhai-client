@@ -202,8 +202,7 @@ const profileSchema
           icon: marker,
         },
         {
-          dataKey: "manualLocation",
-          dataModifier: (manualLocation) => manualLocation?.station,
+          dataKey: "station",
           label: "স্ট্যাশন",
           icon: station,
         },
