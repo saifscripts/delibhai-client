@@ -56,7 +56,7 @@ export const VehiclePhotos = ({ userInfo }) => {
   const vehiclePhotos = currentUser?.vehiclePhotos || userInfo?.vehiclePhotos;
 
   return (
-    <InfoContainer type="গাড়ির ছবি">
+    <InfoContainer category="গাড়ির ছবি">
       <div className="overflow-y-hidden mb-6">
         <div className="flex gap-2 overflow-x-scroll pb-5 -mb-5">
           {vehiclePhotos?.map((url, index) => (
