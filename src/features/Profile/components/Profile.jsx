@@ -1,7 +1,6 @@
 // others
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
-import ReactPlayer from "react-player/youtube";
 import { useParams } from "react-router-dom";
 import vehicles from "../../../data/vehicles";
 import PageContainer from "../../../layouts/PageContainer";
@@ -18,6 +17,7 @@ import {
   Review,
   Showcase,
   VehiclePhotos,
+  VideoInfo,
 } from "../index";
 import GPSLocationInfo from "./GPSLocationInfo";
 
@@ -75,32 +75,14 @@ export const Profile = () => {
         {activeCategory === "locationInfo" && <GPSLocationInfo />}
 
         {/* Video */}
-        {activeCategory === "video" && (
-          <InfoContainer
-            type="ডিহিরোর অভিব্যক্তি"
-            editRoute="/profile/edit/video"
-          >
-            {userInfo?.videoURL ? (
-              <div className="w-full max-w-lg aspect-[1/1.8] bg-black flex justify-center items-center rounded-lg overflow-hidden">
-                <ReactPlayer
-                  width="100%"
-                  height="100%"
-                  loop
-                  url={userInfo?.videoURL}
-                />
-              </div>
-            ) : (
-              <p className="text-red-400 text-center text-2xl">
-                ভিডিও আপডেট করুন
-              </p>
-            )}
-          </InfoContainer>
+        {activeCategory === "videoInfo" && (
+          <VideoInfo videoURL={userInfo?.videoURL} />
         )}
 
         {/* Review */}
         {activeCategory === "review" && (
           <>
-            <InfoContainer type="রাইডার এক্টিভিটি">
+            <InfoContainer category="রাইডার এক্টিভিটি">
               <div className="flex gap-8 justify-center items-center py-3 border-b border-light">
                 <Achievement
                   title="21K রিভিও"
@@ -112,7 +94,7 @@ export const Profile = () => {
               </div>
             </InfoContainer>
 
-            <InfoContainer type="রেটিং এবং রিভিও">
+            <InfoContainer category="রেটিং এবং রিভিও">
               <div className="grid grid-cols-[1fr_3fr] gap-8 items-center px-2 py-3 border-b border-light">
                 <AverageRating rating="3.7" total="21,000" />
                 <RatingBars percentages={[70, 20, 10, 3, 2]} />

@@ -23,4 +23,5 @@ export { ServiceTime } from "./components/ServiceTime";
 export { Showcase } from "./components/Showcase";
 export { VehiclePhoto } from "./components/VehiclePhoto";
 export { VehiclePhotos } from "./components/VehiclePhotos";
+export { VideoInfo } from "./components/VideoInfo";
 export { RadioInput } from "./components/form/RadioInput";

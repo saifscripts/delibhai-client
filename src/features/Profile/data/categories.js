@@ -10,7 +10,7 @@ const categories = [
   { name: 'vehicleInfo', title: 'বাহনের তথ্য', icon: vehicle, percent: 0 },
   { name: 'serviceInfo', title: 'সেবাদান তথ্য', icon: service, percent: 20 },
   { name: 'locationInfo', title: 'মাই লোকেশন', icon: location, percent: 50 },
-  { name: 'video', title: 'ভিডিও', icon: video, percent: 30 },
+  { name: 'videoInfo', title: 'ভিডিও', icon: video, percent: 30 },
   { name: 'review', title: 'রিভিও', icon: star, percent: 100 },
 ];
 

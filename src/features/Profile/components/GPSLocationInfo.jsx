@@ -4,7 +4,7 @@ import { InfoContainer } from "./InfoContainer";
 
 export default function GPSLocationInfo() {
   return (
-    <InfoContainer type="GPS Location">
+    <InfoContainer category="GPS Location">
       <div className="p-3 flex justify-center items-center gap-2 border border-light rounded-md mb-3 text-medium">
         <CiLocationOn />
         <p>
