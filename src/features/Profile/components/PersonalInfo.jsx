@@ -1,5 +1,5 @@
 // icons
-import convertNumber from "../../../utils/convertNumber";
+import englishToBengaliNumber from "../../../utils/englishToBengaliNumber";
 import nid from "../assets/icons/NID.svg";
 import age from "../assets/icons/age.svg";
 import bloodGroup from "../assets/icons/blood-group.svg";
@@ -28,7 +28,7 @@ const PersonalInfo = ({ userInfo }) => {
       icon: bloodGroup,
     },
     {
-      info: userInfo?.age && `${convertNumber(userInfo?.age)} বছর`,
+      info: userInfo?.age && `${englishToBengaliNumber(userInfo?.age)} বছর`,
       label: "বয়স",
       icon: age,
     },

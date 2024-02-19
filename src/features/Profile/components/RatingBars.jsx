@@ -1,4 +1,4 @@
-import convertNumber from "../../../utils/convertNumber";
+import englishToBengaliNumber from "../../../utils/englishToBengaliNumber";
 
 export const RatingBars = ({ percentages }) => {
   return (
@@ -7,7 +7,7 @@ export const RatingBars = ({ percentages }) => {
         console.log(percentage);
         return (
           <div key={i} className="flex gap-3 items-center">
-            <span className="text-xl">{convertNumber(-i + 5)}</span>
+            <span className="text-xl">{englishToBengaliNumber(-i + 5)}</span>
             <div className="w-full h-[9px] rounded-full bg-light">
               <div
                 style={{
