@@ -6,14 +6,14 @@ export const InfoCategories = ({ activeCategory, setActiveCategory }) => {
   return (
     <div className="overflow-y-hidden mb-6">
       <div className="mt-8 flex gap-2 overflow-x-scroll pb-5 -mb-5">
-        {categories.map(({ type, text, icon, percent }) => (
+        {categories.map(({ name, title, icon, percent }) => (
           <InfoCategory
-            key={type}
-            type={type}
-            text={text}
+            key={name}
+            name={name}
+            title={title}
             icon={icon}
             percent={percent}
-            active={activeCategory === type}
+            active={activeCategory === name}
             setActiveCategory={setActiveCategory}
           />
         ))}

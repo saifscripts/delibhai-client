@@ -6,29 +6,24 @@ import { useParams } from "react-router-dom";
 import vehicles from "../../../data/vehicles";
 import PageContainer from "../../../layouts/PageContainer";
 import TopPanel from "../../../layouts/TopPanel";
+import profileSchema from "../data/profileSchema";
 import useUserInfo from "../hooks/useUserInfo";
 import {
   Achievement,
-  AddressInfo,
   AverageRating,
-  ContactInfo,
+  Field,
   InfoCategories,
   InfoContainer,
-  ManualLocationInfo,
-  OwnerInfo,
   RatingBars,
   Review,
-  ServiceInfo,
   Showcase,
-  VehicleInfo,
   VehiclePhotos,
 } from "../index";
 import GPSLocationInfo from "./GPSLocationInfo";
-import PersonalInfo from "./PersonalInfo";
 
 export const Profile = () => {
   const { id } = useParams();
-  const [activeCategory, setActiveCategory] = useState("general");
+  const [activeCategory, setActiveCategory] = useState("generalInfo");
   const [userInfo] = useUserInfo(id);
 
   return (
@@ -51,34 +46,33 @@ export const Profile = () => {
           setActiveCategory={setActiveCategory}
         />
 
-        {/* General Information */}
-        {activeCategory === "general" && (
-          <>
-            <PersonalInfo userInfo={userInfo} />
-            <ContactInfo userInfo={userInfo} />
-            <AddressInfo userInfo={userInfo} />
-          </>
-        )}
+        {profileSchema[activeCategory]?.map((item) => (
+          <InfoContainer
+            key={item.category}
+            category={item.category}
+            editRoute={item.editRoute}
+          >
+            {item.fields.map(({ dataKey, label, icon, dataModifier }) => {
+              const data = userInfo[dataKey];
+              return (
+                <Field
+                  key={dataKey}
+                  value={dataModifier ? dataModifier(data) : data}
+                  label={label}
+                  icon={icon}
+                />
+              );
+            })}
+          </InfoContainer>
+        ))}
 
         {/* Vehicle Information */}
-        {activeCategory === "vehicle" && (
-          <>
-            <VehicleInfo userInfo={userInfo} />
-            <OwnerInfo userInfo={userInfo} />
-            <VehiclePhotos userInfo={userInfo} />
-          </>
+        {activeCategory === "vehicleInfo" && (
+          <VehiclePhotos userInfo={userInfo} />
         )}
-
-        {/* Service Information */}
-        {activeCategory === "service" && <ServiceInfo userInfo={userInfo} />}
 
         {/* Location Information */}
-        {activeCategory === "location" && (
-          <>
-            <GPSLocationInfo />
-            <ManualLocationInfo userInfo={userInfo} />
-          </>
-        )}
+        {activeCategory === "locationInfo" && <GPSLocationInfo />}
 
         {/* Video */}
         {activeCategory === "video" && (
