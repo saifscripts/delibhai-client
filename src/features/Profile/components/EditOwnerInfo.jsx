@@ -9,7 +9,7 @@ import * as yup from "yup";
 import { useUpdateData } from "../../../api/api";
 import Button from "../../../components/ui/Button";
 import { useAuth } from "../../../contexts/AuthContext";
-import PageContainer from "../../../layouts/PageContainer";
+import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
@@ -93,7 +93,7 @@ const EditOwnerInfo = () => {
         title="গাড়ির মালিকানার তথ্য"
         subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
       />
-      <PageContainer>
+      <MiniContainer>
         <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
           <div className="mt-4 mb-1">
             <label className="font-bold">কোম্পানি/মালিকের নাম</label>
@@ -139,7 +139,7 @@ const EditOwnerInfo = () => {
 
           <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
         </form>
-      </PageContainer>
+      </MiniContainer>
     </>
   );
 };

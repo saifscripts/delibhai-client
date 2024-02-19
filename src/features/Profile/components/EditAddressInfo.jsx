@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useUpdateData } from "../../../api/api";
 import Button from "../../../components/ui/Button";
 import { useAuth } from "../../../contexts/AuthContext";
-import PageContainer from "../../../layouts/PageContainer";
+import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
 import getSelectedAddress from "../utils/getSelectedAddress";
@@ -74,7 +74,7 @@ const EditAddressInfo = () => {
         title="ঠিকানা"
         subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
       />
-      <PageContainer>
+      <MiniContainer>
         <form onSubmit={handleSubmit} className="mb-5">
           <p className="font-bold mt-4 mb-3 py-3 border-b border-light">
             বর্তমান ঠিকানা
@@ -106,7 +106,7 @@ const EditAddressInfo = () => {
 
           <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
         </form>
-      </PageContainer>
+      </MiniContainer>
     </>
   );
 };

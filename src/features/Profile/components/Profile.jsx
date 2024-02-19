@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import vehicles from "../../../data/vehicles";
-import PageContainer from "../../../layouts/PageContainer";
+import MiniContainer from "../../../layouts/MiniContainer";
 import TopPanel from "../../../layouts/TopPanel";
 import profileSchema from "../data/profileSchema";
 import useUserInfo from "../hooks/useUserInfo";
@@ -29,7 +29,7 @@ export const Profile = () => {
   return (
     <>
       <TopPanel />
-      <PageContainer>
+      <MiniContainer>
         <Showcase
           id={id}
           name={userInfo?.name}
@@ -117,7 +117,7 @@ export const Profile = () => {
             </InfoContainer>
           </>
         )}
-      </PageContainer>
+      </MiniContainer>
     </>
   );
 };

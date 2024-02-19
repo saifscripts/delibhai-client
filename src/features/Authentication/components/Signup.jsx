@@ -6,7 +6,7 @@ import isStrongPassword from "validator/lib/isStrongPassword";
 import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
 import { useAuth } from "../../../contexts/AuthContext";
-import PageContainer from "../../../layouts/PageContainer";
+import Container from "../../../layouts/Container";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
@@ -106,7 +106,7 @@ function Signup() {
         subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
       />
 
-      <PageContainer>
+      <Container>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-4 mb-1">
             <label className="font-bold">পুরো নাম</label>
@@ -186,7 +186,7 @@ function Signup() {
 
           <Submit disabled={isLoading} value="ওটিপি কোড পাঠান" />
         </form>
-      </PageContainer>
+      </Container>
     </>
   );
 }
