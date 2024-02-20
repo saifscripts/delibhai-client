@@ -25,7 +25,7 @@ const setCanvasPreview = (image, canvas, crop) => {
 
     ctx.restore();
 
-    // return canvas.toDataURL();
+    return canvas.toDataURL();
 
 }
 
