@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useRef } from "react";
 import ReactCrop, {
   centerCrop,
@@ -63,7 +64,7 @@ export default function ResizeModal({
                 onLoad={onImageLoad}
               />
             </ReactCrop>
-            <div>
+            <div className="space-x-3">
               <button
                 className="bg-primary px-3 py-1 rounded-md text-white"
                 onClick={() => setResizeModal(false)}
@@ -72,7 +73,7 @@ export default function ResizeModal({
               </button>
               <button
                 className="bg-primary px-3 py-1 rounded-md text-white"
-                onClick={() => {
+                onClick={async () => {
                   setCanvasPreview(
                     imageRef.current,
                     canvasRef.current,
@@ -83,8 +84,30 @@ export default function ResizeModal({
                     )
                   );
                   const dataURL = canvasRef.current.toDataURL();
+
+                  let response1 = axios.post(
+                    `https://api.imgbb.com/1/upload?key=${
+                      import.meta.env.VITE_IMGBB_API_KEY
+                    }`,
+                    {
+                      image: dataURL,
+                    }
+                  );
+
+                  let response2 = axios.post(
+                    `https://api.imgbb.com/1/upload?key=${
+                      import.meta.env.VITE_IMGBB_API_KEY
+                    }`,
+                    {
+                      image: imageSrc,
+                    }
+                  );
                   setPhotoURL(dataURL);
                   setResizeModal(false);
+
+                  const response = await Promise.all([response1, response2]);
+
+                  console.log(response);
                 }}
               >
                 Crop Image
