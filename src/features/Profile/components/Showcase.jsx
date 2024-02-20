@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-import "cropperjs/dist/cropper.css";
 import ProfileAvatar from "./ProfileAvatar";
 
 export const Showcase = ({

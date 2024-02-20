@@ -17,7 +17,6 @@ export { InfoContainer } from "./components/InfoContainer";
 export { Profile } from "./components/Profile";
 export { RatingBars } from "./components/RatingBars";
 export { RatingStars } from "./components/RatingStars";
-export { ResizeAvatar } from "./components/ResizeAvatar";
 export { Review } from "./components/Review";
 export { ServiceTime } from "./components/ServiceTime";
 export { Showcase } from "./components/Showcase";

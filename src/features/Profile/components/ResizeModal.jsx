@@ -47,7 +47,10 @@ export default function ResizeModal({
               keepSelection
               aspect={ASPECT_RATIO}
               minWidth={MIN_DIMENSION}
-              onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
+              onChange={(pixelCrop, percentCrop) => {
+                console.log(percentCrop);
+                setCrop(percentCrop);
+              }}
             >
               <img
                 ref={imageRef}
