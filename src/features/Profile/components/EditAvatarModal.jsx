@@ -3,16 +3,18 @@ import { AiFillCamera } from "react-icons/ai";
 import { GiResize } from "react-icons/gi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "react-image-crop/dist/ReactCrop.css";
+import { useAuth } from "../../../contexts/AuthContext";
 import { EditOption } from "./EditOption";
 import ResizeModal from "./ResizeModal";
 
 const MIN_DIMENSION = 150;
 
-export const EditAvatarModal = ({ modalOpen, closeModal, setPhotoURL }) => {
+export const EditAvatarModal = ({ modalOpen, closeModal }) => {
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState();
   const [resizeModal, setResizeModal] = useState(false);
   const [error, setError] = useState("");
+  const { currentUser } = useAuth();
 
   const onSelectFile = (e) => {
     setCrop(null);
@@ -49,7 +51,6 @@ export const EditAvatarModal = ({ modalOpen, closeModal, setPhotoURL }) => {
           crop={crop}
           setCrop={setCrop}
           setResizeModal={setResizeModal}
-          setPhotoURL={setPhotoURL}
           MIN_DIMENSION={MIN_DIMENSION}
         />
       )}
@@ -72,6 +73,8 @@ export const EditAvatarModal = ({ modalOpen, closeModal, setPhotoURL }) => {
             text="ছবি রিসাইজ"
             type="button"
             onClick={() => {
+              setImageSrc(currentUser?.avatarSrcURL);
+              setCrop(currentUser?.avatarCropData);
               closeModal();
               setResizeModal(true);
             }}

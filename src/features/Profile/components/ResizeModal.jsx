@@ -5,6 +5,8 @@ import ReactCrop, {
   convertToPixelCrop,
   makeAspectCrop,
 } from "react-image-crop";
+import { useUpdateData } from "../../../api/api";
+import { useAuth } from "../../../contexts/AuthContext";
 import base64ToFormData from "../../../utils/base64ToFormData";
 import setCanvasPreview from "../utils/setCanvasPreview";
 
@@ -15,12 +17,13 @@ export default function ResizeModal({
   crop,
   setCrop,
   setResizeModal,
-  setPhotoURL,
   MIN_DIMENSION,
 }) {
   const imageRef = useRef(null);
   const canvasRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { updateData } = useUpdateData();
+  const { currentUser, setCurrentUser } = useAuth();
 
   const onImageLoad = (e) => {
     const { width, height } = e.currentTarget;
@@ -42,13 +45,11 @@ export default function ResizeModal({
   const handleCrop = async () => {
     setIsLoading(true);
 
-    setCanvasPreview(
+    const dataURL = setCanvasPreview(
       imageRef.current,
       canvasRef.current,
       convertToPixelCrop(crop, imageRef.current.width, imageRef.current.height)
     );
-
-    const dataURL = canvasRef.current.toDataURL();
 
     let response1 = axios.post(
       `https://api.imgbb.com/1/upload?key=${
@@ -66,13 +67,25 @@ export default function ResizeModal({
 
     const response = await Promise.all([response1, response2]);
 
-    if (response[0].status === 200) {
-      setPhotoURL(dataURL);
+    if (response[0].status !== 200) return;
+
+    const avatarData = {
+      avatarURL: response[0]?.data?.data?.url,
+      avatarSrcURL: response[1]?.data?.data?.url,
+      avatarCropData: crop,
+    };
+
+    // Update data
+    const { data } = await updateData(
+      `/v1/user/${currentUser._id}`,
+      avatarData
+    );
+
+    if (data?.success) {
+      setCurrentUser(data.data);
       setResizeModal(false);
       setIsLoading(false);
     }
-
-    console.log(response);
   };
 
   return (

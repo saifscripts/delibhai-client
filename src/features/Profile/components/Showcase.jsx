@@ -6,11 +6,12 @@ export const Showcase = ({
   vehicleType,
   vehicleImage,
   serviceUsage,
+  avatarURL,
 }) => {
   return (
     <>
       <div className="flex items-center gap-5">
-        <ProfileAvatar />
+        <ProfileAvatar avatarURL={avatarURL} />
 
         <div>
           <h3 className="text-2xl mb-1">{name}</h3>

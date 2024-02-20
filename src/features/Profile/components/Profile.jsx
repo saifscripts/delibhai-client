@@ -33,7 +33,7 @@ export const Profile = () => {
         <Showcase
           id={id}
           name={userInfo?.name}
-          image={userInfo?.image}
+          avatarURL={userInfo?.avatarURL}
           vehicleType={userInfo?.vehicleType}
           vehicleImage={
             vehicles.find(({ title }) => title === userInfo?.vehicleType)?.icon
