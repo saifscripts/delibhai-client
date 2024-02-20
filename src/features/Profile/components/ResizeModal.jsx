@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import ReactCrop, {
   centerCrop,
   convertToPixelCrop,
   makeAspectCrop,
 } from "react-image-crop";
+import base64ToFormData from "../../../utils/base64ToFormData";
 import setCanvasPreview from "../utils/setCanvasPreview";
 
 const ASPECT_RATIO = 1;
@@ -19,6 +20,7 @@ export default function ResizeModal({
 }) {
   const imageRef = useRef(null);
   const canvasRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onImageLoad = (e) => {
     const { width, height } = e.currentTarget;
@@ -37,6 +39,42 @@ export default function ResizeModal({
     setCrop(crop || centeredCrop);
   };
 
+  const handleCrop = async () => {
+    setIsLoading(true);
+
+    setCanvasPreview(
+      imageRef.current,
+      canvasRef.current,
+      convertToPixelCrop(crop, imageRef.current.width, imageRef.current.height)
+    );
+
+    const dataURL = canvasRef.current.toDataURL();
+
+    let response1 = axios.post(
+      `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_IMGBB_API_KEY
+      }`,
+      base64ToFormData(dataURL)
+    );
+
+    let response2 = axios.post(
+      `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_IMGBB_API_KEY
+      }`,
+      base64ToFormData(imageSrc)
+    );
+
+    const response = await Promise.all([response1, response2]);
+
+    if (response[0].status === 200) {
+      setPhotoURL(dataURL);
+      setResizeModal(false);
+      setIsLoading(false);
+    }
+
+    console.log(response);
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-20">
       <div className="mx-4 bg-white p-4 rounded-md">
@@ -48,10 +86,7 @@ export default function ResizeModal({
               keepSelection
               aspect={ASPECT_RATIO}
               minWidth={MIN_DIMENSION}
-              onChange={(pixelCrop, percentCrop) => {
-                console.log(percentCrop);
-                setCrop(percentCrop);
-              }}
+              onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
             >
               <img
                 ref={imageRef}
@@ -72,43 +107,11 @@ export default function ResizeModal({
                 Cancel
               </button>
               <button
-                className="bg-primary px-3 py-1 rounded-md text-white"
-                onClick={async () => {
-                  setCanvasPreview(
-                    imageRef.current,
-                    canvasRef.current,
-                    convertToPixelCrop(
-                      crop,
-                      imageRef.current.width,
-                      imageRef.current.height
-                    )
-                  );
-                  const dataURL = canvasRef.current.toDataURL();
-
-                  let response1 = axios.post(
-                    `https://api.imgbb.com/1/upload?key=${
-                      import.meta.env.VITE_IMGBB_API_KEY
-                    }`,
-                    {
-                      image: dataURL,
-                    }
-                  );
-
-                  let response2 = axios.post(
-                    `https://api.imgbb.com/1/upload?key=${
-                      import.meta.env.VITE_IMGBB_API_KEY
-                    }`,
-                    {
-                      image: imageSrc,
-                    }
-                  );
-                  setPhotoURL(dataURL);
-                  setResizeModal(false);
-
-                  const response = await Promise.all([response1, response2]);
-
-                  console.log(response);
-                }}
+                className={`bg-primary px-3 py-1 rounded-md text-white ${
+                  isLoading && "bg-gray-500"
+                }`}
+                onClick={handleCrop}
+                disabled={isLoading}
               >
                 Crop Image
               </button>
