@@ -3,7 +3,7 @@ export { Address } from "./components/Address";
 export { Avatar } from "./components/Avatar";
 export { AverageRating } from "./components/AverageRating";
 export { EditAddressInfo } from "./components/EditAddressInfo";
-export { EditAvatar } from "./components/EditAvatar";
+export { EditAvatarModal } from "./components/EditAvatarModal";
 export { EditContactInfo } from "./components/EditContactInfo";
 export { EditManualLocationInfo } from "./components/EditManualLocationInfo";
 export { EditOption } from "./components/EditOption";

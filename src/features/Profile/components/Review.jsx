@@ -7,7 +7,7 @@ export const Review = ({ image, name, rating, date, review }) => {
     <div className="">
       <div className="flex justify-between items-center">
         <div className="flex gap-5 items-center">
-          <Avatar className="w-12" image={image} />
+          <Avatar className="w-12" src={image} />
           <p className="text-lg">{name}</p>
         </div>
         {<BsThreeDotsVertical />}

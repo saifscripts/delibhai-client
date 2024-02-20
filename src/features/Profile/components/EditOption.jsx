@@ -1,4 +1,4 @@
-export const EditOption = ({ icon, text, type, onChange, onClick }) => {
+export const EditOption = ({ icon, text, type, ...restProps }) => {
   return (
     <label
       className="flex gap-3 items-center hover:bg-[#ccc] active:bg-[#ccc] hover:cursor-pointer px-7 py-2"
@@ -11,9 +11,8 @@ export const EditOption = ({ icon, text, type, onChange, onClick }) => {
         id={text}
         className="text-xl hidden"
         type={type}
-        onChange={onChange}
-        onClick={onClick}
         accept={type === "file" ? "image/png, image/gif, image/jpeg" : ""}
+        {...restProps}
       />
       {text}
     </label>
