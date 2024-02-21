@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
-import vehicles from "../../../data/vehicles";
 import MiniContainer from "../../../layouts/MiniContainer";
 import TopPanel from "../../../layouts/TopPanel";
 import profileSchema from "../data/profileSchema";
@@ -30,16 +29,7 @@ export const Profile = () => {
     <>
       <TopPanel />
       <MiniContainer>
-        <Showcase
-          id={id}
-          name={userInfo?.name}
-          avatarURL={userInfo?.avatarURL}
-          vehicleType={userInfo?.vehicleType}
-          vehicleImage={
-            vehicles.find(({ title }) => title === userInfo?.vehicleType)?.icon
-          }
-          serviceUsage={userInfo?.serviceUsage}
-        />
+        <Showcase userInfo={userInfo} />
 
         <InfoCategories
           userInfo={userInfo}
