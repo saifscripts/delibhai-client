@@ -49,10 +49,18 @@ export const Profile = () => {
           >
             {item.fields.map(({ dataKey, label, icon, dataModifier }) => {
               const data = userInfo[dataKey];
+              let fieldValue;
+
+              if (data) {
+                fieldValue = dataModifier ? dataModifier(data) : data;
+              } else {
+                fieldValue = undefined;
+              }
+
               return (
                 <Field
                   key={dataKey}
-                  value={dataModifier ? dataModifier(data) : data}
+                  value={fieldValue}
                   label={label}
                   icon={icon}
                 />
