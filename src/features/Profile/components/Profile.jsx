@@ -23,7 +23,11 @@ import GPSLocationInfo from "./GPSLocationInfo";
 export const Profile = () => {
   const { id } = useParams();
   const [activeCategory, setActiveCategory] = useState("generalInfo");
-  const [userInfo] = useUserInfo(id);
+  const { isLoading, userInfo } = useUserInfo(id);
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <>
