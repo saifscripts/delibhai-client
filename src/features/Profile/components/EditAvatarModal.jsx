@@ -10,7 +10,7 @@ import ResizeModal from "./ResizeModal";
 
 const MIN_DIMENSION = 150;
 
-export const EditAvatarModal = ({ editModal, closeModal }) => {
+export const EditAvatarModal = ({ editModal, setEditModal }) => {
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState();
   const [resizeModal, setResizeModal] = useState(false);
@@ -37,17 +37,23 @@ export const EditAvatarModal = ({ editModal, closeModal }) => {
               backgroundColor: "#efef8d",
             },
           });
-
           setResizeModal(false);
           return setImageSrc("");
         }
       });
 
       setImageSrc(imageURL);
-      closeModal();
+      setEditModal(false);
       setResizeModal(true);
     });
     reader.readAsDataURL(file);
+  };
+
+  const onResize = () => {
+    setImageSrc(currentUser?.avatarSrcURL);
+    setCrop(currentUser?.avatarCropData);
+    setEditModal(false);
+    setResizeModal(true);
   };
 
   return (
@@ -62,12 +68,15 @@ export const EditAvatarModal = ({ editModal, closeModal }) => {
         />
       )}
 
+      {/* Dark overlay */}
       <div
-        onClick={closeModal}
-        className={`top-0 bottom-0 left-0 right-0 bg-black  z-40  transition-opacity ${
+        onClick={() => setEditModal(false)}
+        className={`inset-0 bg-black  z-40  transition-opacity ${
           editModal ? "fixed opacity-40" : "hidden opacity-0"
         }`}
       ></div>
+
+      {/* Panel sliding from the bottom */}
       <div
         className={`fixed bottom-0 left-0 right-0 bg-white z-50 rounded-t-xl transition-transform ${
           editModal ? "translate-y-0" : "translate-y-full"
@@ -79,12 +88,7 @@ export const EditAvatarModal = ({ editModal, closeModal }) => {
             icon={<GiResize />}
             text="ছবি রিসাইজ"
             type="button"
-            onClick={() => {
-              setImageSrc(currentUser?.avatarSrcURL);
-              setCrop(currentUser?.avatarCropData);
-              closeModal();
-              setResizeModal(true);
-            }}
+            onClick={onResize}
           />
           <EditOption
             icon={<AiFillCamera />}

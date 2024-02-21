@@ -19,10 +19,7 @@ export default function ProfileAvatar({ avatarURL }) {
 
   return (
     <>
-      <EditAvatarModal
-        editModal={editModal}
-        closeModal={() => setEditModal(false)}
-      />
+      <EditAvatarModal editModal={editModal} setEditModal={setEditModal} />
 
       <div className="relative">
         <Avatar className="w-32 min-[400px]:w-40" src={avatarURL} />

@@ -120,8 +120,8 @@ export default function ResizeModal({
                 Cancel
               </button>
               <button
-                className={`bg-primary px-3 py-1 rounded-md text-white ${
-                  isLoading && "bg-gray-500"
+                className={`px-3 py-1 rounded-md text-white ${
+                  isLoading ? "bg-gray-500" : "bg-primary"
                 }`}
                 onClick={handleCrop}
                 disabled={isLoading}
