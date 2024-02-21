@@ -9,7 +9,7 @@ import ResizeModal from "./ResizeModal";
 
 const MIN_DIMENSION = 150;
 
-export const EditAvatarModal = ({ modalOpen, closeModal }) => {
+export const EditAvatarModal = ({ editModal, closeModal }) => {
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState();
   const [resizeModal, setResizeModal] = useState(false);
@@ -58,12 +58,12 @@ export const EditAvatarModal = ({ modalOpen, closeModal }) => {
       <div
         onClick={closeModal}
         className={`top-0 bottom-0 left-0 right-0 bg-black  z-40  transition-opacity ${
-          modalOpen ? "fixed opacity-40" : "hidden opacity-0"
+          editModal ? "fixed opacity-40" : "hidden opacity-0"
         }`}
       ></div>
       <div
         className={`fixed bottom-0 left-0 right-0 bg-white z-50 rounded-t-xl transition-transform ${
-          modalOpen ? "translate-y-0" : "translate-y-full"
+          editModal ? "translate-y-0" : "translate-y-full"
         }`}
       >
         <div className={`w-10 h-1 bg-accent rounded-full mx-auto mt-2`}></div>
