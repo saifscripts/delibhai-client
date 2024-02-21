@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { AiFillCamera } from "react-icons/ai";
 import { GiResize } from "react-icons/gi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
@@ -13,7 +14,6 @@ export const EditAvatarModal = ({ editModal, closeModal }) => {
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState();
   const [resizeModal, setResizeModal] = useState(false);
-  const [error, setError] = useState("");
   const { currentUser } = useAuth();
 
   const onSelectFile = (e) => {
@@ -28,10 +28,17 @@ export const EditAvatarModal = ({ editModal, closeModal }) => {
       imageElement.src = imageURL;
 
       imageElement.addEventListener("load", (e) => {
-        if (error) setError("");
         const { naturalWidth, naturalHeight } = e.currentTarget;
         if (naturalWidth < MIN_DIMENSION || naturalHeight < MIN_DIMENSION) {
-          setError("Image must be at least 150 x 150 pixels");
+          toast.error("Image must be at least 150 x 150 pixels", {
+            duration: 4000,
+            position: "top-center",
+            style: {
+              backgroundColor: "#efef8d",
+            },
+          });
+
+          setResizeModal(false);
           return setImageSrc("");
         }
       });
