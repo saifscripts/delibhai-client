@@ -12,7 +12,7 @@ export const Showcase = ({ userInfo }) => {
         <ProfileAvatar avatarURL={userInfo?.avatarURL} />
 
         <div>
-          <h3 className="text-2xl mb-1">{name}</h3>
+          <h3 className="text-2xl mb-1">{userInfo?.name}</h3>
 
           <span className="text-gray-500 border border-grey-500 rounded-lg px-3 font-inter mb-4 inline-block">
             #{userInfo?._id?.slice(0, 5)}
