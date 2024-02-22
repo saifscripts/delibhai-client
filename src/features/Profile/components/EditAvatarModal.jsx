@@ -85,23 +85,27 @@ export const EditAvatarModal = ({ editModal, setEditModal }) => {
         <div className={`w-10 h-1 bg-accent rounded-full mx-auto mt-2`}></div>
         <div className="py-7 flex flex-col gap-2">
           <EditOption
-            icon={<GiResize />}
-            text="ছবি রিসাইজ"
-            type="button"
-            onClick={onResize}
-          />
-          <EditOption
             icon={<AiFillCamera />}
             text="ছবি আপলোড"
             type="file"
             onChange={onSelectFile}
             onClick={(e) => (e.target.value = null)}
           />
-          <EditOption
-            icon={<RiDeleteBin5Fill />}
-            text="ছবি ডিলিট করুন"
-            type="button"
-          />
+          {currentUser?.avatarURL && (
+            <>
+              <EditOption
+                icon={<GiResize />}
+                text="ছবি রিসাইজ"
+                type="button"
+                onClick={onResize}
+              />
+              <EditOption
+                icon={<RiDeleteBin5Fill />}
+                text="ছবি ডিলিট করুন"
+                type="button"
+              />
+            </>
+          )}
         </div>
       </div>
     </>
