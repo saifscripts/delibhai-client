@@ -20,6 +20,7 @@ export const EditAvatarModal = ({ editModal, setEditModal }) => {
     setCrop(null);
     const file = e.target.files?.[0];
     if (!file) return;
+    setEditModal(false);
 
     const reader = new FileReader();
     reader.addEventListener("load", () => {
@@ -43,7 +44,6 @@ export const EditAvatarModal = ({ editModal, setEditModal }) => {
       });
 
       setImageSrc(imageURL);
-      setEditModal(false);
       setResizeModal(true);
     });
     reader.readAsDataURL(file);

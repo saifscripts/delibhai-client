@@ -8,7 +8,7 @@ import ReactCrop, {
 import { useUpdateData } from "../../../api/api";
 import { useAuth } from "../../../contexts/AuthContext";
 import base64ToFormData from "../../../utils/base64ToFormData";
-import setCanvasPreview from "../utils/setCanvasPreview";
+import getCroppedData from "../utils/getCroppedData";
 
 const ASPECT_RATIO = 1;
 
@@ -20,12 +20,13 @@ export default function ResizeModal({
   MIN_DIMENSION,
 }) {
   const imageRef = useRef(null);
-  const canvasRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const { updateData } = useUpdateData();
   const { currentUser, setCurrentUser } = useAuth();
 
   const onImageLoad = (e) => {
+    if (crop) return;
+
     const { width, height } = e.currentTarget;
     const cropWidthInPercent = (MIN_DIMENSION / width) * 100;
 
@@ -38,34 +39,36 @@ export default function ResizeModal({
       width,
       height
     );
+
     const centeredCrop = centerCrop(_crop, width, height);
-    setCrop(crop || centeredCrop);
+    setCrop(centeredCrop);
   };
 
   const handleCrop = async () => {
-    setIsLoading(true);
-
-    const dataURL = setCanvasPreview(
+    const dataURL = getCroppedData(
       imageRef.current,
-      canvasRef.current,
       convertToPixelCrop(crop, imageRef.current.width, imageRef.current.height)
     );
 
-    let response1 = axios.post(
+    const promises = [];
+
+    promises[0] = axios.post(
       `https://api.imgbb.com/1/upload?key=${
         import.meta.env.VITE_IMGBB_API_KEY
       }`,
       base64ToFormData(dataURL)
     );
 
-    let response2 = axios.post(
-      `https://api.imgbb.com/1/upload?key=${
-        import.meta.env.VITE_IMGBB_API_KEY
-      }`,
-      base64ToFormData(imageSrc)
-    );
+    if (imageSrc.startsWith("data:image/")) {
+      promises[1] = axios.post(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_API_KEY
+        }`,
+        base64ToFormData(imageSrc)
+      );
+    }
 
-    const response = await Promise.all([response1, response2]);
+    const response = await Promise.all(promises);
 
     if (response[0].status !== 200) return;
 
@@ -75,7 +78,6 @@ export default function ResizeModal({
       avatarCropData: crop,
     };
 
-    // Update data
     const { data } = await updateData(
       `/v1/user/${currentUser._id}`,
       avatarData
@@ -120,27 +122,18 @@ export default function ResizeModal({
                 Cancel
               </button>
               <button
+                disabled={isLoading}
                 className={`px-3 py-1 rounded-md text-white ${
                   isLoading ? "bg-gray-500" : "bg-primary"
                 }`}
-                onClick={handleCrop}
-                disabled={isLoading}
+                onClick={() => {
+                  setIsLoading(true);
+                  handleCrop();
+                }}
               >
                 Crop Image
               </button>
             </div>
-            {crop && (
-              <canvas
-                ref={canvasRef}
-                style={{
-                  display: "none",
-                  border: "1px solid black",
-                  objectFit: "contain",
-                  width: 200,
-                  height: 200,
-                }}
-              />
-            )}
           </div>
         )}
       </div>
