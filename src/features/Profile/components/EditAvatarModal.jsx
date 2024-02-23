@@ -4,6 +4,7 @@ import { AiFillCamera } from "react-icons/ai";
 import { GiResize } from "react-icons/gi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "react-image-crop/dist/ReactCrop.css";
+import { useUpdateData } from "../../../api/api";
 import { useAuth } from "../../../contexts/AuthContext";
 import { EditOption } from "./EditOption";
 import ResizeModal from "./ResizeModal";
@@ -14,7 +15,8 @@ export const EditAvatarModal = ({ editModal, setEditModal }) => {
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState();
   const [resizeModal, setResizeModal] = useState(false);
-  const { currentUser } = useAuth();
+  const { currentUser, setCurrentUser } = useAuth();
+  const { updateData } = useUpdateData();
 
   const onSelectFile = (e) => {
     setCrop(null);
@@ -54,6 +56,20 @@ export const EditAvatarModal = ({ editModal, setEditModal }) => {
     setCrop(currentUser?.avatarCropData);
     setEditModal(false);
     setResizeModal(true);
+  };
+
+  const onDelete = async () => {
+    const fields = { avatarURL: 1, avatarSrcURL: 1, avatarCropData: 1 };
+
+    const { data } = await updateData(
+      `/v1/user/remove-fields/${currentUser._id}`,
+      fields
+    );
+
+    if (data?.success) {
+      setCurrentUser(data.data);
+      setEditModal(false);
+    }
   };
 
   return (
@@ -103,6 +119,7 @@ export const EditAvatarModal = ({ editModal, setEditModal }) => {
                 icon={<RiDeleteBin5Fill />}
                 text="ছবি ডিলিট করুন"
                 type="button"
+                onClick={onDelete}
               />
             </>
           )}
