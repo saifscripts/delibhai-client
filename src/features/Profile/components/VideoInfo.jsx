@@ -1,11 +1,14 @@
 import ReactPlayer from "react-player";
+import { useAuth } from "../../../contexts/AuthContext";
 import { InfoContainer } from "./InfoContainer";
 
-export function VideoInfo({ videoURL }) {
+export function VideoInfo({ userId, videoURL }) {
+  const { currentUser } = useAuth();
+
   return (
     <InfoContainer
       category="ডিহিরোর অভিব্যক্তি"
-      editRoute="/profile/edit/video"
+      editRoute={userId === currentUser?._id && "/profile/edit/video"}
     >
       {videoURL ? (
         <div className="w-full bg-black flex justify-center items-center rounded-lg overflow-hidden">

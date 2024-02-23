@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../../../contexts/AuthContext";
 import MiniContainer from "../../../layouts/MiniContainer";
 import TopPanel from "../../../layouts/TopPanel";
 import profileSchema from "../data/profileSchema";
@@ -24,6 +25,7 @@ export const Profile = () => {
   const { id } = useParams();
   const [activeCategory, setActiveCategory] = useState("generalInfo");
   const { isLoading, userInfo } = useUserInfo(id);
+  const { currentUser } = useAuth();
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -45,7 +47,7 @@ export const Profile = () => {
           <InfoContainer
             key={item.category}
             category={item.category}
-            editRoute={item.editRoute}
+            editRoute={id === currentUser?._id && item.editRoute}
           >
             {item.fields.map(({ dataKey, label, icon, dataModifier }) => {
               const data = userInfo[dataKey];
@@ -76,7 +78,7 @@ export const Profile = () => {
         {activeCategory === "locationInfo" && <GPSLocationInfo />}
 
         {activeCategory === "videoInfo" && (
-          <VideoInfo videoURL={userInfo?.videoURL} />
+          <VideoInfo userId={id} videoURL={userInfo?.videoURL} />
         )}
 
         {activeCategory === "review" && (
