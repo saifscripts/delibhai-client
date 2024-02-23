@@ -49,25 +49,33 @@ export const Profile = () => {
             category={item.category}
             editRoute={id === currentUser?._id && item.editRoute}
           >
-            {item.fields.map(({ dataKey, label, icon, dataModifier }) => {
-              const data = userInfo[dataKey];
-              let fieldValue;
+            {item.fields.map(
+              ({ dataKey, label, icon, dataModifier, isPrivate }) => {
+                const data = userInfo[dataKey];
+                let fieldValue;
 
-              if (data) {
-                fieldValue = dataModifier ? dataModifier(data) : data;
-              } else {
-                fieldValue = undefined;
+                if (data) {
+                  fieldValue = dataModifier ? dataModifier(data) : data;
+                } else {
+                  fieldValue = undefined;
+                }
+
+                const hidden =
+                  (isPrivate && id !== currentUser?._id) ||
+                  (!fieldValue && id !== currentUser?._id);
+
+                return (
+                  !hidden && (
+                    <Field
+                      key={dataKey}
+                      value={fieldValue}
+                      label={label}
+                      icon={icon}
+                    />
+                  )
+                );
               }
-
-              return (
-                <Field
-                  key={dataKey}
-                  value={fieldValue}
-                  label={label}
-                  icon={icon}
-                />
-              );
-            })}
+            )}
           </InfoContainer>
         ))}
 

@@ -55,6 +55,7 @@ const profileSchema
           dataKey: "nid",
           label: "জন্মনিবন্ধন/NID নম্বর",
           icon: nid,
+          isPrivate: true
         },
       ],
     },
