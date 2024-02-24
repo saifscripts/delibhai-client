@@ -60,12 +60,11 @@ export const Profile = () => {
                   fieldValue = undefined;
                 }
 
-                const hidden =
-                  (isPrivate && id !== currentUser?._id) ||
-                  (!fieldValue && id !== currentUser?._id);
+                const isHidden =
+                  (isPrivate || !fieldValue) && id !== currentUser?._id;
 
                 return (
-                  !hidden && (
+                  !isHidden && (
                     <Field
                       key={dataKey}
                       value={fieldValue}
