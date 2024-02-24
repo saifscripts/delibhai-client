@@ -60,7 +60,12 @@ export const VehiclePhotos = ({ userInfo }) => {
       <div className="overflow-y-hidden mb-6">
         <div className="flex gap-2 overflow-x-scroll pb-5 -mb-5">
           {vehiclePhotos?.map((url, index) => (
-            <VehiclePhoto url={url} key={url} index={index} />
+            <VehiclePhoto
+              url={url}
+              key={url}
+              index={index}
+              userId={userInfo?._id}
+            />
           ))}
           {vehiclePhotos?.length < 4 && userInfo?._id === currentUser?._id && (
             <form

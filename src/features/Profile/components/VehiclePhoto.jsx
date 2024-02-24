@@ -4,7 +4,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { useUpdateData } from "../../../api/api";
 import { useAuth } from "../../../contexts/AuthContext";
 
-export const VehiclePhoto = ({ url, index }) => {
+export const VehiclePhoto = ({ url, index, userId }) => {
   const [deleteBtn, setDeleteBtn] = useState(-1);
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser, setCurrentUser } = useAuth();
@@ -46,19 +46,8 @@ export const VehiclePhoto = ({ url, index }) => {
     setDeleteBtn(index);
   };
 
-  return (
-    <div
-      style={{
-        backgroundImage: `url(${url})`,
-      }}
-      className={`relative flex flex-col flex-shrink-0 justify-center items-center w-28 aspect-square p-1 bg-center bg-cover bg-no-repeat rounded-lg overflow-hidden ${
-        isLoading && "opacity-30"
-      }`}
-    >
-      <BsThreeDotsVertical
-        className="absolute right-0 top-0"
-        onClick={showDeleteBtn}
-      />
+  const DeleteButton = () => {
+    return (
       <button
         onClick={removePhoto}
         className={`absolute right-4 top-0 bg-white px-3 py-1 rounded-lg gap-3 items-center shadow-lg ${
@@ -68,6 +57,25 @@ export const VehiclePhoto = ({ url, index }) => {
         <span className="text-sm">ডিলিট</span>
         <span className="p-1 rounded-full bg-neutral">{<AiFillDelete />}</span>
       </button>
+    );
+  };
+
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${url})`,
+      }}
+      className={`relative flex flex-col flex-shrink-0 justify-center items-center w-28 aspect-square p-1 bg-center bg-cover bg-no-repeat rounded-lg overflow-hidden hover:shadow-xl ${
+        isLoading && "opacity-30"
+      }`}
+    >
+      <DeleteButton />
+      {userId === currentUser?._id && (
+        <BsThreeDotsVertical
+          className="absolute right-0 top-0"
+          onClick={showDeleteBtn}
+        />
+      )}
     </div>
   );
 };
