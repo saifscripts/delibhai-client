@@ -53,13 +53,11 @@ export const VehiclePhotos = ({ userInfo }) => {
     setIsLoading(false);
   };
 
-  const vehiclePhotos = currentUser?.vehiclePhotos || userInfo?.vehiclePhotos;
-
   return (
     <InfoContainer category="গাড়ির ছবি">
       <div className="overflow-y-hidden mb-6">
         <div className="flex gap-2 overflow-x-scroll pb-5 -mb-5">
-          {vehiclePhotos?.map((url, index) => (
+          {userInfo?.vehiclePhotos?.map((url, index) => (
             <VehiclePhoto
               url={url}
               key={url}
@@ -67,23 +65,24 @@ export const VehiclePhotos = ({ userInfo }) => {
               userId={userInfo?._id}
             />
           ))}
-          {vehiclePhotos?.length < 4 && userInfo?._id === currentUser?._id && (
-            <form
-              className={`relative bg-accent z-10 w-28 aspect-square rounded-lg flex flex-col flex-shrink-0 justify-center items-center ${
-                isLoading && "opacity-30"
-              }`}
-            >
-              <img src={camera} alt="Camera" />
-              <input
-                type="file"
-                accept="image/*"
-                disabled={isLoading}
-                className="absolute top-0 bottom-0 right-0 left-0 z-20 opacity-0"
-                onChange={handleSubmit}
-                onClick={(e) => (e.target.value = null)} // reset value
-              />
-            </form>
-          )}
+          {userInfo?.vehiclePhotos?.length < 4 &&
+            userInfo?._id === currentUser?._id && (
+              <form
+                className={`relative bg-accent z-10 w-28 aspect-square rounded-lg flex flex-col flex-shrink-0 justify-center items-center ${
+                  isLoading && "opacity-30"
+                }`}
+              >
+                <img src={camera} alt="Camera" />
+                <input
+                  type="file"
+                  accept="image/*"
+                  disabled={isLoading}
+                  className="absolute top-0 bottom-0 right-0 left-0 z-20 opacity-0"
+                  onChange={handleSubmit}
+                  onClick={(e) => (e.target.value = null)} // reset value
+                />
+              </form>
+            )}
         </div>
       </div>
     </InfoContainer>
