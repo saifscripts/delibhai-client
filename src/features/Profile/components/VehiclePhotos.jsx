@@ -62,7 +62,7 @@ export const VehiclePhotos = ({ userInfo }) => {
           {vehiclePhotos?.map((url, index) => (
             <VehiclePhoto url={url} key={url} index={index} />
           ))}
-          {vehiclePhotos?.length < 4 && (
+          {vehiclePhotos?.length < 4 && userInfo?._id === currentUser?._id && (
             <form
               className={`relative bg-accent z-10 w-28 aspect-square rounded-lg flex flex-col flex-shrink-0 justify-center items-center ${
                 isLoading && "opacity-30"
