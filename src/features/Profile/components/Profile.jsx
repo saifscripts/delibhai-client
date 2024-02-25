@@ -11,7 +11,7 @@ import {
   Achievement,
   AverageRating,
   Field,
-  InfoCategories,
+  Categories,
   InfoContainer,
   RatingBars,
   Review,
@@ -37,7 +37,7 @@ export const Profile = () => {
       <MiniContainer>
         <Showcase userInfo={userInfo} />
 
-        <InfoCategories
+        <Categories
           userInfo={userInfo}
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
