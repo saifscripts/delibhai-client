@@ -11,7 +11,7 @@ export { EditPersonalInfo } from "./components/EditPersonalInfo";
 export { EditServiceInfo } from "./components/EditServiceInfo";
 export { EditVideoURL } from "./components/EditVideoURL";
 export { Field } from "./components/Field";
-export { Categories } from "./components/Categories";
+export { Categories } from "./components/InfoCategories";
 export { InfoCategory } from "./components/InfoCategory";
 export { InfoContainer } from "./components/InfoContainer";
 export { Profile } from "./components/Profile";
