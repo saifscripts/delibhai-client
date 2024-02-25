@@ -3,7 +3,7 @@ import categories from "../data/categories";
 import profileSchema from "../data/profileSchema";
 import { InfoCategory } from "../index";
 
-export const InfoCategories = ({
+export const Categories = ({
   userInfo,
   activeCategory,
   setActiveCategory,
