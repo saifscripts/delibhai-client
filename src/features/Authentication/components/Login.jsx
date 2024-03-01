@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
 import { useAuth } from "../../../contexts/AuthContext";
-import Container from "../../../layouts/Container";
+import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
@@ -58,12 +58,11 @@ function Login() {
   return (
     <>
       <TopPanel />
-      <Title
-        title="লগিন করুন"
-        subtitle="সঠিক মোবাইল নাম্বার এবং পাসওয়ার্ড দিয়ে লগিন করুন"
-      />
-
-      <Container>
+      <MiniContainer>
+        <Title
+          title="লগিন করুন"
+          subtitle="সঠিক মোবাইল নাম্বার এবং পাসওয়ার্ড দিয়ে লগিন করুন"
+        />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mt-4 mb-1">
             <label className="font-bold">মোবাইল নাম্বার</label>
@@ -93,7 +92,7 @@ function Login() {
 
           <Submit disabled={isLoading} value="লগিন" />
         </form>
-      </Container>
+      </MiniContainer>
     </>
   );
 }

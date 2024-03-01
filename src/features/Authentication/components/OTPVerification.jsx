@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useFetchData, usePostData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
-import Container from "../../../layouts/Container";
+import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import TopPanel from "../../../layouts/TopPanel";
 import { SubmitModal, Timer } from "../index";
@@ -91,12 +91,12 @@ function OTPVerification() {
       {state && (
         <div>
           <TopPanel />
-          <Title
-            title="ওটিপি ভেরিফিকেশন"
-            subtitle="আমাদের পাঠানো SMS এ প্রাপ্ত কোডটি প্রদান করুন +8801823540325"
-          />
+          <MiniContainer>
+            <Title
+              title="ওটিপি ভেরিফিকেশন"
+              subtitle="আমাদের পাঠানো SMS এ প্রাপ্ত কোডটি প্রদান করুন +8801823540325"
+            />
 
-          <Container>
             <p className="text-red-400 text-center text-xl mt-4">{error}</p>
             <Timer
               time={60 * 1000}
@@ -138,7 +138,7 @@ function OTPVerification() {
                 onClick={handleSubmit}
               />
             </form>
-          </Container>
+          </MiniContainer>
           <SubmitModal isOpen={isSubmitModalOpen} id={state.id} />
         </div>
       )}
