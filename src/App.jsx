@@ -2,6 +2,7 @@ import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
+import Home from "./features/Home";
 import {
   EditAddressInfo,
   EditContactInfo,
@@ -16,7 +17,6 @@ import { EditVehicleInfo } from "./features/Profile/components/EditVehicleInfo";
 import DHero from "./pages/DHero";
 import DHeroSearch from "./pages/DHeroSearch";
 import DHeroSearchResult from "./pages/DHeroSearchResult";
-import Home from "./pages/Home";
 import Services from "./pages/Services";
 
 function App() {

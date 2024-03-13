@@ -1,15 +1,18 @@
+/* eslint-disable no-undef */
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      // USE EXTENDED COLORS WHEN DAISY UI WILL BE REMOVED
       colors: {
-        primary: '#00C795',
-        secondary: '#30D0A7',
-        accent: '#707070',
-        neutral: '#D9D9D9',
-        medium: '#515050',
-        light: '#EBEBEB',
+        // // primary: '#00C795',
+        // // secondary: '#30D0A7',
+        // accent: '#707070',
+        // neutral: '#D9D9D9',
+        // medium: '#515050',
+        // light: '#EBEBEB',
       },
       fontFamily: {
         noto: "'Noto Serif Bengali', serif;",
@@ -27,5 +30,22 @@ export default {
       },
     },
   },
-  plugins: [],
+  // ONLY FOR DUMMY HOME PAGE. REMOVE THIS LATER
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          primary: '#00C795',
+          secondary: '#13EBB4',
+          accent: '#707070',
+          neutral: '#D9D9D9',
+          medium: '#515050',
+          light: '#EBEBEB',
+        },
+      },
+    ],
+  },
+  // ONLY FOR DUMMY HOME PAGE. REMOVE THIS LATER
+  plugins: [require("daisyui")
+  ],
 };
