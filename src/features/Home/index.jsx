@@ -10,7 +10,7 @@ import Services from "./Services";
 const Home = () => {
   return (
     <main>
-      <Navbar />
+      <Navbar bgColor="white" />
       <Banner />
       <OrderProcess />
       <Services />
