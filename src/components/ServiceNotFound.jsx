@@ -1,6 +1,6 @@
 function ServiceNotFound() {
   const { host, protocol } = location;
-  const domain = host.split(".").slice(1).join("");
+  const domain = host.split(".").slice(1).join(".");
 
   return (
     <div className="min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-6rem)] flex flex-col justify-center items-center">
