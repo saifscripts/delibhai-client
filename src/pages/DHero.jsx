@@ -7,7 +7,7 @@ import Title from "../layouts/Title";
 export default function DHero() {
   return (
     <div className="bg-secondary min-h-screen">
-      <Navbar bgColor="secondary" />
+      <Navbar />
       <Container>
         <Title color="white" title="ডেলিভাই বাহন" />
         <Categories categories={vehicles} />

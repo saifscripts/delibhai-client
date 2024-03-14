@@ -6,15 +6,11 @@ import { NavLinks } from "./NavLinks";
 import { Sidebar } from "./Sidebar";
 
 // eslint-disable-next-line react/prop-types
-const Navbar = ({ bgColor }) => {
+const Navbar = () => {
   const { isSidebarOpen, handleSidebarToggle } = useSidebar();
 
   return (
-    <nav
-      className={`bg-${
-        bgColor || "[transparent]"
-      } sticky top-0 lg:shadow-sm z-50`}
-    >
+    <nav className="bg-white sticky top-0 lg:shadow-sm z-50">
       <div className="container flex justify-between items-center h-16 sm:h-24">
         {/* Sidebar */}
         <Sidebar
@@ -24,9 +20,7 @@ const Navbar = ({ bgColor }) => {
 
         {/* Hamburger Button */}
         <RxHamburgerMenu
-          className={`lg:hidden text-3xl ${
-            bgColor === "secondary" && "text-white"
-          }`}
+          className="lg:hidden text-3xl"
           onClick={(e) => {
             e.stopPropagation();
             handleSidebarToggle();

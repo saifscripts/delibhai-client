@@ -8,7 +8,7 @@ const { host, protocol } = location;
 const Services = () => {
   return (
     <div className="bg-secondary min-h-screen">
-      <Navbar bgColor="secondary" />
+      <Navbar />
       <Container>
         <Title color="white" title="ডেলিভাই সার্ভিস সমূহ" />
         {/* Categories */}
