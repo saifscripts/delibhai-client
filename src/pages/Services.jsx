@@ -15,7 +15,7 @@ const Services = () => {
         <div className="grid grid-cols-2 gap-4 py-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 lg:gap-8">
           {services.map(({ id, icon, title, subdomain }) => (
             <a
-              href={subdomain + "." + host}
+              href={`https://${subdomain}.${host}`}
               key={id}
               className="bg-white rounded-lg aspect-square flex justify-center items-center shadow-md"
             >
