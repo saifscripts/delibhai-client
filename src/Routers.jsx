@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./RootLayout";
+import ServiceNotFound from "./components/ServiceNotFound";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import Home from "./features/Home";
 import {
@@ -73,11 +74,35 @@ const dheroRouter = createBrowserRouter([
   },
 ]);
 
+const blankRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [{ path: "", element: <ServiceNotFound /> }],
+  },
+]);
+
 export const getRouter = () => {
   const subdomain = location.hostname.split(".")[0];
-  if (subdomain === "hero") {
-    return dheroRouter;
-  }
 
-  return appRouter;
+  switch (subdomain) {
+    case "hero":
+      return dheroRouter;
+    case "labour":
+      return blankRouter;
+    case "send":
+      return blankRouter;
+    case "shop":
+      return blankRouter;
+    case "blood":
+      return blankRouter;
+    case "gas":
+      return blankRouter;
+    case "food":
+      return blankRouter;
+    case "tutor":
+      return blankRouter;
+    default:
+      return appRouter;
+  }
 };
