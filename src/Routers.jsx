@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import "./App.css";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import Home from "./features/Home";
 import {

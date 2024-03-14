@@ -1,6 +1,5 @@
 import { FiPlayCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import "../../../App.css";
 import man from "../../../assets/home/man.png";
 
 const Banner = () => {
