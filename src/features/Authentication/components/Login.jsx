@@ -6,7 +6,6 @@ import Submit from "../../../components/forms/Submit";
 import { useAuth } from "../../../contexts/AuthContext";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import TopPanel from "../../../layouts/TopPanel";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
 
 const userSchema = yup.object({
@@ -56,44 +55,41 @@ function Login() {
   };
 
   return (
-    <>
-      <TopPanel />
-      <MiniContainer>
-        <Title
-          title="লগিন করুন"
-          subtitle="সঠিক মোবাইল নাম্বার এবং পাসওয়ার্ড দিয়ে লগিন করুন"
-        />
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mt-4 mb-1">
-            <label className="font-bold">মোবাইল নাম্বার</label>
-            <input
-              {...register("mobile")}
-              type="text"
-              placeholder="মোবাইল নাম্বার লিখুন"
-              disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
-            />
-            <p className="text-red-400">{errors.mobile?.message}</p>
-          </div>
+    <MiniContainer>
+      <Title
+        title="লগিন করুন"
+        subtitle="সঠিক মোবাইল নাম্বার এবং পাসওয়ার্ড দিয়ে লগিন করুন"
+      />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="mt-4 mb-1">
+          <label className="font-bold">মোবাইল নাম্বার</label>
+          <input
+            {...register("mobile")}
+            type="text"
+            placeholder="মোবাইল নাম্বার লিখুন"
+            disabled={isLoading}
+            className="w-full py-3 border-b border-primary"
+          />
+          <p className="text-red-400">{errors.mobile?.message}</p>
+        </div>
 
-          <div className="mt-4 mb-1">
-            <label className="font-bold">পাসওয়ার্ড</label>
-            <input
-              {...register("password")}
-              type="password"
-              placeholder="পাসওয়ার্ড দিন"
-              disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
-            />
-            <p className="text-red-400">{errors.password?.message}</p>
-          </div>
+        <div className="mt-4 mb-1">
+          <label className="font-bold">পাসওয়ার্ড</label>
+          <input
+            {...register("password")}
+            type="password"
+            placeholder="পাসওয়ার্ড দিন"
+            disabled={isLoading}
+            className="w-full py-3 border-b border-primary"
+          />
+          <p className="text-red-400">{errors.password?.message}</p>
+        </div>
 
-          <p className="text-red-400">{errors.general?.message}</p>
+        <p className="text-red-400">{errors.general?.message}</p>
 
-          <Submit disabled={isLoading} value="লগিন" />
-        </form>
-      </MiniContainer>
-    </>
+        <Submit disabled={isLoading} value="লগিন" />
+      </form>
+    </MiniContainer>
   );
 }
 

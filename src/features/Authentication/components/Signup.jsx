@@ -8,7 +8,6 @@ import Submit from "../../../components/forms/Submit";
 import { useAuth } from "../../../contexts/AuthContext";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import TopPanel from "../../../layouts/TopPanel";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
 
 const userSchema = yup.object({
@@ -99,94 +98,91 @@ function Signup() {
   };
 
   return (
-    <>
-      <TopPanel />
-      <MiniContainer>
-        <Title
-          title="একটি একাউন্ট তৈরী করুন"
-          subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
-        />
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="mt-4 mb-1">
-            <label className="font-bold">পুরো নাম</label>
-            <input
-              {...register("name")}
-              type="text"
-              placeholder="পুরো নাম লিখুন"
-              disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
-            />
-            <p className="text-red-400">{errors.name?.message}</p>
-          </div>
+    <MiniContainer>
+      <Title
+        title="একটি একাউন্ট তৈরী করুন"
+        subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
+      />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="mt-4 mb-1">
+          <label className="font-bold">পুরো নাম</label>
+          <input
+            {...register("name")}
+            type="text"
+            placeholder="পুরো নাম লিখুন"
+            disabled={isLoading}
+            className="w-full py-3 border-b border-primary"
+          />
+          <p className="text-red-400">{errors.name?.message}</p>
+        </div>
 
-          <div className="mt-4 mb-1">
-            <label className="font-bold">লিঙ্গ</label>
-            <select
-              {...register("gender")}
-              disabled={isLoading}
-              className="w-full py-3 border-b border-primary bg-transparent"
-            >
-              <option value="পুরুষ">পুরুষ</option>
-              <option value="মহিলা">মহিলা</option>
-              <option value="অন্যান্য">অন্যান্য</option>
-            </select>
-            <p className="text-red-400">{errors.gender?.message}</p>
-          </div>
+        <div className="mt-4 mb-1">
+          <label className="font-bold">লিঙ্গ</label>
+          <select
+            {...register("gender")}
+            disabled={isLoading}
+            className="w-full py-3 border-b border-primary bg-transparent"
+          >
+            <option value="পুরুষ">পুরুষ</option>
+            <option value="মহিলা">মহিলা</option>
+            <option value="অন্যান্য">অন্যান্য</option>
+          </select>
+          <p className="text-red-400">{errors.gender?.message}</p>
+        </div>
 
-          <div className="mt-4 mb-1">
-            <label className="font-bold">ই-মেইল</label>
-            <input
-              {...register("email")}
-              type="text"
-              placeholder="ই-মেইল লিখুন"
-              disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
-            />
-            <p className="text-red-400">{errors.email?.message}</p>
-          </div>
+        <div className="mt-4 mb-1">
+          <label className="font-bold">ই-মেইল</label>
+          <input
+            {...register("email")}
+            type="text"
+            placeholder="ই-মেইল লিখুন"
+            disabled={isLoading}
+            className="w-full py-3 border-b border-primary"
+          />
+          <p className="text-red-400">{errors.email?.message}</p>
+        </div>
 
-          <div className="mt-4 mb-1">
-            <label className="font-bold">মোবাইল নাম্বার</label>
-            <input
-              {...register("mobile")}
-              type="text"
-              placeholder="মোবাইল নাম্বার লিখুন"
-              disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
-            />
-            <p className="text-red-400">{errors.mobile?.message}</p>
-          </div>
+        <div className="mt-4 mb-1">
+          <label className="font-bold">মোবাইল নাম্বার</label>
+          <input
+            {...register("mobile")}
+            type="text"
+            placeholder="মোবাইল নাম্বার লিখুন"
+            disabled={isLoading}
+            className="w-full py-3 border-b border-primary"
+          />
+          <p className="text-red-400">{errors.mobile?.message}</p>
+        </div>
 
-          <div className="mt-4 mb-1">
-            <label className="font-bold">পাসওয়ার্ড</label>
-            <input
-              {...register("password")}
-              type="password"
-              placeholder="পাসওয়ার্ড দিন"
-              disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
-            />
-            <p className="text-red-400">{errors.password?.message}</p>
-          </div>
+        <div className="mt-4 mb-1">
+          <label className="font-bold">পাসওয়ার্ড</label>
+          <input
+            {...register("password")}
+            type="password"
+            placeholder="পাসওয়ার্ড দিন"
+            disabled={isLoading}
+            className="w-full py-3 border-b border-primary"
+          />
+          <p className="text-red-400">{errors.password?.message}</p>
+        </div>
 
-          <div className="mt-4 mb-1">
-            <label className="font-bold">কনফার্ম পাসওয়ার্ড</label>
-            <input
-              {...register("confirmPassword")}
-              type="password"
-              placeholder="পুনরায় পাসওয়ার্ড দিন"
-              disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
-            />
-            <p className="text-red-400">{errors.confirmPassword?.message}</p>
-          </div>
+        <div className="mt-4 mb-1">
+          <label className="font-bold">কনফার্ম পাসওয়ার্ড</label>
+          <input
+            {...register("confirmPassword")}
+            type="password"
+            placeholder="পুনরায় পাসওয়ার্ড দিন"
+            disabled={isLoading}
+            className="w-full py-3 border-b border-primary"
+          />
+          <p className="text-red-400">{errors.confirmPassword?.message}</p>
+        </div>
 
-          <p className="text-red-400">{errors.general?.message}</p>
+        <p className="text-red-400">{errors.general?.message}</p>
 
-          <Submit disabled={isLoading} value="ওটিপি কোড পাঠান" />
-        </form>
-      </MiniContainer>
-    </>
+        <Submit disabled={isLoading} value="ওটিপি কোড পাঠান" />
+      </form>
+    </MiniContainer>
   );
 }
 

@@ -9,7 +9,6 @@ import { useAuth } from "../../../contexts/AuthContext";
 import vehicles from "../../../data/vehicles";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import TopPanel from "../../../layouts/TopPanel";
 
 const vehicleTitles = vehicles.map(({ title }) => title);
 
@@ -61,7 +60,6 @@ const EditVehicleInfo = () => {
 
   return (
     <>
-      <TopPanel />
       <Title
         title="গাড়ির সাধারণ তথ্য"
         subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"

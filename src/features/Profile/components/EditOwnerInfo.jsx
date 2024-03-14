@@ -11,7 +11,6 @@ import Button from "../../../components/ui/Button";
 import { useAuth } from "../../../contexts/AuthContext";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import TopPanel from "../../../layouts/TopPanel";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
 import getSelectedAddress from "../utils/getSelectedAddress";
 import restoreAddressState from "../utils/restoreAddressState";
@@ -88,7 +87,6 @@ const EditOwnerInfo = () => {
 
   return (
     <>
-      <TopPanel />
       <Title
         title="গাড়ির মালিকানার তথ্য"
         subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"

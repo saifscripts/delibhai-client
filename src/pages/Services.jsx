@@ -1,6 +1,5 @@
 import services from "../data/services";
 import Container from "../layouts/Container";
-import { Navbar } from "../layouts/Navbar/";
 import Title from "../layouts/Title";
 
 const { host, protocol } = location;
@@ -8,7 +7,6 @@ const { host, protocol } = location;
 const Services = () => {
   return (
     <div className="bg-secondary min-h-screen">
-      <Navbar />
       <Container>
         <Title color="white" title="ডেলিভাই সার্ভিস সমূহ" />
         {/* Categories */}

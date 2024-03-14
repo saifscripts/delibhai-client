@@ -4,7 +4,6 @@ import { useFetchData, usePostData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import TopPanel from "../../../layouts/TopPanel";
 import { SubmitModal, Timer } from "../index";
 
 function OTPVerification() {
@@ -89,8 +88,7 @@ function OTPVerification() {
   return (
     <>
       {state && (
-        <div>
-          <TopPanel />
+        <>
           <MiniContainer>
             <Title
               title="ওটিপি ভেরিফিকেশন"
@@ -140,7 +138,7 @@ function OTPVerification() {
             </form>
           </MiniContainer>
           <SubmitModal isOpen={isSubmitModalOpen} id={state.id} />
-        </div>
+        </>
       )}
     </>
   );

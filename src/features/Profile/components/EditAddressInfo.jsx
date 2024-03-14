@@ -8,7 +8,6 @@ import Button from "../../../components/ui/Button";
 import { useAuth } from "../../../contexts/AuthContext";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import TopPanel from "../../../layouts/TopPanel";
 import getSelectedAddress from "../utils/getSelectedAddress";
 import restoreAddressState from "../utils/restoreAddressState";
 import { Address } from "./Address";
@@ -69,7 +68,6 @@ const EditAddressInfo = () => {
 
   return (
     <>
-      <TopPanel />
       <Title
         title="ঠিকানা"
         subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"

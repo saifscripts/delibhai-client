@@ -7,7 +7,6 @@ import Button from "../components/ui/Button";
 import { SearchOption } from "../features/DHero/index";
 import Container from "../layouts/Container";
 import Title from "../layouts/Title";
-import TopPanel from "../layouts/TopPanel";
 
 const divisions = ["ঢাকা", "চট্টগ্রাম", "রাজশাহী", "খুলনা", "রংপুর"];
 export default function DHeroSearch() {
@@ -21,11 +20,9 @@ export default function DHeroSearch() {
   };
 
   return (
-    <div className="min-h-screen">
-      <TopPanel />
+    <>
+      <Title color="black" title="ডেলিভাই হিরো (সার্চ)" />
       <Container>
-        <Title color="black" title="ডেলিভাই হিরো (সার্চ)" />
-
         <div className="w-fit mx-auto mb-8">
           <SearchOption
             fill={activeOption === 1}
@@ -66,12 +63,12 @@ export default function DHeroSearch() {
             <Select options={divisions} selected="ইউনিয়ন নির্বাচন করুন" />
             <Select options={divisions} selected="ওয়ার্ড নম্বর নির্বাচন করুন" />
             <Select options={divisions} selected="গ্রাম নির্বাচন করুন" />
-            <Link to="/services/dhero/search">
+            <Link to="/search">
               <Button type="submit" value="Search" icon={<BiSearchAlt />} />
             </Link>
           </form>
         )}
       </Container>
-    </div>
+    </>
   );
 }

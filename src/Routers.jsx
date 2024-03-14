@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import RootLayout from "./RootLayout";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import Home from "./features/Home";
 import {
@@ -18,46 +19,58 @@ import DHeroSearchResult from "./pages/DHeroSearchResult";
 import Services from "./pages/Services";
 
 const commonRoutes = [
-  { path: "/login", element: <Login /> },
-  { path: "/signup", element: <Signup /> },
-  { path: "/otp-verification", element: <OTPVerification /> },
-  { path: "/profile/:id", element: <Profile /> },
+  { path: "login", element: <Login /> },
+  { path: "signup", element: <Signup /> },
+  { path: "otp-verification", element: <OTPVerification /> },
+  { path: "profile/:id", element: <Profile /> },
   {
-    path: "/profile/edit/personal-info",
+    path: "profile/edit/personal-info",
     element: <EditPersonalInfo />,
   },
   {
-    path: "/profile/edit/contact-info",
+    path: "profile/edit/contact-info",
     element: <EditContactInfo />,
   },
-  { path: "/profile/edit/address", element: <EditAddressInfo /> },
+  { path: "profile/edit/address", element: <EditAddressInfo /> },
   {
-    path: "/profile/edit/vehicle-info",
+    path: "profile/edit/vehicle-info",
     element: <EditVehicleInfo />,
   },
-  { path: "/profile/edit/owner-info", element: <EditOwnerInfo /> },
+  { path: "profile/edit/owner-info", element: <EditOwnerInfo /> },
   {
-    path: "/profile/edit/service-info",
+    path: "profile/edit/service-info",
     element: <EditServiceInfo />,
   },
   {
-    path: "/profile/edit/manual-location-info",
+    path: "profile/edit/manual-location-info",
     element: <EditManualLocationInfo />,
   },
-  { path: "/profile/edit/video", element: <EditVideoURL /> },
+  { path: "profile/edit/video", element: <EditVideoURL /> },
 ];
 
 const appRouter = createBrowserRouter([
-  { path: "/", element: <Home /> },
-  { path: "/services", element: <Services /> },
-  ...commonRoutes,
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { path: "", element: <Home /> },
+      { path: "services", element: <Services /> },
+      ...commonRoutes,
+    ],
+  },
 ]);
 
 const dheroRouter = createBrowserRouter([
-  { path: "/", element: <DHero /> },
-  { path: "/:vehicle", element: <DHeroSearch /> },
-  { path: "/search", element: <DHeroSearchResult /> },
-  ...commonRoutes,
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { path: "", element: <DHero /> },
+      { path: ":vehicle", element: <DHeroSearch /> },
+      { path: "search", element: <DHeroSearchResult /> },
+      ...commonRoutes,
+    ],
+  },
 ]);
 
 export const getRouter = () => {

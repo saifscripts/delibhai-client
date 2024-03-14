@@ -10,7 +10,6 @@ import Button from "../../../components/ui/Button";
 import { useAuth } from "../../../contexts/AuthContext";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import TopPanel from "../../../layouts/TopPanel";
 import { isNID } from "../../../utils/isNID";
 
 const userSchema = yup.object({
@@ -114,7 +113,6 @@ const EditPersonalInfo = () => {
 
   return (
     <>
-      <TopPanel />
       <Title
         title="ব্যক্তিগত তথ্য"
         subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
