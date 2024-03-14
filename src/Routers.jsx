@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./RootLayout";
-import ServiceNotFound from "./components/ServiceNotFound";
+import ErrorPage from "./components/ErrorPage";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import Home from "./features/Home";
 import {
@@ -76,9 +76,7 @@ const dheroRouter = createBrowserRouter([
 
 const blankRouter = createBrowserRouter([
   {
-    path: "/",
-    element: <RootLayout />,
-    children: [{ path: "", element: <ServiceNotFound /> }],
+    errorElement: <ErrorPage />,
   },
 ]);
 
