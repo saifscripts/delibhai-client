@@ -2,6 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./RootLayout";
 import ErrorPage from "./components/ErrorPage";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
+import DHero from "./features/DHero/components/DHero";
+import DHeroSearch from "./features/DHero/components/DHeroSearch";
+import DHeroSearchResult from "./features/DHero/components/DHeroSearchResult";
 import Home from "./features/Home";
 import {
   EditAddressInfo,
@@ -14,9 +17,6 @@ import {
 } from "./features/Profile";
 import { EditOwnerInfo } from "./features/Profile/components/EditOwnerInfo";
 import { EditVehicleInfo } from "./features/Profile/components/EditVehicleInfo";
-import DHero from "./pages/DHero";
-import DHeroSearch from "./pages/DHeroSearch";
-import DHeroSearchResult from "./pages/DHeroSearchResult";
 import Services from "./pages/Services";
 
 const commonRoutes = [

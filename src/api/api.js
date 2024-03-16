@@ -7,13 +7,24 @@ export const useFetchData = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // fetchData method directly returns data/error
-  const fetchData = async (route) => {
+  const fetchData = async (route, searchParams) => {
     const token = localStorage.getItem('authToken');
+    let queryString = '?';
+
+    if(searchParams) {
+      for (let param in searchParams) {
+        queryString += param + '=' + searchParams[param] + '&';
+      }
+      queryString = queryString.slice(0, -1);
+    } else {
+      queryString = ''
+    }
+
     let data, error;
 
     try {
       setIsLoading(true);
-      const response = await axios.get("/api" + route, {
+      const response = await axios.get("/api" + route + queryString, {
         headers: {'authorization': token ? `Bearer ${token}`: null},
       }); 
       data = response.data;

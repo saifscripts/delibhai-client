@@ -1,7 +1,7 @@
-import vehicles from "../data/vehicles";
-import Categories from "../layouts/Categories";
-import Container from "../layouts/Container";
-import Title from "../layouts/Title";
+import vehicles from "../../../data/vehicles";
+import Categories from "../../../layouts/Categories";
+import Container from "../../../layouts/Container";
+import Title from "../../../layouts/Title";
 
 export default function DHero() {
   return (

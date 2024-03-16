@@ -1,22 +1,38 @@
+import { getAllDivision } from "bd-divisions-to-unions";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { BiSearchAlt } from "react-icons/bi";
-import { Link, useParams } from "react-router-dom";
-import Select from "../components/forms/Select";
-import Button from "../components/ui/Button";
-import { SearchOption } from "../features/DHero/index";
-import Container from "../layouts/Container";
-import Title from "../layouts/Title";
+import { useNavigate, useParams } from "react-router-dom";
+import { useFetchData } from "../../../api/api";
+import Button from "../../../components/ui/Button";
+import Container from "../../../layouts/Container";
+import Title from "../../../layouts/Title";
+import { Address } from "../../Profile";
+import getSelectedAddress from "../../Profile/utils/getSelectedAddress";
+import { SearchOption } from "../index";
 
-const divisions = ["ঢাকা", "চট্টগ্রাম", "রাজশাহী", "খুলনা", "রংপুর"];
+const defaultAddressValue = {
+  division: getAllDivision(),
+  district: null,
+  upazila: null,
+  union: null,
+};
+
 export default function DHeroSearch() {
   const { vehicle } = useParams();
-  console.log(vehicle);
+  const [address, setAddress] = useState(defaultAddressValue);
 
   const [activeOption, setActiveOption] = useState(0);
+  const { fetchData } = useFetchData();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const searchInfo = { vehicle, ...getSelectedAddress(address) };
+    const heros = await fetchData("/v1/user/heros", searchInfo);
+    if (heros?.data?.success) {
+      navigate("/search", { state: { heros: heros.data.data } });
+    }
   };
 
   return (
@@ -55,17 +71,11 @@ export default function DHeroSearch() {
         {activeOption === 2 && (
           <form
             className="max-w-[500px] mx-auto text-gray-500 mb-6"
-            onClick={handleSubmit}
+            onSubmit={handleSubmit}
           >
-            <Select options={divisions} selected="বিভাগ নির্বাচন করুন" />
-            <Select options={divisions} selected="জেলা নির্বাচন করুন" />
-            <Select options={divisions} selected="উপজেলা নির্বাচন করুন" />
-            <Select options={divisions} selected="ইউনিয়ন নির্বাচন করুন" />
-            <Select options={divisions} selected="ওয়ার্ড নম্বর নির্বাচন করুন" />
-            <Select options={divisions} selected="গ্রাম নির্বাচন করুন" />
-            <Link to="/search">
-              <Button type="submit" value="Search" icon={<BiSearchAlt />} />
-            </Link>
+            <Address address={address} setAddress={setAddress} />
+
+            <Button type="submit" value="Search" icon={<BiSearchAlt />} />
           </form>
         )}
       </Container>
