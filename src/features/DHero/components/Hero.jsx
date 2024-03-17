@@ -2,6 +2,7 @@ import { BsTelephoneFill } from "react-icons/bs";
 import { GrLocation } from "react-icons/gr";
 import { PiPaperPlaneTiltFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import dp from "../../../assets/default.jpg";
 import PrimaryButton from "../../../components/ui/PrimaryButton";
 
 // eslint-disable-next-line react/prop-types
@@ -13,7 +14,11 @@ export default function Hero({ details }) {
     <Link to={`/profile/${_id}`}>
       <div className="flex items-center gap-5 p-4 hover:bg-neutral active:bg-neutral rounded-lg">
         <div className="w-28 rounded-full">
-          <img src={avatarURL} alt="name" className="w-full rounded-full" />
+          <img
+            src={avatarURL || dp}
+            alt="name"
+            className="w-full rounded-full"
+          />
         </div>
 
         <div>
