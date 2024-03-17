@@ -21,7 +21,8 @@ const NavLinks = () => {
         <CustomNavLink
           to="/signup"
           icon={<MdAppRegistration />}
-          text="রেজিস্ট্রেশন করুন"
+          text="আয় করুন"
+          highlight
         />
       )}
       {currentUser && (
