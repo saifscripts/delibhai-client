@@ -3,9 +3,15 @@ import services from "../data/services";
 window.addEventListener("message", function (event) {
   console.log(event.origin);
 
-  if (event.data) {
-    console.log(event.data);
-    localStorage.setItem("authToken", event.data);
+  console.log(event.data);
+  const { method, token } = event.data;
+
+  if (method === "set") {
+    localStorage.setItem("authToken", token);
+  }
+
+  if (method === "remove") {
+    localStorage.removeItem("authToken");
   }
 });
 

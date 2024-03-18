@@ -1,4 +1,5 @@
 import services from "../../../data/services";
+import postMessageToSubdomain from "./postMessageToSubdomain";
 
 
 export const setAuthToken = (token) => {
@@ -9,8 +10,8 @@ export const setAuthToken = (token) => {
     token
   }
 
-  postCrossDomainMessage(data, 'parent')
-  services?.forEach(({subdomain, active}) => active && postCrossDomainMessage(data, subdomain));
+  postMessageToSubdomain(data, 'parent')
+  services?.forEach(({subdomain, active}) => active && postMessageToSubdomain(data, subdomain));
 };
 
 // export const setAuthToken = (token) => {
@@ -20,8 +21,3 @@ export const setAuthToken = (token) => {
 //   let expires = "expires=" + d.toUTCString();
 //   document.cookie = "authToken=" + token + ";" + expires;
 // };
-
-function postCrossDomainMessage(msg, subdomain) {
-  const win = document.getElementById(`${subdomain}_frame`).contentWindow;
-  win.postMessage(msg, "*");
-}
