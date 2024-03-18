@@ -19,7 +19,7 @@ function App() {
       <iframe
         src={`https://delibhai.com`}
         className="hidden"
-        id={`parent_frame"`}
+        id={`parent_frame`}
       ></iframe>
       {services?.map(
         ({ id, subdomain, active }) =>
@@ -28,7 +28,7 @@ function App() {
               key={id}
               src={`https://${subdomain}.delibhai.com`}
               className="hidden"
-              id={`${subdomain}_frame"`}
+              id={`${subdomain}_frame`}
             ></iframe>
           )
       )}
