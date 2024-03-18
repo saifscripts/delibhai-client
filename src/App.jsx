@@ -1,11 +1,12 @@
 import { Toaster } from "react-hot-toast";
 import { RouterProvider } from "react-router-dom";
 import { getRouter } from "./Routers";
+import services from "./data/services";
 
 window.addEventListener("message", function (event) {
   // if (event.origin === "http://localhost:5173") {
   if (event.data) {
-    console.log("message received");
+    console.log("message received in ", event.origin);
     localStorage.setItem("authToken", event.data);
   }
   // }
@@ -16,11 +17,18 @@ function App() {
     <>
       <RouterProvider router={getRouter()} />
       <iframe
-        src="https://hero.delibhai.com"
-        className="w-full h-screen"
-        id="hero_frame"
-        title="Iframe Example"
+        src={`https://delibhai.com`}
+        className="hidden"
+        id={`parent_frame"`}
       ></iframe>
+      {services?.map(({ id, subdomain }) => (
+        <iframe
+          key={id}
+          src={`https://${subdomain}.delibhai.com`}
+          className="hidden"
+          id={`${subdomain}_frame"`}
+        ></iframe>
+      ))}
       <Toaster />
     </>
   );

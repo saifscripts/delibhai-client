@@ -1,6 +1,10 @@
+import services from "../../../data/services";
+
+
 export const setAuthToken = (token) => {
   localStorage.setItem("authToken", token);
-  postCrossDomainMessage(token); 
+  postCrossDomainMessage(token, 'parent')
+  services?.forEach(({subdomain}) => postCrossDomainMessage(token, subdomain));
 };
 
 // export const setAuthToken = (token) => {
@@ -11,7 +15,7 @@ export const setAuthToken = (token) => {
 //   document.cookie = "authToken=" + token + ";" + expires;
 // };
 
-function postCrossDomainMessage(msg) {
-  const win = document.getElementById('hero_frame').contentWindow;
+function postCrossDomainMessage(msg, subdomain) {
+  const win = document.getElementById(`${subdomain}_frame`).contentWindow;
   win.postMessage(msg, "*");
 }
