@@ -5,18 +5,17 @@ export const getAuthToken = () => {
 // Using Cookie
 // export const getAuthToken = () => {
 //   let name = "authToken=";
+//   console.log(document.cookie);
 //   let decodedCookie = decodeURIComponent(document.cookie);
-//   console.log(document.cookie)
-//   let ca = decodedCookie.split(";");
+//   let cookieArray = decodedCookie.split(";");
 
-//   for (let i = 0; i < ca.length; i++) {
-//     let c = ca[i];
-//     while (c.charAt(0) == " ") {
-//       c = c.substring(1);
+//   for (let i = 0; i < cookieArray.length; i++) {
+//     let cookie = cookieArray[i];
+//     while (cookie.charAt(0) == " ") {
+//       cookie = cookie.substring(1);
 //     }
-//     if (c.indexOf(name) == 0) {
-//       console.log(c.substring(name.length, c.length));
-//       return c.substring(name.length, c.length);
+//     if (cookie.indexOf(name) == 0) {
+//       return cookie.substring(name.length, cookie.length);
 //     }
 //   }
 //   return "";
