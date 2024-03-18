@@ -1,10 +1,12 @@
 import services from "../data/services";
 
 window.addEventListener("message", function (event) {
+  console.log("checking origin");
   if (event.origin !== window.location.origin) {
     return;
   }
 
+  console.log("origin matched");
   if (event.data) {
     localStorage.setItem("authToken", event.data);
   }
