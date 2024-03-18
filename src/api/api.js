@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { getAuthToken } from "../utils/getAuthToken";
 import axios from "./axiosConfig";
+
 
 // useFetchData hook returns loading state and fetchData method
 export const useFetchData = () => {
@@ -8,7 +10,7 @@ export const useFetchData = () => {
 
   // fetchData method directly returns data/error
   const fetchData = async (route, searchParams) => {
-    const token = localStorage.getItem('authToken');
+    const token = getAuthToken();
     let queryString = '?';
 
     if(searchParams) {
@@ -49,7 +51,7 @@ export const usePostData = () => {
 
   // postData method directly returns data/error
   const postData = async (route, body) => {
-    const token = localStorage.getItem('authToken');
+    const token = getAuthToken();
     let data, error;
 
     try {
@@ -79,7 +81,7 @@ export const useUpdateData = () => {
 
   // updateData method directly returns data/error
   const updateData = async (route, body) => {
-    const token = localStorage.getItem('authToken');
+    const token = getAuthToken();
     let data, error;
 
     try {

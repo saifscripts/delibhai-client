@@ -2,6 +2,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useContext, useEffect, useState } from "react";
 import { useFetchData, usePostData } from "../api/api";
+import { removeAuthToken } from "../utils/removeAuthToken";
+import { setAuthToken } from "../utils/setAuthToken";
 
 const AuthContext = createContext();
 
@@ -44,7 +46,7 @@ export const AuthProvider = ({ children }) => {
     // If login is successful, set the token to the local storage and update current user
     if (data?.success) {
       const { token } = data.data;
-      localStorage.setItem("authToken", token);
+      setAuthToken(token);
       setCurrentUser(data?.data?.user);
     }
 
@@ -53,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem("authToken");
+    removeAuthToken();
     setCurrentUser(null);
   };
 
