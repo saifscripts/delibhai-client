@@ -16,7 +16,7 @@ function App() {
     <>
       <RouterProvider router={getRouter()} />
       <iframe
-        src="http://hero.localhost:5173"
+        src="https://hero.delibhai.com"
         className="w-full h-screen"
         id="hero_frame"
         title="Iframe Example"
