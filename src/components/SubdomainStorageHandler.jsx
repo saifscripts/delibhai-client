@@ -4,6 +4,7 @@ window.addEventListener("message", function (event) {
   console.log(event.origin);
 
   if (event.data) {
+    console.log(event.data);
     localStorage.setItem("authToken", event.data);
   }
 });
