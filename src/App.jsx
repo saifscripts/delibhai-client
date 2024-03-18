@@ -21,14 +21,17 @@ function App() {
         className="hidden"
         id={`parent_frame"`}
       ></iframe>
-      {services?.map(({ id, subdomain }) => (
-        <iframe
-          key={id}
-          src={`https://${subdomain}.delibhai.com`}
-          className="hidden"
-          id={`${subdomain}_frame"`}
-        ></iframe>
-      ))}
+      {services?.map(
+        ({ id, subdomain, active }) =>
+          active && (
+            <iframe
+              key={id}
+              src={`https://${subdomain}.delibhai.com`}
+              className="hidden"
+              id={`${subdomain}_frame"`}
+            ></iframe>
+          )
+      )}
       <Toaster />
     </>
   );

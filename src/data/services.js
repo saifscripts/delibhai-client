@@ -8,7 +8,7 @@ import gaslagbe from '../assets/icons/gaslagbe.svg';
 import tutor from '../assets/icons/tutor.svg';
 
 const services = [
-  { id: 1, icon: dhero, title: 'dHero', subdomain: 'hero' },
+  { id: 1, icon: dhero, title: 'dHero', subdomain: 'hero', active: true },
   { id: 2, icon: dlabour, title: 'dLabour', subdomain: 'labour' },
   { id: 3, icon: dsend, title: 'dSend', subdomain: 'send' },
   { id: 4, icon: dshop, title: 'dShop', subdomain: 'shop' },
