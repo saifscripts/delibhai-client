@@ -3,8 +3,14 @@ import services from "../../../data/services";
 
 export const setAuthToken = (token) => {
   localStorage.setItem("authToken", token);
-  postCrossDomainMessage(token, 'parent')
-  services?.forEach(({subdomain, active}) => active && postCrossDomainMessage(token, subdomain));
+
+  const data = {
+    method: 'set',
+    token
+  }
+
+  postCrossDomainMessage(data, 'parent')
+  services?.forEach(({subdomain, active}) => active && postCrossDomainMessage(data, subdomain));
 };
 
 // export const setAuthToken = (token) => {
