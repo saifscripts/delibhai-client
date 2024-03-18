@@ -1,5 +1,5 @@
 import ReactPlayer from "react-player";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../Authentication/contexts/AuthContext";
 import { InfoContainer } from "./InfoContainer";
 
 export function VideoInfo({ userId, videoURL }) {

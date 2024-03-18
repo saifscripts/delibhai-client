@@ -5,7 +5,7 @@ import { GiResize } from "react-icons/gi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "react-image-crop/dist/ReactCrop.css";
 import { useUpdateData } from "../../../api/api";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../Authentication/contexts/AuthContext";
 import { EditOption } from "./EditOption";
 import ResizeModal from "./ResizeModal";
 

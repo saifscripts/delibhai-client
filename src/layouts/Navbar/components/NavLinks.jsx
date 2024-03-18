@@ -1,7 +1,7 @@
 import { AiFillHome, AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { MdAppRegistration, MdOutlineTaskAlt } from "react-icons/md";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../../features/Authentication/contexts/AuthContext";
 import { CustomNavLink } from "./CustomNavLink";
 
 const NavLinks = () => {

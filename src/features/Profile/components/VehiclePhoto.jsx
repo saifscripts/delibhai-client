@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useUpdateData } from "../../../api/api";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../Authentication/contexts/AuthContext";
 
 export const VehiclePhoto = ({ url, index, userId }) => {
   const [deleteBtn, setDeleteBtn] = useState(-1);

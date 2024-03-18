@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
-import { useAuth } from "../../../contexts/AuthContext";
 import MiniContainer from "../../../layouts/MiniContainer";
+import { useAuth } from "../../Authentication/contexts/AuthContext";
 import profileSchema from "../data/profileSchema";
 import useUserInfo from "../hooks/useUserInfo";
 import {

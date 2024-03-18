@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getAuthToken } from "../utils/getAuthToken";
+import { getAuthToken } from "../features/Authentication/utils/getAuthToken";
 import axios from "./axiosConfig";
 
 

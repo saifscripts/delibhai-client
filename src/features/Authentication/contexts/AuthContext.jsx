@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useContext, useEffect, useState } from "react";
-import { useFetchData, usePostData } from "../api/api";
+import { useFetchData, usePostData } from "../../../api/api";
 import { removeAuthToken } from "../utils/removeAuthToken";
 import { setAuthToken } from "../utils/setAuthToken";
 

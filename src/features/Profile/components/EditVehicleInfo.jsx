@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useUpdateData } from "../../../api/api";
 import Button from "../../../components/ui/Button";
-import { useAuth } from "../../../contexts/AuthContext";
 import vehicles from "../../../data/vehicles";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
+import { useAuth } from "../../Authentication/contexts/AuthContext";
 
 const vehicleTitles = vehicles.map(({ title }) => title);
 

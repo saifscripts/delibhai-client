@@ -5,10 +5,10 @@ import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
-import { useAuth } from "../../../contexts/AuthContext";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
+import { useAuth } from "../contexts/AuthContext";
 
 const userSchema = yup.object({
   name: yup

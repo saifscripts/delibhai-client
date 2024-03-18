@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useFetchData } from '../../../api/api';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from '../../Authentication/contexts/AuthContext';
 
 const useUserInfo = (id) => {
   const [userInfo, setUserInfo] = useState({});
