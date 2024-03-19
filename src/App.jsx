@@ -7,8 +7,11 @@ function App() {
   return (
     <>
       <RouterProvider router={getRouter()} />
-      <SubdomainStorageHandler />
       <Toaster />
+
+      {window.self.location === window.parent.location && (
+        <SubdomainStorageHandler />
+      )}
     </>
   );
 }

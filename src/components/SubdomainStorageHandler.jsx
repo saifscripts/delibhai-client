@@ -1,9 +1,7 @@
 import services from "../data/services";
+import getLocation from "../utils/getLocation";
 
 window.addEventListener("message", function (event) {
-  console.log(event.origin);
-
-  console.log(event.data);
   const { method, token } = event.data;
 
   if (method === "set") {
@@ -15,12 +13,14 @@ window.addEventListener("message", function (event) {
   }
 });
 
+const { protocol, domain } = getLocation();
+
 function SubdomainStorageHandler() {
   return (
     <>
       {/* Parent frame */}
       <iframe
-        src={`https://delibhai.com`}
+        src={`${protocol}//${domain}`} // generate url using current window location
         className="hidden"
         id={`parent_frame`}
       ></iframe>
@@ -31,7 +31,7 @@ function SubdomainStorageHandler() {
           active && (
             <iframe
               key={id}
-              src={`https://${subdomain}.delibhai.com`}
+              src={`${protocol}//${subdomain}.${domain}`} // generate url using current window location
               className="hidden"
               id={`${subdomain}_frame`}
             ></iframe>
