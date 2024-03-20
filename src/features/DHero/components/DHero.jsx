@@ -55,16 +55,12 @@ export default function DHero() {
                 <div
                   onClick={() => setVehicle(title)}
                   key={title}
-                  className={`flex flex-col justify-center items-center gap-3 flex-shrink-0 w-32 aspect-square shadow-md rounded-lg ${
+                  className={`flex flex-col justify-center items-center gap-3 flex-shrink-0 w-32 aspect-square p-3 shadow-md rounded-lg ${
                     selected ? "bg-secondary bg-opacity-30" : ""
                   }`}
                 >
-                  <img
-                    src={icon}
-                    alt={title}
-                    className="w-16 sm:w-20 lg:w-24 aspect-square"
-                  />
-                  <p className="text-xl sm:text-2xl text-center">{title}</p>
+                  <img src={icon} alt={title} className="w-2/3 aspect-square" />
+                  <p className="text-xl text-center">{title}</p>
                 </div>
               );
             })}
@@ -105,10 +101,7 @@ export default function DHero() {
         )}
 
         {activeOption === 2 && (
-          <form
-            className="max-w-[500px] mx-auto text-gray-500 mb-6"
-            onSubmit={handleSubmit}
-          >
+          <form className="w-full text-gray-500 mb-6" onSubmit={handleSubmit}>
             <Address address={address} setAddress={setAddress} />
 
             <Button type="submit" value="Search" icon={<BiSearchAlt />} />
