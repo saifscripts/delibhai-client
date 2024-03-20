@@ -1,15 +1,126 @@
+import { getAllDivision } from "bd-divisions-to-unions";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { BiSearchAlt } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
+import Button from "../../../components/ui/Button";
 import vehicles from "../../../data/vehicles";
-import Categories from "../../../layouts/Categories";
-import Container from "../../../layouts/Container";
+import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
+import { Address } from "../../Profile";
+import getSelectedAddress from "../../Profile/utils/getSelectedAddress";
+import { SearchOption } from "../index";
+
+const defaultAddressValue = {
+  division: getAllDivision(),
+  district: null,
+  upazila: null,
+  union: null,
+};
 
 export default function DHero() {
+  const [vehicle, setVehicle] = useState("বাইক");
+  const [address, setAddress] = useState(defaultAddressValue);
+  const [activeOption, setActiveOption] = useState(2);
+  // const [heros, setHeros] = useState([]);
+
+  // const { fetchData } = useFetchData();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { division, district, upazila, union } = getSelectedAddress(address);
+    navigate(
+      `/search?vehicle=${vehicle}&division=${division}&district=${district}&upazila=${upazila}&union=${union}`
+    );
+    // const searchInfo = { vehicle, ...getSelectedAddress(address) };
+    // const heros = await fetchData("/v1/user/heros", searchInfo);
+    // if (heros?.data?.success) {
+    //   setHeros(heros.data.data);
+    // }
+  };
+
   return (
-    <div className="bg-secondary min-h-screen">
-      <Container>
-        <Title color="white" title="ডেলিভাই বাহন" />
-        <Categories categories={vehicles} />
-      </Container>
+    <div className="min-h-screen">
+      <MiniContainer>
+        <Title title="ডেলিভাই হিরো" />
+        <h2 className="text-2xl font-semibold pt-4">গাড়ির ধরণ</h2>
+
+        {/* <Select options={vehicles} selected="গাড়ি নির্বাচন করুন" /> */}
+        <div className="overflow-y-hidden mb-6">
+          <div className="mt-8 flex gap-4 overflow-x-scroll pb-5 -mb-5">
+            {vehicles.map(({ title, icon }) => {
+              const selected = vehicle === title;
+              return (
+                <div
+                  onClick={() => setVehicle(title)}
+                  key={title}
+                  className={`flex flex-col justify-center items-center gap-3 flex-shrink-0 w-32 aspect-square shadow-md rounded-lg ${
+                    selected ? "bg-secondary bg-opacity-30" : ""
+                  }`}
+                >
+                  <img
+                    src={icon}
+                    alt={title}
+                    className="w-16 sm:w-20 lg:w-24 aspect-square"
+                  />
+                  <p className="text-xl sm:text-2xl text-center">{title}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <hr className="border-b border-gray-300" />
+        {/* <Categories categories={vehicles} /> */}
+
+        <h2 className="text-2xl font-semibold pt-4">নিজ ঠিকানা</h2>
+
+        <div className="w-fit mx-auto mb-8">
+          <SearchOption
+            fill={activeOption === 1}
+            text="GPS Location"
+            handleSelectSearchOption={() => {
+              setActiveOption(1);
+              toast.error(
+                'এই সার্ভিসটি আপডেটের কাজ চলমান! দয়া করে "Manual Search" অপশনটি নির্বাচন করুন',
+                {
+                  duration: 4000,
+                  position: "top-center",
+                  style: {
+                    backgroundColor: "#efef8d",
+                  },
+                }
+              );
+            }}
+          />
+          <SearchOption
+            fill={activeOption === 2}
+            text="Manual Location"
+            handleSelectSearchOption={() => setActiveOption(2)}
+          />
+        </div>
+
+        {activeOption === 1 && (
+          <p className="text-center text-3xl my-32">Not Available</p>
+        )}
+
+        {activeOption === 2 && (
+          <form
+            className="max-w-[500px] mx-auto text-gray-500 mb-6"
+            onSubmit={handleSubmit}
+          >
+            <Address address={address} setAddress={setAddress} />
+
+            <Button type="submit" value="Search" icon={<BiSearchAlt />} />
+          </form>
+        )}
+
+        {/* <div className="my-8 flex flex-col gap-4 w-fit max-w-full mx-auto">
+          {heros?.map((hero) => (
+            <Hero details={hero} key={hero._id} />
+          ))}
+        </div> */}
+      </MiniContainer>
     </div>
   );
 }

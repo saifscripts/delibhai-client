@@ -4,7 +4,6 @@ import ErrorPage from "./components/ErrorPage";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import DHero from "./features/DHero/components/DHero";
 import DHeroSearch from "./features/DHero/components/DHeroSearch";
-import DHeroSearchResult from "./features/DHero/components/DHeroSearchResult";
 import Home from "./features/Home";
 import {
   EditAddressInfo,
@@ -67,8 +66,7 @@ const dheroRouter = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { path: "", element: <DHero /> },
-      { path: ":vehicle", element: <DHeroSearch /> },
-      { path: "search", element: <DHeroSearchResult /> },
+      { path: "search", element: <DHeroSearch /> },
       ...commonRoutes,
     ],
   },
