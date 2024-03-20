@@ -7,6 +7,8 @@ import Button from "../../../components/ui/Button";
 import vehicles from "../../../data/vehicles";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
+import cn from "../../../lib/cn";
+import { Item, ScrollableMenu } from "../../../lib/scrollable-menu";
 import { Address } from "../../Profile";
 import getSelectedAddress from "../../Profile/utils/getSelectedAddress";
 import { SearchOption } from "../index";
@@ -47,26 +49,23 @@ export default function DHero() {
         <h2 className="text-2xl font-semibold pt-4">গাড়ির ধরণ</h2>
 
         {/* <Select options={vehicles} selected="গাড়ি নির্বাচন করুন" /> */}
-        <div className="overflow-y-hidden mb-6">
-          <div className="mt-8 flex gap-4 overflow-x-scroll pb-5 -mb-5">
-            {vehicles.map(({ title, icon }) => {
-              const selected = vehicle === title;
-              return (
-                <div
-                  onClick={() => setVehicle(title)}
-                  key={title}
-                  className={`flex flex-col justify-center items-center gap-3 flex-shrink-0 w-32 aspect-square p-3 shadow-md rounded-lg ${
-                    selected ? "bg-secondary bg-opacity-30" : ""
-                  }`}
-                >
-                  <img src={icon} alt={title} className="w-2/3 aspect-square" />
-                  <p className="text-xl text-center">{title}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <hr className="border-b border-gray-300" />
+        <ScrollableMenu arrow>
+          {vehicles.map(({ title, icon }) => (
+            <Item
+              key={title}
+              onClick={() => setVehicle(title)}
+              className={cn(
+                "flex flex-col justify-center items-center gap-3 w-32 aspect-square p-3 shadow-md rounded-lg",
+                { "bg-secondary bg-opacity-30": vehicle === title }
+              )}
+            >
+              <img src={icon} alt={title} className="w-2/3 aspect-square" />
+              <p className="text-xl text-center">{title}</p>
+            </Item>
+          ))}
+        </ScrollableMenu>
+
+        {/* <hr className="border-b border-gray-300" /> */}
         {/* <Categories categories={vehicles} /> */}
 
         <h2 className="text-2xl font-semibold pt-4">নিজ ঠিকানা</h2>
