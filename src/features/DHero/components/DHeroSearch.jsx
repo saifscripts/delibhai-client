@@ -11,13 +11,13 @@ export default function DHeroSearch() {
   const { fetchData } = useFetchData();
 
   useEffect(() => {
-    fetchData("/v1/user/heros", Object.fromEntries([...searchParams])).then(
-      (data) => {
-        if (data?.data?.success) {
-          setHeros(data.data.data);
-        }
+    const _searchParams = Object.fromEntries([...searchParams]);
+    fetchData("/v1/user/heros", _searchParams).then((data) => {
+      if (data?.data?.success) {
+        setHeros(data.data.data);
+        localStorage.setItem("heroSearchParams", JSON.stringify(_searchParams));
       }
-    );
+    });
   }, [searchParams]);
 
   return (

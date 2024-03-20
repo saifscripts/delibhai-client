@@ -1,5 +1,5 @@
 import { getAllDivision } from "bd-divisions-to-unions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { BiSearchAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import cn from "../../../lib/cn";
 import { Item, ScrollableMenu } from "../../../lib/scrollable-menu";
 import { Address } from "../../Profile";
 import getSelectedAddress from "../../Profile/utils/getSelectedAddress";
+import restoreAddressState from "../../Profile/utils/restoreAddressState";
 import { SearchOption } from "../index";
 
 const defaultAddressValue = {
@@ -41,6 +42,15 @@ export default function DHero() {
     //   setHeros(heros.data.data);
     // }
   };
+
+  useEffect(() => {
+    const searchParams = JSON.parse(localStorage.getItem("heroSearchParams"));
+    if (searchParams) {
+      const { vehicle, ...address } = searchParams;
+      setVehicle(vehicle);
+      setAddress(restoreAddressState(address));
+    }
+  }, []);
 
   return (
     <div className="min-h-screen">
