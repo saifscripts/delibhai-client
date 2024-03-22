@@ -5,28 +5,28 @@ import man from "../../../assets/home/man.png";
 const Banner = () => {
   return (
     <section className="relative">
-      <div className="absolute bg-neutral opacity-20 top-0 bottom-0 left-0 right-0 z-10"></div>
+      <div className="absolute bottom-0 left-0 right-0 top-0 z-10 bg-neutral opacity-20"></div>
       <div className="relative z-20">
-        <div className="container grid grid-cols-1 lg:grid-cols-2 items-center gap-5 lg:gap-16">
-          <div className="text-center lg:text-left my-5">
-            <h1 className="text-4xl sm:text-6xl xl:text-7xl font-bold mb-4 leading-tight sm:leading-tight xl:leading-tight">
+        <div className="container grid grid-cols-1 items-center gap-5 lg:grid-cols-2 lg:gap-16">
+          <div className="my-5 text-center lg:text-left">
+            <h1 className="mb-4 text-4xl font-bold leading-tight sm:text-6xl sm:leading-tight xl:text-7xl xl:leading-tight">
               দেশের নাম্বার ওয়ান ডেলিভারি সার্ভিস
             </h1>
-            <p className="text-accent text-3xl mb-8">সব সমাধান এক ক্লিকে</p>
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5">
+            <p className="mb-8 text-3xl text-accent">সব সমাধান এক ক্লিকে</p>
+            <div className="flex flex-col items-center justify-center gap-5 sm:flex-row lg:justify-start">
               <Link to={"/registration"} className="btn btn-primary text-white">
                 রেজিস্ট্রেশন করুন
               </Link>
               <Link
                 to={"/"}
-                className="btn border-primary text-primary hover:border-primary bg-transparent hover:bg-primary hover:text-white flex items-center gap-1"
+                className="btn flex items-center gap-1 border-primary bg-transparent text-primary hover:border-primary hover:bg-primary hover:text-white"
               >
                 <FiPlayCircle className="text-xl" />
                 <span>ডেলিভাই কিভাবে কাজ করে</span>
               </Link>
             </div>
           </div>
-          <div className="flex justify-center lg:justify-start items-end order-first lg:order-last pt-10">
+          <div className="order-first flex items-end justify-center pt-10 lg:order-last lg:justify-start">
             <img src={man} alt="DeliBhai Hero" />
           </div>
         </div>

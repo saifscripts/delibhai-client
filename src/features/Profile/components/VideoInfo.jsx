@@ -11,11 +11,11 @@ export function VideoInfo({ userId, videoURL }) {
       editRoute={userId === currentUser?._id && "/profile/edit/video"}
     >
       {videoURL ? (
-        <div className="w-full bg-black flex justify-center items-center rounded-lg overflow-hidden">
+        <div className="flex w-full items-center justify-center overflow-hidden rounded-lg bg-black">
           <ReactPlayer loop url={videoURL} />
         </div>
       ) : (
-        <p className="text-red-400 text-center text-2xl">ভিডিও আপডেট করুন</p>
+        <p className="text-center text-2xl text-red-400">ভিডিও আপডেট করুন</p>
       )}
     </InfoContainer>
   );

@@ -18,13 +18,14 @@ export default function DHeroSearch() {
         localStorage.setItem("heroSearchParams", JSON.stringify(_searchParams));
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   return (
     <>
       <Title color="black" title="ডেলিভাই হিরো" />
       <Container>
-        <div className="my-8 flex flex-col gap-4 w-fit max-w-full mx-auto">
+        <div className="mx-auto my-8 flex w-fit max-w-full flex-col gap-4">
           {heros?.map((hero) => (
             <Hero details={hero} key={hero.id} />
           ))}

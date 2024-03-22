@@ -50,12 +50,12 @@ export const VehiclePhoto = ({ url, index, userId }) => {
     return (
       <button
         onClick={removePhoto}
-        className={`absolute right-4 top-0 bg-white px-3 py-1 rounded-lg gap-3 items-center shadow-lg ${
+        className={`absolute right-4 top-0 items-center gap-3 rounded-lg bg-white px-3 py-1 shadow-lg ${
           deleteBtn === index ? "flex" : "hidden"
         }`}
       >
         <span className="text-sm">ডিলিট</span>
-        <span className="p-1 rounded-full bg-neutral">{<AiFillDelete />}</span>
+        <span className="rounded-full bg-neutral p-1">{<AiFillDelete />}</span>
       </button>
     );
   };
@@ -65,7 +65,7 @@ export const VehiclePhoto = ({ url, index, userId }) => {
       style={{
         backgroundImage: `url(${url})`,
       }}
-      className={`relative flex flex-col flex-shrink-0 justify-center items-center w-28 aspect-square p-1 bg-center bg-cover bg-no-repeat rounded-lg overflow-hidden hover:shadow-xl ${
+      className={`relative flex aspect-square w-28 flex-shrink-0 flex-col items-center justify-center overflow-hidden rounded-lg bg-cover bg-center bg-no-repeat p-1 hover:shadow-xl ${
         isLoading && "opacity-30"
       }`}
     >

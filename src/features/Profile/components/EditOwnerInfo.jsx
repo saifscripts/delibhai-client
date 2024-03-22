@@ -72,7 +72,7 @@ const EditOwnerInfo = () => {
     // Update data
     const { data, error } = await updateData(
       `/v1/user/${currentUser._id}`,
-      userData
+      userData,
     );
 
     if (data?.success) {
@@ -93,44 +93,44 @@ const EditOwnerInfo = () => {
       />
       <MiniContainer>
         <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">কোম্পানি/মালিকের নাম</label>
             <input
               {...register("ownerName")}
               type="text"
               placeholder="কোম্পানি/মালিকের নাম লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.ownerName?.message}</p>
           </div>
 
-          <p className="font-bold mt-4 mb-3 py-3 border-b border-light">
+          <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
             ঠিকানা
           </p>
 
           <Address address={ownerAddress} setAddress={setOwnerAddress} />
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">মোবাইল</label>
             <input
               {...register("ownerMobile")}
               type="text"
               placeholder="মোবাইল নাম্বার লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.ownerMobile?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">ই-মেইল</label>
             <input
               {...register("ownerEmail")}
               type="text"
               placeholder="ই-মেইল লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.ownerEmail?.message}</p>
           </div>

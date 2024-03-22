@@ -35,7 +35,7 @@ function SubdomainStorageHandler() {
               className="hidden"
               id={`${subdomain}_frame`}
             ></iframe>
-          )
+          ),
       )}
     </>
   );

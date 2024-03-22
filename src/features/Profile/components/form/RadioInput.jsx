@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 function RadioInput({ label, checked, onClick }) {
   return (
-    <div className="flex gap-2 items-center ml-4">
+    <div className="ml-4 flex items-center gap-2">
       <input
         className="accent-primary focus:border-primary"
         type="radio"

@@ -63,7 +63,7 @@ export const EditAvatarModal = ({ editModal, setEditModal }) => {
 
     const { data } = await updateData(
       `/v1/user/remove-fields/${currentUser._id}`,
-      fields
+      fields,
     );
 
     if (data?.success) {
@@ -87,19 +87,19 @@ export const EditAvatarModal = ({ editModal, setEditModal }) => {
       {/* Dark overlay */}
       <div
         onClick={() => setEditModal(false)}
-        className={`inset-0 bg-black  z-40  transition-opacity ${
+        className={`inset-0 z-40  bg-black  transition-opacity ${
           editModal ? "fixed opacity-40" : "hidden opacity-0"
         }`}
       ></div>
 
       {/* Panel sliding from the bottom */}
       <div
-        className={`fixed bottom-0 left-0 right-0 bg-white z-50 rounded-t-xl transition-transform ${
+        className={`fixed bottom-0 left-0 right-0 z-50 rounded-t-xl bg-white transition-transform ${
           editModal ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <div className={`w-10 h-1 bg-accent rounded-full mx-auto mt-2`}></div>
-        <div className="py-7 flex flex-col gap-2">
+        <div className={`mx-auto mt-2 h-1 w-10 rounded-full bg-accent`}></div>
+        <div className="flex flex-col gap-2 py-7">
           <EditOption
             icon={<AiFillCamera />}
             text="ছবি আপলোড"

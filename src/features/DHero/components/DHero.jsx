@@ -34,7 +34,7 @@ export default function DHero() {
     e.preventDefault();
     const { division, district, upazila, union } = getSelectedAddress(address);
     navigate(
-      `/search?vehicle=${vehicle}&division=${division}&district=${district}&upazila=${upazila}&union=${union}`
+      `/search?vehicle=${vehicle}&division=${division}&district=${district}&upazila=${upazila}&union=${union}`,
     );
     // const searchInfo = { vehicle, ...getSelectedAddress(address) };
     // const heros = await fetchData("/v1/user/heros", searchInfo);
@@ -53,10 +53,10 @@ export default function DHero() {
   }, []);
 
   return (
-    <div className="min-h-screen relative">
+    <div className="relative min-h-screen">
       <MiniContainer>
         <Title title="ডেলিভাই হিরো" />
-        <h2 className="text-2xl font-semibold pt-4">গাড়ির ধরণ</h2>
+        <h2 className="pt-4 text-2xl font-semibold">গাড়ির ধরণ</h2>
 
         {/* <Select options={vehicles} selected="গাড়ি নির্বাচন করুন" /> */}
         <ScrollMenu arrow>
@@ -65,12 +65,12 @@ export default function DHero() {
               key={title}
               onClick={() => setVehicle(title)}
               className={cn(
-                "flex flex-col justify-center items-center gap-3 w-24 sm:w-32 aspect-square p-3 shadow-md rounded-lg",
-                { "bg-secondary bg-opacity-30": vehicle === title }
+                "flex aspect-square w-24 flex-col items-center justify-center gap-3 rounded-lg p-3 shadow-md sm:w-32",
+                { "bg-secondary bg-opacity-30": vehicle === title },
               )}
             >
-              <img src={icon} alt={title} className="w-2/3 aspect-square" />
-              <p className="text-base sm:text-xl text-center">{title}</p>
+              <img src={icon} alt={title} className="aspect-square w-2/3" />
+              <p className="text-center text-base sm:text-xl">{title}</p>
             </ScrollItem>
           ))}
         </ScrollMenu>
@@ -78,9 +78,9 @@ export default function DHero() {
         {/* <hr className="border-b border-gray-300" /> */}
         {/* <Categories categories={vehicles} /> */}
 
-        <h2 className="text-2xl font-semibold pt-4">নিজ ঠিকানা</h2>
+        <h2 className="pt-4 text-2xl font-semibold">নিজ ঠিকানা</h2>
 
-        <div className="w-fit mx-auto mb-8">
+        <div className="mx-auto mb-8 w-fit">
           <SearchOption
             fill={activeOption === 1}
             text="GPS Location"
@@ -94,7 +94,7 @@ export default function DHero() {
                   style: {
                     backgroundColor: "#efef8d",
                   },
-                }
+                },
               );
             }}
           />
@@ -106,11 +106,11 @@ export default function DHero() {
         </div>
 
         {activeOption === 1 && (
-          <p className="text-center text-3xl my-32">Not Available</p>
+          <p className="my-32 text-center text-3xl">Not Available</p>
         )}
 
         {activeOption === 2 && (
-          <form className="w-full text-gray-500 mb-6" onSubmit={handleSubmit}>
+          <form className="mb-6 w-full text-gray-500" onSubmit={handleSubmit}>
             <Address address={address} setAddress={setAddress} />
 
             <Button type="submit" value="Search" icon={<BiSearchAlt />} />

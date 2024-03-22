@@ -27,13 +27,13 @@ const AboutUs = () => {
 
   return (
     <section className="my-24">
-      <div className="max-w-[920px] mx-auto px-6 text-center">
+      <div className="mx-auto max-w-[920px] px-6 text-center">
         {/* Section title */}
-        <h2 className="text-black text-3xl sm:text-4xl md:text-5xl font-semibold mb-10">
+        <h2 className="mb-10 text-3xl font-semibold text-black sm:text-4xl md:text-5xl">
           আমাদের সম্পর্কে জানুন
         </h2>
         {/* Infos */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {infos.map((info) => (
             <InfoCard key={info.id} info={info} />
           ))}

@@ -61,26 +61,26 @@ function Login() {
         subtitle="সঠিক মোবাইল নাম্বার এবং পাসওয়ার্ড দিয়ে লগিন করুন"
       />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-4 mb-1">
+        <div className="mb-1 mt-4">
           <label className="font-bold">মোবাইল নাম্বার</label>
           <input
             {...register("mobile")}
             type="text"
             placeholder="মোবাইল নাম্বার লিখুন"
             disabled={isLoading}
-            className="w-full py-3 border-b border-primary"
+            className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.mobile?.message}</p>
         </div>
 
-        <div className="mt-4 mb-1">
+        <div className="mb-1 mt-4">
           <label className="font-bold">পাসওয়ার্ড</label>
           <input
             {...register("password")}
             type="password"
             placeholder="পাসওয়ার্ড দিন"
             disabled={isLoading}
-            className="w-full py-3 border-b border-primary"
+            className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.password?.message}</p>
         </div>

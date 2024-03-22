@@ -2,7 +2,7 @@
 export default function Button({ value, icon, ...props }) {
   return (
     <button
-      className="bg-secondary disabled:bg-slate-400 disabled:text-slate-600 text-white text-xl font-bold font-inter mx-auto w-full max-w-[310px] h-[70px] rounded-full shadow mt-6 flex justify-center items-center gap-5"
+      className="mx-auto mt-6 flex h-[70px] w-full max-w-[310px] items-center justify-center gap-5 rounded-full bg-secondary font-inter text-xl font-bold text-white shadow disabled:bg-slate-400 disabled:text-slate-600"
       {...props}
     >
       <span>{value}</span>

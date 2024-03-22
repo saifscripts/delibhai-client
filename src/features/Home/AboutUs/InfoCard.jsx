@@ -1,10 +1,10 @@
 const InfoCard = ({ info }) => {
   const { title, quantity } = info;
   return (
-    <div className="border border-[#dddddd] rounded-lg px-7 py-8 relative text-center">
+    <div className="relative rounded-lg border border-[#dddddd] px-7 py-8 text-center">
       {/* Title and Description */}
-      <h4 className="text-5xl font-semibold mb-3">{quantity}</h4>
-      <p className="text-[#7a7a7a] text-xl">{title}</p>
+      <h4 className="mb-3 text-5xl font-semibold">{quantity}</h4>
+      <p className="text-xl text-[#7a7a7a]">{title}</p>
     </div>
   );
 };

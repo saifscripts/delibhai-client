@@ -74,13 +74,13 @@ const EditAddressInfo = () => {
       />
       <MiniContainer>
         <form onSubmit={handleSubmit} className="mb-5">
-          <p className="font-bold mt-4 mb-3 py-3 border-b border-light">
+          <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
             বর্তমান ঠিকানা
           </p>
 
           <Address address={presentAddress} setAddress={setPresentAddress} />
 
-          <p className="font-bold mt-4 mb-3 py-3 border-b border-light">
+          <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
             স্থায়ী ঠিকানা
           </p>
 

@@ -22,8 +22,7 @@ import vehicleType from "../assets/icons/vehicle.svg";
 import getAddressText from "../utils/getAddressText";
 import modifyAge from "../utils/modifyAge";
 
-const profileSchema
-= {
+const profileSchema = {
   generalInfo: [
     {
       category: "ব্যক্তিগত তথ্য",
@@ -55,7 +54,7 @@ const profileSchema
           dataKey: "nid",
           label: "জন্মনিবন্ধন/NID নম্বর",
           icon: nid,
-          isPrivate: true
+          isPrivate: true,
         },
       ],
     },

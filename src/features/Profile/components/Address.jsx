@@ -40,12 +40,12 @@ const Address = ({ address, setAddress, isLoading }) => {
 
   return (
     <div>
-      <div className="mt-4 mb-1">
+      <div className="mb-1 mt-4">
         <label className="font-bold">বিভাগ</label>
         <select
           disabled={isLoading}
           value={address.division?.find(({ selected }) => selected)?.title}
-          className="w-full py-3 border-b border-primary bg-transparent"
+          className="w-full border-b border-primary bg-transparent py-3"
           onChange={(e) => handleChange(e, "division")}
         >
           <option>সিলেক্ট করুন</option>
@@ -57,12 +57,12 @@ const Address = ({ address, setAddress, isLoading }) => {
         </select>
       </div>
 
-      <div className="mt-4 mb-1">
+      <div className="mb-1 mt-4">
         <label className="font-bold">জেলা</label>
         <select
           value={address.district?.find(({ selected }) => selected)?.title}
           disabled={isLoading}
-          className="w-full py-3 border-b border-primary bg-transparent"
+          className="w-full border-b border-primary bg-transparent py-3"
           onChange={(e) => handleChange(e, "district")}
         >
           <option>সিলেক্ট করুন</option>
@@ -74,12 +74,12 @@ const Address = ({ address, setAddress, isLoading }) => {
         </select>
       </div>
 
-      <div className="mt-4 mb-1">
+      <div className="mb-1 mt-4">
         <label className="font-bold">উপজেলা</label>
         <select
           value={address.upazila?.find(({ selected }) => selected)?.title}
           disabled={isLoading}
-          className="w-full py-3 border-b border-primary bg-transparent"
+          className="w-full border-b border-primary bg-transparent py-3"
           onChange={(e) => handleChange(e, "upazila")}
         >
           <option>সিলেক্ট করুন</option>
@@ -91,12 +91,12 @@ const Address = ({ address, setAddress, isLoading }) => {
         </select>
       </div>
 
-      <div className="mt-4 mb-1">
+      <div className="mb-1 mt-4">
         <label className="font-bold">ইউনিয়ন</label>
         <select
           value={address.union?.find(({ selected }) => selected)?.title}
           disabled={isLoading}
-          className="w-full py-3 border-b border-primary bg-transparent"
+          className="w-full border-b border-primary bg-transparent py-3"
           onChange={(e) => handleChange(e, "union")}
         >
           <option>সিলেক্ট করুন</option>

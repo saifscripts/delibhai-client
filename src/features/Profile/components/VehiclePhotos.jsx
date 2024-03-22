@@ -29,7 +29,7 @@ export const VehiclePhotos = ({ userInfo }) => {
       `https://api.imgbb.com/1/upload?key=${
         import.meta.env.VITE_IMGBB_API_KEY
       }`,
-      formData
+      formData,
     );
 
     // return if upload is not success
@@ -55,8 +55,8 @@ export const VehiclePhotos = ({ userInfo }) => {
 
   return (
     <InfoContainer category="গাড়ির ছবি">
-      <div className="overflow-y-hidden mb-6">
-        <div className="flex gap-2 overflow-x-scroll pb-5 -mb-5">
+      <div className="mb-6 overflow-y-hidden">
+        <div className="-mb-5 flex gap-2 overflow-x-scroll pb-5">
           {userInfo?.vehiclePhotos?.map((url, index) => (
             <VehiclePhoto
               url={url}
@@ -68,7 +68,7 @@ export const VehiclePhotos = ({ userInfo }) => {
           {userInfo?.vehiclePhotos?.length < 4 &&
             userInfo?._id === currentUser?._id && (
               <form
-                className={`relative bg-accent z-10 w-28 aspect-square rounded-lg flex flex-col flex-shrink-0 justify-center items-center ${
+                className={`relative z-10 flex aspect-square w-28 flex-shrink-0 flex-col items-center justify-center rounded-lg bg-accent ${
                   isLoading && "opacity-30"
                 }`}
               >
@@ -77,7 +77,7 @@ export const VehiclePhotos = ({ userInfo }) => {
                   type="file"
                   accept="image/*"
                   disabled={isLoading}
-                  className="absolute top-0 bottom-0 right-0 left-0 z-20 opacity-0"
+                  className="absolute bottom-0 left-0 right-0 top-0 z-20 opacity-0"
                   onChange={handleSubmit}
                   onClick={(e) => (e.target.value = null)} // reset value
                 />

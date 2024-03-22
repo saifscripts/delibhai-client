@@ -42,8 +42,8 @@ export function ScrollMenu({ children, className, arrow, ...restProps }) {
     <div className="relative w-full overflow-hidden">
       <div
         className={cn(
-          "flex gap-4 flex-no-wrap overflow-x-auto scroll-smooth hide-scrollbar py-3",
-          className
+          "flex-no-wrap hide-scrollbar flex gap-4 overflow-x-auto scroll-smooth py-3",
+          className,
         )}
         onScroll={handleScroll}
         ref={scrollElementRef}
@@ -68,7 +68,7 @@ export function ScrollItem({ children, className, ...restProps }) {
 function LeftArrow(props) {
   return (
     <div
-      className="absolute top-1/2 -translate-y-1/2 left-0 text-3xl hover:bg-primary hover:bg-opacity-10 px-[1px] py-8 w-8"
+      className="absolute left-0 top-1/2 w-8 -translate-y-1/2 px-[1px] py-8 text-3xl hover:bg-primary hover:bg-opacity-10"
       {...props}
     >
       <MdOutlineArrowBackIos />
@@ -79,7 +79,7 @@ function LeftArrow(props) {
 function RightArrow(props) {
   return (
     <div
-      className="absolute top-1/2 -translate-y-1/2 right-0 text-3xl hover:bg-primary hover:bg-opacity-10 px-[1px] py-8 w-8"
+      className="absolute right-0 top-1/2 w-8 -translate-y-1/2 px-[1px] py-8 text-3xl hover:bg-primary hover:bg-opacity-10"
       {...props}
     >
       <MdOutlineArrowForwardIos />

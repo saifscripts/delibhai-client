@@ -55,7 +55,7 @@ const EditContactInfo = () => {
   const onSubmit = async (userData) => {
     const { data, error } = await updateData(
       `/v1/user/${currentUser._id}`,
-      userData
+      userData,
     );
 
     if (data?.success) {
@@ -74,50 +74,50 @@ const EditContactInfo = () => {
       />
       <MiniContainer>
         <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">মোবাইল নাম্বার</label>
             <input
               {...register("mobile")}
               type="text"
               placeholder="মোবাইল নাম্বার লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.mobile?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">বিকল্প মোবাইল নম্বর</label>
             <input
               {...register("altMobile")}
               type="text"
               placeholder="বিকল্প মোবাইল নাম্বার লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.altMobile?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">ই-মেইল</label>
             <input
               {...register("email")}
               type="text"
               placeholder="ই-মেইল লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.email?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">ফেইসবুক লিংক</label>
             <input
               {...register("facebookURL")}
               type="text"
               placeholder="ফেইসবুক লিংক লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.facebookURL?.message}</p>
           </div>

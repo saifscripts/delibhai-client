@@ -12,7 +12,7 @@ export default function Hero({ details }) {
 
   return (
     <Link to={`/profile/${_id}`}>
-      <div className="flex items-center gap-5 p-4 hover:bg-neutral active:bg-neutral rounded-lg">
+      <div className="flex items-center gap-5 rounded-lg p-4 hover:bg-neutral active:bg-neutral">
         <div className="w-28 rounded-full">
           <img
             src={avatarURL || dp}
@@ -22,9 +22,9 @@ export default function Hero({ details }) {
         </div>
 
         <div>
-          <h3 className="text-xl mb-3">{name}</h3>
+          <h3 className="mb-3 text-xl">{name}</h3>
 
-          <div className="flex items-center gap-1 text-gray-700 mb-2">
+          <div className="mb-2 flex items-center gap-1 text-gray-700">
             <span>{<GrLocation />}</span>
             <span>{distance}km</span>
           </div>

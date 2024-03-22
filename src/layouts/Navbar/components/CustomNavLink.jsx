@@ -6,16 +6,16 @@ const CustomNavLink = ({ to, icon, text, highlight }) => {
       to={to}
       className={({ isActive }) =>
         isActive
-          ? "bg-slate-700 lg:bg-primary lg:bg-opacity-5 lg:text-primary lg:rounded-lg"
+          ? "bg-slate-700 lg:rounded-lg lg:bg-primary lg:bg-opacity-5 lg:text-primary"
           : ""
       }
     >
       <div
-        className={`hover:cursor-pointer active:bg-primary lg:hover:bg-neutral px-8 py-4 lg:px-4 lg:py-4 lg:rounded-lg text-sm flex gap-5 items-center lg:blok ${
-          highlight && "lg:bg-primary lg:text-white lg:font-bold"
+        className={`lg:blok flex items-center gap-5 px-8 py-4 text-sm hover:cursor-pointer active:bg-primary lg:rounded-lg lg:px-4 lg:py-4 lg:hover:bg-neutral ${
+          highlight && "lg:bg-primary lg:font-bold lg:text-white"
         }`}
       >
-        <span className="lg:hidden text-2xl">{icon}</span>
+        <span className="text-2xl lg:hidden">{icon}</span>
         <span>{text}</span>
       </div>
     </NavLink>

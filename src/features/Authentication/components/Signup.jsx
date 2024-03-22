@@ -22,7 +22,7 @@ const userSchema = yup.object({
     .required("Gender is required.")
     .oneOf(
       ["পুরুষ", "মহিলা", "অন্যান্য"],
-      "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য."
+      "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য.",
     ),
   email: yup
     .string()
@@ -47,7 +47,7 @@ const userSchema = yup.object({
           minNumbers: 0,
           minUppercase: 0,
           minSymbols: 0,
-        })
+        }),
     ),
   confirmPassword: yup
     .string()
@@ -104,24 +104,24 @@ function Signup() {
         subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
       />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-4 mb-1">
+        <div className="mb-1 mt-4">
           <label className="font-bold">পুরো নাম</label>
           <input
             {...register("name")}
             type="text"
             placeholder="পুরো নাম লিখুন"
             disabled={isLoading}
-            className="w-full py-3 border-b border-primary"
+            className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.name?.message}</p>
         </div>
 
-        <div className="mt-4 mb-1">
+        <div className="mb-1 mt-4">
           <label className="font-bold">লিঙ্গ</label>
           <select
             {...register("gender")}
             disabled={isLoading}
-            className="w-full py-3 border-b border-primary bg-transparent"
+            className="w-full border-b border-primary bg-transparent py-3"
           >
             <option value="পুরুষ">পুরুষ</option>
             <option value="মহিলা">মহিলা</option>
@@ -130,50 +130,50 @@ function Signup() {
           <p className="text-red-400">{errors.gender?.message}</p>
         </div>
 
-        <div className="mt-4 mb-1">
+        <div className="mb-1 mt-4">
           <label className="font-bold">ই-মেইল</label>
           <input
             {...register("email")}
             type="text"
             placeholder="ই-মেইল লিখুন"
             disabled={isLoading}
-            className="w-full py-3 border-b border-primary"
+            className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.email?.message}</p>
         </div>
 
-        <div className="mt-4 mb-1">
+        <div className="mb-1 mt-4">
           <label className="font-bold">মোবাইল নাম্বার</label>
           <input
             {...register("mobile")}
             type="text"
             placeholder="মোবাইল নাম্বার লিখুন"
             disabled={isLoading}
-            className="w-full py-3 border-b border-primary"
+            className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.mobile?.message}</p>
         </div>
 
-        <div className="mt-4 mb-1">
+        <div className="mb-1 mt-4">
           <label className="font-bold">পাসওয়ার্ড</label>
           <input
             {...register("password")}
             type="password"
             placeholder="পাসওয়ার্ড দিন"
             disabled={isLoading}
-            className="w-full py-3 border-b border-primary"
+            className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.password?.message}</p>
         </div>
 
-        <div className="mt-4 mb-1">
+        <div className="mb-1 mt-4">
           <label className="font-bold">কনফার্ম পাসওয়ার্ড</label>
           <input
             {...register("confirmPassword")}
             type="password"
             placeholder="পুনরায় পাসওয়ার্ড দিন"
             disabled={isLoading}
-            className="w-full py-3 border-b border-primary"
+            className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.confirmPassword?.message}</p>
         </div>

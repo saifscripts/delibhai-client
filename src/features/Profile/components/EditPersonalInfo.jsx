@@ -27,13 +27,13 @@ const userSchema = yup.object({
     .required("Gender is required.")
     .oneOf(
       ["পুরুষ", "মহিলা", "অন্যান্য"],
-      "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য."
+      "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য.",
     ),
   bloodGroup: yup
     .string()
     .oneOf(
       ["এ+", "বি+", "এবি+", "ও+", "এ-", "বি-", "এবি-", "ও-"],
-      "${value} is an invalid blood group."
+      "${value} is an invalid blood group.",
     ),
   age: yup.number().integer("{value} is not an integer value."),
   nid: yup.string().test("isValidNID", "NID is not valid.", isNID),
@@ -77,7 +77,7 @@ const EditPersonalInfo = () => {
         `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_IMGBB_API_KEY
         }`,
-        formData
+        formData,
       );
 
       // If image upload is not successful, setError message and return
@@ -98,7 +98,7 @@ const EditPersonalInfo = () => {
     // Update data
     const { data, error } = await updateData(
       `/v1/user/${currentUser._id}`,
-      userData
+      userData,
     );
 
     if (data?.success) {
@@ -119,36 +119,36 @@ const EditPersonalInfo = () => {
       />
       <MiniContainer>
         <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">নিজের নাম</label>
             <input
               {...register("name")}
               type="text"
               placeholder="নিজের নাম লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.name?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">পিতার নাম</label>
             <input
               {...register("fatherName")}
               type="text"
               placeholder="পিতার নাম লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.fatherName?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">লিঙ্গ</label>
             <select
               {...register("gender")}
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary bg-transparent"
+              className="w-full border-b border-primary bg-transparent py-3"
             >
               <option value="পুরুষ">পুরুষ</option>
               <option value="মহিলা">মহিলা</option>
@@ -157,12 +157,12 @@ const EditPersonalInfo = () => {
             <p className="text-red-400">{errors.gender?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">রক্তের গ্রুপ</label>
             <select
               {...register("bloodGroup")}
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary bg-transparent"
+              className="w-full border-b border-primary bg-transparent py-3"
             >
               <option value="এ+">এ+</option>
               <option value="বি+">বি+</option>
@@ -176,38 +176,38 @@ const EditPersonalInfo = () => {
             <p className="text-red-400">{errors.bloodGroup?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">বয়স</label>
             <input
               {...register("age")}
               type="number"
               placeholder="বয়স লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.age?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">জন্মনিবন্ধন/NID নম্বর</label>
             <input
               {...register("nid")}
               type="number"
               placeholder="জন্মনিবন্ধন/NID নম্বর লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.nid?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">জন্মনিবন্ধন/NID এর ছবি</label>
             <input
               {...register("nidURL")}
               type="file"
               disabled={isLoading}
               accept="image/*"
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.nidURL?.message}</p>
           </div>

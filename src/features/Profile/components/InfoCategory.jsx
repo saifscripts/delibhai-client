@@ -12,14 +12,14 @@ export const InfoCategory = ({
   return (
     <div
       onClick={() => setActiveCategory(name)}
-      className={`relative z-10 flex flex-col flex-shrink-0 justify-center items-center w-24 p-1 ${
+      className={`relative z-10 flex w-24 flex-shrink-0 flex-col items-center justify-center p-1 ${
         active && "border-b-2"
       } border-secondary`}
     >
       <div className="relative">
         <CircularProgressbar
           counterClockwise
-          className="w-[50px] aspect-square"
+          className="aspect-square w-[50px]"
           strokeWidth={10}
           value={percent}
           styles={{
@@ -36,15 +36,15 @@ export const InfoCategory = ({
         />
 
         <div
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black rounded-full -z-10 flex justify-center items-center text-[#00E1A9] aspect-square`}
+          className={`absolute left-1/2 top-1/2 -z-10 flex aspect-square -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black text-[#00E1A9]`}
           style={{ width: 45 }}
         >
           <img src={icon} alt={title} />
         </div>
       </div>
 
-      <p className="mt-1 text-[6px">{title}</p>
-      <p className="text-[#979797] -mt-2 text-[6px">{percent}%</p>
+      <p className="text-[6px mt-1">{title}</p>
+      <p className="text-[6px -mt-2 text-[#979797]">{percent}%</p>
     </div>
   );
 };

@@ -70,7 +70,7 @@ export const Profile = () => {
                   />
                 )
               );
-            }
+            },
           )}
         </InfoContainer>
       ))}
@@ -88,7 +88,7 @@ export const Profile = () => {
       {activeCategory === "review" && (
         <>
           <InfoContainer category="রাইডার এক্টিভিটি">
-            <div className="flex gap-8 justify-center items-center py-3 border-b border-light">
+            <div className="border-light flex items-center justify-center gap-8 border-b py-3">
               <Achievement title="21K রিভিও" stat="4.3" icon={<AiFillStar />} />
               <Achievement title="রাইড শেয়ার" stat="30K" />
               <Achievement title="রিসিভড কল" stat="35K" />
@@ -96,7 +96,7 @@ export const Profile = () => {
           </InfoContainer>
 
           <InfoContainer category="রেটিং এবং রিভিও">
-            <div className="grid grid-cols-[1fr_3fr] gap-8 items-center px-2 py-3 border-b border-light">
+            <div className="border-light grid grid-cols-[1fr_3fr] items-center gap-8 border-b px-2 py-3">
               <AverageRating rating="3.7" total="21,000" />
               <RatingBars percentages={[70, 20, 10, 3, 2]} />
             </div>
@@ -115,7 +115,7 @@ export const Profile = () => {
                     date={date}
                     review={review}
                   />
-                )
+                ),
               )}
             </div>
           </InfoContainer>

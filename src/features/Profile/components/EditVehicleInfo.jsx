@@ -47,7 +47,7 @@ const EditVehicleInfo = () => {
   const onSubmit = async (userData) => {
     const { data, error } = await updateData(
       `/v1/user/${currentUser._id}`,
-      userData
+      userData,
     );
 
     if (data?.success) {
@@ -66,12 +66,12 @@ const EditVehicleInfo = () => {
       />
       <MiniContainer>
         <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">গাড়ির ধরণ</label>
             <select
               {...register("vehicleType")}
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary bg-transparent"
+              className="w-full border-b border-primary bg-transparent py-3"
             >
               <option>গাড়ির ধরণ নির্বাচন করুন</option>
 
@@ -84,50 +84,50 @@ const EditVehicleInfo = () => {
             <p className="text-red-400">{errors.vehicleType?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">গাড়ির ব্র্যান্ড</label>
             <input
               {...register("vehicleBrand")}
               type="text"
               placeholder="গাড়ির ব্র্যান্ড লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.vehicleBrand?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">গাড়ির মডেল</label>
             <input
               {...register("vehicleModel")}
               type="text"
               placeholder="গাড়ির মডেল লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.vehicleModel?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">গাড়ির নম্বর</label>
             <input
               {...register("vehicleNumber")}
               type="text"
               placeholder="গাড়ির নম্বর লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.vehicleNumber?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">গাড়ির নাম</label>
             <input
               {...register("vehicleName")}
               type="text"
               placeholder="গাড়ির নাম লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.vehicleName?.message}</p>
           </div>

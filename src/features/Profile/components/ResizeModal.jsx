@@ -37,7 +37,7 @@ export default function ResizeModal({
       },
       ASPECT_RATIO,
       width,
-      height
+      height,
     );
 
     const centeredCrop = centerCrop(_crop, width, height);
@@ -47,7 +47,7 @@ export default function ResizeModal({
   const handleCrop = async () => {
     const dataURL = getCroppedData(
       imageRef.current,
-      convertToPixelCrop(crop, imageRef.current.width, imageRef.current.height)
+      convertToPixelCrop(crop, imageRef.current.width, imageRef.current.height),
     );
 
     const promises = [];
@@ -56,7 +56,7 @@ export default function ResizeModal({
       `https://api.imgbb.com/1/upload?key=${
         import.meta.env.VITE_IMGBB_API_KEY
       }`,
-      base64ToFormData(dataURL)
+      base64ToFormData(dataURL),
     );
 
     if (imageSrc.startsWith("data:image/")) {
@@ -64,7 +64,7 @@ export default function ResizeModal({
         `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_IMGBB_API_KEY
         }`,
-        base64ToFormData(imageSrc)
+        base64ToFormData(imageSrc),
       );
     }
 
@@ -80,7 +80,7 @@ export default function ResizeModal({
 
     const { data } = await updateData(
       `/v1/user/${currentUser._id}`,
-      avatarData
+      avatarData,
     );
 
     if (data?.success) {
@@ -91,10 +91,10 @@ export default function ResizeModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-20">
-      <div className="mx-4 bg-white p-4 rounded-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-20">
+      <div className="mx-4 rounded-md bg-white p-4">
         {imageSrc && (
-          <div className="flex flex-col justify-center items-center gap-5">
+          <div className="flex flex-col items-center justify-center gap-5">
             <ReactCrop
               crop={crop}
               // circularCrop
@@ -116,14 +116,14 @@ export default function ResizeModal({
             </ReactCrop>
             <div className="space-x-3">
               <button
-                className="bg-primary px-3 py-1 rounded-md text-white"
+                className="rounded-md bg-primary px-3 py-1 text-white"
                 onClick={() => setResizeModal(false)}
               >
                 Cancel
               </button>
               <button
                 disabled={isLoading}
-                className={`px-3 py-1 rounded-md text-white ${
+                className={`rounded-md px-3 py-1 text-white ${
                   isLoading ? "bg-gray-500" : "bg-primary"
                 }`}
                 onClick={() => {

@@ -36,7 +36,7 @@ const EditVideoURL = () => {
   const onSubmit = async (userData) => {
     const { data, error } = await updateData(
       `/v1/user/${currentUser._id}`,
-      userData
+      userData,
     );
 
     if (data?.success) {
@@ -55,14 +55,14 @@ const EditVideoURL = () => {
       />
       <MiniContainer>
         <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">ভিডিও লিংক</label>
             <input
               {...register("videoURL")}
               type="text"
               placeholder="ইউটিউব ভিডিও লিংক লিখুন"
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary"
+              className="w-full border-b border-primary py-3"
             />
             <p className="text-red-400">{errors.videoURL?.message}</p>
           </div>

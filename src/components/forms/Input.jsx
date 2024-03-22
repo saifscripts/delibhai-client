@@ -3,14 +3,14 @@
 function Input({ label, type, data, info, onInputChange, placeholder }) {
   return (
     <label>
-      <p className="font-bold mt-4 mb-1">{label}</p>
+      <p className="mb-1 mt-4 font-bold">{label}</p>
 
       <input
         type={type}
         value={data || info}
         placeholder={placeholder}
         onChange={onInputChange}
-        className="w-full py-3 border-b border-primary"
+        className="w-full border-b border-primary py-3"
       />
     </label>
   );

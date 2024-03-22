@@ -5,15 +5,15 @@ import { Avatar, RatingStars } from "../index";
 export const Review = ({ image, name, rating, date, review }) => {
   return (
     <div className="">
-      <div className="flex justify-between items-center">
-        <div className="flex gap-5 items-center">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-5">
           <Avatar className="w-12" src={image} />
           <p className="text-lg">{name}</p>
         </div>
         {<BsThreeDotsVertical />}
       </div>
 
-      <div className="flex gap-2 items-center my-2">
+      <div className="my-2 flex items-center gap-2">
         <RatingStars rating={rating} />
         <span className="text-medium">{date}</span>
       </div>

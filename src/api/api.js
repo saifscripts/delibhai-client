@@ -2,7 +2,6 @@ import { useState } from "react";
 import { getAuthToken } from "../features/Authentication/utils/getAuthToken";
 import axios from "./axiosConfig";
 
-
 // useFetchData hook returns loading state and fetchData method
 export const useFetchData = () => {
   // Loading State
@@ -11,15 +10,15 @@ export const useFetchData = () => {
   // fetchData method directly returns data/error
   const fetchData = async (route, searchParams) => {
     const token = getAuthToken();
-    let queryString = '?';
+    let queryString = "?";
 
-    if(searchParams) {
+    if (searchParams) {
       for (let param in searchParams) {
-        queryString += param + '=' + searchParams[param] + '&';
+        queryString += param + "=" + searchParams[param] + "&";
       }
       queryString = queryString.slice(0, -1);
     } else {
-      queryString = ''
+      queryString = "";
     }
 
     let data, error;
@@ -27,8 +26,8 @@ export const useFetchData = () => {
     try {
       setIsLoading(true);
       const response = await axios.get("/api" + route + queryString, {
-        headers: {'authorization': token ? `Bearer ${token}`: null},
-      }); 
+        headers: { authorization: token ? `Bearer ${token}` : null },
+      });
       data = response.data;
     } catch (err) {
       const appError = err?.response?.data;
@@ -57,7 +56,7 @@ export const usePostData = () => {
     try {
       setIsLoading(true);
       const response = await axios.post("/api" + route, body, {
-        headers: {'authorization': token ? `Bearer ${token}`: null},
+        headers: { authorization: token ? `Bearer ${token}` : null },
       });
       data = response.data;
     } catch (err) {
@@ -87,7 +86,7 @@ export const useUpdateData = () => {
     try {
       setIsLoading(true);
       const response = await axios.patch("/api" + route, body, {
-        headers: {'authorization': token ? `Bearer ${token}`: null},
+        headers: { authorization: token ? `Bearer ${token}` : null },
       });
       data = response.data;
     } catch (err) {

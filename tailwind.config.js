@@ -2,7 +2,7 @@
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       // USE EXTENDED COLORS WHEN DAISY UI WILL BE REMOVED
@@ -20,16 +20,16 @@ export default {
         inter: "'Inter', sans-serif",
       },
       boxShadow: {
-        '3xl': '0 4px 4px rgba(0, 0, 0, 0.25)',
+        "3xl": "0 4px 4px rgba(0, 0, 0, 0.25)",
       },
       transitionProperty: {
-        'height': 'height',
-      }
+        height: "height",
+      },
     },
     container: {
       center: true,
       padding: {
-        DEFAULT: '1.5rem',
+        DEFAULT: "1.5rem",
       },
     },
   },
@@ -38,17 +38,16 @@ export default {
     themes: [
       {
         mytheme: {
-          primary: '#00C795',
-          secondary: '#13EBB4',
-          accent: '#707070',
-          neutral: '#D9D9D9',
-          medium: '#515050',
-          light: '#EBEBEB',
+          primary: "#00C795",
+          secondary: "#13EBB4",
+          accent: "#707070",
+          neutral: "#D9D9D9",
+          medium: "#515050",
+          light: "#EBEBEB",
         },
       },
     ],
   },
   // ONLY FOR DUMMY HOME PAGE. REMOVE THIS LATER
-  plugins: [require("daisyui")
-  ],
+  plugins: [require("daisyui")],
 };

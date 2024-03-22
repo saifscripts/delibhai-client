@@ -6,23 +6,23 @@ import { NavLinks } from "./NavLinks";
 const Sidebar = ({ isSidebarOpen, handleSidebarToggle }) => {
   return (
     <div
-      className={`lg:hidden fixed top-0 bottom-0 left-0 w-[300px] bg-slate-800 text-white transition-transform ease-in ${
+      className={`fixed bottom-0 left-0 top-0 w-[300px] bg-slate-800 text-white transition-transform ease-in lg:hidden ${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       }`}
     >
-      <div className="lg:hidden flex justify-between items-center py-5 px-4  border-b border-slate-700">
+      <div className="flex items-center justify-between border-b border-slate-700 px-4  py-5 lg:hidden">
         <Link
           onClick={handleSidebarToggle}
-          className="flex gap-4 items-center"
+          className="flex items-center gap-4"
           to={"/"}
         >
           <img src={minilogo} alt="deliBhai Logo" className="w-10" />
-          <p className="text-3xl text-white font-bold">deliBhai</p>
+          <p className="text-3xl font-bold text-white">deliBhai</p>
         </Link>
 
         <div
           onClick={handleSidebarToggle}
-          className="w-10 h-10 flex justify-center items-center text-3xl border border-slate-700 hover:bg-slate-700"
+          className="flex h-10 w-10 items-center justify-center border border-slate-700 text-3xl hover:bg-slate-700"
         >
           <RxCross1 />
         </div>

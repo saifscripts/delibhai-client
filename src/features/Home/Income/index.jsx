@@ -5,8 +5,8 @@ const Income = () => {
   return (
     <section className="my-24">
       {/* Section Title */}
-      <div className="max-w-2xl mx-auto px-6 text-center">
-        <h2 className="heading text-black text-3xl sm:text-4xl md:text-5xl font-semibold mb-3">
+      <div className="mx-auto max-w-2xl px-6 text-center">
+        <h2 className="heading mb-3 text-3xl font-semibold text-black sm:text-4xl md:text-5xl">
           বাইক, গাড়ি অথবা অটো রিকশা এর মাধ্যমে আয় করুন
         </h2>
         <Link to="/" className="btn btn-primary mb-10 text-white">

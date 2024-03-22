@@ -24,17 +24,17 @@ const OrderProcess = () => {
 
   return (
     <section className="my-24">
-      <div className="max-w-[920px] mx-auto px-6">
+      <div className="mx-auto max-w-[920px] px-6">
         {/* Section Title */}
-        <h3 className="text-primary text-center text-2xl md:text-3xl mb-5">
+        <h3 className="mb-5 text-center text-2xl text-primary md:text-3xl">
           ডেলিভাই সার্ভিসের মাধ্যমে
         </h3>
-        <h2 className="text-black text-center text-3xl sm:text-4xl md:text-5xl font-semibold mb-10">
+        <h2 className="mb-10 text-center text-3xl font-semibold text-black sm:text-4xl md:text-5xl">
           মাত্র 30 মিনিটে অর্ডার ডেলিভারি
         </h2>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
+        <div className="grid grid-cols-1 gap-16 md:grid-cols-3">
           {steps.map((step) => (
             <Step key={step.id} step={step} />
           ))}

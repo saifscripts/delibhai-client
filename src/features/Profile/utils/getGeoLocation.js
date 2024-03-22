@@ -1,4 +1,9 @@
-import { getAllDistrict, getAllDivision, getAllUnion, getAllUpazila } from "bd-divisions-to-unions";
+import {
+  getAllDistrict,
+  getAllDivision,
+  getAllUnion,
+  getAllUpazila,
+} from "bd-divisions-to-unions";
 
 const getDistricts = (divisionTitle) => {
   const divisions = getAllDivision();
@@ -46,11 +51,10 @@ const getUnions = (upazilaTitle) => {
   const upazila = upazilas.find(({ title }) => title === upazilaTitle);
 
   // Get corresponding division value;
-  const upazilaValue = upazila?.value;  
+  const upazilaValue = upazila?.value;
 
   // return upazilas from specified division
   return unions[upazilaValue];
 };
 
- export { getDistricts, getUnions, getUpazilas };
-
+export { getDistricts, getUnions, getUpazilas };

@@ -44,7 +44,7 @@ function ServiceTime({ serviceTime, setServiceTime }) {
 
     let _data = cloneDeep(serviceTime);
     _data = serviceTime.filter(
-      ({ start, end }) => !(start === startTime && end === endTime)
+      ({ start, end }) => !(start === startTime && end === endTime),
     );
 
     setServiceTime(_data);
@@ -52,20 +52,20 @@ function ServiceTime({ serviceTime, setServiceTime }) {
 
   return (
     <>
-      <p className="font-bold mt-4 mb-1">সার্ভিস প্রদানের সময়</p>
+      <p className="mb-1 mt-4 font-bold">সার্ভিস প্রদানের সময়</p>
 
       <div className="flex flex-col gap-2">
         {serviceTime.map(({ start, end }, index) => (
           <div
             key={index}
-            className="px-3 py-2 bg-light rounded-lg flex justify-between items-center"
+            className="bg-light flex items-center justify-between rounded-lg px-3 py-2"
           >
             <span>{`${convertTimeFormat(start)} থেকে ${convertTimeFormat(
-              end
+              end,
             )} পর্যন্ত`}</span>
             <button
               onClick={(e) => removeTime(e, start, end)}
-              className="p-3 rounded-lg bg-neutral"
+              className="rounded-lg bg-neutral p-3"
             >
               {<AiFillDelete />}
             </button>
@@ -73,20 +73,20 @@ function ServiceTime({ serviceTime, setServiceTime }) {
         ))}
       </div>
 
-      <div className="flex my-6 flex-col gap-2 p-3 bg-accent rounded-lg">
-        <label className="bg-light p-2 rounded-lg flex justify-between items-center">
+      <div className="my-6 flex flex-col gap-2 rounded-lg bg-accent p-3">
+        <label className="bg-light flex items-center justify-between rounded-lg p-2">
           শুরুর সময়
           <input
-            className="bg-inherit rounded-lg border border-accent p-1"
+            className="rounded-lg border border-accent bg-inherit p-1"
             type="time"
             value={startTime}
             onChange={onStartTimeChange}
           />
         </label>
-        <label className="bg-light p-2 rounded-lg flex justify-between items-center">
+        <label className="bg-light flex items-center justify-between rounded-lg p-2">
           শেষের সময়
           <input
-            className="bg-inherit rounded-lg border border-accent p-1"
+            className="rounded-lg border border-accent bg-inherit p-1"
             type="time"
             value={endTime}
             onChange={onEndTimeChange}
@@ -95,7 +95,7 @@ function ServiceTime({ serviceTime, setServiceTime }) {
 
         <button
           onClick={addTime}
-          className="bg-blue-400 px-2 py-2 text-white text-xl rounded-lg flex gap-2 justify-center items-center"
+          className="flex items-center justify-center gap-2 rounded-lg bg-blue-400 px-2 py-2 text-xl text-white"
         >
           <AiFillPlusSquare />
           <span>যোগ করুন</span>
@@ -106,4 +106,3 @@ function ServiceTime({ serviceTime, setServiceTime }) {
 }
 
 export { ServiceTime };
-

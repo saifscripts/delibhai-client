@@ -95,7 +95,7 @@ function OTPVerification() {
               subtitle="আমাদের পাঠানো SMS এ প্রাপ্ত কোডটি প্রদান করুন +8801823540325"
             />
 
-            <p className="text-red-400 text-center text-xl mt-4">{error}</p>
+            <p className="mt-4 text-center text-xl text-red-400">{error}</p>
             <Timer
               time={60 * 1000}
               timerRunning={timerRunning}
@@ -113,12 +113,12 @@ function OTPVerification() {
                     onKeyDown={preventUpDown}
                     maxLength="1"
                     disabled={isLoading}
-                    className="w-12 aspect-square text-xl px-4 border border-secondary rounded-lg focus:outline-none focus:border-primary"
+                    className="aspect-square w-12 rounded-lg border border-secondary px-4 text-xl focus:border-primary focus:outline-none"
                   />
                 ))}
               </div>
 
-              <p className="w-fit mx-auto my-4">
+              <p className="mx-auto my-4 w-fit">
                 আমি কোনো কোড পাই নি.{" "}
                 <button
                   onClick={resendOTP}

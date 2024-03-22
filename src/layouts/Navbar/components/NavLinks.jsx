@@ -35,9 +35,9 @@ const NavLinks = () => {
       {currentUser && (
         <button
           onClick={logout}
-          className="hover:cursor-pointer active:bg-primary lg:hover:bg-neutral px-8 py-4 lg:px-4 lg:py-4 lg:rounded-lg text-sm flex gap-5 items-center lg:blok"
+          className="lg:blok flex items-center gap-5 px-8 py-4 text-sm hover:cursor-pointer active:bg-primary lg:rounded-lg lg:px-4 lg:py-4 lg:hover:bg-neutral"
         >
-          <span className="lg:hidden text-2xl">
+          <span className="text-2xl lg:hidden">
             <AiOutlineLogout />
           </span>
           <span>লগআউট করুন</span>

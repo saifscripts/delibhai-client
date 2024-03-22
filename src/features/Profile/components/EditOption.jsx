@@ -1,15 +1,15 @@
 export const EditOption = ({ icon, text, type, ...restProps }) => {
   return (
     <label
-      className="flex gap-3 items-center hover:bg-[#ccc] active:bg-[#ccc] hover:cursor-pointer px-7 py-2"
+      className="flex items-center gap-3 px-7 py-2 hover:cursor-pointer hover:bg-[#ccc] active:bg-[#ccc]"
       htmlFor={text}
     >
-      <div className="w-10 aspect-square rounded-full bg-light flex justify-center items-center text-xl">
+      <div className="bg-light flex aspect-square w-10 items-center justify-center rounded-full text-xl">
         {icon}
       </div>
       <input
         id={text}
-        className="text-xl hidden"
+        className="hidden text-xl"
         type={type}
         accept={type === "file" ? "image/png, image/gif, image/jpeg" : ""}
         {...restProps}

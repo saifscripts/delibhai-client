@@ -1,23 +1,21 @@
-import { useEffect, useState } from 'react';
-import { useFetchData } from '../../../api/api';
-import { useAuth } from '../../Authentication/contexts/AuthContext';
+import { useEffect, useState } from "react";
+import { useFetchData } from "../../../api/api";
+import { useAuth } from "../../Authentication/contexts/AuthContext";
 
 const useUserInfo = (id) => {
   const [userInfo, setUserInfo] = useState({});
-  const { isLoading, fetchData} = useFetchData();
-  const {currentUser} = useAuth();
+  const { isLoading, fetchData } = useFetchData();
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     if (currentUser?._id === id) {
-      setUserInfo(currentUser)
+      setUserInfo(currentUser);
     } else {
-      fetchData(`/v1/user/${id}`).then(({data})=> setUserInfo(data.data))
+      fetchData(`/v1/user/${id}`).then(({ data }) => setUserInfo(data.data));
     }
-
   }, [id, currentUser]);
 
-  return {isLoading, userInfo};
+  return { isLoading, userInfo };
 };
 
 export default useUserInfo;
-

@@ -20,13 +20,13 @@ const userSchema = yup.object({
     .string()
     .oneOf(
       ["ব্যক্তিগত", "ভাড়ায় চালিত"],
-      "${value} is an invalid service usage."
+      "${value} is an invalid service usage.",
     ),
   serviceType: yup
     .string()
     .oneOf(
       ["লোকাল ভাড়া", "রিজার্ভ ভাড়া", "লোকাল ও রিজার্ভ ভাড়া", "কন্টাক্ট ভাড়া"],
-      "${value} is an invalid service type."
+      "${value} is an invalid service type.",
     ),
 });
 
@@ -74,7 +74,7 @@ const EditServiceInfo = () => {
     // Update data
     const { data, error } = await updateData(
       `/v1/user/${currentUser._id}`,
-      userData
+      userData,
     );
 
     if (data?.success) {
@@ -95,12 +95,12 @@ const EditServiceInfo = () => {
       />
       <MiniContainer>
         <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">গাড়ির ব্যবহার</label>
             <select
               {...register("serviceUsage")}
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary bg-transparent"
+              className="w-full border-b border-primary bg-transparent py-3"
             >
               <option value="ব্যক্তিগত">ব্যক্তিগত</option>
               <option value="ভাড়ায় চালিত">ভাড়ায় চালিত</option>
@@ -108,12 +108,12 @@ const EditServiceInfo = () => {
             <p className="text-red-400">{errors.serviceUsage?.message}</p>
           </div>
 
-          <div className="mt-4 mb-1">
+          <div className="mb-1 mt-4">
             <label className="font-bold">গাড়ির সেবা</label>
             <select
               {...register("serviceType")}
               disabled={isLoading}
-              className="w-full py-3 border-b border-primary bg-transparent"
+              className="w-full border-b border-primary bg-transparent py-3"
             >
               <option value="লোকাল ভাড়া">লোকাল ভাড়া</option>
               <option value="রিজার্ভ ভাড়া">রিজার্ভ ভাড়া</option>
@@ -123,7 +123,7 @@ const EditServiceInfo = () => {
             <p className="text-red-400">{errors.serviceType?.message}</p>
           </div>
 
-          <p className="font-bold mt-4 mb-3 py-3 border-b border-light">
+          <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
             সার্ভিস প্রদানের এলাকা
           </p>
 

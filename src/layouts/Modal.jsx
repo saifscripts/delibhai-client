@@ -13,7 +13,7 @@ const Modal = ({ isOpen, onClose, className, children }) => {
         onClick={onClose}
       ></div>
       {/* Modal container */}
-      <div className={`bg-white rounded-lg shadow-lg z-50 ${className}`}>
+      <div className={`z-50 rounded-lg bg-white shadow-lg ${className}`}>
         {children}
       </div>
     </div>

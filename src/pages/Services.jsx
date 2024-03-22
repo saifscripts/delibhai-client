@@ -6,24 +6,24 @@ const { host, protocol } = location;
 
 const Services = () => {
   return (
-    <div className="bg-secondary min-h-screen">
+    <div className="min-h-screen bg-secondary">
       <Container>
         <Title color="white" title="ডেলিভাই সার্ভিস সমূহ" />
         {/* Categories */}
-        <div className="grid grid-cols-2 gap-4 py-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 lg:gap-8">
+        <div className="grid grid-cols-2 gap-4 py-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 lg:gap-8 xl:grid-cols-5">
           {services.map(({ id, icon, title, subdomain }) => (
             <a
               href={`${protocol}//${subdomain}.${host}`}
               key={id}
-              className="bg-white rounded-lg aspect-square flex justify-center items-center shadow-md"
+              className="flex aspect-square items-center justify-center rounded-lg bg-white shadow-md"
             >
-              <div className="flex flex-col gap-4 lg:gap-6 justify-center items-center">
+              <div className="flex flex-col items-center justify-center gap-4 lg:gap-6">
                 <img
                   src={icon}
                   alt={title}
-                  className="w-16 sm:w-20 lg:w-24 aspect-square"
+                  className="aspect-square w-16 sm:w-20 lg:w-24"
                 />
-                <p className="text-xl sm:text-2xl text-center">{title}</p>
+                <p className="text-center text-xl sm:text-2xl">{title}</p>
               </div>
             </a>
           ))}

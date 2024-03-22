@@ -3,11 +3,7 @@ import categories from "../data/categories";
 import profileSchema from "../data/profileSchema";
 import { InfoCategory } from "../index";
 
-export const Categories = ({
-  userInfo,
-  activeCategory,
-  setActiveCategory,
-}) => {
+export const Categories = ({ userInfo, activeCategory, setActiveCategory }) => {
   const calculatePercent = (categoryName) => {
     let total = 0;
     let completed = 0;
@@ -24,8 +20,8 @@ export const Categories = ({
   };
 
   return (
-    <div className="overflow-y-hidden mb-6">
-      <div className="mt-8 flex gap-2 overflow-x-scroll pb-5 -mb-5">
+    <div className="mb-6 overflow-y-hidden">
+      <div className="-mb-5 mt-8 flex gap-2 overflow-x-scroll pb-5">
         {categories.map(({ name, title, icon }) => (
           <InfoCategory
             key={name}

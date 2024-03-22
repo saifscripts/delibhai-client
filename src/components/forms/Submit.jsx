@@ -3,7 +3,7 @@
 function Submit({ value, className, ...props }) {
   return (
     <button
-      className={`bg-primary disabled:bg-slate-400 disabled:text-slate-600 text-white text-xl rounded-full w-full py-3 my-8 ${className}`}
+      className={`my-8 w-full rounded-full bg-primary py-3 text-xl text-white disabled:bg-slate-400 disabled:text-slate-600 ${className}`}
       type="submit"
       {...props}
     >

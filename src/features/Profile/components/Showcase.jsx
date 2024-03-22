@@ -3,7 +3,7 @@ import ProfileAvatar from "./ProfileAvatar";
 
 export const Showcase = ({ userInfo }) => {
   const vehicleIcon = vehicles.find(
-    ({ title }) => title === userInfo?.vehicleType
+    ({ title }) => title === userInfo?.vehicleType,
   )?.icon;
 
   return (
@@ -12,28 +12,28 @@ export const Showcase = ({ userInfo }) => {
         <ProfileAvatar avatarURL={userInfo?.avatarURL} />
 
         <div>
-          <h3 className="text-2xl mb-1">{userInfo?.name}</h3>
+          <h3 className="mb-1 text-2xl">{userInfo?.name}</h3>
 
-          <span className="text-gray-500 border border-grey-500 rounded-lg px-3 font-inter mb-4 inline-block">
+          <span className="border-grey-500 mb-4 inline-block rounded-lg border px-3 font-inter text-gray-500">
             #{userInfo?._id?.slice(0, 5)}
           </span>
 
-          <div className="relative z-10 bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] pl-4 pr-10 min-[400px]:pr-12 min-[500px]:pr-16 py-3 rounded-full text-xs min-[500px]:text-base h-10 flex items-center">
+          <div className="relative z-10 flex h-10 items-center rounded-full bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] py-3 pl-4 pr-10 text-xs min-[400px]:pr-12 min-[500px]:pr-16 min-[500px]:text-base">
             <span>
               {(userInfo?.vehicleType &&
                 userInfo?.serviceUsage === "ব্যক্তিগত" &&
                 userInfo?.vehicleType + " মালিক") ||
                 (userInfo?.vehicleType && userInfo?.vehicleType + " রাইডার")}
             </span>
-            <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-16">
+            <div className="absolute right-0 top-1/2 w-16 -translate-y-1/2 translate-x-1/2">
               <img
                 src={vehicleIcon}
                 alt={userInfo?.vehicleType}
                 className="w-full"
               />
             </div>
-            <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-24 aspect-square rounded-full bg-secondary opacity-10 p-4 -z-20"></div>
-            <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-[76px] aspect-square rounded-full bg-secondary opacity-20 -z-10"></div>
+            <div className="absolute right-0 top-1/2 -z-20 aspect-square w-24 -translate-y-1/2 translate-x-1/2 rounded-full bg-secondary p-4 opacity-10"></div>
+            <div className="absolute right-0 top-1/2 -z-10 aspect-square w-[76px] -translate-y-1/2 translate-x-1/2 rounded-full bg-secondary opacity-20"></div>
           </div>
         </div>
       </div>

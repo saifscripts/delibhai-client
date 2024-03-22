@@ -1,6 +1,6 @@
 const getLocation = () => {
   let domain;
-  let subdomain = '';
+  let subdomain = "";
 
   const { protocol, hostname, port } = window.location;
   const hostParts = hostname.split(".");
@@ -21,7 +21,7 @@ const getLocation = () => {
 
   if (!isLocalhost && hostParts.length === 3) {
     subdomain = hostParts[0];
-    domain = hostParts.slice(1).join('.');
+    domain = hostParts.slice(1).join(".");
   }
 
   return { protocol, port, subdomain, domain };

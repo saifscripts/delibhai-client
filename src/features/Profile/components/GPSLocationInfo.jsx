@@ -5,16 +5,16 @@ import { InfoContainer } from "./InfoContainer";
 export default function GPSLocationInfo() {
   return (
     <InfoContainer category="GPS Location">
-      <div className="p-3 flex justify-center items-center gap-2 border border-light rounded-md mb-3 text-medium">
+      <div className="border-light text-medium mb-3 flex items-center justify-center gap-2 rounded-md border p-3">
         <CiLocationOn />
         <p>
           {"Heyako Bazar, Ramgarh Khagrachari Road, Fatikchhari, Chittagong, Bangladesh".slice(
             0,
-            30
+            30,
           ) + " . . ."}
         </p>
       </div>
-      <div className="border border-light rounded-md">
+      <div className="border-light rounded-md border">
         <img src={map} alt="Map" className="w-full" />
       </div>
     </InfoContainer>

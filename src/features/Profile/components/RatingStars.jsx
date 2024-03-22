@@ -17,7 +17,7 @@ export const RatingStars = ({ rating }) => {
     .map((n, i) => <BsStar key={i} />);
 
   return (
-    <div className="flex justify-center gap-1 text-primary text-sm">
+    <div className="flex justify-center gap-1 text-sm text-primary">
       {fullStars} {halfStar} {emptyStars}
     </div>
   );

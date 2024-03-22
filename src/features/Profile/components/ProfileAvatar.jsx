@@ -10,7 +10,7 @@ export default function ProfileAvatar({ avatarURL }) {
     return (
       <button
         onClick={() => setEditModal(true)}
-        className="absolute right-[5%] bottom-[5%] rounded-full bg-neutral w-[20%] aspect-square flex justify-center items-center"
+        className="absolute bottom-[5%] right-[5%] flex aspect-square w-[20%] items-center justify-center rounded-full bg-neutral"
       >
         <img src={camera} alt="Camera" />
       </button>

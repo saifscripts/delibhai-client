@@ -5,7 +5,7 @@ import Edit from "../../../components/ui/Edit";
 export const InfoContainer = ({ category, children, editRoute }) => {
   return (
     <div className="mb-3">
-      <div className="flex justify-between items-center mb-2">
+      <div className="mb-2 flex items-center justify-between">
         <h4 className="text-xl font-bold">{category}</h4>
         {editRoute && (
           <Link to={editRoute}>

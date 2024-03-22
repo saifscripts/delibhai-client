@@ -6,9 +6,9 @@ export const RatingBars = ({ percentages }) => {
       {percentages.map((percentage, i) => {
         console.log(percentage);
         return (
-          <div key={i} className="flex gap-3 items-center">
+          <div key={i} className="flex items-center gap-3">
             <span className="text-xl">{englishToBengaliNumber(-i + 5)}</span>
-            <div className="w-full h-[9px] rounded-full bg-light">
+            <div className="bg-light h-[9px] w-full rounded-full">
               <div
                 style={{
                   width: `${percentage}%`,

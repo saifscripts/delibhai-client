@@ -26,7 +26,7 @@ const getCroppedData = (image, crop) => {
     0,
     0,
     image.naturalWidth,
-    image.naturalHeight
+    image.naturalHeight,
   );
 
   ctx.restore();

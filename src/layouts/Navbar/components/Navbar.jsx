@@ -10,8 +10,8 @@ const Navbar = () => {
   const { isSidebarOpen, handleSidebarToggle } = useSidebar();
 
   return (
-    <nav className="bg-white sticky top-0 lg:shadow-sm z-50">
-      <div className="container flex justify-between items-center h-16 sm:h-24">
+    <nav className="sticky top-0 z-50 bg-white lg:shadow-sm">
+      <div className="container flex h-16 items-center justify-between sm:h-24">
         {/* Sidebar */}
         <Sidebar
           isSidebarOpen={isSidebarOpen}
@@ -20,7 +20,7 @@ const Navbar = () => {
 
         {/* Hamburger Button */}
         <RxHamburgerMenu
-          className="lg:hidden text-3xl"
+          className="text-3xl lg:hidden"
           onClick={(e) => {
             e.stopPropagation();
             handleSidebarToggle();
@@ -33,7 +33,7 @@ const Navbar = () => {
         </Link>
 
         {/* Nav menu */}
-        <ul className="hidden lg:flex gap-2">
+        <ul className="hidden gap-2 lg:flex">
           <NavLinks />
         </ul>
       </div>

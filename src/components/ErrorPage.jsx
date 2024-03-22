@@ -11,23 +11,23 @@ function ErrorPage() {
 
   return (
     <Container>
-      <div className="min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-6rem)] flex flex-col gap-4 justify-center items-center">
-        <h1 className="text-3xl lg:text-4xl text-center">
+      <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center gap-4 sm:min-h-[calc(100vh-6rem)]">
+        <h1 className="text-center text-3xl lg:text-4xl">
           {error.status} - {error.statusText}
         </h1>
-        <p className="text-center text-gray-600 max-w-xl">
+        <p className="max-w-xl text-center text-gray-600">
           The page/service you are looking for might have been removed had its
           name changed or is temporarily unavailable.
         </p>
         <div className="space-x-4">
           <button
             onClick={() => navigate(-1)}
-            className="bg-secondary px-4 py-2 font-semibold text-white rounded-md hover:bg-accent"
+            className="rounded-md bg-secondary px-4 py-2 font-semibold text-white hover:bg-accent"
           >
             Previous Page
           </button>
           <a href={`${protocol}//${domain}`}>
-            <button className="bg-secondary px-4 py-2 font-semibold text-white rounded-md hover:bg-accent">
+            <button className="rounded-md bg-secondary px-4 py-2 font-semibold text-white hover:bg-accent">
               Home Page
             </button>
           </a>
