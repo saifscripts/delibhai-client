@@ -8,7 +8,7 @@ import vehicles from "../../../data/vehicles";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import cn from "../../../lib/cn";
-import { Item, ScrollableMenu } from "../../../lib/scrollable-menu";
+import { ScrollItem, ScrollMenu } from "../../../lib/scrollable-menu";
 import { Address } from "../../Profile";
 import getSelectedAddress from "../../Profile/utils/getSelectedAddress";
 import restoreAddressState from "../../Profile/utils/restoreAddressState";
@@ -53,27 +53,27 @@ export default function DHero() {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
       <MiniContainer>
         <Title title="ডেলিভাই হিরো" />
         <h2 className="text-2xl font-semibold pt-4">গাড়ির ধরণ</h2>
 
         {/* <Select options={vehicles} selected="গাড়ি নির্বাচন করুন" /> */}
-        <ScrollableMenu arrow>
+        <ScrollMenu arrow>
           {vehicles.map(({ title, icon }) => (
-            <Item
+            <ScrollItem
               key={title}
               onClick={() => setVehicle(title)}
               className={cn(
-                "flex flex-col justify-center items-center gap-3 w-32 aspect-square p-3 shadow-md rounded-lg",
+                "flex flex-col justify-center items-center gap-3 w-24 sm:w-32 aspect-square p-3 shadow-md rounded-lg",
                 { "bg-secondary bg-opacity-30": vehicle === title }
               )}
             >
               <img src={icon} alt={title} className="w-2/3 aspect-square" />
-              <p className="text-xl text-center">{title}</p>
-            </Item>
+              <p className="text-base sm:text-xl text-center">{title}</p>
+            </ScrollItem>
           ))}
-        </ScrollableMenu>
+        </ScrollMenu>
 
         {/* <hr className="border-b border-gray-300" /> */}
         {/* <Categories categories={vehicles} /> */}

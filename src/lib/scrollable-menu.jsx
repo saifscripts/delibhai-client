@@ -1,8 +1,11 @@
 import { useRef, useState } from "react";
-import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import {
+  MdOutlineArrowBackIos,
+  MdOutlineArrowForwardIos,
+} from "react-icons/md";
 import cn from "./cn";
 
-export function ScrollableMenu({ children, className, arrow, ...restProps }) {
+export function ScrollMenu({ children, className, arrow, ...restProps }) {
   const [leftArrow, setLeftArrow] = useState(false);
   const [rightArrow, setRightArrow] = useState(true);
   const scrollElementRef = useRef(null);
@@ -36,10 +39,10 @@ export function ScrollableMenu({ children, className, arrow, ...restProps }) {
   };
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative w-full overflow-hidden">
       <div
         className={cn(
-          "flex gap-4 overflow-x-scroll py-3 -mb-4 scroll-smooth",
+          "flex gap-4 flex-no-wrap overflow-x-auto scroll-smooth hide-scrollbar py-3",
           className
         )}
         onScroll={handleScroll}
@@ -54,7 +57,7 @@ export function ScrollableMenu({ children, className, arrow, ...restProps }) {
   );
 }
 
-export function Item({ children, className, ...restProps }) {
+export function ScrollItem({ children, className, ...restProps }) {
   return (
     <div className={cn("flex-shrink-0", className)} {...restProps}>
       {children}
@@ -65,20 +68,21 @@ export function Item({ children, className, ...restProps }) {
 function LeftArrow(props) {
   return (
     <div
-      className="absolute top-1/2 -translate-y-1/2 left-0 text-3xl hover:shadow-sm w-6 p-1"
+      className="absolute top-1/2 -translate-y-1/2 left-0 text-3xl hover:bg-primary hover:bg-opacity-10 px-[1px] py-8 w-8"
       {...props}
     >
-      <MdArrowBackIos />
+      <MdOutlineArrowBackIos />
     </div>
   );
 }
+
 function RightArrow(props) {
   return (
     <div
-      className="absolute top-1/2 -translate-y-1/2 right-1 text-3xl hover:shadow-sm w-6 p-1"
+      className="absolute top-1/2 -translate-y-1/2 right-0 text-3xl hover:bg-primary hover:bg-opacity-10 px-[1px] py-8 w-8"
       {...props}
     >
-      <MdArrowForwardIos />
+      <MdOutlineArrowForwardIos />
     </div>
   );
 }
