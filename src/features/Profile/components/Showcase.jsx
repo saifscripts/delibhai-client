@@ -20,10 +20,7 @@ export const Showcase = ({ userInfo }) => {
 
           <div className="relative z-10 flex h-10 items-center rounded-full bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] py-3 pl-4 pr-10 text-xs min-[400px]:pr-12 min-[500px]:pr-16 min-[500px]:text-base">
             <span>
-              {(userInfo?.vehicleType &&
-                userInfo?.serviceUsage === "ব্যক্তিগত" &&
-                userInfo?.vehicleType + " মালিক") ||
-                (userInfo?.vehicleType && userInfo?.vehicleType + " রাইডার")}
+              {userInfo?.vehicleType && userInfo?.vehicleType + " রাইডার"}
             </span>
             <div className="absolute right-0 top-1/2 w-16 -translate-y-1/2 translate-x-1/2">
               <img
