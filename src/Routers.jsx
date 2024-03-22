@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import RootLayout from "./RootLayout";
 import ErrorPage from "./components/ErrorPage";
+import RootLayout from "./components/RootLayout";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import DHero from "./features/DHero/components/DHero";
 import DHeroSearch from "./features/DHero/components/DHeroSearch";
