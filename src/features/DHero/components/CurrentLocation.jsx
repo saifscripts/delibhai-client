@@ -1,33 +1,35 @@
-import { useState } from "react";
 import { Address } from "../../Profile";
 import GPSLocation from "./GPSLocation";
 import SearchOption from "./SearchOption";
 
-function CurrentLocation({ currentLocation, setCurrentLocation }) {
-  const [activeOption, setActiveOption] = useState("gps");
-
+function CurrentLocation({
+  currentLocation,
+  setCurrentLocation,
+  locationType,
+  setLocationType,
+}) {
   return (
     <>
-      <h2 className="pt-4 text-2xl font-semibold">নিজ ঠিকানা</h2>
+      <h2 className="mb-4 mt-8 text-2xl font-semibold">নিজ ঠিকানা</h2>
 
       <div className="mx-auto mb-8 w-fit">
         <SearchOption
-          fill={activeOption === "gps"}
+          fill={locationType === "gps"}
           text="GPS Location"
-          onSelect={() => setActiveOption("gps")}
+          onSelect={() => setLocationType("gps")}
         />
         <SearchOption
-          fill={activeOption === "manual"}
+          fill={locationType === "manual"}
           text="Manual Location"
-          onSelect={() => setActiveOption("manual")}
+          onSelect={() => setLocationType("manual")}
         />
       </div>
 
-      {activeOption === "gps" && (
-        <GPSLocation setActiveOption={setActiveOption} />
+      {locationType === "gps" && (
+        <GPSLocation setLocationType={setLocationType} />
       )}
 
-      {activeOption === "manual" && (
+      {locationType === "manual" && (
         <Address address={currentLocation} setAddress={setCurrentLocation} />
       )}
     </>

@@ -8,6 +8,7 @@ import Title from "../../../layouts/Title";
 import getSelectedAddress from "../../Profile/utils/getSelectedAddress";
 import restoreAddressState from "../../Profile/utils/restoreAddressState";
 import CurrentLocation from "./CurrentLocation";
+import Destination from "./Destination";
 import VehicleCategories from "./VehicleCategories";
 
 const defaultAddressValue = {
@@ -19,18 +20,15 @@ const defaultAddressValue = {
 
 export default function DHero() {
   const [vehicleType, setVehicleType] = useState("বাইক");
+  const [locationType, setLocationType] = useState("gps");
   const [currentLocation, setCurrentLocation] = useState(defaultAddressValue);
-  // const [heros, setHeros] = useState([]);
+  const [destination, setDestination] = useState(defaultAddressValue);
 
-  // const { fetchData } = useFetchData();
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    const { division, district, upazila, union } =
-      getSelectedAddress(currentLocation);
-
     navigate(
-      `/search?vehicle=${vehicleType}&division=${division}&district=${district}&upazila=${upazila}&union=${union}`,
+      `/search?vehicleType=${vehicleType}&locationType=${locationType}&cLocation=${JSON.stringify(getSelectedAddress(currentLocation))}&destination=${JSON.stringify(getSelectedAddress(destination))}`,
     );
   };
 
@@ -55,8 +53,15 @@ export default function DHero() {
         />
 
         <CurrentLocation
+          locationType={locationType}
+          setLocationType={setLocationType}
           currentLocation={currentLocation}
           setCurrentLocation={setCurrentLocation}
+        />
+
+        <Destination
+          destination={destination}
+          setDestination={setDestination}
         />
 
         <Button

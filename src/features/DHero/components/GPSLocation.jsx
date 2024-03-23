@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function GPSLocation({ setActiveOption }) {
+function GPSLocation({ setLocationType }) {
   const [geoLocation, setGeoLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -13,31 +13,22 @@ function GPSLocation({ setActiveOption }) {
       setLoading(false);
     };
 
-    const handleError = () => {
+    const handleError = (error) => {
+      if (error.code === error.PERMISSION_DENIED) {
+        setError(
+          "জিপিএস লোকেশন এর পারমিশন দেয়া হয় নি। সেটিং থেকে লোকেশন পারমিশন এলাউ করে দিন।",
+        );
+      }
       setLoading(false);
     };
-
-    navigator.permissions
-      .query({ name: "geolocation" })
-      .then(function (permissionStatus) {
-        if (permissionStatus.state === "denied") {
-          setError(
-            "জিপিএস লোকেশন এর পারমিশন দেয়া হয় নি। সেটিং থেকে লোকেশন পারমিশন এলাউ করে দিন।",
-          );
-        }
-      })
-      .catch(function (error) {
-        console.error("Error checking geolocation permission:", error);
-      });
 
     const watchId = navigator.geolocation.watchPosition(
       handlePosition,
       handleError,
     );
-    console.log(watchId);
 
     return () => navigator.geolocation.clearWatch(watchId);
-  }, [setActiveOption]);
+  }, [setLocationType]);
 
   if (loading) {
     return <h2 className="text-center text-2xl">Loading...</h2>;
@@ -45,8 +36,8 @@ function GPSLocation({ setActiveOption }) {
 
   if (error) {
     return (
-      <div className="flex aspect-video w-full flex-col items-center justify-center gap-2 rounded-lg border">
-        <p className="text-center text-2xl text-red-400">{error}</p>
+      <div className="flex aspect-video w-full flex-col items-center justify-center gap-2 rounded-lg border p-5">
+        <p className="text-center text-xl text-red-400">{error}</p>
       </div>
     );
   }
