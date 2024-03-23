@@ -2,8 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage";
 import RootLayout from "./components/RootLayout";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
-import DHero from "./features/DHero/components/DHero";
-import DHeroSearch from "./features/DHero/components/DHeroSearch";
+import { Search, SearchResults } from "./features/DHero";
 import Home from "./features/Home";
 import {
   EditAddressInfo,
@@ -65,8 +64,8 @@ const dheroRouter = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     children: [
-      { path: "", element: <DHero /> },
-      { path: "search", element: <DHeroSearch /> },
+      { path: "", element: <Search /> },
+      { path: "search", element: <SearchResults /> },
       ...commonRoutes,
     ],
   },

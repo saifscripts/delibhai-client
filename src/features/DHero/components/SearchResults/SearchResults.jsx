@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useFetchData } from "../../../api/api";
-import Container from "../../../layouts/Container";
-import Title from "../../../layouts/Title";
-import { Hero } from "../index";
+import { useFetchData } from "../../../../api/api";
+import Container from "../../../../layouts/Container";
+import Title from "../../../../layouts/Title";
+import Hero from "./Hero";
 
-export default function DHeroSearch() {
+export default function SearchResults() {
   const [heros, setHeros] = useState([]);
   const [searchParams] = useSearchParams();
   const { fetchData } = useFetchData();
 
   useEffect(() => {
     let _searchParams = Object.fromEntries([...searchParams]);
-    const { vehicleType: vehicle, currentLocation } = _searchParams;
-    const { division, district, upazila, union } = JSON.parse(currentLocation);
+    const { vehicleType: vehicle, manualLocation } = _searchParams;
+    const { division, district, upazila, union } = JSON.parse(manualLocation);
     _searchParams = {
       vehicle,
       division,

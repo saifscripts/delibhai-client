@@ -1,4 +1,4 @@
-import { Address } from "../../Profile";
+import { Address } from "../../../Profile";
 
 function Destination({ destination, setDestination }) {
   return (

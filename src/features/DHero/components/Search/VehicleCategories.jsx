@@ -1,6 +1,6 @@
-import vehicles from "../../../data/vehicles";
-import cn from "../../../lib/cn";
-import { ScrollItem, ScrollMenu } from "../../../lib/scrollable-menu";
+import vehicles from "../../../../data/vehicles";
+import cn from "../../../../lib/cn";
+import { ScrollItem, ScrollMenu } from "../../../../lib/scrollable-menu";
 
 function VehicleCategories({ vehicleType, setVehicleType }) {
   return (

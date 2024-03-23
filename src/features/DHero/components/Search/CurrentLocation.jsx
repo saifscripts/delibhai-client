@@ -1,10 +1,10 @@
-import { Address } from "../../Profile";
+import { Address } from "../../../Profile";
 import GPSLocation from "./GPSLocation";
-import SearchOption from "./SearchOption";
+import RadioButton from "./RadioButton";
 
 function CurrentLocation({
-  currentLocation,
-  setCurrentLocation,
+  manualLocation,
+  setManualLocation,
   locationType,
   setLocationType,
   geoLocation,
@@ -15,12 +15,12 @@ function CurrentLocation({
       <h2 className="mb-4 mt-8 text-2xl font-semibold">নিজ ঠিকানা</h2>
 
       <div className="mx-auto mb-8 w-fit">
-        <SearchOption
+        <RadioButton
           fill={locationType === "gps"}
           text="GPS Location"
           onSelect={() => setLocationType("gps")}
         />
-        <SearchOption
+        <RadioButton
           fill={locationType === "manual"}
           text="Manual Location"
           onSelect={() => setLocationType("manual")}
@@ -36,7 +36,7 @@ function CurrentLocation({
       )}
 
       {locationType === "manual" && (
-        <Address address={currentLocation} setAddress={setCurrentLocation} />
+        <Address address={manualLocation} setAddress={setManualLocation} />
       )}
     </>
   );

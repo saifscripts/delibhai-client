@@ -1,5 +1,4 @@
-// eslint-disable-next-line react/prop-types
-export default function SearchOption({ text, fill, onSelect }) {
+export default function RadioButton({ text, fill, onSelect }) {
   return (
     <div
       className="my-4 flex items-center gap-4 hover:cursor-default"

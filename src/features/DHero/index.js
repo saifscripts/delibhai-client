@@ -1,4 +1,4 @@
-import Hero from "./components/Hero.jsx";
-import SearchOption from "./components/SearchOption.jsx";
 
-export { Hero, SearchOption };
+export { default as Search } from './components/Search/Search.jsx';
+export { default as SearchResults } from './components/SearchResults/SearchResults.jsx';
+

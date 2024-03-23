@@ -2,12 +2,10 @@ import { BsTelephoneFill } from "react-icons/bs";
 import { GrLocation } from "react-icons/gr";
 import { PiPaperPlaneTiltFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import dp from "../../../assets/default.jpg";
-import PrimaryButton from "../../../components/ui/PrimaryButton";
+import dp from "../../../../assets/default.jpg";
+import PrimaryButton from "../../../../components/ui/PrimaryButton";
 
-// eslint-disable-next-line react/prop-types
 export default function Hero({ details }) {
-  // eslint-disable-next-line react/prop-types
   const { name, avatarURL, distance, _id, mobile } = details;
 
   return (

@@ -2,12 +2,12 @@ import { getAllDivision } from "bd-divisions-to-unions";
 import { useEffect, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../components/ui/Button";
-import MiniContainer from "../../../layouts/MiniContainer";
-import Title from "../../../layouts/Title";
-import getSelectedAddress from "../../Profile/utils/getSelectedAddress";
-import restoreAddressState from "../../Profile/utils/restoreAddressState";
-import generateSearchString from "../utils/generateSearchString";
+import Button from "../../../../components/ui/Button";
+import MiniContainer from "../../../../layouts/MiniContainer";
+import Title from "../../../../layouts/Title";
+import getSelectedAddress from "../../../Profile/utils/getSelectedAddress";
+import restoreAddressState from "../../../Profile/utils/restoreAddressState";
+import generateSearchString from "../../utils/generateSearchString";
 import CurrentLocation from "./CurrentLocation";
 import Destination from "./Destination";
 import VehicleCategories from "./VehicleCategories";
@@ -19,40 +19,42 @@ const defaultAddressValue = {
   union: null,
 };
 
-export default function DHero() {
+export default function Search() {
   const [vehicleType, setVehicleType] = useState("বাইক");
   const [locationType, setLocationType] = useState("gps");
-  const [currentLocation, setCurrentLocation] = useState(defaultAddressValue);
   const [geoLocation, setGeoLocation] = useState(null);
+  const [manualLocation, setManualLocation] = useState(defaultAddressValue);
   const [destination, setDestination] = useState(defaultAddressValue);
   const navigate = useNavigate();
 
-  // RESTORE STATES FROM THE LOCAL STORAGE
+  // restore states from the local storage
   useEffect(() => {
     const searchParams = JSON.parse(localStorage.getItem("heroSearchParams"));
 
     if (searchParams) {
-      const { vehicleType, locationType, currentLocation, destination } =
+      const { vehicleType, locationType, manualLocation, destination } =
         searchParams;
 
       setVehicleType(vehicleType);
       setLocationType(locationType);
-      setCurrentLocation(restoreAddressState(currentLocation));
+      setManualLocation(restoreAddressState(manualLocation));
       setDestination(restoreAddressState(destination));
     }
   }, []);
 
   const handleSearch = () => {
+    // combine all states as searchParams obj
     const searchParams = {
       vehicleType,
       locationType,
       geoLocation,
-      currentLocation: getSelectedAddress(currentLocation),
+      manualLocation: getSelectedAddress(manualLocation),
       destination: getSelectedAddress(destination),
     };
 
-    let searchString = generateSearchString(searchParams);
     localStorage.setItem("heroSearchParams", JSON.stringify(searchParams));
+    let searchString = generateSearchString(searchParams);
+
     navigate(`/search?${searchString}`);
   };
 
@@ -69,10 +71,10 @@ export default function DHero() {
 
         <CurrentLocation
           locationType={locationType}
-          currentLocation={currentLocation}
+          manualLocation={manualLocation}
           geoLocation={geoLocation}
           setLocationType={setLocationType}
-          setCurrentLocation={setCurrentLocation}
+          setManualLocation={setManualLocation}
           setGeoLocation={setGeoLocation}
         />
 
