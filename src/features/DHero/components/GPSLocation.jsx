@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
-function GPSLocation({ setLocationType }) {
-  const [geoLocation, setGeoLocation] = useState(null);
+function GPSLocation({ setLocationType, geoLocation, setGeoLocation }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -9,7 +8,10 @@ function GPSLocation({ setLocationType }) {
     setLoading(true);
 
     const handlePosition = (position) => {
-      setGeoLocation(position.coords);
+      setGeoLocation({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
       setLoading(false);
     };
 

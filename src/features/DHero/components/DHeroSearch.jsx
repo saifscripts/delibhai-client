@@ -11,11 +11,21 @@ export default function DHeroSearch() {
   const { fetchData } = useFetchData();
 
   useEffect(() => {
-    const _searchParams = Object.fromEntries([...searchParams]);
+    let _searchParams = Object.fromEntries([...searchParams]);
+    const { vehicleType: vehicle, currentLocation } = _searchParams;
+    const { division, district, upazila, union } = JSON.parse(currentLocation);
+    _searchParams = {
+      vehicle,
+      division,
+      district,
+      upazila,
+      union,
+    };
+
     fetchData("/v1/user/heros", _searchParams).then((data) => {
       if (data?.data?.success) {
         setHeros(data.data.data);
-        localStorage.setItem("heroSearchParams", JSON.stringify(_searchParams));
+        // localStorage.setItem("heroSearchParams", JSON.stringify(_searchParams));
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

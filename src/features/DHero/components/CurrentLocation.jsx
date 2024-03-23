@@ -7,6 +7,8 @@ function CurrentLocation({
   setCurrentLocation,
   locationType,
   setLocationType,
+  geoLocation,
+  setGeoLocation,
 }) {
   return (
     <>
@@ -26,7 +28,11 @@ function CurrentLocation({
       </div>
 
       {locationType === "gps" && (
-        <GPSLocation setLocationType={setLocationType} />
+        <GPSLocation
+          setLocationType={setLocationType}
+          geoLocation={geoLocation}
+          setGeoLocation={setGeoLocation}
+        />
       )}
 
       {locationType === "manual" && (
