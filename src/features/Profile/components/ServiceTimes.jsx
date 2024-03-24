@@ -8,6 +8,7 @@ import {
   is24Hour,
   isSlotOverlapping,
   isValidTimeSlot,
+  remove24HourSlot,
 } from "../utils/timeHelpers";
 
 const getCurrentTime = () => {
@@ -46,6 +47,15 @@ export default function ServiceTimes({
       ...prevSlot,
       end: e.target.value,
     }));
+  };
+
+  const toggle24Hour = () => {
+    if (is24HourServiceTime) {
+      setServiceTimes(remove24HourSlot(serviceTimes));
+      setIs24HourServiceTime(false);
+    } else {
+      setIs24HourServiceTime(true);
+    }
   };
 
   const addTime = (e) => {
@@ -89,7 +99,7 @@ export default function ServiceTimes({
           <input
             type="checkbox"
             checked={is24HourServiceTime}
-            onChange={() => setIs24HourServiceTime((is24Hour) => !is24Hour)}
+            onChange={toggle24Hour}
           />{" "}
           দিনরাত ২৪ ঘণ্টা
         </label>

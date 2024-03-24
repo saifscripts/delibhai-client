@@ -78,3 +78,15 @@ export const is24Hour = (slots) => {
 
   return false;
 };
+
+export const remove24HourSlot = (slots) => {
+  const filtered = slots.filter((slot) => {
+    const slotStartMinutes = calculateTimeInMinutes(slot.start);
+    const slotEndMinutes = calculateTimeInMinutes(slot.end);
+
+    return !(slotStartMinutes === 0 && slotEndMinutes === 23 * 60 + 59);
+  });
+
+  console.log(filtered);
+  return filtered;
+};
