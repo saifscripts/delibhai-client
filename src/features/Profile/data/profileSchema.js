@@ -1,4 +1,3 @@
-import { getServiceTimes } from "../../../utils/convertTime";
 import nid from "../assets/icons/NID.svg";
 import age from "../assets/icons/age.svg";
 import bloodGroup from "../assets/icons/blood-group.svg";
@@ -19,6 +18,7 @@ import vehicleBrand from "../assets/icons/vehicle-brand.svg";
 import vehicleModel from "../assets/icons/vehicle-model.svg";
 import vehicleNumber from "../assets/icons/vehicle-number.svg";
 import vehicleType from "../assets/icons/vehicle.svg";
+import { getServiceTimes } from "../utils/convertTime";
 import getAddressText from "../utils/getAddressText";
 import modifyAge from "../utils/modifyAge";
 

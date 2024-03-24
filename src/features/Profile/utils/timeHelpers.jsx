@@ -65,3 +65,16 @@ export const isCurrentTimeWithinServiceTimes = (slots) => {
 
   return false;
 };
+
+export const is24Hour = (slots) => {
+  for (const slot of slots) {
+    const slotStartMinutes = calculateTimeInMinutes(slot.start);
+    const slotEndMinutes = calculateTimeInMinutes(slot.end);
+
+    if (slotStartMinutes === 0 && slotEndMinutes === 23 * 60 + 59) {
+      return true;
+    }
+  }
+
+  return false;
+};

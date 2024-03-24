@@ -1,13 +1,14 @@
 import { cloneDeep } from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiFillDelete, AiFillPlusSquare } from "react-icons/ai";
 import { showErrorToast } from "../../../lib/toast";
-import { convertTimeFormat } from "../../../utils/convertTime";
+import { convertTimeFormat } from "../utils/convertTime";
 import {
   hasMinimumTimeGap,
+  is24Hour,
   isSlotOverlapping,
   isValidTimeSlot,
-} from "../utils/validateTime";
+} from "../utils/timeHelpers";
 
 const getCurrentTime = () => {
   const currentDate = new Date();
@@ -18,11 +19,20 @@ const getCurrentTime = () => {
   return `${hours}:${minutes}`;
 };
 
-export default function ServiceTimes({ serviceTimes, setServiceTimes }) {
+export default function ServiceTimes({
+  serviceTimes,
+  setServiceTimes,
+  is24HourServiceTime,
+  setIs24HourServiceTime,
+}) {
   const [newTimeSlot, setNewTimeSlot] = useState({
     start: getCurrentTime(),
     end: getCurrentTime(),
   });
+
+  useEffect(() => {
+    setIs24HourServiceTime(is24Hour(serviceTimes));
+  }, [serviceTimes, setIs24HourServiceTime]);
 
   const onStartTimeChange = (e) => {
     setNewTimeSlot((prevSlot) => ({
@@ -72,55 +82,70 @@ export default function ServiceTimes({ serviceTimes, setServiceTimes }) {
   return (
     <>
       {/* Title */}
-      <p className="mb-1 mt-4 font-bold">সার্ভিস প্রদানের সময়</p>
+      <div className="mb-1 mt-4 flex items-center justify-between">
+        <p className="font-bold">সার্ভিস প্রদানের সময়</p>
 
-      <div className="flex flex-col gap-2">
-        {serviceTimes.map(({ start, end }, index) => (
-          <div
-            key={index}
-            className="flex items-center justify-between rounded-lg bg-secondary bg-opacity-30 px-3 py-2 "
-          >
-            <span>{`${convertTimeFormat(start)} থেকে ${convertTimeFormat(
-              end,
-            )} পর্যন্ত`}</span>
+        <label className="my-2 inline-block text-lg">
+          <input
+            type="checkbox"
+            checked={is24HourServiceTime}
+            onChange={() => setIs24HourServiceTime((is24Hour) => !is24Hour)}
+          />{" "}
+          দিনরাত ২৪ ঘণ্টা
+        </label>
+      </div>
+
+      {!is24HourServiceTime && (
+        <>
+          <div className="flex flex-col gap-2">
+            {serviceTimes.map(({ start, end }, index) => (
+              <div
+                key={index}
+                className="flex items-center justify-between rounded-lg bg-secondary bg-opacity-30 px-3 py-2 "
+              >
+                <span>{`${convertTimeFormat(start)} থেকে ${convertTimeFormat(
+                  end,
+                )} পর্যন্ত`}</span>
+                <button
+                  onClick={(e) => removeTime(e, start, end)}
+                  className="rounded-lg bg-primary p-3 text-white"
+                >
+                  {<AiFillDelete />}
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <div className="my-6 flex flex-col gap-2 rounded-lg bg-secondary bg-opacity-10 p-3">
+            <label className="bg-light flex items-center justify-between rounded-lg p-2">
+              শুরুর সময়
+              <input
+                className="rounded-lg border border-accent bg-inherit p-1"
+                type="time"
+                value={newTimeSlot.start}
+                onChange={onStartTimeChange}
+              />
+            </label>
+            <label className="bg-light flex items-center justify-between rounded-lg p-2">
+              শেষের সময়
+              <input
+                className="rounded-lg border border-accent bg-inherit p-1"
+                type="time"
+                value={newTimeSlot.end}
+                onChange={onEndTimeChange}
+              />
+            </label>
+
             <button
-              onClick={(e) => removeTime(e, start, end)}
-              className="rounded-lg bg-primary p-3 text-white"
+              onClick={addTime}
+              className="flex items-center justify-center gap-2 rounded-lg bg-primary px-2 py-2 text-xl text-white"
             >
-              {<AiFillDelete />}
+              <AiFillPlusSquare />
+              <span>যোগ করুন</span>
             </button>
           </div>
-        ))}
-      </div>
-
-      <div className="my-6 flex flex-col gap-2 rounded-lg bg-secondary bg-opacity-10 p-3">
-        <label className="bg-light flex items-center justify-between rounded-lg p-2">
-          শুরুর সময়
-          <input
-            className="rounded-lg border border-accent bg-inherit p-1"
-            type="time"
-            value={newTimeSlot.start}
-            onChange={onStartTimeChange}
-          />
-        </label>
-        <label className="bg-light flex items-center justify-between rounded-lg p-2">
-          শেষের সময়
-          <input
-            className="rounded-lg border border-accent bg-inherit p-1"
-            type="time"
-            value={newTimeSlot.end}
-            onChange={onEndTimeChange}
-          />
-        </label>
-
-        <button
-          onClick={addTime}
-          className="flex items-center justify-center gap-2 rounded-lg bg-primary px-2 py-2 text-xl text-white"
-        >
-          <AiFillPlusSquare />
-          <span>যোগ করুন</span>
-        </button>
-      </div>
+        </>
+      )}
     </>
   );
 }

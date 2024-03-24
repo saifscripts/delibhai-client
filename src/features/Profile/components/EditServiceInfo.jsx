@@ -40,6 +40,8 @@ const EditServiceInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [serviceAddress, setServiceAddress] = useState(defaultAddressValue);
   const [serviceTimes, setServiceTimes] = useState([]);
+  const [is24HourServiceTime, setIs24HourServiceTime] = useState(false);
+
   const { currentUser, setCurrentUser } = useAuth();
   const { updateData } = useUpdateData();
   const navigate = useNavigate();
@@ -68,7 +70,11 @@ const EditServiceInfo = () => {
   const onSubmit = async (userData) => {
     setIsLoading(true);
     userData.serviceAddress = getSelectedAddress(serviceAddress);
-    userData.serviceTimes = serviceTimes;
+    if (is24HourServiceTime) {
+      userData.serviceTimes = [{ start: "00:00", end: "23:59" }];
+    } else {
+      userData.serviceTimes = serviceTimes;
+    }
 
     // Update data
     const { data, error } = await updateData(
@@ -131,6 +137,8 @@ const EditServiceInfo = () => {
           <ServiceTimes
             serviceTimes={serviceTimes}
             setServiceTimes={setServiceTimes}
+            is24HourServiceTime={is24HourServiceTime}
+            setIs24HourServiceTime={setIs24HourServiceTime}
           />
 
           <p className="text-red-400">{errors.general?.message}</p>

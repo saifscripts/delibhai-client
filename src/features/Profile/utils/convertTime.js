@@ -1,3 +1,5 @@
+import { is24Hour } from "./timeHelpers";
+
 export const convertTimeFormat = (timeString) => {
   const splitted = timeString.split(":");
 
@@ -24,6 +26,10 @@ export const convertTimeFormat = (timeString) => {
 };
 
 export const getServiceTimes = (timeArray = []) => {
+  if(is24Hour(timeArray)) {
+    return 'দিনরাত ২৪ ঘণ্টা'
+  }
+  
   let outputArray = [];
   timeArray.forEach(({ start, end }) => {
     outputArray.push(`${convertTimeFormat(start)}-${convertTimeFormat(end)}`);
