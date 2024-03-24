@@ -49,7 +49,7 @@ export default function ServiceTimes({ serviceTimes, setServiceTimes }) {
       return showErrorToast("ন্যূনতম ৩০ মিনিট ব্যবধান থাকা বাধ্যতামূলক");
     }
 
-    if (!isSlotOverlapping(newTimeSlot, serviceTimes)) {
+    if (isSlotOverlapping(newTimeSlot, serviceTimes)) {
       return showErrorToast("উক্ত সময় ইতিমধ্যে প্রদান করা হয়েছে");
     }
 
