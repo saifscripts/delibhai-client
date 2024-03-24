@@ -12,32 +12,31 @@ export default function SearchResults() {
   const { fetchData } = useFetchData();
 
   useEffect(() => {
-    let _searchParams = Object.fromEntries([...searchParams]);
-    const { vehicleType: vehicle, manualLocation } = _searchParams;
-    const { division, district, upazila, union } = JSON.parse(manualLocation);
-    _searchParams = {
-      vehicle,
-      division,
-      district,
-      upazila,
-      union,
-    };
+    const _searchParams = Object.fromEntries([...searchParams]);
+    const { vehicleType, destination } = _searchParams;
 
-    fetchData("/v1/user/heros", _searchParams).then((data) => {
+    fetchData("/v1/user/heros", {
+      vehicleType,
+      destination,
+    }).then((data) => {
       if (data?.data?.success) {
         let _heros = data.data.data;
         _heros = _heros.map((hero) => ({
           ...hero,
           isOnline: isCurrentTimeWithinServiceTimes(hero.serviceTimes),
-          distance: (Math.random() * 20).toFixed(2),
+          currentDistance: (Math.random() * 20).toFixed(2),
+          destinationDistance: (Math.random() * 20).toFixed(2),
         }));
 
         _heros.sort(function (a, b) {
           if (!a.isOnline && b.isOnline) return 1;
           if (!b.isOnline && a.isOnline) return -1;
 
-          if (a.distance - b.distance > 0) return 1;
-          if (a.distance - b.distance < 0) return -1;
+          if (a.currentDistance - b.currentDistance > 0) return 1;
+          if (a.currentDistance - b.currentDistance < 0) return -1;
+
+          if (a.destinationDistance - b.destinationDistance > 0) return 1;
+          if (a.destinationDistance - b.destinationDistance < 0) return -1;
         });
 
         setHeros(_heros);

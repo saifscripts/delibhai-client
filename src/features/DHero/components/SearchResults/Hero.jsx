@@ -7,7 +7,7 @@ import PrimaryButton from "../../../../components/ui/PrimaryButton";
 import cn from "../../../../lib/cn.js";
 
 export default function Hero({ hero }) {
-  const { name, avatarURL, _id, mobile, isOnline, distance } = hero;
+  const { name, avatarURL, _id, mobile, isOnline, currentDistance } = hero;
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -34,7 +34,7 @@ export default function Hero({ hero }) {
 
         <div className="mb-2 flex items-center gap-1 text-gray-700">
           <span>{<GrLocation />}</span>
-          <span>{distance} km</span>
+          <span>{currentDistance} km</span>
         </div>
 
         <div className="flex gap-3">
