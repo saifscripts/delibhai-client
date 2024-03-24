@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getAllDivision } from "bd-divisions-to-unions";
 import { useEffect, useState } from "react";
@@ -13,7 +12,7 @@ import { useAuth } from "../../Authentication/contexts/AuthContext";
 import getSelectedAddress from "../utils/getSelectedAddress";
 import restoreAddressState from "../utils/restoreAddressState";
 import { Address } from "./Address";
-import { ServiceTime } from "./ServiceTime";
+import ServiceTimes from "./ServiceTimes";
 
 const userSchema = yup.object({
   serviceUsage: yup
@@ -40,17 +39,17 @@ const defaultAddressValue = {
 const EditServiceInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [serviceAddress, setServiceAddress] = useState(defaultAddressValue);
-  const [serviceTime, setServiceTime] = useState([]);
+  const [serviceTimes, setServiceTimes] = useState([]);
   const { currentUser, setCurrentUser } = useAuth();
   const { updateData } = useUpdateData();
   const navigate = useNavigate();
 
   useEffect(() => {
     const serviceAddress = currentUser?.serviceAddress;
-    const serviceTime = currentUser?.serviceTime;
+    const serviceTimes = currentUser?.serviceTimes;
 
     serviceAddress && setServiceAddress(restoreAddressState(serviceAddress));
-    serviceTime && setServiceTime(serviceTime);
+    serviceTimes && setServiceTimes(serviceTimes);
   }, [currentUser]);
 
   const {
@@ -69,7 +68,7 @@ const EditServiceInfo = () => {
   const onSubmit = async (userData) => {
     setIsLoading(true);
     userData.serviceAddress = getSelectedAddress(serviceAddress);
-    userData.serviceTime = serviceTime;
+    userData.serviceTimes = serviceTimes;
 
     // Update data
     const { data, error } = await updateData(
@@ -129,9 +128,9 @@ const EditServiceInfo = () => {
 
           <Address address={serviceAddress} setAddress={setServiceAddress} />
 
-          <ServiceTime
-            serviceTime={serviceTime}
-            setServiceTime={setServiceTime}
+          <ServiceTimes
+            serviceTimes={serviceTimes}
+            setServiceTimes={setServiceTimes}
           />
 
           <p className="text-red-400">{errors.general?.message}</p>

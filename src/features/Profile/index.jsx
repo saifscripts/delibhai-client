@@ -18,7 +18,6 @@ export { Profile } from "./components/Profile";
 export { RatingBars } from "./components/RatingBars";
 export { RatingStars } from "./components/RatingStars";
 export { Review } from "./components/Review";
-export { ServiceTime } from "./components/ServiceTime";
 export { Showcase } from "./components/Showcase";
 export { VehiclePhoto } from "./components/VehiclePhoto";
 export { VehiclePhotos } from "./components/VehiclePhotos";
