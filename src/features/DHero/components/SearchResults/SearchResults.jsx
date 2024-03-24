@@ -29,7 +29,16 @@ export default function SearchResults() {
         _heros = _heros.map((hero) => ({
           ...hero,
           isOnline: isCurrentTimeWithinServiceTimes(hero.serviceTimes),
+          distance: (Math.random() * 20).toFixed(2),
         }));
+
+        _heros.sort(function (a, b) {
+          if (!a.isOnline && b.isOnline) return 1;
+          if (!b.isOnline && a.isOnline) return -1;
+
+          if (a.distance - b.distance > 0) return 1;
+          if (a.distance - b.distance < 0) return -1;
+        });
 
         setHeros(_heros);
       }
@@ -43,7 +52,7 @@ export default function SearchResults() {
       <Container>
         <div className="mx-auto my-8 flex w-fit max-w-full flex-col gap-4">
           {heros?.map((hero) => (
-            <Hero details={hero} key={hero.id} />
+            <Hero hero={hero} key={hero._id} />
           ))}
         </div>
       </Container>
