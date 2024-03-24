@@ -1,4 +1,4 @@
-import { getServiceTime } from "../../../utils/convertTime";
+import { getServiceTimes } from "../../../utils/convertTime";
 import nid from "../assets/icons/NID.svg";
 import age from "../assets/icons/age.svg";
 import bloodGroup from "../assets/icons/blood-group.svg";
@@ -182,8 +182,8 @@ const profileSchema = {
           icon: serviceAddress,
         },
         {
-          dataKey: "serviceTime",
-          dataModifier: getServiceTime,
+          dataKey: "serviceTimes",
+          dataModifier: getServiceTimes,
           label: "সার্ভিস প্রদানের সময়",
           icon: clock,
         },

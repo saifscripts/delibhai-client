@@ -23,7 +23,7 @@ export const convertTimeFormat = (timeString) => {
   return splitted.join(":") + meridiem;
 };
 
-export const getServiceTime = (timeArray = []) => {
+export const getServiceTimes = (timeArray = []) => {
   let outputArray = [];
   timeArray.forEach(({ start, end }) => {
     outputArray.push(`${convertTimeFormat(start)}-${convertTimeFormat(end)}`);
