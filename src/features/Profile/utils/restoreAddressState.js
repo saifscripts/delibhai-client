@@ -3,6 +3,15 @@ import { getDistricts, getUnions, getUpazilas } from "./getGeoLocation";
 import selectObjectByTitle from "./selectObjectByTitle";
 
 const restoreAddressState = (address) => {
+  if(!address) {
+    return {
+      division: getAllDivision(),
+      district: null,
+      upazila: null,
+      union: null,
+    }
+  }
+  
   const { division, district, upazila, union } = address;
 
   return {
