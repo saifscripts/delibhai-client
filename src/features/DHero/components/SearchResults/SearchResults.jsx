@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { useFetchData } from "../../../../api/api";
 import Container from "../../../../layouts/Container";
 import Title from "../../../../layouts/Title";
+import { isCurrentTimeWithinServiceTimes } from "../../../Profile/utils/timeHelpers";
 import Hero from "./Hero";
 
 export default function SearchResults() {
@@ -24,8 +25,13 @@ export default function SearchResults() {
 
     fetchData("/v1/user/heros", _searchParams).then((data) => {
       if (data?.data?.success) {
-        setHeros(data.data.data);
-        // localStorage.setItem("heroSearchParams", JSON.stringify(_searchParams));
+        let _heros = data.data.data;
+        _heros = _heros.map((hero) => ({
+          ...hero,
+          isOnline: isCurrentTimeWithinServiceTimes(hero.serviceTimes),
+        }));
+
+        setHeros(_heros);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

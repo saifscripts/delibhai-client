@@ -6,7 +6,7 @@ import dp from "../../../../assets/default.jpg";
 import PrimaryButton from "../../../../components/ui/PrimaryButton";
 
 export default function Hero({ details }) {
-  const { name, avatarURL, distance, _id, mobile } = details;
+  const { name, avatarURL, _id, mobile, isOnline } = details;
 
   return (
     <Link to={`/profile/${_id}`}>
@@ -24,7 +24,7 @@ export default function Hero({ details }) {
 
           <div className="mb-2 flex items-center gap-1 text-gray-700">
             <span>{<GrLocation />}</span>
-            <span>{distance}km</span>
+            <span>{isOnline ? "online" : "offline"}</span>
           </div>
 
           <div className="flex gap-3">
