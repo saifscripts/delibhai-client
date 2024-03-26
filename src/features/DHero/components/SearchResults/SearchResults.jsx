@@ -34,7 +34,6 @@ export default function SearchResults() {
         const timestamp = Date.now();
 
         heros = heros.map((hero) => {
-          console.log(hero.name, timestamp - hero?.liveLocation?.timestamp);
           const isOnline =
             hero?.liveLocation &&
             timestamp - hero.liveLocation.timestamp < 10000;
