@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useUpdateData } from "../api/api";
 
 const LocationTracker = ({ userId }) => {
-  const [currentLocation, setCurrentLocation] = useState(null);
   const { updateData } = useUpdateData();
 
   // Function to get the user's current location
   const getLocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(
+      navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setCurrentLocation({ latitude, longitude });
+          const liveLocation = { latitude, longitude };
+          updateData(`/v1/user/${userId}`, {
+            liveLocation,
+          });
         },
         (error) => {
           console.error("Error getting location:", error);
@@ -24,17 +26,11 @@ const LocationTracker = ({ userId }) => {
 
   // Send location data to the server using Socket.IO
   useEffect(() => {
-    updateData(`/v1/user/${userId}`, {
-      liveLocation: currentLocation,
-    });
+    const intervalId = setInterval(getLocation, 1000);
 
+    return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, currentLocation]);
-
-  // Get user's initial location when component mounts
-  useEffect(() => {
-    getLocation();
-  }, []);
+  }, [userId]);
 
   return <></>;
 };
