@@ -4,7 +4,6 @@ import { useUpdateData } from "../api/api";
 const LocationTracker = ({ userId }) => {
   const [currentLocation, setCurrentLocation] = useState(null);
   const { updateData } = useUpdateData();
-  console.log(currentLocation);
 
   // Function to get the user's current location
   const getLocation = () => {

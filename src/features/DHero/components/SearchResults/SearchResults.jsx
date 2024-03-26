@@ -38,8 +38,6 @@ export default function SearchResults() {
             hero?.liveLocation &&
             timestamp - hero.liveLocation.timestamp < 60000;
 
-          console.log(hero.name, isOnline);
-
           const heroCurrentLocation = (isOnline && hero?.liveLocation) ||
             hero?.manualLocation?.geoLocation || {
               latitude: 22.892515,
