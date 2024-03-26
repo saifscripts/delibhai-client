@@ -11,7 +11,7 @@ const LocationTracker = ({ userId }) => {
         (position) => {
           const { latitude, longitude } = position.coords;
           const liveLocation = { latitude, longitude };
-          updateData(`/v1/user/${userId}`, {
+          updateData(`/v1/user/location/${userId}`, {
             liveLocation,
           });
         },
