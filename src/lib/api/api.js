@@ -1,46 +1,34 @@
 import { useState } from "react";
-import { getAuthToken } from "../features/Authentication/utils/getAuthToken";
-import axios from "../lib/api/axiosConfig";
+import { getAuthToken } from "../../features/Authentication/utils/getAuthToken.js";
+import axios from "./axiosConfig.js";
 
 // useFetchData hook returns loading state and fetchData method
-export const useFetchData = () => {
-  // Loading State
-  const [isLoading, setIsLoading] = useState(false);
+export const fetchData = async (route, searchParams) => {
+  const token = getAuthToken();
 
-  // fetchData method directly returns data/error
-  const fetchData = async (route, searchParams) => {
-    const token = getAuthToken();
-    let queryString = "?";
-
-    if (searchParams) {
-      for (let param in searchParams) {
-        queryString += param + "=" + searchParams[param] + "&";
-      }
-      queryString = queryString.slice(0, -1);
-    } else {
-      queryString = "";
+  // generate queryString from searchParams obj
+  let queryString = "?";
+  if (searchParams) {
+    for (let param in searchParams) {
+      queryString += param + "=" + searchParams[param] + "&";
     }
+    queryString = queryString.slice(0, -1);
+  } else {
+    queryString = "";
+  }
 
-    let data, error;
+  try {
+    const response = await axios.get("/api" + route + queryString, {
+      headers: { authorization: token ? `Bearer ${token}` : null },
+    });
 
-    try {
-      setIsLoading(true);
-      const response = await axios.get("/api" + route + queryString, {
-        headers: { authorization: token ? `Bearer ${token}` : null },
-      });
-      data = response.data;
-    } catch (err) {
-      const appError = err?.response?.data;
-      const axiosError = err;
-      error = appError || axiosError;
-    } finally {
-      setIsLoading(false);
-    }
-
-    return { data, error };
-  };
-
-  return { isLoading, fetchData };
+    return response.data;
+  } catch (err) {
+    const appError = err?.response?.data;
+    const axiosError = err;
+    
+    return appError || axiosError;
+  }
 };
 
 // usePostData hook returns loading state and postData method

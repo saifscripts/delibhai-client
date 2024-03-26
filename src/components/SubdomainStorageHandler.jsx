@@ -22,10 +22,10 @@ function SubdomainStorageHandler() {
       <iframe
         src={`${protocol}//${domain}`} // generate url using current window location
         className="hidden"
-        id={`parent_frame`}
+        id="parent_frame"
       ></iframe>
 
-      {/* Subdomain frames */}
+      {/* Services subdomain frames */}
       {services?.map(
         ({ id, subdomain, active }) =>
           active && (
@@ -37,6 +37,13 @@ function SubdomainStorageHandler() {
             ></iframe>
           ),
       )}
+
+      {/* Admin frame */}
+      <iframe
+        src={`${protocol}//admin.${domain}`} // generate url using current window location
+        className="hidden"
+        id="admin_frame"
+      ></iframe>
     </>
   );
 }

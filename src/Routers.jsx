@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminRoute from "./components/AdminRoute";
 import ErrorPage from "./components/ErrorPage";
+import PublicRoute from "./components/PublicRoute";
 import RootLayout from "./components/RootLayout";
+import DHeroLocation from "./features/Admin/DHeroLocation";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import { Search, SearchResults } from "./features/DHero";
 import Home from "./features/Home";
@@ -18,8 +21,22 @@ import { EditVehicleInfo } from "./features/Profile/components/EditVehicleInfo";
 import Services from "./pages/Services";
 
 const commonRoutes = [
-  { path: "login", element: <Login /> },
-  { path: "signup", element: <Signup /> },
+  {
+    path: "login",
+    element: (
+      <PublicRoute>
+        <Login />
+      </PublicRoute>
+    ),
+  },
+  {
+    path: "signup",
+    element: (
+      <PublicRoute>
+        <Signup />
+      </PublicRoute>
+    ),
+  },
   { path: "otp-verification", element: <OTPVerification /> },
   { path: "profile/:id", element: <Profile /> },
   {
@@ -71,6 +88,25 @@ const dheroRouter = createBrowserRouter([
   },
 ]);
 
+const adminRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <AdminRoute>
+        <DHeroLocation />
+      </AdminRoute>
+    ),
+  },
+  {
+    path: "login",
+    element: (
+      <PublicRoute>
+        <Login />
+      </PublicRoute>
+    ),
+  },
+]);
+
 const blankRouter = createBrowserRouter([
   {
     errorElement: <ErrorPage />,
@@ -83,6 +119,8 @@ export const getRouter = () => {
   switch (subdomain) {
     case "hero":
       return dheroRouter;
+    case "admin":
+      return adminRouter;
     case "labour":
       return blankRouter;
     case "send":
