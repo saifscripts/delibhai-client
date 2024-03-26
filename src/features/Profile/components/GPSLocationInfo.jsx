@@ -15,7 +15,7 @@ export default function GPSLocationInfo({ id }) {
       fetchData(`/v1/user/location/${id}`).then(({ data }) => {
         if (data?.success) {
           const timestamp = Date.now();
-          const isOnline = timestamp - data.data.timestamp < 10000;
+          const isOnline = timestamp - data.data.timestamp < 1000;
 
           setGeoLocation(isOnline ? data.data : null);
         }
