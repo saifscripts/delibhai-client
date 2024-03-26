@@ -79,7 +79,7 @@ export const Profile = () => {
         <VehiclePhotos userInfo={userInfo} />
       )}
 
-      {activeCategory === "locationInfo" && <GPSLocationInfo />}
+      {activeCategory === "locationInfo" && <GPSLocationInfo id={id} />}
 
       {activeCategory === "videoInfo" && (
         <VideoInfo userId={id} videoURL={userInfo?.videoURL} />
