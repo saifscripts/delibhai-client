@@ -13,6 +13,8 @@ export default function SearchResults() {
   const { fetchData } = useFetchData();
 
   useEffect(() => {
+    const timestamp = Date.now();
+
     const _searchParams = Object.fromEntries([...searchParams]);
     const { vehicleType, destination, locationType, geoLocation } =
       _searchParams;
@@ -33,7 +35,11 @@ export default function SearchResults() {
         let heros = data.data.data;
 
         heros = heros.map((hero) => {
-          const heroCurrentLocation = hero?.liveLocation ||
+          const isOnline =
+            hero?.liveLocation &&
+            timestamp - hero.liveLocation.timestamp < 5000;
+
+          const heroCurrentLocation = (isOnline && hero?.liveLocation) ||
             hero?.manualLocation?.geoLocation || {
               latitude: 22.892515,
               longitude: 91.674607,
