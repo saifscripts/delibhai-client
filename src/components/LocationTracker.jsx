@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { useUpdateData } from "../api/api";
-import { useAuth } from "../features/Authentication/contexts/AuthContext";
 
-const LocationTracker = () => {
+const LocationTracker = ({ userId }) => {
   const [currentLocation, setCurrentLocation] = useState(null);
   const { updateData } = useUpdateData();
-  const { currentUser } = useAuth();
 
   // Function to get the user's current location
   const getLocation = () => {
@@ -27,15 +25,15 @@ const LocationTracker = () => {
 
   // Send location data to the server using Socket.IO
   useEffect(() => {
-    if (currentLocation) {
-      updateData(`/v1/user/${currentUser?._id}`, {
+    const intervalId = setInterval(() => {
+      updateData(`/v1/user/${userId}`, {
         liveLocation: currentLocation,
-      }).then((data) => {
-        console.log(data);
       });
-    }
+    }, 500);
+
+    return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentLocation]);
+  }, [userId, currentLocation]);
 
   // Get user's initial location when component mounts
   useEffect(() => {
