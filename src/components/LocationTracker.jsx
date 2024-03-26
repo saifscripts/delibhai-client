@@ -26,7 +26,7 @@ const LocationTracker = ({ userId }) => {
 
   // Send location data to the server using Socket.IO
   useEffect(() => {
-    const intervalId = setInterval(getLocation, 1000);
+    const intervalId = setInterval(getLocation, 500);
 
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
