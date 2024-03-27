@@ -5,7 +5,7 @@
     "source.fixAll.tslint": "explicit",
     "source.organizeImports": "explicit"
   },
-  "javascript.validate.enable": false,
+  "javascript.validate.enable": true,
   "typescript.validate.enable": false,
   "workbench.colorTheme": "Learn with Sumit - Shades of Grey"
 }
