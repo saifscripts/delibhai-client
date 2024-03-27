@@ -1,6 +1,6 @@
 import { AiFillHome, AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
-import { MdAppRegistration, MdOutlineTaskAlt } from "react-icons/md";
+import { MdAppRegistration } from "react-icons/md";
 import { useAuth } from "../../../features/Authentication/contexts/AuthContext";
 import { CustomNavLink } from "./CustomNavLink";
 
@@ -9,11 +9,11 @@ const NavLinks = () => {
   return (
     <>
       <CustomNavLink to="/" icon={<AiFillHome />} text="হোম পেইজ" />
-      <CustomNavLink
+      {/* <CustomNavLink
         to="/services"
         icon={<MdOutlineTaskAlt />}
         text="সার্ভিস সমূহ"
-      />
+      /> */}
       {currentUser ? null : (
         <CustomNavLink icon={<AiOutlineLogin />} to="/login" text="লগইন করুন" />
       )}
