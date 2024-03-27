@@ -3,7 +3,6 @@ import AdminRoute from "./components/AdminRoute";
 import ErrorPage from "./components/ErrorPage";
 import PublicRoute from "./components/PublicRoute";
 import RootLayout from "./components/RootLayout";
-import DHeroLocation from "./features/Admin/DHeroLocation";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import { Search, SearchResults } from "./features/DHero";
 import Home from "./features/Home";
@@ -19,6 +18,7 @@ import {
 import { EditOwnerInfo } from "./features/Profile/components/EditOwnerInfo";
 import { EditVehicleInfo } from "./features/Profile/components/EditVehicleInfo";
 import Services from "./pages/Services";
+import DHeroLocation from "./pages/admin/DHeroLocation";
 
 const commonRoutes = [
   {
