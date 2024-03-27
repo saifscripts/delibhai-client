@@ -1,20 +1,16 @@
-import { useState } from "react";
-import { Address } from "../../features/Address";
+import { AddressFields, useAddressFields } from "../../features/AddressFields";
 import MiniContainer from "../../layouts/MiniContainer";
-import { getAllDivision } from "../../lib/bd-divisions-to-unions";
-
-const defaultAddressValue = {
-  division: getAllDivision(),
-  district: null,
-  upazila: null,
-  union: null,
-};
 
 export default function DHeroLocation() {
-  const [address, setAddress] = useState(defaultAddressValue);
+  const [selectedAddress, addressFields, handleChange] = useAddressFields();
+  console.log(selectedAddress);
+
   return (
     <MiniContainer>
-      <Address address={address} setAddress={setAddress} />
+      <AddressFields
+        addressFields={addressFields}
+        handleChange={handleChange}
+      />
     </MiniContainer>
   );
 }
