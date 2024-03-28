@@ -1,44 +1,54 @@
 import { useEffect, useState } from "react";
-import { getAllDivision } from "../../../lib/bd-divisions-to-unions";
-import restoreAddressState from "../utils/restoreAddressState";
+import generateAddressFields from "../utils/generateAddressFields";
 
 const useAddressFields = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
-
-  const [addressFields, setAddressFields] = useState({
-    divisions: getAllDivision(),
-    districts: null,
-    upazilas: null,
-    unions: null,
-  });
+  const [addressFields, setAddressFields] = useState(null);
 
   useEffect(() => {
-    setAddressFields(restoreAddressState(selectedAddress));
+    (async function () {
+      setAddressFields(await generateAddressFields(selectedAddress));
+    })();
   }, [selectedAddress]);
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+
+    const isDivision = name === "division";
+    const isDistrict = name === "district";
+    const isUpazila = name === "upazila";
+    const isUnion = name === "union";
+    const isWard = name === "ward";
+    const isVillage = name === "village";
+
     setSelectedAddress((prevAddress) => ({
-      division: name === "division" ? value : prevAddress.division,
-      district:
-        name === "district"
-          ? value
-          : name === "division"
-            ? undefined
-            : prevAddress.district,
-      upazila:
-        name === "upazila"
-          ? value
-          : name === ("division" || "district")
-            ? undefined
-            : prevAddress.upazila,
-      union:
-        name === "union"
-          ? value
-          : name === ("division" || "district" || "upazila")
-            ? undefined
-            : prevAddress.union,
+      division: isDivision ? value : prevAddress.division,
+      district: isDistrict
+        ? value
+        : isDivision
+          ? undefined
+          : prevAddress.district,
+      upazila: isUpazila
+        ? value
+        : isDivision || isDistrict
+          ? undefined
+          : prevAddress.upazila,
+      union: isUnion
+        ? value
+        : isDivision || isDistrict || isUpazila
+          ? undefined
+          : prevAddress.union,
+      ward: isWard
+        ? value
+        : isDivision || isDistrict || isUpazila || isUnion
+          ? undefined
+          : prevAddress.ward,
+      village: isVillage
+        ? value
+        : isDivision || isDistrict || isUpazila || isUnion || isWard
+          ? undefined
+          : prevAddress.village,
     }));
   };
 

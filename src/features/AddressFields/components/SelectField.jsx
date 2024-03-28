@@ -4,13 +4,14 @@ export default function SelectField({
   fields,
   onChange,
   name,
+  value,
 }) {
   return (
     <div className="mb-1 mt-4">
       <label className="font-bold">{label}</label>
       <select
         name={name}
-        defaultValue={fields?.find((field) => field.selected)?.value} // find the selected field value
+        defaultValue={value}
         disabled={disabled}
         onChange={onChange}
         className="w-full border-b border-primary bg-transparent py-3"
