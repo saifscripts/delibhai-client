@@ -9,11 +9,6 @@ const NavLinks = () => {
   return (
     <>
       <CustomNavLink to="/" icon={<AiFillHome />} text="হোম পেইজ" />
-      {/* <CustomNavLink
-        to="/services"
-        icon={<MdOutlineTaskAlt />}
-        text="সার্ভিস সমূহ"
-      /> */}
       {currentUser ? null : (
         <CustomNavLink icon={<AiOutlineLogin />} to="/login" text="লগইন করুন" />
       )}

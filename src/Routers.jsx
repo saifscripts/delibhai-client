@@ -17,7 +17,6 @@ import {
 } from "./features/Profile";
 import { EditOwnerInfo } from "./features/Profile/components/EditOwnerInfo";
 import { EditVehicleInfo } from "./features/Profile/components/EditVehicleInfo";
-import Services from "./pages/Services";
 import DHeroLocation from "./pages/admin/DHeroLocation";
 
 const commonRoutes = [
@@ -68,11 +67,7 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    children: [
-      { path: "", element: <Home /> },
-      { path: "services", element: <Services /> },
-      ...commonRoutes,
-    ],
+    children: [{ path: "", element: <Home /> }, ...commonRoutes],
   },
 ]);
 
