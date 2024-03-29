@@ -47,12 +47,97 @@ const useAddressFields = () => {
       village: isVillage
         ? value
         : isDivision || isDistrict || isUpazila || isUnion || isWard
-          ? undefined
+          ? []
           : prevAddress.village,
     }));
   };
 
-  return [selectedAddress, addressFields, handleChange];
+  const handleDivisionChange = (e) => {
+    setSelectedAddress({
+      division: e.target.value,
+      district: undefined,
+      upazila: undefined,
+      union: undefined,
+      ward: undefined,
+      village: [],
+    });
+  };
+
+  const handleDistrictChange = (e) => {
+    setSelectedAddress((prevAddress) => ({
+      ...prevAddress,
+      district: e.target.value,
+      upazila: undefined,
+      union: undefined,
+      ward: undefined,
+      village: [],
+    }));
+  };
+
+  const handleUpazilaChange = (e) => {
+    setSelectedAddress((prevAddress) => ({
+      ...prevAddress,
+      upazila: e.target.value,
+      union: undefined,
+      ward: undefined,
+      village: [],
+    }));
+  };
+
+  const handleUnionChange = (e) => {
+    setSelectedAddress((prevAddress) => ({
+      ...prevAddress,
+      union: e.target.value,
+      ward: undefined,
+      village: [],
+    }));
+  };
+
+  const handleWardChange = (e) => {
+    setSelectedAddress((prevAddress) => ({
+      ...prevAddress,
+      ward: e.target.value,
+    }));
+  };
+
+  const handleVillageSelect = (e) => {
+    setSelectedAddress((prevAddress) => ({
+      ...prevAddress,
+      village: e.target.value,
+    }));
+  };
+
+  const handleVillageCheck = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+
+    setSelectedAddress((prevAddress) => {
+      let _villages = [...prevAddress.village];
+
+      if (checked) {
+        _villages.push(value);
+      } else {
+        _villages = _villages.filter((v) => v !== value);
+      }
+
+      return {
+        ...prevAddress,
+        village: _villages,
+      };
+    });
+  };
+
+  const handlers = {
+    handleVillageCheck,
+    handleDivisionChange,
+    handleDistrictChange,
+    handleUpazilaChange,
+    handleUnionChange,
+    handleWardChange,
+    handleVillageSelect,
+  };
+
+  return { selectedAddress, addressFields, handleChange, handlers };
 };
 
 export default useAddressFields;

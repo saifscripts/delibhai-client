@@ -1,22 +1,25 @@
 import { fetchData } from '../../../lib/api/api.js';
 import { getAllDivision, getDistricts, getUnions, getUpazilas } from "../../../lib/bd-divisions-to-unions/index.js";
+import englishToBengaliNumber from '../../../utils/englishToBengaliNumber.js';
 
-const getWards = async(unionCode) => {
+const getWards = (unionCode) => {
   if(!unionCode) {
     return;
   }
 
-  const response = await fetchData(`/v1/ward/${unionCode}`);
-  return response.data;
+  return Array.from(Array(20)).map((ward, index) => ({value: index + 1, title: `ওয়ার্ড নং ${englishToBengaliNumber(index + 1)}`}))
 }
 
-const getVillages = async(wardCode) => {
-  if(!wardCode) {
+const getVillages = async(unionValue, wardValue) => {
+  if(!unionValue) {
     return;
   }
   
-  const response = await fetchData(`/v1/village/${wardCode}`);
-  return response.data;
+  const {data} = await fetchData(`/v1/village/${unionValue}`);
+  if(wardValue) {
+    return data?.filter((village) => village.wardValue === wardValue);
+  }
+  return data;
 }
 
 const generateAddressFields = async(address) => {
@@ -26,15 +29,15 @@ const generateAddressFields = async(address) => {
     }
   }
   
-  const { division, district, upazila, union, ward } = address;
+  const { division, district, upazila, union } = address;
 
   const result = {
     divisions: getAllDivision(),
     districts: getDistricts(division),
     upazilas: getUpazilas(district),
     unions: getUnions(upazila),
-    wards: await getWards(union),
-    villages: await getVillages(ward)
+    wards: getWards(union),
+    villages: await getVillages(union)
   };
 
   // console.log(result);

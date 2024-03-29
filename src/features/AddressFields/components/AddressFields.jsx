@@ -1,3 +1,4 @@
+import CheckVillages from "./CheckVillages";
 import SelectField from "./SelectField";
 
 const AddressFields = ({
@@ -6,15 +7,17 @@ const AddressFields = ({
   disabled,
   className,
   selectedAddress,
+  handlers,
 }) => {
+  console.log(selectedAddress);
   return (
-    <div className={className}>
+    <form className={className}>
       <SelectField
         label="বিভাগ"
         name="division"
         value={selectedAddress?.division}
         disabled={disabled}
-        onChange={handleChange}
+        onChange={handlers.handleDivisionChange}
         fields={addressFields?.divisions}
       />
       <SelectField
@@ -22,67 +25,39 @@ const AddressFields = ({
         name="district"
         value={selectedAddress?.district}
         disabled={disabled}
-        onChange={handleChange}
+        onChange={handlers.handleDistrictChange}
         fields={addressFields?.districts}
       />
       <SelectField
-        label="উপজেলা"
+        label="উপজেলা/সিটি কর্পোরেশন"
         name="upazila"
         value={selectedAddress?.upazila}
         disabled={disabled}
-        onChange={handleChange}
+        onChange={handlers.handleUpazilaChange}
         fields={addressFields?.upazilas}
       />
       <SelectField
-        label="ইউনিয়ন"
+        label="ইউনিয়ন/থানা/পৌরসভা"
         name="union"
         value={selectedAddress?.union}
         disabled={disabled}
-        onChange={handleChange}
+        onChange={handlers.handleUnionChange}
         fields={addressFields?.unions}
       />
-
-      {/* <div className="mb-1 mt-4">
-        <label className="font-bold">ওয়ার্ড</label>
-        <select
-          name="ward"
-          defaultValue={
-            addressFields?.wards?.find((field) => field.selected)?.wardCode
-          } // find the selected field value
-          disabled={disabled}
-          onChange={handleChange}
-          className="w-full border-b border-primary bg-transparent py-3"
-        >
-          <option>সিলেক্ট করুন</option>
-          {addressFields?.wards?.map(({ wardCode, wardNo }) => (
-            <option key={wardCode} value={wardCode}>
-              ওয়ার্ড নং {englishToBengaliNumber(wardNo)}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="mb-1 mt-4">
-        <label className="font-bold">গ্রাম</label>
-        <select
-          name="village"
-          defaultValue={
-            addressFields?.villages?.find((field) => field.selected)
-              ?.villageCode
-          } // find the selected field value
-          disabled={disabled}
-          onChange={handleChange}
-          className="w-full border-b border-primary bg-transparent py-3"
-        >
-          <option>সিলেক্ট করুন</option>
-          {addressFields?.villages?.map(({ villageCode, villageName }) => (
-            <option key={villageCode} value={villageCode}>
-              {villageName}
-            </option>
-          ))}
-        </select>
-      </div> */}
-    </div>
+      {/* <SelectVillage
+        selectedAddress={selectedAddress}
+        disabled={disabled}
+        onChange={handleChange}
+        addressFields={addressFields}
+      /> */}
+      <CheckVillages
+        selectedAddress={selectedAddress}
+        disabled={disabled}
+        onChange={handleChange}
+        addressFields={addressFields}
+        handlers={handlers}
+      />
+    </form>
   );
 };
 
