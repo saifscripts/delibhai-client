@@ -1,4 +1,4 @@
-import CheckVillages from "./CheckVillages";
+import AddVillage from "./AddVillage";
 import SelectField from "./SelectField";
 
 const AddressFields = ({
@@ -7,6 +7,7 @@ const AddressFields = ({
   disabled,
   className,
   selectedAddress,
+  setAddressFields,
   handlers,
 }) => {
   console.log(selectedAddress);
@@ -50,12 +51,20 @@ const AddressFields = ({
         onChange={handleChange}
         addressFields={addressFields}
       /> */}
-      <CheckVillages
+      {/* <CheckVillages
         selectedAddress={selectedAddress}
         disabled={disabled}
         onChange={handleChange}
         addressFields={addressFields}
         handlers={handlers}
+      /> */}
+      <AddVillage
+        selectedAddress={selectedAddress}
+        disabled={disabled}
+        onChange={handleChange}
+        addressFields={addressFields}
+        handlers={handlers}
+        setAddressFields={setAddressFields}
       />
     </form>
   );

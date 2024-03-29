@@ -10,15 +10,12 @@ const getWards = (unionCode) => {
   return Array.from(Array(20)).map((ward, index) => ({value: index + 1, title: `ওয়ার্ড নং ${englishToBengaliNumber(index + 1)}`}))
 }
 
-const getVillages = async(unionValue, wardValue) => {
+const getVillages = async(unionValue) => {
   if(!unionValue) {
     return;
   }
   
   const {data} = await fetchData(`/v1/village/${unionValue}`);
-  if(wardValue) {
-    return data?.filter((village) => village.wardValue === wardValue);
-  }
   return data;
 }
 

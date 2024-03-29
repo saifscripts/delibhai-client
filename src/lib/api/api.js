@@ -2,7 +2,6 @@ import { useState } from "react";
 import { getAuthToken } from "../../features/Authentication/utils/getAuthToken.js";
 import axios from "./axiosConfig.js";
 
-// useFetchData hook returns loading state and fetchData method
 export const fetchData = async (route, searchParams) => {
   const token = getAuthToken();
 
@@ -26,39 +25,24 @@ export const fetchData = async (route, searchParams) => {
   } catch (err) {
     const appError = err?.response?.data;
     const axiosError = err;
-    
+
     return appError || axiosError;
   }
 };
 
-// usePostData hook returns loading state and postData method
-export const usePostData = () => {
-  // Loading State
-  const [isLoading, setIsLoading] = useState(false);
+export const postData = async (route, body) => {
+  const token = getAuthToken();
 
-  // postData method directly returns data/error
-  const postData = async (route, body) => {
-    const token = getAuthToken();
-    let data, error;
-
-    try {
-      setIsLoading(true);
-      const response = await axios.post("/api" + route, body, {
-        headers: { authorization: token ? `Bearer ${token}` : null },
-      });
-      data = response.data;
-    } catch (err) {
-      const appError = err?.response?.data;
-      const axiosError = err;
-      error = appError || axiosError;
-    } finally {
-      setIsLoading(false);
-    }
-
-    return { data, error };
-  };
-
-  return { isLoading, postData };
+  try {
+    const response = await axios.post("/api" + route, body, {
+      headers: { authorization: token ? `Bearer ${token}` : null },
+    });
+    return response.data;
+  } catch (err) {
+    const appError = err?.response?.data;
+    const axiosError = err;
+    return appError || axiosError;
+  }
 };
 
 // useUpdateData hook returns loading state and updateData method
