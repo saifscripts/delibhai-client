@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { getAuthToken } from "../../features/Authentication/utils/getAuthToken.js";
 import axios from "./axiosConfig.js";
 
@@ -45,32 +44,17 @@ export const postData = async (route, body) => {
   }
 };
 
-// useUpdateData hook returns loading state and updateData method
-export const useUpdateData = () => {
-  // Loading State
-  const [isLoading, setIsLoading] = useState(false);
+export const updateData = async (route, body) => {
+  const token = getAuthToken();
 
-  // updateData method directly returns data/error
-  const updateData = async (route, body) => {
-    const token = getAuthToken();
-    let data, error;
-
-    try {
-      setIsLoading(true);
-      const response = await axios.patch("/api" + route, body, {
-        headers: { authorization: token ? `Bearer ${token}` : null },
-      });
-      data = response.data;
-    } catch (err) {
-      const appError = err?.response?.data;
-      const axiosError = err;
-      error = appError || axiosError;
-    } finally {
-      setIsLoading(false);
-    }
-
-    return { data, error };
-  };
-
-  return { isLoading, updateData };
+  try {
+    const response = await axios.patch("/api" + route, body, {
+      headers: { authorization: token ? `Bearer ${token}` : null },
+    });
+    return response.data;
+  } catch (err) {
+    const appError = err?.response?.data;
+    const axiosError = err;
+    return appError || axiosError;
+  }
 };

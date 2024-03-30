@@ -10,9 +10,8 @@ const AddressFields = ({
   setAddressFields,
   handlers,
 }) => {
-  console.log(selectedAddress);
   return (
-    <form className={className}>
+    <div className={className}>
       <SelectField
         label="বিভাগ"
         name="division"
@@ -66,7 +65,7 @@ const AddressFields = ({
         handlers={handlers}
         setAddressFields={setAddressFields}
       />
-    </form>
+    </div>
   );
 };
 

@@ -8,10 +8,7 @@ const Modal = ({ isOpen, onClose, className, children }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Modal overlay */}
-      <div
-        className="fixed inset-0 bg-black opacity-50"
-        onClick={onClose}
-      ></div>
+      <div className="fixed inset-0 bg-black opacity-5" onClick={onClose}></div>
       {/* Modal container */}
       <div className={`z-50 rounded-lg bg-white shadow-lg ${className}`}>
         {children}
