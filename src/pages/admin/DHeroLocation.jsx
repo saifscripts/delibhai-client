@@ -18,6 +18,7 @@ export default function DHeroLocation() {
         handleChange={handleChange}
         selectedAddress={selectedAddress}
         handlers={handlers}
+        villageType="add"
       />
     </MiniContainer>
   );

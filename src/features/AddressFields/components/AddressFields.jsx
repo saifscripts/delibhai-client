@@ -1,12 +1,14 @@
 import AddVillage from "./AddVillage";
+import CheckVillages from "./CheckVillages";
 import SelectField from "./SelectField";
+import SelectVillage from "./SelectVillage";
 
 const AddressFields = ({
   addressFields,
   handleChange,
   disabled,
   className,
-
+  villageType,
   selectedAddress,
   setAddressFields,
   handlers,
@@ -45,27 +47,34 @@ const AddressFields = ({
         onChange={handlers.handleUnionChange}
         fields={addressFields?.unions}
       />
-      {/* <SelectVillage
-        selectedAddress={selectedAddress}
-        disabled={disabled}
-        onChange={handleChange}
-        addressFields={addressFields}
-      /> */}
-      {/* <CheckVillages
-        selectedAddress={selectedAddress}
-        disabled={disabled}
-        onChange={handleChange}
-        addressFields={addressFields}
-        handlers={handlers}
-      /> */}
-      <AddVillage
-        selectedAddress={selectedAddress}
-        disabled={disabled}
-        onChange={handleChange}
-        addressFields={addressFields}
-        handlers={handlers}
-        setAddressFields={setAddressFields}
-      />
+      {villageType === "select" && (
+        <SelectVillage
+          selectedAddress={selectedAddress}
+          disabled={disabled}
+          onChange={handleChange}
+          addressFields={addressFields}
+        />
+      )}
+      {villageType === "checkbox" && (
+        <CheckVillages
+          selectedAddress={selectedAddress}
+          disabled={disabled}
+          onChange={handleChange}
+          addressFields={addressFields}
+          handlers={handlers}
+        />
+      )}
+
+      {villageType === "add" && (
+        <AddVillage
+          selectedAddress={selectedAddress}
+          disabled={disabled}
+          onChange={handleChange}
+          addressFields={addressFields}
+          handlers={handlers}
+          setAddressFields={setAddressFields}
+        />
+      )}
     </div>
   );
 };
