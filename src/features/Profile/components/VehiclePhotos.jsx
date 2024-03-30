@@ -39,15 +39,13 @@ export const VehiclePhotos = ({ userInfo }) => {
     }
 
     // update the image url in database
-    const { data, error } = await updateData(`/v1/user/${currentUser._id}`, {
+    const { data } = await updateData(`/v1/user/${currentUser._id}`, {
       vehiclePhotos: [..._vehiclePhotos, response.data.data.url],
     });
 
     // update current user state if database is updated
     if (data?.success) {
       setCurrentUser(data.data);
-    } else {
-      console.log(error);
     }
 
     setIsLoading(false);

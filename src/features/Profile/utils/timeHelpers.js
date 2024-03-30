@@ -86,7 +86,6 @@ export const remove24HourSlot = (slots) => {
 
     return !(slotStartMinutes === 0 && slotEndMinutes === 23 * 60 + 59);
   });
-
-  console.log(filtered);
+  
   return filtered;
 };

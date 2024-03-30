@@ -4,7 +4,6 @@ export const RatingBars = ({ percentages }) => {
   return (
     <div className="flex flex-col">
       {percentages.map((percentage, i) => {
-        console.log(percentage);
         return (
           <div key={i} className="flex items-center gap-3">
             <span className="text-xl">{englishToBengaliNumber(-i + 5)}</span>

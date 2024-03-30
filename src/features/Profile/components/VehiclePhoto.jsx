@@ -28,14 +28,12 @@ export const VehiclePhoto = ({ url, index, userId }) => {
     const vehiclePhotos = currentUser?.vehiclePhotos;
     vehiclePhotos?.splice(index, 1);
 
-    const { data, error } = await updateData(`/v1/user/${currentUser._id}`, {
+    const { data } = await updateData(`/v1/user/${currentUser._id}`, {
       vehiclePhotos,
     });
 
     if (data?.success) {
       setCurrentUser(data.data);
-    } else {
-      console.log(error);
     }
 
     setIsLoading(false);

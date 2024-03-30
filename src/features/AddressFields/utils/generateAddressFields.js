@@ -37,7 +37,6 @@ const generateAddressFields = async(address) => {
     villages: await getVillages(union)
   };
 
-  // console.log(result);
   return result;
 };
 
