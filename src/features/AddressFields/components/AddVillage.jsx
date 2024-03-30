@@ -40,17 +40,12 @@ export default function AddVillage({
   };
 
   const handleVillageEdit = async () => {
-    console.log("clicked save");
     const { value, title } = editVillage;
-    console.log(editVillage);
-    const response = await updateData(`/v1/village/${value}`, {
+    const response = await updateData(`/v1/village/update/${value}`, {
       title,
     });
 
-    console.log(response);
-
     if (response?.success) {
-      console.log("success");
       setIsModalOpen(false);
       setAddressFields(await generateAddressFields(selectedAddress)); // refetch updated data
     }
