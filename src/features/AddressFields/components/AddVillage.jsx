@@ -1,9 +1,10 @@
 import { cloneDeep } from "lodash";
 import { useState } from "react";
-import { MdEditSquare } from "react-icons/md";
-import { postData, updateData } from "../../../lib/api/api";
+import { MdDelete, MdEdit } from "react-icons/md";
+import { deleteData, postData, updateData } from "../../../lib/api/api";
 import generateAddressFields from "../utils/generateAddressFields";
 import cn from "./../../../lib/cn";
+import DeleteModal from "./DeleteModal";
 import RenameModal from "./RenameModal";
 import SelectWard from "./SelectWard";
 
@@ -17,6 +18,7 @@ export default function AddVillage({
   const [villages, setVillages] = useState("");
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [editVillage, setEditVillage] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -47,6 +49,17 @@ export default function AddVillage({
 
     if (response?.success) {
       setIsModalOpen(false);
+      setAddressFields(await generateAddressFields(selectedAddress)); // refetch updated data
+    }
+  };
+
+  const handleVillageDelete = async () => {
+    const { value } = editVillage;
+    const response = await deleteData(`/v1/village/delete/${value}`);
+
+    if (response?.success) {
+      console.log(response);
+      setIsDeleteModalOpen(false);
       setAddressFields(await generateAddressFields(selectedAddress)); // refetch updated data
     }
   };
@@ -92,21 +105,32 @@ export default function AddVillage({
               selectedAddress?.ward === wardValue,
           )
           .map((village) => (
-            <p
+            <div
               key={village.value}
-              className="group my-1 flex items-center justify-between px-3 py-[6px] text-xl hover:bg-gray-100"
+              className="group my-1 flex items-center justify-between px-3 py-[6px] text-xl hover:bg-primary hover:bg-opacity-10"
             >
               <span>{village.title}</span>
-              <button
-                onClick={() => {
-                  setIsModalOpen(true);
-                  setEditVillage(village);
-                }}
-                className="mr-2 hidden group-hover:inline-block"
-              >
-                <MdEditSquare />
-              </button>
-            </p>
+              <div className="mr-2 flex items-center gap-3">
+                <button
+                  onClick={() => {
+                    setIsModalOpen(true);
+                    setEditVillage(village);
+                  }}
+                  className="hidden text-primary group-hover:inline-block"
+                >
+                  <MdEdit />
+                </button>
+                <button
+                  onClick={() => {
+                    setIsDeleteModalOpen(true);
+                    setEditVillage(village);
+                  }}
+                  className="hidden text-red-400 group-hover:inline-block"
+                >
+                  <MdDelete />
+                </button>
+              </div>
+            </div>
           ))}
       </div>
       <RenameModal
@@ -115,6 +139,13 @@ export default function AddVillage({
         editVillage={editVillage}
         setEditVillage={setEditVillage}
         onClose={() => setIsModalOpen(false)}
+      />
+
+      <DeleteModal
+        isOpen={isDeleteModalOpen}
+        handleVillageDelete={handleVillageDelete}
+        editVillage={editVillage}
+        onClose={() => setIsDeleteModalOpen(false)}
       />
     </div>
   );

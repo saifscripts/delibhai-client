@@ -58,3 +58,18 @@ export const updateData = async (route, body) => {
     return appError || axiosError;
   }
 };
+
+export const deleteData = async (route) => {
+  const token = getAuthToken();
+
+  try {
+    const response = await axios.delete("/api" + route, {
+      headers: { authorization: token ? `Bearer ${token}` : null },
+    });
+    return response.data;
+  } catch (err) {
+    const appError = err?.response?.data;
+    const axiosError = err;
+    return appError || axiosError;
+  }
+};
