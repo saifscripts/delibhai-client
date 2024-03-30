@@ -6,6 +6,7 @@ const AddressFields = ({
   handleChange,
   disabled,
   className,
+
   selectedAddress,
   setAddressFields,
   handlers,
@@ -15,7 +16,7 @@ const AddressFields = ({
       <SelectField
         label="বিভাগ"
         name="division"
-        value={selectedAddress?.division}
+        defaultValue={selectedAddress?.division}
         disabled={disabled}
         onChange={handlers.handleDivisionChange}
         fields={addressFields?.divisions}
@@ -23,7 +24,7 @@ const AddressFields = ({
       <SelectField
         label="জেলা"
         name="district"
-        value={selectedAddress?.district}
+        defaultValue={selectedAddress?.district}
         disabled={disabled}
         onChange={handlers.handleDistrictChange}
         fields={addressFields?.districts}
@@ -31,7 +32,7 @@ const AddressFields = ({
       <SelectField
         label="উপজেলা/সিটি কর্পোরেশন"
         name="upazila"
-        value={selectedAddress?.upazila}
+        defaultValue={selectedAddress?.upazila}
         disabled={disabled}
         onChange={handlers.handleUpazilaChange}
         fields={addressFields?.upazilas}
@@ -39,7 +40,7 @@ const AddressFields = ({
       <SelectField
         label="ইউনিয়ন/থানা/পৌরসভা"
         name="union"
-        value={selectedAddress?.union}
+        defaultValue={selectedAddress?.union}
         disabled={disabled}
         onChange={handlers.handleUnionChange}
         fields={addressFields?.unions}

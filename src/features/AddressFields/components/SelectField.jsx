@@ -4,21 +4,21 @@ export default function SelectField({
   fields,
   onChange,
   name,
-  value,
+  defaultValue,
 }) {
   return (
     <div className="mb-1 mt-4">
       <label className="font-bold">{label}</label>
       <select
         name={name}
-        defaultValue={value}
+        defaultValue={defaultValue}
         disabled={disabled}
         onChange={onChange}
         className="w-full border-b border-primary bg-transparent py-3"
       >
         <option>সিলেক্ট করুন</option>
-        {fields?.map(({ value, title }) => (
-          <option key={value} value={value}>
+        {fields?.map(({ _id, title }) => (
+          <option key={_id} value={_id}>
             {title}
           </option>
         ))}

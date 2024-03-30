@@ -15,7 +15,7 @@ const RenameModal = ({
         className="border px-3 py-1"
         value={editVillage?.title}
         onChange={(e) =>
-          setEditVillage({ value: editVillage?.value, title: e.target.value })
+          setEditVillage({ _id: editVillage?._id, title: e.target.value })
         }
       />
       <div className="mt-2 space-x-2 text-right">

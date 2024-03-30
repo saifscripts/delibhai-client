@@ -17,7 +17,7 @@ export default function AddVillage({
 }) {
   const [villages, setVillages] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [editVillage, setEditVillage] = useState(null);
 
@@ -25,8 +25,8 @@ export default function AddVillage({
     e.preventDefault();
     setLoading(true);
     const villageArray = villages.split(",").map((village) => ({
-      unionValue: selectedAddress.union,
-      wardValue: selectedAddress.ward,
+      unionId: selectedAddress.union,
+      wardId: selectedAddress.ward,
       title: village.trim(),
     }));
 
@@ -42,23 +42,22 @@ export default function AddVillage({
   };
 
   const handleVillageEdit = async () => {
-    const { value, title } = editVillage;
-    const response = await updateData(`/v1/village/update/${value}`, {
+    const { _id, title } = editVillage;
+    const response = await updateData(`/v1/village/update/${_id}`, {
       title,
     });
 
     if (response?.success) {
-      setIsModalOpen(false);
+      setIsRenameModalOpen(false);
       setAddressFields(await generateAddressFields(selectedAddress)); // refetch updated data
     }
   };
 
   const handleVillageDelete = async () => {
-    const { value } = editVillage;
-    const response = await deleteData(`/v1/village/delete/${value}`);
+    const { _id } = editVillage;
+    const response = await deleteData(`/v1/village/delete/${_id}`);
 
     if (response?.success) {
-      console.log(response);
       setIsDeleteModalOpen(false);
       setAddressFields(await generateAddressFields(selectedAddress)); // refetch updated data
     }
@@ -72,7 +71,7 @@ export default function AddVillage({
           disabled={disabled}
           fields={addressFields?.wards}
           onChange={handlers.handleWardChange}
-          value={selectedAddress?.ward}
+          defaultValue={selectedAddress?.ward}
         />
       </div>
 
@@ -100,20 +99,20 @@ export default function AddVillage({
       <div className="h-80 overflow-auto">
         {addressFields?.villages
           ?.filter(
-            ({ wardValue }) =>
+            ({ wardId }) =>
               selectedAddress?.ward === "all" ||
-              selectedAddress?.ward === wardValue,
+              selectedAddress?.ward === wardId,
           )
           .map((village) => (
             <div
-              key={village.value}
+              key={village._id}
               className="group my-1 flex items-center justify-between px-3 py-[6px] text-xl hover:bg-primary hover:bg-opacity-10"
             >
               <span>{village.title}</span>
               <div className="mr-2 flex items-center gap-3">
                 <button
                   onClick={() => {
-                    setIsModalOpen(true);
+                    setIsRenameModalOpen(true);
                     setEditVillage(village);
                   }}
                   className="hidden text-primary group-hover:inline-block"
@@ -134,11 +133,11 @@ export default function AddVillage({
           ))}
       </div>
       <RenameModal
-        isOpen={isModalOpen}
+        isOpen={isRenameModalOpen}
         handleVillageEdit={handleVillageEdit}
         editVillage={editVillage}
         setEditVillage={setEditVillage}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => setIsRenameModalOpen(false)}
       />
 
       <DeleteModal

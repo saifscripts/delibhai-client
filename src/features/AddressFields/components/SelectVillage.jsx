@@ -14,7 +14,7 @@ export default function SelectVillage({
           disabled={disabled}
           fields={addressFields?.wards}
           onChange={onChange}
-          value={selectedAddress?.ward}
+          defaultValue={selectedAddress?.ward}
         />
       </div>
       <select
@@ -25,8 +25,8 @@ export default function SelectVillage({
         className="w-full border-b border-primary bg-transparent py-3"
       >
         <option>সিলেক্ট করুন</option>
-        {addressFields?.villages?.map(({ value, title }) => (
-          <option key={value} value={value}>
+        {addressFields?.villages?.map(({ _id, title }) => (
+          <option key={_id} value={_id}>
             {title}
           </option>
         ))}

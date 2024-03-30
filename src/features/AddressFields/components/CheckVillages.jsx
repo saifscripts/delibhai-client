@@ -14,7 +14,7 @@ export default function CheckVillages({
           disabled={disabled}
           fields={addressFields?.wards}
           onChange={handlers.handleWardChange}
-          value={selectedAddress?.ward}
+          defaultValue={selectedAddress?.ward}
         />
       </div>
 
@@ -22,30 +22,29 @@ export default function CheckVillages({
         <div className="h-72 overflow-auto">
           {addressFields?.villages
             ?.filter(
-              ({ wardValue }) =>
+              ({ wardId }) =>
                 selectedAddress?.ward === "all" ||
-                selectedAddress?.ward === wardValue,
+                selectedAddress?.ward === wardId,
             )
-            .map(({ value, title }) => (
-              <label key={value} className="my-1 block text-xl">
+            .map(({ _id, title }) => (
+              <label key={_id} className="my-1 block text-xl">
                 <input
                   onChange={handlers.handleVillageCheck}
                   type="checkbox"
                   name="village"
-                  checked={selectedAddress.village.includes(value)}
-                  value={value}
+                  checked={selectedAddress.village.includes(_id)}
+                  value={_id}
                 />{" "}
                 {title}
               </label>
             ))}
         </div>
         <div className="flex h-72 flex-col flex-wrap gap-2 overflow-x-auto pl-4">
-          {selectedAddress?.village?.map((value) => (
-            <p key={value} className="bg-gray-50 px-2 py-1">
+          {selectedAddress?.village?.map((_id) => (
+            <p key={_id} className="bg-gray-50 px-2 py-1">
               {
-                addressFields.villages.find(
-                  (village) => village.value === value,
-                ).title
+                addressFields.villages.find((village) => village._id === _id)
+                  .title
               }
             </p>
           ))}

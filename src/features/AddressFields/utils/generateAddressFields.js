@@ -7,15 +7,15 @@ const getWards = (unionCode) => {
     return;
   }
 
-  return Array.from(Array(20)).map((ward, index) => ({value: index + 1, title: `ওয়ার্ড নং ${englishToBengaliNumber(index + 1)}`}))
+  return Array.from(Array(20)).map((ward, index) => ({_id: index + 1, title: `ওয়ার্ড নং ${englishToBengaliNumber(index + 1)}`}))
 }
 
-const getVillages = async(unionValue) => {
-  if(!unionValue) {
+const getVillages = async(unionId) => {
+  if(!unionId) {
     return;
   }
   
-  const {data} = await fetchData(`/v1/village/${unionValue}`);
+  const {data} = await fetchData(`/v1/village/${unionId}`);
   return data;
 }
 

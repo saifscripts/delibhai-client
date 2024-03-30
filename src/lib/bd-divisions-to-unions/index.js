@@ -14,14 +14,14 @@ function getAllUnion(type) {
     return type === "en"? unions_en : unions;
 }
 
-function getDistricts(division_value, type) {
-    return type === "en"? districts_en[division_value] : districts[division_value];
+function getDistricts(division_id, type) {
+    return type === "en"? districts_en[division_id] : districts[division_id];
 }
-function getUpazilas(district_value, type) {
-    return type === "en"? upazilas_en[district_value] : upazilas[district_value];
+function getUpazilas(district_id, type) {
+    return type === "en"? upazilas_en[district_id] : upazilas[district_id];
 }
-function getUnions(upazila_value, type) {
-    return type === "en"? unions_en[upazila_value] : unions[upazila_value];
+function getUnions(upazila_id, type) {
+    return type === "en"? unions_en[upazila_id] : unions[upazila_id];
 }
 
 export {
