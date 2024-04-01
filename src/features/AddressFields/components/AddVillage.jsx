@@ -10,20 +10,20 @@ import RenameModal from "./RenameModal";
 import SelectWard from "./SelectWard";
 
 export default function AddVillage() {
-  const [villages, setVillages] = useState("");
   const [loading, setLoading] = useState(false);
   const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [villages, setVillages] = useState("");
   const [editVillage, setEditVillage] = useState(null);
 
-  const { address, addressFields, setAddressFields } = useAddress();
+  const { address, ward, addressFields, setAddressFields } = useAddress();
 
-  const handleSubmit = async (e) => {
+  const handleVillageAdd = async (e) => {
     e.preventDefault();
     setLoading(true);
     const villageArray = villages.split(",").map((village) => ({
       unionId: address.union,
-      wardId: address.ward,
+      wardId: ward,
       title: village.trim(),
     }));
 
@@ -67,7 +67,7 @@ export default function AddVillage() {
         <SelectWard />
       </div>
 
-      {address?.ward !== "all" && (
+      {ward && (
         <form className="my-5 grid grid-cols-[1fr_200px] items-center gap-3">
           <input
             onChange={(e) => setVillages(e.target.value)}
@@ -76,7 +76,7 @@ export default function AddVillage() {
             className="h-12 w-full rounded-md border p-2"
           />
           <button
-            onClick={handleSubmit}
+            onClick={handleVillageAdd}
             type="submit"
             disabled={loading}
             className={cn("h-12 rounded-md bg-secondary hover:brightness-90", {
@@ -90,9 +90,7 @@ export default function AddVillage() {
 
       <div className="h-80 overflow-auto">
         {addressFields?.villages
-          ?.filter(
-            ({ wardId }) => address?.ward === "all" || address?.ward === wardId,
-          )
+          ?.filter(({ wardId }) => !ward || ward === wardId)
           .map((village) => (
             <div
               key={village._id}

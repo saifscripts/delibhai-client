@@ -10,7 +10,7 @@ export default function DHeroLocation() {
       <AddressFields
         address={address}
         setAddress={setAddress}
-        villageType="add"
+        villageType="checkbox"
       />
     </MiniContainer>
   );

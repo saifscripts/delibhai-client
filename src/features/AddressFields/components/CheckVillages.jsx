@@ -2,7 +2,7 @@ import { useAddress } from "../contexts/AddressContext";
 import SelectWard from "./SelectWard";
 
 export default function CheckVillages() {
-  const { address, addressFields, handlers } = useAddress();
+  const { ward, address, addressFields, handlers } = useAddress();
 
   return (
     <div className="mb-1 mt-4">
@@ -14,10 +14,7 @@ export default function CheckVillages() {
       <div className="grid grid-cols-[150px_2fr] p-3 shadow-lg md:grid-cols-[200px_2fr]">
         <div className="h-72 overflow-auto">
           {addressFields?.villages
-            ?.filter(
-              ({ wardId }) =>
-                address?.ward === "all" || address?.ward === wardId,
-            )
+            ?.filter(({ wardId }) => !ward || ward === wardId)
             .map(({ _id, title }) => (
               <label key={_id} className="my-1 block text-xl">
                 <input

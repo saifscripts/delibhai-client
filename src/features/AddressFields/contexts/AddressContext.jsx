@@ -15,6 +15,7 @@ export const AddressProvider = ({
   children,
 }) => {
   const [addressFields, setAddressFields] = useState(null);
+  const [ward, setWard] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -66,12 +67,7 @@ export const AddressProvider = ({
     }));
   };
 
-  const handleWardChange = (e) => {
-    setAddress((prevAddress) => ({
-      ...prevAddress,
-      ward: e.target.value,
-    }));
-  };
+  const handleWardChange = (e) => setWard(e.target.value);
 
   const handleVillageSelect = (e) => {
     setAddress((prevAddress) => ({
@@ -116,6 +112,7 @@ export const AddressProvider = ({
         isLoading,
         villageType,
         address,
+        ward,
         addressFields,
         setAddressFields,
         handlers,

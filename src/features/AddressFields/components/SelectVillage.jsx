@@ -2,7 +2,7 @@ import { useAddress } from "../contexts/AddressContext";
 import SelectWard from "./SelectWard";
 
 export default function SelectVillage() {
-  const { address, addressFields, isLoading } = useAddress();
+  const { ward, address, addressFields, isLoading } = useAddress();
 
   return (
     <div className="mb-1 mt-4">
@@ -18,9 +18,7 @@ export default function SelectVillage() {
       >
         <option>সিলেক্ট করুন</option>
         {addressFields?.villages
-          ?.filter(
-            ({ wardId }) => address?.ward === "all" || address?.ward === wardId,
-          )
+          ?.filter(({ wardId }) => !ward || ward === wardId)
           ?.map(({ _id, title }) => (
             <option key={_id} value={_id}>
               {title}
