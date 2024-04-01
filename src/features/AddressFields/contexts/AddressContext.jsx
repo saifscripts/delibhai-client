@@ -1,21 +1,32 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext, useEffect, useState } from "react";
 import generateAddressFields from "../utils/generateAddressFields";
 
-const useAddressFields = () => {
-  const [selectedAddress, setSelectedAddress] = useState(null);
+const AddressContext = createContext();
+
+export const useAddress = () => {
+  return useContext(AddressContext);
+};
+
+export const AddressProvider = ({
+  address,
+  setAddress,
+  villageType,
+  children,
+}) => {
   const [addressFields, setAddressFields] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async function () {
       setIsLoading(true);
-      setAddressFields(await generateAddressFields(selectedAddress));
+      setAddressFields(await generateAddressFields(address));
       setIsLoading(false);
     })();
-  }, [selectedAddress]);
+  }, [address]);
 
   const handleDivisionChange = (e) => {
-    setSelectedAddress({
+    setAddress({
       division: e.target.value,
       district: undefined,
       upazila: undefined,
@@ -26,7 +37,7 @@ const useAddressFields = () => {
   };
 
   const handleDistrictChange = (e) => {
-    setSelectedAddress((prevAddress) => ({
+    setAddress((prevAddress) => ({
       ...prevAddress,
       district: e.target.value,
       upazila: undefined,
@@ -37,7 +48,7 @@ const useAddressFields = () => {
   };
 
   const handleUpazilaChange = (e) => {
-    setSelectedAddress((prevAddress) => ({
+    setAddress((prevAddress) => ({
       ...prevAddress,
       upazila: e.target.value,
       union: undefined,
@@ -47,23 +58,23 @@ const useAddressFields = () => {
   };
 
   const handleUnionChange = (e) => {
-    setSelectedAddress((prevAddress) => ({
+    setAddress((prevAddress) => ({
       ...prevAddress,
       union: e.target.value,
-      ward: 'all',
+      ward: "all",
       village: [],
     }));
   };
 
   const handleWardChange = (e) => {
-    setSelectedAddress((prevAddress) => ({
+    setAddress((prevAddress) => ({
       ...prevAddress,
       ward: e.target.value,
     }));
   };
 
   const handleVillageSelect = (e) => {
-    setSelectedAddress((prevAddress) => ({
+    setAddress((prevAddress) => ({
       ...prevAddress,
       village: e.target.value,
     }));
@@ -73,7 +84,7 @@ const useAddressFields = () => {
     const value = e.target.value;
     const checked = e.target.checked;
 
-    setSelectedAddress((prevAddress) => {
+    setAddress((prevAddress) => {
       let _villages = [...prevAddress.village];
 
       if (checked) {
@@ -99,7 +110,18 @@ const useAddressFields = () => {
     handleVillageSelect,
   };
 
-  return { selectedAddress, addressFields, setAddressFields , handlers, isLoading };
+  return (
+    <AddressContext.Provider
+      value={{
+        isLoading,
+        villageType,
+        address,
+        addressFields,
+        setAddressFields,
+        handlers,
+      }}
+    >
+      {children}
+    </AddressContext.Provider>
+  );
 };
-
-export default useAddressFields;

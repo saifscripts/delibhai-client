@@ -2,31 +2,28 @@ import { cloneDeep } from "lodash";
 import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { deleteData, postData, updateData } from "../../../lib/api/api";
+import { useAddress } from "../contexts/AddressContext";
 import generateAddressFields from "../utils/generateAddressFields";
 import cn from "./../../../lib/cn";
 import DeleteModal from "./DeleteModal";
 import RenameModal from "./RenameModal";
 import SelectWard from "./SelectWard";
 
-export default function AddVillage({
-  disabled,
-  addressFields,
-  setAddressFields,
-  selectedAddress,
-  handlers,
-}) {
+export default function AddVillage() {
   const [villages, setVillages] = useState("");
   const [loading, setLoading] = useState(false);
   const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [editVillage, setEditVillage] = useState(null);
 
+  const { address, addressFields, setAddressFields } = useAddress();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     const villageArray = villages.split(",").map((village) => ({
-      unionId: selectedAddress.union,
-      wardId: selectedAddress.ward,
+      unionId: address.union,
+      wardId: address.ward,
       title: village.trim(),
     }));
 
@@ -49,7 +46,7 @@ export default function AddVillage({
 
     if (response?.success) {
       setIsRenameModalOpen(false);
-      setAddressFields(await generateAddressFields(selectedAddress)); // refetch updated data
+      setAddressFields(await generateAddressFields(address)); // refetch updated data
     }
   };
 
@@ -59,7 +56,7 @@ export default function AddVillage({
 
     if (response?.success) {
       setIsDeleteModalOpen(false);
-      setAddressFields(await generateAddressFields(selectedAddress)); // refetch updated data
+      setAddressFields(await generateAddressFields(address)); // refetch updated data
     }
   };
 
@@ -67,15 +64,10 @@ export default function AddVillage({
     <div className="mb-1 mt-4">
       <div className="grid grid-cols-[1fr_125px] items-center">
         <label className="font-bold">গ্রাম/স্ট্যাশন</label>
-        <SelectWard
-          disabled={disabled}
-          fields={addressFields?.wards}
-          handlers={handlers}
-          defaultValue={selectedAddress?.ward}
-        />
+        <SelectWard />
       </div>
 
-      {selectedAddress?.ward !== "all" && (
+      {address?.ward !== "all" && (
         <form className="my-5 grid grid-cols-[1fr_200px] items-center gap-3">
           <input
             onChange={(e) => setVillages(e.target.value)}
@@ -99,9 +91,7 @@ export default function AddVillage({
       <div className="h-80 overflow-auto">
         {addressFields?.villages
           ?.filter(
-            ({ wardId }) =>
-              selectedAddress?.ward === "all" ||
-              selectedAddress?.ward === wardId,
+            ({ wardId }) => address?.ward === "all" || address?.ward === wardId,
           )
           .map((village) => (
             <div
