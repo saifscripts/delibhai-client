@@ -11,7 +11,7 @@ export default function SelectField({
       <label className="font-bold">{label}</label>
       <select
         name={name}
-        defaultValue={defaultValue}
+        value={defaultValue}
         disabled={disabled}
         onChange={onChange}
         className="w-full border-b border-primary bg-transparent py-3"

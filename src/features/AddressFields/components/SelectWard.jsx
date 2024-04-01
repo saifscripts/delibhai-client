@@ -11,7 +11,7 @@ export default function SelectWard() {
   return (
     <select
       name="ward"
-      defaultValue={ward}
+      value={ward}
       onChange={handlers.handleWardChange}
       className="w-full rounded-md bg-primary bg-opacity-10 px-4 py-[6px]"
     >

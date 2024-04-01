@@ -2,7 +2,7 @@ import { useAddress } from "../contexts/AddressContext";
 import SelectWard from "./SelectWard";
 
 export default function SelectVillage() {
-  const { ward, address, addressFields, isLoading } = useAddress();
+  const { ward, address, addressFields, isLoading, handlers } = useAddress();
 
   return (
     <div className="mb-1 mt-4">
@@ -12,9 +12,10 @@ export default function SelectVillage() {
       </div>
       <select
         name="village"
-        defaultValue={address?.village}
+        value={address?.village}
         disabled={isLoading}
         className="w-full border-b border-primary bg-transparent py-3"
+        onChange={handlers.handleVillageSelect}
       >
         <option>সিলেক্ট করুন</option>
         {addressFields?.villages
