@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { getAllDivision } from "bd-divisions-to-unions";
 import { isEqual } from "lodash";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,24 +6,22 @@ import { useUpdateData } from "../../../api/api";
 import Button from "../../../components/ui/Button";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
+import { AddressFields } from "../../AddressFields";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
-import getSelectedAddress from "../utils/getSelectedAddress";
-import restoreAddressState from "../utils/restoreAddressState";
-import { Address } from "./Address";
 import { RadioInput } from "./form/RadioInput";
 
-const defaultAddressValue = {
-  division: getAllDivision(),
-  district: null,
-  upazila: null,
-  union: null,
-};
+// const defaultAddressValue = {
+//   division: getAllDivision(),
+//   district: null,
+//   upazila: null,
+//   union: null,
+// };
 
 const EditAddressInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAddressEqual, setIsAddressEqual] = useState(true);
-  const [presentAddress, setPresentAddress] = useState(defaultAddressValue);
-  const [permanentAddress, setPermanentAddress] = useState(defaultAddressValue);
+  const [presentAddress, setPresentAddress] = useState(null);
+  const [permanentAddress, setPermanentAddress] = useState(null);
 
   const { currentUser, setCurrentUser } = useAuth();
 
@@ -32,9 +29,8 @@ const EditAddressInfo = () => {
     const presentAddress = currentUser?.presentAddress;
     const permanentAddress = currentUser?.permanentAddress;
 
-    presentAddress && setPresentAddress(restoreAddressState(presentAddress));
-    permanentAddress &&
-      setPermanentAddress(restoreAddressState(permanentAddress));
+    presentAddress && setPresentAddress(presentAddress);
+    permanentAddress && setPermanentAddress(permanentAddress);
 
     setIsAddressEqual(isEqual(presentAddress, permanentAddress));
   }, [currentUser]);
@@ -47,8 +43,8 @@ const EditAddressInfo = () => {
     setIsLoading(true);
 
     const address = {
-      presentAddress: getSelectedAddress(presentAddress),
-      permanentAddress: getSelectedAddress(permanentAddress),
+      presentAddress,
+      permanentAddress,
     };
 
     if (isAddressEqual) {
@@ -78,7 +74,11 @@ const EditAddressInfo = () => {
             বর্তমান ঠিকানা
           </p>
 
-          <Address address={presentAddress} setAddress={setPresentAddress} />
+          <AddressFields
+            address={presentAddress}
+            setAddress={setPresentAddress}
+            villageType="select"
+          />
 
           <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
             স্থায়ী ঠিকানা
@@ -96,9 +96,10 @@ const EditAddressInfo = () => {
           />
 
           {!isAddressEqual && (
-            <Address
+            <AddressFields
               address={permanentAddress}
               setAddress={setPermanentAddress}
+              villageType="select"
             />
           )}
 
