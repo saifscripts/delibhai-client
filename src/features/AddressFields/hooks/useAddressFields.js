@@ -4,10 +4,13 @@ import generateAddressFields from "../utils/generateAddressFields";
 const useAddressFields = () => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [addressFields, setAddressFields] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async function () {
+      setIsLoading(true);
       setAddressFields(await generateAddressFields(selectedAddress));
+      setIsLoading(false);
     })();
   }, [selectedAddress]);
 
@@ -96,7 +99,7 @@ const useAddressFields = () => {
     handleVillageSelect,
   };
 
-  return { selectedAddress, addressFields, setAddressFields , handlers };
+  return { selectedAddress, addressFields, setAddressFields , handlers, isLoading };
 };
 
 export default useAddressFields;

@@ -8,11 +8,13 @@ export default function DHeroLocation() {
     setAddressFields,
     handleChange,
     handlers,
+    isLoading,
   } = useAddressFields();
 
   return (
     <MiniContainer>
       <AddressFields
+        disabled={isLoading}
         addressFields={addressFields}
         setAddressFields={setAddressFields}
         handleChange={handleChange}
