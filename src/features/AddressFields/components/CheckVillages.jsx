@@ -13,7 +13,7 @@ export default function CheckVillages({
         <SelectWard
           disabled={disabled}
           fields={addressFields?.wards}
-          onChange={handlers.handleWardChange}
+          handlers={handlers}
           defaultValue={selectedAddress?.ward}
         />
       </div>

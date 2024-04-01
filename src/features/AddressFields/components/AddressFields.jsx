@@ -5,7 +5,6 @@ import SelectVillage from "./SelectVillage";
 
 const AddressFields = ({
   addressFields,
-  handleChange,
   disabled,
   className,
   villageType,
@@ -51,15 +50,14 @@ const AddressFields = ({
         <SelectVillage
           selectedAddress={selectedAddress}
           disabled={disabled}
-          onChange={handleChange}
           addressFields={addressFields}
+          handlers={handlers}
         />
       )}
       {villageType === "checkbox" && (
         <CheckVillages
           selectedAddress={selectedAddress}
           disabled={disabled}
-          onChange={handleChange}
           addressFields={addressFields}
           handlers={handlers}
         />
@@ -69,7 +67,6 @@ const AddressFields = ({
         <AddVillage
           selectedAddress={selectedAddress}
           disabled={disabled}
-          onChange={handleChange}
           addressFields={addressFields}
           handlers={handlers}
           setAddressFields={setAddressFields}

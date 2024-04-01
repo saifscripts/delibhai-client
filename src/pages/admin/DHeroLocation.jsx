@@ -6,7 +6,6 @@ export default function DHeroLocation() {
     selectedAddress,
     addressFields,
     setAddressFields,
-    handleChange,
     handlers,
     isLoading,
   } = useAddressFields();
@@ -17,10 +16,9 @@ export default function DHeroLocation() {
         disabled={isLoading}
         addressFields={addressFields}
         setAddressFields={setAddressFields}
-        handleChange={handleChange}
         selectedAddress={selectedAddress}
         handlers={handlers}
-        villageType="add"
+        villageType="checkbox"
       />
     </MiniContainer>
   );

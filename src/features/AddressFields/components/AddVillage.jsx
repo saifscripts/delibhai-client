@@ -70,7 +70,7 @@ export default function AddVillage({
         <SelectWard
           disabled={disabled}
           fields={addressFields?.wards}
-          onChange={handlers.handleWardChange}
+          handlers={handlers}
           defaultValue={selectedAddress?.ward}
         />
       </div>
