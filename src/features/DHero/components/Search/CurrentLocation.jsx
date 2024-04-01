@@ -1,4 +1,4 @@
-import { Address } from "../../../Profile";
+import { AddressFields } from "../../../AddressFields";
 import GPSLocation from "./GPSLocation";
 import RadioButton from "./RadioButton";
 
@@ -36,7 +36,11 @@ function CurrentLocation({
       )}
 
       {locationType === "manual" && (
-        <Address address={manualLocation} setAddress={setManualLocation} />
+        <AddressFields
+          villageType="select"
+          address={manualLocation}
+          setAddress={setManualLocation}
+        />
       )}
     </>
   );
