@@ -19,7 +19,7 @@ import vehicleModel from "../assets/icons/vehicle-model.svg";
 import vehicleNumber from "../assets/icons/vehicle-number.svg";
 import vehicleType from "../assets/icons/vehicle.svg";
 import { getServiceTimes } from "../utils/convertTime";
-import getAddressText from "../utils/getAddressText";
+import getAddressTitles from "../utils/getAddressTitles";
 import modifyAge from "../utils/modifyAge";
 
 const profileSchema = {
@@ -86,13 +86,13 @@ const profileSchema = {
       fields: [
         {
           dataKey: "presentAddress",
-          dataModifier: getAddressText,
+          dataModifier: getAddressTitles,
           label: "বর্তমান ঠিকানা",
           icon: marker,
         },
         {
           dataKey: "permanentAddress",
-          dataModifier: getAddressText,
+          dataModifier: getAddressTitles,
           label: "স্থায়ী ঠিকানা",
           icon: marker,
         },
@@ -142,7 +142,7 @@ const profileSchema = {
         },
         {
           dataKey: "ownerAddress",
-          dataModifier: getAddressText,
+          dataModifier: getAddressTitles,
           label: "স্থায়ী ঠিকানা",
           icon: marker,
         },
@@ -197,7 +197,7 @@ const profileSchema = {
       fields: [
         {
           dataKey: "manualLocation",
-          dataModifier: getAddressText,
+          dataModifier: getAddressTitles,
           label: "ঠিকানা",
           icon: marker,
         },

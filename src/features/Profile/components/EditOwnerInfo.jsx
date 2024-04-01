@@ -12,6 +12,7 @@ import Title from "../../../layouts/Title";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
 import { AddressFields } from "../../AddressFields";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
+import getAddressId from "../utils/getAddressId";
 
 const userSchema = yup.object({
   ownerName: yup
@@ -38,7 +39,7 @@ const EditOwnerInfo = () => {
 
   useEffect(() => {
     const ownerAddress = currentUser?.ownerAddress;
-    ownerAddress && setOwnerAddress(ownerAddress);
+    ownerAddress && setOwnerAddress(getAddressId(ownerAddress));
   }, [currentUser]);
 
   const {

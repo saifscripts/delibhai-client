@@ -9,6 +9,7 @@ import Title from "../../../layouts/Title";
 import { AddressFields } from "../../AddressFields";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
 import { RadioInput } from "./form/RadioInput";
+import getAddressId from "../utils/getAddressId";
 
 const EditAddressInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -22,8 +23,8 @@ const EditAddressInfo = () => {
     const presentAddress = currentUser?.presentAddress;
     const permanentAddress = currentUser?.permanentAddress;
 
-    presentAddress && setPresentAddress(presentAddress);
-    permanentAddress && setPermanentAddress(permanentAddress);
+    presentAddress && setPresentAddress(getAddressId(presentAddress));
+    permanentAddress && setPermanentAddress(getAddressId(permanentAddress));
 
     setIsAddressEqual(isEqual(presentAddress, permanentAddress));
   }, [currentUser]);
