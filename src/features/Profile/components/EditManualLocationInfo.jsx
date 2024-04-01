@@ -1,31 +1,23 @@
-import { getAllDivision } from "bd-divisions-to-unions";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUpdateData } from "../../../api/api";
 import Button from "../../../components/ui/Button";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
+import { AddressFields } from "../../AddressFields";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
-import getSelectedAddress from "../utils/getSelectedAddress";
-import restoreAddressState from "../utils/restoreAddressState";
-import { Address } from "./Address";
-
-const defaultAddressValue = {
-  division: getAllDivision(),
-  district: null,
-  upazila: null,
-  union: null,
-};
 
 const EditManualLocationInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [manualLocation, setManualLocation] = useState(defaultAddressValue);
+  const [manualLocation, setManualLocation] = useState(null);
 
   const { currentUser, setCurrentUser } = useAuth();
 
   useEffect(() => {
     const manualLocation = currentUser?.manualLocation;
-    manualLocation && setManualLocation(restoreAddressState(manualLocation));
+    console.log(manualLocation);
+
+    manualLocation && setManualLocation(manualLocation);
   }, [currentUser]);
 
   const { updateData } = useUpdateData();
@@ -35,10 +27,7 @@ const EditManualLocationInfo = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    const userData = {
-      manualLocation: getSelectedAddress(manualLocation),
-      // Should add manualLocation.station = 'stationName'
-    };
+    const userData = { manualLocation };
 
     // Update data
     const { data } = await updateData(`/v1/user/${currentUser._id}`, userData);
@@ -59,7 +48,11 @@ const EditManualLocationInfo = () => {
       />
       <MiniContainer>
         <form onSubmit={handleSubmit} className="mb-5">
-          <Address address={manualLocation} setAddress={setManualLocation} />
+          <AddressFields
+            villageType="select"
+            address={manualLocation}
+            setAddress={setManualLocation}
+          />
 
           {/* Should add station here or inside Address component */}
 

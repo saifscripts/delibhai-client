@@ -10,13 +10,6 @@ import { AddressFields } from "../../AddressFields";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
 import { RadioInput } from "./form/RadioInput";
 
-// const defaultAddressValue = {
-//   division: getAllDivision(),
-//   district: null,
-//   upazila: null,
-//   union: null,
-// };
-
 const EditAddressInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAddressEqual, setIsAddressEqual] = useState(true);

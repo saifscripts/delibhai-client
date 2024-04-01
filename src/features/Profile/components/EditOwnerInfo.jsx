@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
-import { getAllDivision } from "bd-divisions-to-unions";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -11,10 +10,8 @@ import Button from "../../../components/ui/Button";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
+import { AddressFields } from "../../AddressFields";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
-import getSelectedAddress from "../utils/getSelectedAddress";
-import restoreAddressState from "../utils/restoreAddressState";
-import { Address } from "./Address";
 
 const userSchema = yup.object({
   ownerName: yup
@@ -32,23 +29,16 @@ const userSchema = yup.object({
     .test("isValidEmail", `Email is not valid.`, isEmail),
 });
 
-const defaultAddressValue = {
-  division: getAllDivision(),
-  district: null,
-  upazila: null,
-  union: null,
-};
-
 const EditOwnerInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [ownerAddress, setOwnerAddress] = useState(defaultAddressValue);
+  const [ownerAddress, setOwnerAddress] = useState(null);
   const { currentUser, setCurrentUser } = useAuth();
   const { updateData } = useUpdateData();
   const navigate = useNavigate();
 
   useEffect(() => {
     const ownerAddress = currentUser?.ownerAddress;
-    ownerAddress && setOwnerAddress(restoreAddressState(ownerAddress));
+    ownerAddress && setOwnerAddress(ownerAddress);
   }, [currentUser]);
 
   const {
@@ -67,7 +57,7 @@ const EditOwnerInfo = () => {
 
   const onSubmit = async (userData) => {
     setIsLoading(true);
-    userData.ownerAddress = getSelectedAddress(ownerAddress);
+    userData.ownerAddress = ownerAddress;
 
     // Update data
     const { data, error } = await updateData(
@@ -109,7 +99,11 @@ const EditOwnerInfo = () => {
             ঠিকানা
           </p>
 
-          <Address address={ownerAddress} setAddress={setOwnerAddress} />
+          <AddressFields
+            villageType="select"
+            address={ownerAddress}
+            setAddress={setOwnerAddress}
+          />
 
           <div className="mb-1 mt-4">
             <label className="font-bold">মোবাইল</label>
