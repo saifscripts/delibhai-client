@@ -25,6 +25,12 @@ export default {
       transitionProperty: {
         height: "height",
       },
+      spacing: {
+        '192': '48rem',
+      },
+      minWidth: {
+        '192': '48rem',
+      }
     },
     container: {
       center: true,
