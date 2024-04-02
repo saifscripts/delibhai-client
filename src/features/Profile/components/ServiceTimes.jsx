@@ -118,7 +118,7 @@ export default function ServiceTimes({
                 )} পর্যন্ত`}</span>
                 <button
                   onClick={(e) => removeTime(e, start, end)}
-                  className="rounded-lg bg-primary p-3 text-white"
+                  className="rounded-lg bg-red-800 p-3 text-white"
                 >
                   {<AiFillDelete />}
                 </button>
