@@ -1,7 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { getAllDivision } from "bd-divisions-to-unions";
+import { cloneDeep } from "lodash";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { AiFillDelete, AiFillPlusSquare } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useUpdateData } from "../../../api/api";
@@ -9,9 +10,8 @@ import Button from "../../../components/ui/Button";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
-import getSelectedAddress from "../utils/getSelectedAddress";
-import restoreAddressState from "../utils/restoreAddressState";
-import { Address } from "./Address";
+import getAddressId from "../utils/getAddressId";
+import AddressModal from "./AddressModal";
 import ServiceTimes from "./ServiceTimes";
 
 const userSchema = yup.object({
@@ -29,18 +29,14 @@ const userSchema = yup.object({
     ),
 });
 
-const defaultAddressValue = {
-  division: getAllDivision(),
-  district: null,
-  upazila: null,
-  union: null,
-};
-
 const EditServiceInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [serviceAddress, setServiceAddress] = useState(defaultAddressValue);
+  const [serviceAddress, setServiceAddress] = useState([]);
+  const [address, setAddress] = useState(null);
+  const [addressIndex, setAddressIndex] = useState(null);
   const [serviceTimes, setServiceTimes] = useState([]);
   const [is24HourServiceTime, setIs24HourServiceTime] = useState(false);
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
   const { currentUser, setCurrentUser } = useAuth();
   const { updateData } = useUpdateData();
@@ -50,7 +46,8 @@ const EditServiceInfo = () => {
     const serviceAddress = currentUser?.serviceAddress;
     const serviceTimes = currentUser?.serviceTimes;
 
-    serviceAddress && setServiceAddress(restoreAddressState(serviceAddress));
+    serviceAddress &&
+      setServiceAddress(serviceAddress.map((address) => getAddressId(address)));
     serviceTimes && setServiceTimes(serviceTimes);
   }, [currentUser]);
 
@@ -69,7 +66,7 @@ const EditServiceInfo = () => {
 
   const onSubmit = async (userData) => {
     setIsLoading(true);
-    userData.serviceAddress = getSelectedAddress(serviceAddress);
+    userData.serviceAddress = serviceAddress;
     if (is24HourServiceTime) {
       userData.serviceTimes = [{ start: "00:00", end: "23:59" }];
     } else {
@@ -132,7 +129,48 @@ const EditServiceInfo = () => {
             সার্ভিস প্রদানের এলাকা
           </p>
 
-          <Address address={serviceAddress} setAddress={setServiceAddress} />
+          <div className="my-6 flex flex-col gap-2">
+            {serviceAddress.length !== 0 &&
+              serviceAddress?.map((address, index) => (
+                <div
+                  key={index}
+                  className="flex cursor-pointer items-center justify-between rounded-lg bg-secondary bg-opacity-30 px-3 py-2"
+                  onClick={() => {
+                    setAddress(address);
+                    setAddressIndex(index);
+                    setIsAddressModalOpen(true);
+                  }}
+                >
+                  <span>{address?.village?.map((_id) => _id).join(", ")}</span>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+
+                      const _serviceAddress = cloneDeep(serviceAddress);
+                      _serviceAddress.splice(index, 1);
+                      setServiceAddress(_serviceAddress);
+                    }}
+                    className="rounded-lg bg-red-800 p-3 text-white"
+                  >
+                    {<AiFillDelete />}
+                  </button>
+                </div>
+              ))}
+          </div>
+
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setIsAddressModalOpen(true);
+              setAddress(null);
+              setAddressIndex(serviceAddress.length);
+            }}
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-2 py-2 text-xl text-white"
+          >
+            <AiFillPlusSquare />
+            <span>নতুন এলাকা যোগ করুন</span>
+          </button>
 
           <ServiceTimes
             serviceTimes={serviceTimes}
@@ -146,6 +184,15 @@ const EditServiceInfo = () => {
           <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
         </form>
       </MiniContainer>
+      <AddressModal
+        isOpen={isAddressModalOpen}
+        onClose={() => setIsAddressModalOpen(false)}
+        address={address}
+        setAddress={setAddress}
+        serviceAddress={serviceAddress}
+        setServiceAddress={setServiceAddress}
+        addressIndex={addressIndex}
+      />
     </>
   );
 };

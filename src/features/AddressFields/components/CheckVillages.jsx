@@ -21,7 +21,7 @@ export default function CheckVillages() {
                   onChange={handlers.handleVillageCheck}
                   type="checkbox"
                   name="village"
-                  checked={address.village.includes(_id)}
+                  checked={address?.village?.includes(_id)}
                   value={_id}
                 />{" "}
                 {title}
@@ -32,8 +32,8 @@ export default function CheckVillages() {
           {address?.village?.map((_id) => (
             <p key={_id} className="bg-gray-50 px-2 py-1">
               {
-                addressFields.villages.find((village) => village._id === _id)
-                  .title
+                addressFields?.villages?.find((village) => village?._id === _id)
+                  ?.title
               }
             </p>
           ))}
