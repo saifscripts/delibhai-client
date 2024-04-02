@@ -5,11 +5,17 @@ import SelectField from "./SelectField";
 import SelectVillage from "./SelectVillage";
 
 const Fields = () => {
-  const { villageType, address, addressFields, isLoading, handlers } =
-    useAddress();
+  const {
+    villageType,
+    address,
+    addressFields,
+    isLoading,
+    handlers,
+    className,
+  } = useAddress();
 
   return (
-    <>
+    <div className={className}>
       <SelectField
         label="বিভাগ"
         name="division"
@@ -45,7 +51,7 @@ const Fields = () => {
       {villageType === "select" && <SelectVillage />}
       {villageType === "checkbox" && <CheckVillages />}
       {villageType === "add" && <AddVillage />}
-    </>
+    </div>
   );
 };
 

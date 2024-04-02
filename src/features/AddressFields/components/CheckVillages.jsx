@@ -11,11 +11,11 @@ export default function CheckVillages() {
         <SelectWard />
       </div>
 
-      <div className="grid grid-cols-[150px_2fr] p-3 shadow-lg md:grid-cols-[200px_2fr]">
+      <div className="my-6 grid grid-cols-[150px_2fr] p-3 shadow-lg md:grid-cols-[200px_2fr]">
         <div className="h-72 overflow-auto">
           {addressFields?.villages
             ?.filter(({ wardId }) => !ward || ward === wardId)
-            .map(({ _id, title }) => (
+            ?.map(({ _id, title }) => (
               <label key={_id} className="my-1 block text-xl">
                 <input
                   onChange={handlers.handleVillageCheck}

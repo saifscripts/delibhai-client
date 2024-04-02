@@ -62,7 +62,7 @@ export const AddressProvider = ({
     setAddress((prevAddress) => ({
       ...prevAddress,
       union: e.target.value,
-      ward: "all",
+      ward: "",
       village: [],
     }));
   };
