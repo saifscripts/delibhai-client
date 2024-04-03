@@ -4,15 +4,9 @@ import CheckVillages from "./CheckVillages";
 import SelectField from "./SelectField";
 import SelectVillage from "./SelectVillage";
 
-const Fields = () => {
-  const {
-    villageType,
-    address,
-    addressFields,
-    isLoading,
-    handlers,
-    className,
-  } = useAddress();
+const Fields = ({ className }) => {
+  const { villageType, address, addressFields, isLoading, handlers } =
+    useAddress();
 
   return (
     <div className={className}>
