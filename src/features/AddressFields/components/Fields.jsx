@@ -13,7 +13,7 @@ const Fields = ({ className }) => {
       <SelectField
         label="বিভাগ"
         name="division"
-        defaultValue={address?.division}
+        defaultValue={address?.division?._id}
         disabled={isLoading}
         onChange={handlers.handleDivisionChange}
         fields={addressFields?.divisions}
@@ -21,7 +21,7 @@ const Fields = ({ className }) => {
       <SelectField
         label="জেলা"
         name="district"
-        defaultValue={address?.district}
+        defaultValue={address?.district?._id}
         disabled={isLoading}
         onChange={handlers.handleDistrictChange}
         fields={addressFields?.districts}
@@ -29,7 +29,7 @@ const Fields = ({ className }) => {
       <SelectField
         label="উপজেলা/সিটি কর্পোরেশন"
         name="upazila"
-        defaultValue={address?.upazila}
+        defaultValue={address?.upazila?._id}
         disabled={isLoading}
         onChange={handlers.handleUpazilaChange}
         fields={addressFields?.upazilas}
@@ -37,7 +37,7 @@ const Fields = ({ className }) => {
       <SelectField
         label="ইউনিয়ন/থানা/পৌরসভা"
         name="union"
-        defaultValue={address?.union}
+        defaultValue={address?.union?._id}
         disabled={isLoading}
         onChange={handlers.handleUnionChange}
         fields={addressFields?.unions}

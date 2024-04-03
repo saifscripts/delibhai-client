@@ -18,6 +18,8 @@ export const AddressProvider = ({
   const [ward, setWard] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log(address);
+
   useEffect(() => {
     (async function () {
       setIsLoading(true);
@@ -28,11 +30,13 @@ export const AddressProvider = ({
 
   const handleDivisionChange = (e) => {
     setAddress({
-      division: e.target.value,
+      division: {
+        _id: e.target.value,
+        title: e.target.selectedOptions[0].innerText,
+      },
       district: undefined,
       upazila: undefined,
       union: undefined,
-      ward: undefined,
       village: [],
     });
   };
@@ -40,10 +44,12 @@ export const AddressProvider = ({
   const handleDistrictChange = (e) => {
     setAddress((prevAddress) => ({
       ...prevAddress,
-      district: e.target.value,
+      district: {
+        _id: e.target.value,
+        title: e.target.selectedOptions[0].innerText,
+      },
       upazila: undefined,
       union: undefined,
-      ward: undefined,
       village: [],
     }));
   };
@@ -51,9 +57,11 @@ export const AddressProvider = ({
   const handleUpazilaChange = (e) => {
     setAddress((prevAddress) => ({
       ...prevAddress,
-      upazila: e.target.value,
+      upazila: {
+        _id: e.target.value,
+        title: e.target.selectedOptions[0].innerText,
+      },
       union: undefined,
-      ward: undefined,
       village: [],
     }));
   };
@@ -61,8 +69,10 @@ export const AddressProvider = ({
   const handleUnionChange = (e) => {
     setAddress((prevAddress) => ({
       ...prevAddress,
-      union: e.target.value,
-      ward: "",
+      union: {
+        _id: e.target.value,
+        title: e.target.selectedOptions[0].innerText,
+      },
       village: [],
     }));
   };
@@ -72,12 +82,19 @@ export const AddressProvider = ({
   const handleVillageSelect = (e) => {
     setAddress((prevAddress) => ({
       ...prevAddress,
-      village: e.target.value,
+      village: {
+        _id: e.target.value,
+        title: e.target.selectedOptions[0].innerText,
+      },
     }));
   };
 
   const handleVillageCheck = (e) => {
-    const value = e.target.value;
+    const value = {
+      _id: e.target.value,
+      title: e.target.labels[0].innerText.trim(),
+    };
+
     const checked = e.target.checked;
 
     setAddress((prevAddress) => {
@@ -86,7 +103,7 @@ export const AddressProvider = ({
       if (checked) {
         _villages.push(value);
       } else {
-        _villages = _villages.filter((v) => v !== value);
+        _villages = _villages.filter((v) => v._id !== value._id);
       }
 
       return {

@@ -22,7 +22,7 @@ export default function AddVillage() {
     e.preventDefault();
     setLoading(true);
     const villageArray = villages.split(",").map((village) => ({
-      unionId: address.union,
+      unionId: address.union._id,
       wardId: ward,
       title: village.trim(),
     }));

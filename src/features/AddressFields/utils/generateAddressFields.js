@@ -69,7 +69,7 @@ const generateAddressFields = async (address) => {
   }
 
   const { division, district, upazila, union } = address;
-  const locations = await Promise.all([getDistricts(division), getUpazilas(district), getUnions(upazila), getVillages(union)])
+  const locations = await Promise.all([getDistricts(division?._id), getUpazilas(district?._id), getUnions(upazila?._id), getVillages(union?._id)])
 
   return {
     divisions,

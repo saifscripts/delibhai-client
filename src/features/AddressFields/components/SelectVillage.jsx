@@ -12,7 +12,7 @@ export default function SelectVillage() {
       </div>
       <select
         name="village"
-        value={address?.village}
+        value={address?.village?._id}
         disabled={isLoading}
         className="w-full border-b border-primary bg-transparent py-3"
         onChange={handlers.handleVillageSelect}
