@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../../components/ui/Button";
 import MiniContainer from "../../../../layouts/MiniContainer";
 import Title from "../../../../layouts/Title";
-import restoreAddressState from "../../../Profile/utils/restoreAddressState";
 import generateSearchString from "../../utils/generateSearchString";
 import CurrentLocation from "./CurrentLocation";
 import Destination from "./Destination";
@@ -36,8 +35,8 @@ export default function Search() {
 
       setVehicleType(vehicleType);
       setLocationType(locationType);
-      setManualLocation(restoreAddressState(manualLocation));
-      setDestination(restoreAddressState(destination));
+      setManualLocation(manualLocation);
+      setDestination(destination);
     }
   }, []);
 
