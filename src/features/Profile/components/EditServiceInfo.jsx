@@ -10,7 +10,6 @@ import Button from "../../../components/ui/Button";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
-import getAddressId from "../utils/getAddressId";
 import AddressModal from "./AddressModal";
 import ServiceTimes from "./ServiceTimes";
 
@@ -46,8 +45,7 @@ const EditServiceInfo = () => {
     const serviceAddress = currentUser?.serviceAddress;
     const serviceTimes = currentUser?.serviceTimes;
 
-    serviceAddress &&
-      setServiceAddress(serviceAddress.map((address) => getAddressId(address)));
+    serviceAddress && setServiceAddress(serviceAddress);
     serviceTimes && setServiceTimes(serviceTimes);
   }, [currentUser]);
 
