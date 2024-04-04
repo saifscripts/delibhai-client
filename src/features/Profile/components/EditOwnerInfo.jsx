@@ -12,6 +12,7 @@ import Title from "../../../layouts/Title";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
 import { AddressFields } from "../../AddressFields";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
+import getAddressId from "../utils/getAddressId";
 
 const userSchema = yup.object({
   ownerName: yup
@@ -57,7 +58,7 @@ const EditOwnerInfo = () => {
 
   const onSubmit = async (userData) => {
     setIsLoading(true);
-    userData.ownerAddress = ownerAddress;
+    userData.ownerAddress = getAddressId(ownerAddress);
 
     // Update data
     const { data, error } = await updateData(

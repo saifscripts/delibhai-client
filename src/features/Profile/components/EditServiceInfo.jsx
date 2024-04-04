@@ -10,6 +10,7 @@ import Button from "../../../components/ui/Button";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
+import getAddressId from "../utils/getAddressId";
 import AddressModal from "./AddressModal";
 import ServiceTimes from "./ServiceTimes";
 
@@ -64,7 +65,9 @@ const EditServiceInfo = () => {
 
   const onSubmit = async (userData) => {
     setIsLoading(true);
-    userData.serviceAddress = serviceAddress;
+    userData.serviceAddress = serviceAddress?.map((address) =>
+      getAddressId(address),
+    );
     if (is24HourServiceTime) {
       userData.serviceTimes = [{ start: "00:00", end: "23:59" }];
     } else {

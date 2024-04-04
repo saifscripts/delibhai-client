@@ -6,6 +6,7 @@ import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import { AddressFields } from "../../AddressFields";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
+import getAddressId from "../utils/getAddressId";
 
 const EditManualLocationInfo = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +27,7 @@ const EditManualLocationInfo = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    const userData = { manualLocation };
+    const userData = { manualLocation: getAddressId(manualLocation) };
 
     // Update data
     const { data } = await updateData(`/v1/user/${currentUser._id}`, userData);

@@ -8,6 +8,7 @@ import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import { AddressFields } from "../../AddressFields";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
+import getAddressId from "../utils/getAddressId";
 import { RadioInput } from "./form/RadioInput";
 
 const EditAddressInfo = () => {
@@ -36,8 +37,8 @@ const EditAddressInfo = () => {
     setIsLoading(true);
 
     const address = {
-      presentAddress,
-      permanentAddress,
+      presentAddress: getAddressId(presentAddress),
+      permanentAddress: getAddressId(permanentAddress),
     };
 
     if (isAddressEqual) {
