@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../../components/ui/Button";
 import MiniContainer from "../../../../layouts/MiniContainer";
 import Title from "../../../../layouts/Title";
-import generateSearchString from "../../utils/generateSearchString";
 import CurrentLocation from "./CurrentLocation";
 import Destination from "./Destination";
 import VehicleCategories from "./VehicleCategories";
@@ -51,9 +50,10 @@ export default function Search() {
     };
 
     localStorage.setItem("heroSearchParams", JSON.stringify(searchParams));
-    let searchString = generateSearchString(searchParams);
 
-    navigate(`/search?${searchString}`);
+    navigate(
+      `/search?vehicle=${vehicleType}&location=${locationType}&lat=${geoLocation?.latitude}&long=${geoLocation?.longitude}&cVil=${manualLocation?.village?._id}&dVil=${destination?.village?._id}`,
+    );
   };
 
   return (
