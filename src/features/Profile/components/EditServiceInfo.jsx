@@ -128,33 +128,39 @@ const EditServiceInfo = () => {
           </p>
 
           <div className="my-6 flex flex-col gap-2">
-            {serviceAddress.length !== 0 &&
-              serviceAddress?.map((address, index) => (
-                <div
-                  key={index}
-                  className="flex cursor-pointer items-center justify-between rounded-lg bg-secondary bg-opacity-30 px-3 py-2"
-                  onClick={() => {
-                    setAddress(address);
-                    setAddressIndex(index);
-                    setIsAddressModalOpen(true);
-                  }}
-                >
-                  <span>{address?.village?.map((_id) => _id).join(", ")}</span>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-
-                      const _serviceAddress = cloneDeep(serviceAddress);
-                      _serviceAddress.splice(index, 1);
-                      setServiceAddress(_serviceAddress);
-                    }}
-                    className="rounded-lg bg-red-800 p-3 text-white"
-                  >
-                    {<AiFillDelete />}
-                  </button>
+            {serviceAddress?.map((address, index) => (
+              <div
+                key={index}
+                className="flex cursor-pointer items-center justify-between gap-5 rounded-lg bg-secondary bg-opacity-10 p-2"
+                onClick={() => {
+                  setAddress(address);
+                  setAddressIndex(index);
+                  setIsAddressModalOpen(true);
+                }}
+              >
+                <div className="flex-1 rounded-lg bg-primary bg-opacity-5 p-3">
+                  <p className="mb-1 font-semibold">
+                    {address?.union?.title} ইউনিয়ন
+                  </p>
+                  <p>
+                    {address?.village?.map(({ title }) => title).join(", ")}
+                  </p>
                 </div>
-              ))}
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const _serviceAddress = cloneDeep(serviceAddress);
+                    _serviceAddress.splice(index, 1);
+                    setServiceAddress(_serviceAddress);
+                  }}
+                  className="rounded-lg bg-red-800 p-3 text-white"
+                >
+                  {<AiFillDelete />}
+                </button>
+              </div>
+            ))}
           </div>
 
           <button
