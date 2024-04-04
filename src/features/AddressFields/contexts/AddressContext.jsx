@@ -18,8 +18,6 @@ export const AddressProvider = ({
   const [ward, setWard] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(address);
-
   useEffect(() => {
     (async function () {
       setIsLoading(true);

@@ -15,7 +15,6 @@ const EditManualLocationInfo = () => {
 
   useEffect(() => {
     const manualLocation = currentUser?.manualLocation;
-    console.log(manualLocation);
 
     manualLocation && setManualLocation(manualLocation);
   }, [currentUser]);
