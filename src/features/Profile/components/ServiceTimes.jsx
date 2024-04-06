@@ -1,6 +1,7 @@
 import { cloneDeep } from "lodash";
 import { useEffect, useState } from "react";
-import { AiFillDelete, AiFillPlusSquare } from "react-icons/ai";
+import { AiFillPlusSquare } from "react-icons/ai";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { showErrorToast } from "../../../lib/toast";
 import { convertTimeFormat } from "../utils/convertTime";
 import {
@@ -116,12 +117,23 @@ export default function ServiceTimes({
                 <span>{`${convertTimeFormat(start)} থেকে ${convertTimeFormat(
                   end,
                 )} পর্যন্ত`}</span>
-                <button
-                  onClick={(e) => removeTime(e, start, end)}
-                  className="rounded-lg bg-red-800 p-3 text-white"
-                >
-                  {<AiFillDelete />}
-                </button>
+
+                <div className="space-x-1">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                    }}
+                    className="rounded-lg p-2 text-primary hover:bg-neutral"
+                  >
+                    {<MdEdit />}
+                  </button>
+                  <button
+                    onClick={(e) => removeTime(e, start, end)}
+                    className="rounded-lg p-2 text-red-400 hover:bg-neutral"
+                  >
+                    {<MdDelete />}
+                  </button>
+                </div>
               </div>
             ))}
           </div>

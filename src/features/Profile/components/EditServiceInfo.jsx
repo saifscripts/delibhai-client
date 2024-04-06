@@ -2,7 +2,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { cloneDeep } from "lodash";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { AiFillDelete, AiFillPlusSquare } from "react-icons/ai";
+import { AiFillPlusSquare } from "react-icons/ai";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useUpdateData } from "../../../api/api";
@@ -134,34 +135,47 @@ const EditServiceInfo = () => {
             {serviceAddress?.map((address, index) => (
               <div
                 key={index}
-                className="flex cursor-pointer items-center justify-between gap-5 rounded-lg bg-secondary bg-opacity-10 p-2"
-                onClick={() => {
-                  setAddress(address);
-                  setAddressIndex(index);
-                  setIsAddressModalOpen(true);
-                }}
+                className="rounded-lg bg-secondary bg-opacity-10 p-2"
               >
-                <div className="flex-1 rounded-lg bg-primary bg-opacity-5 p-3">
-                  <p className="mb-1 font-semibold">
-                    {address?.union?.title} ইউনিয়ন
-                  </p>
+                <div className="flex flex-col gap-5 rounded-lg bg-primary bg-opacity-5 p-3">
+                  <div className="flex items-center justify-between">
+                    <p className="mb-1 font-semibold">
+                      {address?.union?.title} ইউনিয়ন
+                    </p>
+                    <div className="space-x-1">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+
+                          setAddress(address);
+                          setAddressIndex(index);
+                          setIsAddressModalOpen(true);
+                        }}
+                        className="rounded-lg p-2 text-primary hover:bg-neutral"
+                      >
+                        {<MdEdit />}
+                      </button>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+
+                          const _serviceAddress = cloneDeep(serviceAddress);
+                          _serviceAddress.splice(index, 1);
+                          setServiceAddress(_serviceAddress);
+                        }}
+                        className="rounded-lg p-2 text-red-400 hover:bg-neutral"
+                      >
+                        {<MdDelete />}
+                      </button>
+                    </div>
+                  </div>
+
                   <p>
                     {address?.village?.map(({ title }) => title).join(", ")}
                   </p>
                 </div>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    const _serviceAddress = cloneDeep(serviceAddress);
-                    _serviceAddress.splice(index, 1);
-                    setServiceAddress(_serviceAddress);
-                  }}
-                  className="rounded-lg bg-red-800 p-3 text-white"
-                >
-                  {<AiFillDelete />}
-                </button>
               </div>
             ))}
           </div>
