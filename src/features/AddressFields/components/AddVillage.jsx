@@ -2,6 +2,7 @@ import { cloneDeep } from "lodash";
 import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { deleteData, postData, updateData } from "../../../lib/api/api";
+import { showErrorToast } from "../../../lib/toast";
 import { useAddress } from "../contexts/AddressContext";
 import generateAddressFields from "../utils/generateAddressFields";
 import cn from "./../../../lib/cn";
@@ -29,11 +30,17 @@ export default function AddVillage() {
 
     const response = await postData("/v1/village/create", villageArray);
 
+    console.log(response);
+
     if (response?.success) {
       const _addressFields = cloneDeep(addressFields);
       _addressFields.villages.unshift(...response.data);
       setAddressFields(_addressFields);
       setVillages("");
+    } else if (response?.code === "ALREADY_EXIST") {
+      showErrorToast(
+        `${response?.data?.titles.join(", ")} ইতিমধ্যে যোগ করা হয়েছে।`,
+      );
     }
     setLoading(false);
   };
