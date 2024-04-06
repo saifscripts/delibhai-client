@@ -40,11 +40,12 @@ export default function SearchResults() {
             hero?.liveLocation &&
             timestamp - hero.liveLocation.timestamp < 1000;
 
-          const heroCurrentLocation = (isOnline && hero?.liveLocation) ||
-            hero?.manualLocation?.geoLocation || {
-              latitude: 22.892515,
-              longitude: 91.674607,
-            };
+          const heroCurrentLocation = isOnline
+            ? hero?.liveLocation
+            : hero?.manualLocation?.geoLocation || {
+                latitude: 22.892515,
+                longitude: 91.674607,
+              };
 
           return {
             ...hero,
