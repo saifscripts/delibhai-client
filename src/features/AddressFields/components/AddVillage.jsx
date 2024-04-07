@@ -46,14 +46,18 @@ export default function AddVillage() {
   };
 
   const handleVillageEdit = async () => {
-    const { _id, title } = editVillage;
+    const { _id, title, unionId } = editVillage;
+    console.log(editVillage);
     const response = await updateData(`/v1/village/update/${_id}`, {
       title,
+      unionId,
     });
 
     if (response?.success) {
       setIsRenameModalOpen(false);
       setAddressFields(await generateAddressFields(address)); // refetch updated data
+    } else {
+      showErrorToast(`${response?.data?.title} ইতিমধ্যে যোগ করা হয়েছে`);
     }
   };
 
