@@ -6,12 +6,12 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import "react-image-crop/dist/ReactCrop.css";
 import { useUpdateData } from "../../../api/api";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
-import { EditOption } from "./EditOption";
+import EditOption from "./EditOption";
 import ResizeModal from "./ResizeModal";
 
 const MIN_DIMENSION = 150;
 
-export const EditAvatarModal = ({ editModal, setEditModal }) => {
+export default function EditAvatarModal({ editModal, setEditModal }) {
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState();
   const [resizeModal, setResizeModal] = useState(false);
@@ -127,4 +127,4 @@ export const EditAvatarModal = ({ editModal, setEditModal }) => {
       </div>
     </>
   );
-};
+}

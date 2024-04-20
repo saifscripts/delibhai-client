@@ -1,7 +1,7 @@
 import englishToBengaliNumber from "../../../utils/englishToBengaliNumber";
-import { RatingStars } from "../index";
+import RatingStars from "./RatingStars";
 
-export const AverageRating = ({ rating, total }) => {
+export default function AverageRating({ rating, total }) {
   return (
     <div className="w-full text-center">
       <p className="text-5xl font-bold">{englishToBengaliNumber(rating)}</p>
@@ -11,4 +11,4 @@ export const AverageRating = ({ rating, total }) => {
       <p className="text-medium text-lg">{englishToBengaliNumber(total)}</p>
     </div>
   );
-};
+}

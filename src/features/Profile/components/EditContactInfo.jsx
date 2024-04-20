@@ -32,7 +32,7 @@ const userSchema = yup.object({
     .test("isFacebookURL", "Please provide a valid url.", isURL),
 });
 
-const EditContactInfo = () => {
+export default function EditContactInfo() {
   const { currentUser, setCurrentUser } = useAuth();
   const { isLoading, updateData } = useUpdateData();
   const navigate = useNavigate();
@@ -129,6 +129,4 @@ const EditContactInfo = () => {
       </MiniContainer>
     </>
   );
-};
-
-export { EditContactInfo };
+}

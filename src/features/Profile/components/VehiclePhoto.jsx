@@ -4,7 +4,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { useUpdateData } from "../../../api/api";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
 
-export const VehiclePhoto = ({ url, index, userId }) => {
+export default function VehiclePhoto({ url, index, userId }) {
   const [deleteBtn, setDeleteBtn] = useState(-1);
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser, setCurrentUser } = useAuth();
@@ -76,4 +76,4 @@ export const VehiclePhoto = ({ url, index, userId }) => {
       )}
     </div>
   );
-};
+}

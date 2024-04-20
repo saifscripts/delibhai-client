@@ -8,13 +8,13 @@ import {
   EditAddressInfo,
   EditContactInfo,
   EditManualLocationInfo,
+  EditOwnerInfo,
   EditPersonalInfo,
   EditServiceInfo,
+  EditVehicleInfo,
   EditVideoURL,
   Profile,
 } from "./features/Profile";
-import { EditOwnerInfo } from "./features/Profile/components/EditOwnerInfo";
-import { EditVehicleInfo } from "./features/Profile/components/EditVehicleInfo";
 import MainLayout from "./layouts/MainLayout";
 import { Home } from "./pages";
 import DHeroLocation from "./pages/admin/DHeroLocation";

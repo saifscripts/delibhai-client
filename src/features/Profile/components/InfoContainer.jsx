@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import Edit from "../../../components/ui/Edit";
 
-export const InfoContainer = ({ category, children, editRoute }) => {
+export default function InfoContainer({ category, children, editRoute }) {
   return (
     <div className="mb-3">
       <div className="mb-2 flex items-center justify-between">
@@ -17,4 +16,4 @@ export const InfoContainer = ({ category, children, editRoute }) => {
       {children}
     </div>
   );
-};
+}

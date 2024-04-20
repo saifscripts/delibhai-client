@@ -1,7 +1,7 @@
 import { useState } from "react";
 import camera from "../assets/icons/camera.svg";
-import { Avatar } from "./Avatar";
-import { EditAvatarModal } from "./EditAvatarModal";
+import Avatar from "./Avatar";
+import EditAvatarModal from "./EditAvatarModal";
 
 export default function ProfileAvatar({ avatarURL }) {
   const [editModal, setEditModal] = useState(false);

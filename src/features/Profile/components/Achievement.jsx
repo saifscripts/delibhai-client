@@ -1,4 +1,4 @@
-export const Achievement = ({ stat, title, icon }) => {
+export default function Achievement({ stat, title, icon }) {
   return (
     <div className="text-center leading-4">
       <p className="flex justify-center gap-1 font-bold">
@@ -7,4 +7,4 @@ export const Achievement = ({ stat, title, icon }) => {
       <p>{title}</p>
     </div>
   );
-};
+}

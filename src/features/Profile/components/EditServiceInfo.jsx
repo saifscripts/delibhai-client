@@ -30,7 +30,7 @@ const userSchema = yup.object({
     ),
 });
 
-const EditServiceInfo = () => {
+export default function EditServiceInfo() {
   const [isLoading, setIsLoading] = useState(false);
   const [serviceAddress, setServiceAddress] = useState([]);
   const [address, setAddress] = useState(null);
@@ -216,6 +216,4 @@ const EditServiceInfo = () => {
       />
     </>
   );
-};
-
-export { EditServiceInfo };
+}

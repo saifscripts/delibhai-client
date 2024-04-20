@@ -1,4 +1,4 @@
-export const Field = ({ value, label, icon }) => {
+export default function Field({ value, label, icon }) {
   return (
     <div className="border-light flex items-start gap-3 border-b py-2">
       <div className="bg-light flex aspect-square w-12 flex-shrink-0 items-center justify-center rounded-full">
@@ -21,4 +21,4 @@ export const Field = ({ value, label, icon }) => {
       </div>
     </div>
   );
-};
+}

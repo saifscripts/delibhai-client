@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 
-export const RatingStars = ({ rating }) => {
+export default function RatingStars({ rating }) {
   const numberOfFullStars = Math.floor(rating);
   const isHalfStars = rating - numberOfFullStars >= 0.5;
   const numberOfEmptyStars = 5 - numberOfFullStars - (isHalfStars ? 1 : 0);
@@ -21,4 +20,4 @@ export const RatingStars = ({ rating }) => {
       {fullStars} {halfStar} {emptyStars}
     </div>
   );
-};
+}

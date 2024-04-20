@@ -30,7 +30,7 @@ const userSchema = yup.object({
     .test("isValidEmail", `Email is not valid.`, isEmail),
 });
 
-const EditOwnerInfo = () => {
+export default function EditOwnerInfo() {
   const [isLoading, setIsLoading] = useState(false);
   const [ownerAddress, setOwnerAddress] = useState(null);
   const { currentUser, setCurrentUser } = useAuth();
@@ -135,6 +135,4 @@ const EditOwnerInfo = () => {
       </MiniContainer>
     </>
   );
-};
-
-export { EditOwnerInfo };
+}

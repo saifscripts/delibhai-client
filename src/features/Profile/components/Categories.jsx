@@ -1,9 +1,13 @@
 import "react-circular-progressbar/dist/styles.css";
 import categories from "../data/categories";
 import profileSchema from "../data/profileSchema";
-import { InfoCategory } from "../index";
+import InfoCategory from "./Category";
 
-export const Categories = ({ userInfo, activeCategory, setActiveCategory }) => {
+export default function Categories({
+  userInfo,
+  activeCategory,
+  setActiveCategory,
+}) {
   const calculatePercent = (categoryName) => {
     let total = 0;
     let completed = 0;
@@ -36,4 +40,4 @@ export const Categories = ({ userInfo, activeCategory, setActiveCategory }) => {
       </div>
     </div>
   );
-};
+}

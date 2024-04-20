@@ -1,6 +1,6 @@
 import englishToBengaliNumber from "../../../utils/englishToBengaliNumber";
 
-export const RatingBars = ({ percentages }) => {
+export default function RatingBars({ percentages }) {
   return (
     <div className="flex flex-col">
       {percentages.map((percentage, i) => {
@@ -20,4 +20,4 @@ export const RatingBars = ({ percentages }) => {
       })}
     </div>
   );
-};
+}

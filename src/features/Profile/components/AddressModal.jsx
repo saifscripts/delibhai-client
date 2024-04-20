@@ -6,7 +6,7 @@ import Modal from "../../../layouts/Modal";
 import { showErrorToast } from "../../../lib/toast";
 import { AddressFields } from "../../AddressFields";
 
-const AddressModal = ({
+export default function AddressModal({
   isOpen,
   onClose,
   address,
@@ -14,7 +14,7 @@ const AddressModal = ({
   serviceAddress,
   setServiceAddress,
   addressIndex,
-}) => {
+}) {
   useEffect(() => {
     const isUnionExist = serviceAddress?.some(
       (add) => add?.union?._id === address?.union?._id,
@@ -61,6 +61,4 @@ const AddressModal = ({
       </MiniContainer>
     </Modal>
   );
-};
-
-export default AddressModal;
+}

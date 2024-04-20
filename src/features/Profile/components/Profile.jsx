@@ -6,21 +6,19 @@ import MiniContainer from "../../../layouts/MiniContainer";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
 import profileSchema from "../data/profileSchema";
 import useUserInfo from "../hooks/useUserInfo";
-import {
-  Achievement,
-  AverageRating,
-  Categories,
-  Field,
-  InfoContainer,
-  RatingBars,
-  Review,
-  Showcase,
-  VehiclePhotos,
-  VideoInfo,
-} from "../index";
+import Achievement from "./Achievement";
+import AverageRating from "./AverageRating";
+import Categories from "./Categories";
+import Field from "./Field";
 import GPSLocationInfo from "./GPSLocationInfo";
+import InfoContainer from "./InfoContainer";
+import RatingBars from "./RatingBars";
+import Review from "./Review";
+import Showcase from "./Showcase";
+import VehiclePhotos from "./VehiclePhotos";
+import VideoInfo from "./VideoInfo";
 
-export const Profile = () => {
+export default function Profile() {
   const { id } = useParams();
   const [activeCategory, setActiveCategory] = useState("generalInfo");
   const { isLoading, userInfo } = useUserInfo(id);
@@ -123,4 +121,4 @@ export const Profile = () => {
       )}
     </MiniContainer>
   );
-};
+}

@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Avatar, RatingStars } from "../index";
+import Avatar from "./Avatar";
+import RatingStars from "./RatingStars";
 
-export const Review = ({ image, name, rating, date, review }) => {
+export default function Review({ image, name, rating, date, review }) {
   return (
     <div className="">
       <div className="flex items-center justify-between">
@@ -21,4 +21,4 @@ export const Review = ({ image, name, rating, date, review }) => {
       <p className="text-sm">{review}</p>
     </div>
   );
-};
+}

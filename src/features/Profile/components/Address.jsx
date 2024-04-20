@@ -1,7 +1,7 @@
 import * as _ from "lodash";
 import { getDistricts, getUnions, getUpazilas } from "../utils/getGeoLocation";
 
-const Address = ({ address, setAddress, isLoading }) => {
+export default function Address({ address, setAddress, isLoading }) {
   const handleChange = (e, currentField) => {
     const currentValue = e.target.value;
     const _address = _.cloneDeep(address);
@@ -109,6 +109,4 @@ const Address = ({ address, setAddress, isLoading }) => {
       </div>
     </div>
   );
-};
-
-export { Address };
+}

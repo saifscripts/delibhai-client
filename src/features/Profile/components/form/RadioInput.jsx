@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-function RadioInput({ label, checked, onClick }) {
+export default function RadioInput({ label, checked, onClick }) {
   return (
     <div className="ml-4 flex items-center gap-2">
       <input
@@ -14,5 +13,3 @@ function RadioInput({ label, checked, onClick }) {
     </div>
   );
 }
-
-export { RadioInput };

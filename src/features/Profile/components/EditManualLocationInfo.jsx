@@ -8,7 +8,7 @@ import { AddressFields } from "../../AddressFields";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
 import getAddressId from "../utils/getAddressId";
 
-const EditManualLocationInfo = () => {
+export default function EditManualLocationInfo() {
   const [isLoading, setIsLoading] = useState(false);
   const [manualLocation, setManualLocation] = useState(null);
 
@@ -61,6 +61,4 @@ const EditManualLocationInfo = () => {
       </MiniContainer>
     </>
   );
-};
-
-export { EditManualLocationInfo };
+}

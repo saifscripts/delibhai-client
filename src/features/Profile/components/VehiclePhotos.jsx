@@ -3,9 +3,10 @@ import { useState } from "react";
 import { useUpdateData } from "../../../api/api";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
 import camera from "../assets/icons/camera.svg";
-import { InfoContainer, VehiclePhoto } from "../index";
+import InfoContainer from "./InfoContainer";
+import VehiclePhoto from "./VehiclePhoto";
 
-export const VehiclePhotos = ({ userInfo }) => {
+export default function VehiclePhotos({ userInfo }) {
   const [isLoading, setIsLoading] = useState(false);
   const { updateData } = useUpdateData();
   const { currentUser, setCurrentUser } = useAuth();
@@ -85,4 +86,4 @@ export const VehiclePhotos = ({ userInfo }) => {
       </div>
     </InfoContainer>
   );
-};
+}

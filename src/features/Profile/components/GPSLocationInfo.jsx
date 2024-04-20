@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { useFetchData } from "../../../api/api";
-import { InfoContainer } from "./InfoContainer";
+import InfoContainer from "./InfoContainer";
 
 export default function GPSLocationInfo({ id }) {
   const [geoLocation, setGeoLocation] = useState(null);

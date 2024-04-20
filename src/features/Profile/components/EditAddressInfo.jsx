@@ -9,9 +9,9 @@ import Title from "../../../layouts/Title";
 import { AddressFields } from "../../AddressFields";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
 import getAddressId from "../utils/getAddressId";
-import { RadioInput } from "./form/RadioInput";
+import RadioInput from "./form/RadioInput";
 
-const EditAddressInfo = () => {
+export default function EditAddressInfo() {
   const [isLoading, setIsLoading] = useState(false);
   const [isAddressEqual, setIsAddressEqual] = useState(true);
   const [presentAddress, setPresentAddress] = useState(null);
@@ -102,6 +102,4 @@ const EditAddressInfo = () => {
       </MiniContainer>
     </>
   );
-};
-
-export { EditAddressInfo };
+}

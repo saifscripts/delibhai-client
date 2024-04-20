@@ -40,7 +40,7 @@ const userSchema = yup.object({
   nidURL: yup.mixed(),
 });
 
-const EditPersonalInfo = () => {
+export default function EditPersonalInfo() {
   const [isLoading, setIsLoading] = useState(false);
   const { currentUser, setCurrentUser } = useAuth();
   const { updateData } = useUpdateData();
@@ -219,6 +219,4 @@ const EditPersonalInfo = () => {
       </MiniContainer>
     </>
   );
-};
-
-export { EditPersonalInfo };
+}

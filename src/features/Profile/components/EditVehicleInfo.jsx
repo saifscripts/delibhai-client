@@ -23,7 +23,7 @@ const userSchema = yup.object({
   vehicleName: yup.string().trim(),
 });
 
-const EditVehicleInfo = () => {
+export default function EditVehicleInfo() {
   const { currentUser, setCurrentUser } = useAuth();
   const { isLoading, updateData } = useUpdateData();
   const navigate = useNavigate();
@@ -139,6 +139,4 @@ const EditVehicleInfo = () => {
       </MiniContainer>
     </>
   );
-};
-
-export { EditVehicleInfo };
+}

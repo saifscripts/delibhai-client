@@ -1,14 +1,14 @@
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-export const InfoCategory = ({
+export default function Category({
   name,
   setActiveCategory,
   title,
   icon,
   percent,
   active,
-}) => {
+}) {
   return (
     <div
       onClick={() => setActiveCategory(name)}
@@ -47,4 +47,4 @@ export const InfoCategory = ({
       <p className="text-[6px -mt-2 text-[#979797]">{percent}%</p>
     </div>
   );
-};
+}

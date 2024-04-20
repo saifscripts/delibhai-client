@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +15,7 @@ const userSchema = yup.object({
     .test("isYoutubeURL", "Please provide a valid url.", isURL),
 });
 
-const EditVideoURL = () => {
+export default function EditVideoURL() {
   const { currentUser, setCurrentUser } = useAuth();
   const { isLoading, updateData } = useUpdateData();
   const navigate = useNavigate();
@@ -74,6 +73,4 @@ const EditVideoURL = () => {
       </MiniContainer>
     </>
   );
-};
-
-export { EditVideoURL };
+}

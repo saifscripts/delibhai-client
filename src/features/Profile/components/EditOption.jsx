@@ -1,4 +1,4 @@
-export const EditOption = ({ icon, text, type, ...restProps }) => {
+export default function EditOption({ icon, text, type, ...restProps }) {
   return (
     <label
       className="flex items-center gap-3 px-7 py-2 hover:cursor-pointer hover:bg-[#ccc] active:bg-[#ccc]"
@@ -17,4 +17,4 @@ export const EditOption = ({ icon, text, type, ...restProps }) => {
       {text}
     </label>
   );
-};
+}

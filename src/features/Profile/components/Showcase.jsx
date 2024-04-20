@@ -1,7 +1,7 @@
 import vehicles from "../../../data/vehicles";
 import ProfileAvatar from "./ProfileAvatar";
 
-export const Showcase = ({ userInfo }) => {
+export default function Showcase({ userInfo }) {
   const vehicleIcon = vehicles.find(
     ({ title }) => title === userInfo?.vehicleType,
   )?.icon;
@@ -36,4 +36,4 @@ export const Showcase = ({ userInfo }) => {
       </div>
     </>
   );
-};
+}
