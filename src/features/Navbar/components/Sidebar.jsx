@@ -1,7 +1,7 @@
 import { RxCross1 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import minilogo from "../../../assets/logos/minilogo.png";
-import { NavLinks } from "./NavLinks";
+import NavLinks from "./NavLinks";
 
 const Sidebar = ({ isSidebarOpen, handleSidebarToggle }) => {
   return (
@@ -35,4 +35,4 @@ const Sidebar = ({ isSidebarOpen, handleSidebarToggle }) => {
   );
 };
 
-export { Sidebar };
+export default Sidebar;

@@ -22,4 +22,4 @@ const CustomNavLink = ({ to, icon, text, highlight }) => {
   );
 };
 
-export { CustomNavLink };
+export default CustomNavLink;

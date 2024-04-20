@@ -4,12 +4,11 @@ import logo from "../../../assets/logos/logo.png";
 import { useAuth } from "../../../features/Authentication/contexts/AuthContext";
 import getLocation from "../../../utils/getLocation";
 import useSidebar from "../hooks/useSidebar";
-import { NavLinks } from "./NavLinks";
-import { Sidebar } from "./Sidebar";
+import NavLinks from "./NavLinks";
+import Sidebar from "./Sidebar";
 
 const { protocol, domain } = getLocation();
 
-// eslint-disable-next-line react/prop-types
 const Navbar = () => {
   const { isSidebarOpen, handleSidebarToggle } = useSidebar();
   const { currentUser } = useAuth();
@@ -57,4 +56,4 @@ const Navbar = () => {
   );
 };
 
-export { Navbar };
+export default Navbar;

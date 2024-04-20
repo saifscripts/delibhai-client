@@ -2,7 +2,7 @@ import { AiFillHome, AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { MdAppRegistration } from "react-icons/md";
 import { useAuth } from "../../../features/Authentication/contexts/AuthContext";
-import { CustomNavLink } from "./CustomNavLink";
+import CustomNavLink from "./CustomNavLink";
 
 const NavLinks = () => {
   const { currentUser, logout } = useAuth();
@@ -42,4 +42,4 @@ const NavLinks = () => {
   );
 };
 
-export { NavLinks };
+export default NavLinks;
