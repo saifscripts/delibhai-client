@@ -2,8 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import { Home } from "./apps/root";
 import AdminRoute from "./components/AdminRoute";
 import ErrorPage from "./components/ErrorPage";
+import MainLayout from "./components/MainLayout";
 import PublicRoute from "./components/PublicRoute";
-import RootLayout from "./components/RootLayout";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import { Search, SearchResults } from "./features/DHero";
 import {
@@ -66,7 +66,7 @@ const commonRoutes = [
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: <MainLayout />,
     children: [{ path: "", element: <Home /> }, ...commonRoutes],
   },
 ]);
@@ -74,7 +74,7 @@ const appRouter = createBrowserRouter([
 const dheroRouter = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: <MainLayout />,
     children: [
       { path: "", element: <Search /> },
       { path: "search", element: <SearchResults /> },
