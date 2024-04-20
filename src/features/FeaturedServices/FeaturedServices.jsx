@@ -1,8 +1,8 @@
-import dailygoods from "../../../assets/home/dailygoods.png";
-import gas from "../../../assets/home/gas.png";
+import dailygoods from "./assets/dailygoods.png";
+import gas from "./assets/gas.png";
 import Service from "./Service";
 
-const Services = () => {
+const FeaturedServices = () => {
   const services = [
     {
       id: 1,
@@ -31,4 +31,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default FeaturedServices;

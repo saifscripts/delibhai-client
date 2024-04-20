@@ -4,7 +4,7 @@ import { ScrollItem, ScrollMenu } from "../../lib/scrollable-menu";
 
 const { host, protocol } = window.location;
 
-const DelibhaiServices = () => {
+const Services = () => {
   return (
     <section className="my-20">
       <Container>
@@ -41,4 +41,4 @@ const DelibhaiServices = () => {
   );
 };
 
-export default DelibhaiServices;
+export default Services;

@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Home } from "./apps/root";
 import AdminRoute from "./components/AdminRoute";
 import ErrorPage from "./components/ErrorPage";
 import PublicRoute from "./components/PublicRoute";
 import RootLayout from "./components/RootLayout";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import { Search, SearchResults } from "./features/DHero";
-import Home from "./features/Home";
 import {
   EditAddressInfo,
   EditContactInfo,

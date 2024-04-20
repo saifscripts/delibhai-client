@@ -1,5 +1,5 @@
-const InfoCard = ({ info }) => {
-  const { title, quantity } = info;
+const StatCard = ({ stat }) => {
+  const { title, quantity } = stat;
   return (
     <div className="relative rounded-lg border border-[#dddddd] px-7 py-8 text-center">
       {/* Title and Description */}
@@ -9,4 +9,4 @@ const InfoCard = ({ info }) => {
   );
 };
 
-export default InfoCard;
+export default StatCard;

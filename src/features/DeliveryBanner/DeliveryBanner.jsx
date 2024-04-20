@@ -1,9 +1,9 @@
-import delivery1 from "../../../assets/home/delivery1.jpg";
-import delivery2 from "../../../assets/home/delivery2.jpg";
-import delivery3 from "../../../assets/home/delivery3.jpg";
-import delivery4 from "../../../assets/home/delivery4.jpg";
+import delivery1 from "./assets/delivery1.jpg";
+import delivery2 from "./assets/delivery2.jpg";
+import delivery3 from "./assets/delivery3.jpg";
+import delivery4 from "./assets/delivery4.jpg";
 
-const DeliveryImages = () => {
+const DeliveryBanner = () => {
   return (
     <section className="my-24">
       {/* Section Title */}
@@ -23,4 +23,4 @@ const DeliveryImages = () => {
   );
 };
 
-export default DeliveryImages;
+export default DeliveryBanner;

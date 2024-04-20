@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import income from "../../../assets/home/income.svg";
+import earnings from "./assets/earnings.svg";
 
-const Income = () => {
+const EarningsBanner = () => {
   return (
     <section className="my-24">
       {/* Section Title */}
@@ -16,10 +16,10 @@ const Income = () => {
 
       {/* Image */}
       <div className="">
-        <img src={income} className="w-full" alt="" />
+        <img src={earnings} className="w-full" alt="" />
       </div>
     </section>
   );
 };
 
-export default Income;
+export default EarningsBanner;

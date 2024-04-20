@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import InfoCard from "./InfoCard";
+import StatCard from "./StatCard";
 
-const AboutUs = () => {
-  const infos = [
+const Stats = () => {
+  const statsData = [
     {
       id: 1,
       title: "রেজিস্টার্ড কাস্টমার",
@@ -34,8 +34,8 @@ const AboutUs = () => {
         </h2>
         {/* Infos */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-          {infos.map((info) => (
-            <InfoCard key={info.id} info={info} />
+          {statsData.map((stat) => (
+            <StatCard key={stat.id} stat={stat} />
           ))}
         </div>
         {/* More Button */}
@@ -47,4 +47,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default Stats;
