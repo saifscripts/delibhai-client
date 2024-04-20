@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home } from "./apps/root";
 import AdminRoute from "./components/AdminRoute";
 import ErrorPage from "./components/ErrorPage";
 import PublicRoute from "./components/PublicRoute";
@@ -17,6 +16,7 @@ import {
 import { EditOwnerInfo } from "./features/Profile/components/EditOwnerInfo";
 import { EditVehicleInfo } from "./features/Profile/components/EditVehicleInfo";
 import MainLayout from "./layouts/MainLayout";
+import { Home } from "./pages";
 import DHeroLocation from "./pages/admin/DHeroLocation";
 
 const commonRoutes = [
