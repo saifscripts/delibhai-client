@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import { Home } from "./apps/root";
 import AdminRoute from "./components/AdminRoute";
 import ErrorPage from "./components/ErrorPage";
-import MainLayout from "./components/MainLayout";
 import PublicRoute from "./components/PublicRoute";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import { Search, SearchResults } from "./features/DHero";
@@ -17,6 +16,7 @@ import {
 } from "./features/Profile";
 import { EditOwnerInfo } from "./features/Profile/components/EditOwnerInfo";
 import { EditVehicleInfo } from "./features/Profile/components/EditVehicleInfo";
+import MainLayout from "./layouts/MainLayout";
 import DHeroLocation from "./pages/admin/DHeroLocation";
 
 const commonRoutes = [
