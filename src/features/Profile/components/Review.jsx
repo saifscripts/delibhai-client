@@ -1,5 +1,5 @@
 import { BsThreeDotsVertical } from "react-icons/bs";
-import Avatar from "./Avatar";
+import Avatar from "../../../components/Avatar";
 import RatingStars from "./RatingStars";
 
 export default function Review({ image, name, rating, date, review }) {

@@ -1,6 +1,6 @@
 // others
 import { useParams } from "react-router-dom";
-import Showcase from "../../features/Profile/components/Showcase";
+import { ProfileHeader } from "../../features/ProfileHeader";
 import MiniContainer from "../../layouts/MiniContainer";
 import useUserInfo from "./useUserInfo";
 
@@ -14,7 +14,7 @@ export default function NewProfile() {
 
   return (
     <MiniContainer>
-      <Showcase userInfo={userInfo} />
+      <ProfileHeader userInfo={userInfo} />
     </MiniContainer>
   );
 }

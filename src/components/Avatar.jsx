@@ -1,4 +1,4 @@
-import dp from "../../../assets/default.jpg";
+import dp from "../assets/default.jpg";
 
 export default function Avatar({ className, src }) {
   return (

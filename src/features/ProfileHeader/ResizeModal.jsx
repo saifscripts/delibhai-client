@@ -5,10 +5,10 @@ import ReactCrop, {
   convertToPixelCrop,
   makeAspectCrop,
 } from "react-image-crop";
-import { useUpdateData } from "../../../api/api";
-import base64ToFormData from "../../../utils/base64ToFormData";
-import { useAuth } from "../../Authentication/contexts/AuthContext";
-import getCroppedData from "../utils/getCroppedData";
+import { useUpdateData } from "../../api/api";
+import base64ToFormData from "../../utils/base64ToFormData";
+import { useAuth } from "../Authentication/contexts/AuthContext";
+import getCroppedData from "./utils/getCroppedData";
 
 const ASPECT_RATIO = 1;
 

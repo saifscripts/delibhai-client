@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { useUpdateData } from "../../../api/api";
+import camera from "../../../assets/icons/camera.svg";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
-import camera from "../assets/icons/camera.svg";
 import InfoContainer from "./InfoContainer";
 import VehiclePhoto from "./VehiclePhoto";
 

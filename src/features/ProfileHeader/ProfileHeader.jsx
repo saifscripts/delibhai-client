@@ -1,7 +1,7 @@
-import vehicles from "../../../data/vehicles";
+import vehicles from "../../data/vehicles";
 import ProfileAvatar from "./ProfileAvatar";
 
-export default function Showcase({ userInfo }) {
+export default function ProfileHeader({ userInfo }) {
   const vehicleIcon = vehicles.find(
     ({ title }) => title === userInfo?.vehicleType,
   )?.icon;

@@ -4,6 +4,7 @@ import { AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import MiniContainer from "../../../layouts/MiniContainer";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
+import { ProfileHeader } from "../../ProfileHeader";
 import profileSchema from "../data/profileSchema";
 import useUserInfo from "../hooks/useUserInfo";
 import Achievement from "./Achievement";
@@ -14,7 +15,6 @@ import GPSLocationInfo from "./GPSLocationInfo";
 import InfoContainer from "./InfoContainer";
 import RatingBars from "./RatingBars";
 import Review from "./Review";
-import Showcase from "./Showcase";
 import VehiclePhotos from "./VehiclePhotos";
 import VideoInfo from "./VideoInfo";
 
@@ -30,7 +30,7 @@ export default function Profile() {
 
   return (
     <MiniContainer>
-      <Showcase userInfo={userInfo} />
+      <ProfileHeader userInfo={userInfo} />
 
       <Categories
         userInfo={userInfo}
