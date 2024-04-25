@@ -18,6 +18,7 @@ import {
 import MainLayout from "./layouts/MainLayout";
 import { Home } from "./pages";
 import DHeroLocation from "./pages/admin/DHeroLocation";
+import NewProfile from "./pages/common/NewProfile";
 
 const commonRoutes = [
   {
@@ -38,6 +39,7 @@ const commonRoutes = [
   },
   { path: "otp-verification", element: <OTPVerification /> },
   { path: "profile/:id", element: <Profile /> },
+  { path: "new-profile/:id", element: <NewProfile /> },
   {
     path: "profile/edit/personal-info",
     element: <EditPersonalInfo />,

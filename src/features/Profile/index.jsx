@@ -7,3 +7,4 @@ export { default as EditServiceInfo } from "./components/EditServiceInfo";
 export { default as EditVehicleInfo } from "./components/EditVehicleInfo";
 export { default as EditVideoURL } from "./components/EditVideoURL";
 export { default as Profile } from "./components/Profile";
+export { default as useUserInfo } from "./hooks/useUserInfo";
