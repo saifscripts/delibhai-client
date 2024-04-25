@@ -1,8 +1,8 @@
 // others
 import { useParams } from "react-router-dom";
-import { useUserInfo } from "../../features/Profile";
 import Showcase from "../../features/Profile/components/Showcase";
 import MiniContainer from "../../layouts/MiniContainer";
+import useUserInfo from "./useUserInfo";
 
 export default function NewProfile() {
   const { id } = useParams();
