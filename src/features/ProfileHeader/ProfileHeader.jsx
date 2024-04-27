@@ -1,7 +1,11 @@
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
 import vehicles from "../../data/vehicles";
 import ProfileAvatar from "./ProfileAvatar";
 
-export default function ProfileHeader({ userInfo }) {
+export default function ProfileHeader() {
+  const { userInfo } = useContext(UserContext);
+
   const vehicleIcon = vehicles.find(
     ({ title }) => title === userInfo?.vehicleType,
   )?.icon;

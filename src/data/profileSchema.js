@@ -18,13 +18,13 @@ import vehicleBrand from "../assets/icons/vehicle-brand.svg";
 import vehicleModel from "../assets/icons/vehicle-model.svg";
 import vehicleNumber from "../assets/icons/vehicle-number.svg";
 import vehicleType from "../assets/icons/vehicle.svg";
-import { getServiceTimes } from "../utils/convertTime";
-import getAddressTitles from "../utils/getAddressTitles";
-import getVillages from "../utils/getVillages";
-import modifyAge from "../utils/modifyAge";
+import { getServiceTimes } from "../features/Profile/utils/convertTime";
+import getAddressTitles from "../features/Profile/utils/getAddressTitles";
+import getVillages from "../features/Profile/utils/getVillages";
+import modifyAge from "../features/Profile/utils/modifyAge";
 
 const profileSchema = {
-  generalInfo: [
+  general: [
     {
       category: "ব্যক্তিগত তথ্য",
       editRoute: "/profile/edit/personal-info",
@@ -100,7 +100,7 @@ const profileSchema = {
       ],
     },
   ],
-  vehicleInfo: [
+  vehicle: [
     {
       category: "গাড়ির সাধারণ তথ্য",
       editRoute: "/profile/edit/vehicle-info",
@@ -160,7 +160,7 @@ const profileSchema = {
       ],
     },
   ],
-  serviceInfo: [
+  service: [
     {
       category: "সার্ভিস তথ্য",
       editRoute: "/profile/edit/service-info",
@@ -191,7 +191,7 @@ const profileSchema = {
       ],
     },
   ],
-  locationInfo: [
+  location: [
     {
       category: "ম্যানুয়াল লোকেশন",
       editRoute: "/profile/edit/manual-location-info",

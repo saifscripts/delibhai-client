@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../../features/Authentication/contexts/AuthContext";
-import { fetchData } from "../../lib/api/api";
+import { useAuth } from "../../../features/Authentication/contexts/AuthContext";
+import { fetchData } from "../../../lib/api/api";
 
 const useUserInfo = (id) => {
   const [userInfo, setUserInfo] = useState({});

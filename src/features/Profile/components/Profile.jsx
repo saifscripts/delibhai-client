@@ -2,10 +2,10 @@
 import { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
+import profileSchema from "../../../data/profileSchema";
 import MiniContainer from "../../../layouts/MiniContainer";
 import { useAuth } from "../../Authentication/contexts/AuthContext";
 import { ProfileHeader } from "../../ProfileHeader";
-import profileSchema from "../data/profileSchema";
 import useUserInfo from "../hooks/useUserInfo";
 import Achievement from "./Achievement";
 import AverageRating from "./AverageRating";

@@ -1,13 +1,13 @@
+import { useContext } from "react";
 import "react-circular-progressbar/dist/styles.css";
-import profileSchema from "../../../data/profileSchema";
-import categories from "../data/categories";
-import InfoCategory from "./Category";
+import UserContext from "../../contexts/UserContext";
+import profileSchema from "../../data/profileSchema";
+import Category from "./Category";
+import categories from "./data/categories";
 
-export default function Categories({
-  userInfo,
-  activeCategory,
-  setActiveCategory,
-}) {
+export default function ProfileMenu() {
+  const { userInfo } = useContext(UserContext);
+
   const calculatePercent = (categoryName) => {
     let total = 0;
     let completed = 0;
@@ -26,15 +26,14 @@ export default function Categories({
   return (
     <div className="mb-6 overflow-y-hidden">
       <div className="-mb-5 mt-8 flex gap-2 overflow-x-scroll pb-5">
-        {categories.map(({ name, title, icon }) => (
-          <InfoCategory
+        {categories.map(({ name, title, icon, index }) => (
+          <Category
             key={name}
             name={name}
             title={title}
             icon={icon}
+            index={index}
             percent={calculatePercent(name)}
-            active={activeCategory === name}
-            setActiveCategory={setActiveCategory}
           />
         ))}
       </div>

@@ -15,10 +15,11 @@ import {
   EditVideoURL,
   Profile,
 } from "./features/Profile";
+import { ProfileInfo } from "./features/ProfileInfo";
 import MainLayout from "./layouts/MainLayout";
 import { Home } from "./pages";
 import DHeroLocation from "./pages/admin/DHeroLocation";
-import NewProfile from "./pages/common/NewProfile";
+import NewProfile from "./pages/common/Profile/NewProfile";
 
 const commonRoutes = [
   {
@@ -39,7 +40,20 @@ const commonRoutes = [
   },
   { path: "otp-verification", element: <OTPVerification /> },
   { path: "profile/:id", element: <Profile /> },
-  { path: "new-profile/:id", element: <NewProfile /> },
+  {
+    path: "new-profile/:id",
+    element: <NewProfile />,
+    children: [
+      {
+        index: true,
+        element: <ProfileInfo />,
+      },
+      {
+        path: ":category",
+        element: <ProfileInfo />,
+      },
+    ],
+  },
   {
     path: "profile/edit/personal-info",
     element: <EditPersonalInfo />,
