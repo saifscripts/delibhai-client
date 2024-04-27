@@ -1,5 +1,6 @@
 // others
 import { Outlet, useParams } from "react-router-dom";
+import Skeleton from "../../../components/Skeleton";
 import UserContext from "../../../contexts/UserContext";
 import { ProfileHeader } from "../../../features/ProfileHeader";
 import { ProfileMenu } from "../../../features/ProfileMenu";
@@ -8,14 +9,18 @@ import useUserInfo from "./useUserInfo";
 
 export default function NewProfile() {
   const { id } = useParams();
-  const { isLoading, userInfo } = useUserInfo(id);
+  const userInfo = useUserInfo(id);
 
-  if (isLoading) {
-    return <h1>Loading...</h1>;
+  if (userInfo?.isLoading) {
+    return (
+      <MiniContainer>
+        <Skeleton />;
+      </MiniContainer>
+    );
   }
 
   return (
-    <UserContext.Provider value={{ isLoading, userInfo }}>
+    <UserContext.Provider value={userInfo}>
       <MiniContainer>
         <ProfileHeader />
         <ProfileMenu />
