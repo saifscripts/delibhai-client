@@ -7,7 +7,7 @@ import { ProfileHeader } from "../features/ProfileHeader";
 import { ProfileMenu } from "../features/ProfileMenu";
 import useUserInfo from "../hooks/useUserInfo";
 
-export default function NewProfile() {
+export default function Profile() {
   const { id } = useParams();
   const userInfo = useUserInfo(id);
 

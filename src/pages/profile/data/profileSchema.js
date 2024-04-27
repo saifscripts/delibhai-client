@@ -159,6 +159,14 @@ const profileSchema = {
         },
       ],
     },
+    {
+      category: "গাড়ির ছবি",
+      fields: [
+        {
+          dataKey: 'vehiclePhotos'
+        }
+      ]
+    }
   ],
   service: [
     {
@@ -209,6 +217,50 @@ const profileSchema = {
         },
       ],
     },
+    {
+      category: "GPS Location",
+      fields: [
+        {
+          dataKey: 'liveLocation'
+        }
+      ]
+    }
+  ],
+  video: [
+    {
+      category: "ডিহিরোর অভিব্যক্তি",
+      editRoute: "/profile/edit/video",
+      fields: [
+        {
+          dataKey: 'videoURL'
+        }
+      ]
+    }
+  ],
+  review: [
+    {
+      category: "রাইডার এক্টিভিটি",
+      fields: [
+        {
+          dataKey: 'riderActivity'
+        }
+      ]
+    },
+    {
+      category: "রেটিং এবং রিভিও",
+      fields: [
+        {
+          dataKey: 'ratings'
+        }
+      ]
+    },
+    {
+      fields: [
+        {
+          dataKey: 'reviews'
+        }
+      ]
+    }
   ],
 };
 

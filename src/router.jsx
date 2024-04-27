@@ -12,12 +12,11 @@ import {
   EditServiceInfo,
   EditVehicleInfo,
   EditVideoURL,
-  Profile,
 } from "./features/Profile";
 import MainLayout from "./layouts/MainLayout";
 import { DHeroLocation } from "./pages/admin";
 import { Home } from "./pages/home";
-import { NewProfile } from "./pages/profile";
+import { Profile } from "./pages/profile";
 import { ProfileInfo } from "./pages/profile/features/ProfileInfo";
 
 const router = createBrowserRouter([
@@ -43,10 +42,9 @@ const router = createBrowserRouter([
         ),
       },
       { path: "otp-verification", element: <OTPVerification /> },
-      { path: "profile/:id", element: <Profile /> },
       {
-        path: "new-profile/:id",
-        element: <NewProfile />,
+        path: "profile/:id",
+        element: <Profile />,
         children: [
           {
             index: true,

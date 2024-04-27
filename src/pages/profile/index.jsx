@@ -1,1 +1,1 @@
-export { default as NewProfile } from "./components/NewProfile";
+export { default as Profile } from "./components/Profile";
