@@ -1,5 +1,5 @@
 import "react-circular-progressbar/dist/styles.css";
-import profileSchema from "../../../data/profileSchema";
+import profileSchema from "../../../pages/profile/data/profileSchema";
 import categories from "../data/categories";
 import InfoCategory from "./Category";
 

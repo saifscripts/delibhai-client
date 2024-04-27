@@ -1,4 +1,4 @@
-import { getAuthToken } from "../../features/Authentication/utils/getAuthToken.js";
+import { getAuthToken } from "../../features/Authentication/utils/authToken.js";
 import axios from "./axiosConfig.js";
 
 export const fetchData = async (route, searchParams) => {

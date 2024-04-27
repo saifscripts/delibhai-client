@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getAuthToken } from "../features/Authentication/utils/getAuthToken";
+import { getAuthToken } from "../features/Authentication/utils/authToken";
 import axios from "../lib/api/axiosConfig";
 
 // useFetchData hook returns loading state and fetchData method
