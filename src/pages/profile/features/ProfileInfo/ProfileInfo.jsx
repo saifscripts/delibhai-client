@@ -23,7 +23,7 @@ export default function ProfileInfo() {
         <InfoContainer
           key={item.category}
           category={item.category}
-          editRoute={id === currentUser?._id && item.editRoute}
+          editModal={id === currentUser?._id && item.editModal}
         >
           {item?.fields?.map(
             ({ dataKey, label, icon, dataModifier, isPrivate }) => {

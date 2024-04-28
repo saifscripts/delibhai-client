@@ -27,7 +27,7 @@ const profileSchema = {
   general: [
     {
       category: "ব্যক্তিগত তথ্য",
-      editRoute: "/profile/edit/personal-info",
+      editModal: "personal",
       fields: [
         { dataKey: "name", label: "নিজের নাম", icon: person },
         {
@@ -61,7 +61,7 @@ const profileSchema = {
     },
     {
       category: "কন্টাক্ট ইনফো",
-      editRoute: "/profile/edit/contact-info",
+      editModal: "contact",
       fields: [
         {
           dataKey: "mobile",
@@ -83,7 +83,7 @@ const profileSchema = {
     },
     {
       category: "ঠিকানা",
-      editRoute: "/profile/edit/address",
+      editModal: "address",
       fields: [
         {
           dataKey: "presentAddress",
@@ -103,7 +103,7 @@ const profileSchema = {
   vehicle: [
     {
       category: "গাড়ির সাধারণ তথ্য",
-      editRoute: "/profile/edit/vehicle-info",
+      editModal: "vehicle",
       fields: [
         {
           dataKey: "vehicleType",
@@ -134,7 +134,7 @@ const profileSchema = {
     },
     {
       category: "গাড়ির মালিকানার তথ্য",
-      editRoute: "/profile/edit/owner-info",
+      editModal: "owner",
       fields: [
         {
           dataKey: "ownerName",
@@ -171,7 +171,7 @@ const profileSchema = {
   service: [
     {
       category: "সার্ভিস তথ্য",
-      editRoute: "/profile/edit/service-info",
+      editModal: "service",
       fields: [
         {
           dataKey: "serviceUsage",
@@ -202,7 +202,7 @@ const profileSchema = {
   location: [
     {
       category: "ম্যানুয়াল লোকেশন",
-      editRoute: "/profile/edit/manual-location-info",
+      editModal: "manual-location",
       fields: [
         {
           dataKey: "manualLocation",
@@ -229,7 +229,7 @@ const profileSchema = {
   video: [
     {
       category: "ডিহিরোর অভিব্যক্তি",
-      editRoute: "/profile/edit/video",
+      editModal: "video",
       fields: [
         {
           dataKey: 'videoURL'
