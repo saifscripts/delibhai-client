@@ -52,7 +52,7 @@ export default function Search() {
     localStorage.setItem("heroSearchParams", JSON.stringify(searchParams));
 
     navigate(
-      `/search?vehicle=${vehicleType}&location=${locationType}&lat=${geoLocation?.latitude}&long=${geoLocation?.longitude}&cVil=${manualLocation?.village?._id}&dVil=${destination?.village?._id}`,
+      `search?vehicle=${vehicleType}&location=${locationType}&lat=${geoLocation?.latitude}&long=${geoLocation?.longitude}&cVil=${manualLocation?.village?._id}&dVil=${destination?.village?._id}`,
     );
   };
 
