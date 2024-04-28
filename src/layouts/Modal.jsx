@@ -23,7 +23,7 @@ const Modal = ({ isOpen, onClose, className, children }) => {
       <div className="flex h-max min-h-screen w-full items-center justify-center">
         <div
           onClick={stopPropagation}
-          className={`m-10 overflow-hidden rounded-lg bg-white shadow-lg ${className}`}
+          className={`h-screen overflow-hidden rounded-lg bg-white shadow-lg sm:m-10 sm:h-auto ${className}`}
         >
           {children}
         </div>

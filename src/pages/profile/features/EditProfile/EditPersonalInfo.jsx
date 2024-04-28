@@ -112,12 +112,16 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <Title
-        title="ব্যক্তিগত তথ্য"
-        subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
-      />
       <MiniContainer>
-        <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
+        <Title
+          title="ব্যক্তিগত তথ্য"
+          subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
+        />
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mb-5 w-full sm:w-[48rem]"
+        >
           <div className="mb-1 mt-4">
             <label className="font-bold">নিজের নাম</label>
             <input
