@@ -1,8 +1,7 @@
+import { Link } from "react-router-dom";
 import services from "../../data/services";
 import Container from "../../layouts/Container";
 import { ScrollItem, ScrollMenu } from "../../lib/scrollable-menu";
-
-const { host, protocol } = window.location;
 
 const Services = () => {
   return (
@@ -16,13 +15,13 @@ const Services = () => {
           ডেলিভাই সার্ভিসসমূহ
         </h2>
         <ScrollMenu arrow className="gap-10">
-          {services.map(({ id, title, icon, subdomain }) => (
+          {services.map(({ id, title, icon, to }) => (
             <ScrollItem
               className="flex aspect-square w-60 items-center justify-center rounded-md p-5 shadow-lg"
               key={id}
             >
-              <a
-                href={`${protocol}//${subdomain}.${host}`}
+              <Link
+                to={to}
                 key={id}
                 className="flex flex-col items-center justify-center gap-4 lg:gap-6"
               >
@@ -32,7 +31,7 @@ const Services = () => {
                   className="aspect-square w-16 sm:w-20 lg:w-24"
                 />
                 <p className="text-center text-xl sm:text-2xl">{title}</p>
-              </a>
+              </Link>
             </ScrollItem>
           ))}
         </ScrollMenu>
