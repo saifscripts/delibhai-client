@@ -7,9 +7,7 @@ import * as yup from "yup";
 import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
-import MiniContainer from "../../../../layouts/MiniContainer";
 import Modal from "../../../../layouts/Modal";
-import Title from "../../../../layouts/Title";
 import { isNID } from "../../../../utils/isNID";
 
 const userSchema = yup.object({
@@ -111,115 +109,110 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <MiniContainer>
-        <Title
-          title="ব্যক্তিগত তথ্য"
-          subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
-        />
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      closeBtn
+      headerText="ব্যক্তিগত তথ্য"
+    >
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+        <div className="mb-1 mt-4">
+          <label className="font-bold">নিজের নাম</label>
+          <input
+            {...register("name")}
+            type="text"
+            placeholder="নিজের নাম লিখুন"
+            disabled={isLoading}
+            className="w-full border-b border-primary py-3"
+          />
+          <p className="text-red-400">{errors.name?.message}</p>
+        </div>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="mb-5 w-full sm:w-[48rem]"
-        >
-          <div className="mb-1 mt-4">
-            <label className="font-bold">নিজের নাম</label>
-            <input
-              {...register("name")}
-              type="text"
-              placeholder="নিজের নাম লিখুন"
-              disabled={isLoading}
-              className="w-full border-b border-primary py-3"
-            />
-            <p className="text-red-400">{errors.name?.message}</p>
-          </div>
+        <div className="mb-1 mt-4">
+          <label className="font-bold">পিতার নাম</label>
+          <input
+            {...register("fatherName")}
+            type="text"
+            placeholder="পিতার নাম লিখুন"
+            disabled={isLoading}
+            className="w-full border-b border-primary py-3"
+          />
+          <p className="text-red-400">{errors.fatherName?.message}</p>
+        </div>
 
-          <div className="mb-1 mt-4">
-            <label className="font-bold">পিতার নাম</label>
-            <input
-              {...register("fatherName")}
-              type="text"
-              placeholder="পিতার নাম লিখুন"
-              disabled={isLoading}
-              className="w-full border-b border-primary py-3"
-            />
-            <p className="text-red-400">{errors.fatherName?.message}</p>
-          </div>
+        <div className="mb-1 mt-4">
+          <label className="font-bold">লিঙ্গ</label>
+          <select
+            {...register("gender")}
+            disabled={isLoading}
+            className="w-full border-b border-primary bg-transparent py-3"
+          >
+            <option value="পুরুষ">পুরুষ</option>
+            <option value="মহিলা">মহিলা</option>
+            <option value="অন্যান্য">অন্যান্য</option>
+          </select>
+          <p className="text-red-400">{errors.gender?.message}</p>
+        </div>
 
-          <div className="mb-1 mt-4">
-            <label className="font-bold">লিঙ্গ</label>
-            <select
-              {...register("gender")}
-              disabled={isLoading}
-              className="w-full border-b border-primary bg-transparent py-3"
-            >
-              <option value="পুরুষ">পুরুষ</option>
-              <option value="মহিলা">মহিলা</option>
-              <option value="অন্যান্য">অন্যান্য</option>
-            </select>
-            <p className="text-red-400">{errors.gender?.message}</p>
-          </div>
+        <div className="mb-1 mt-4">
+          <label className="font-bold">রক্তের গ্রুপ</label>
+          <select
+            {...register("bloodGroup")}
+            disabled={isLoading}
+            className="w-full border-b border-primary bg-transparent py-3"
+          >
+            <option value="এ+">এ+</option>
+            <option value="বি+">বি+</option>
+            <option value="এবি+">এবি+</option>
+            <option value="ও+">ও+</option>
+            <option value="এ-">এ-</option>
+            <option value="বি-">বি-</option>
+            <option value="এবি-">এবি-</option>
+            <option value="ও-">ও-</option>
+          </select>
+          <p className="text-red-400">{errors.bloodGroup?.message}</p>
+        </div>
 
-          <div className="mb-1 mt-4">
-            <label className="font-bold">রক্তের গ্রুপ</label>
-            <select
-              {...register("bloodGroup")}
-              disabled={isLoading}
-              className="w-full border-b border-primary bg-transparent py-3"
-            >
-              <option value="এ+">এ+</option>
-              <option value="বি+">বি+</option>
-              <option value="এবি+">এবি+</option>
-              <option value="ও+">ও+</option>
-              <option value="এ-">এ-</option>
-              <option value="বি-">বি-</option>
-              <option value="এবি-">এবি-</option>
-              <option value="ও-">ও-</option>
-            </select>
-            <p className="text-red-400">{errors.bloodGroup?.message}</p>
-          </div>
+        <div className="mb-1 mt-4">
+          <label className="font-bold">বয়স</label>
+          <input
+            {...register("age")}
+            type="number"
+            placeholder="বয়স লিখুন"
+            disabled={isLoading}
+            className="w-full border-b border-primary py-3"
+          />
+          <p className="text-red-400">{errors.age?.message}</p>
+        </div>
 
-          <div className="mb-1 mt-4">
-            <label className="font-bold">বয়স</label>
-            <input
-              {...register("age")}
-              type="number"
-              placeholder="বয়স লিখুন"
-              disabled={isLoading}
-              className="w-full border-b border-primary py-3"
-            />
-            <p className="text-red-400">{errors.age?.message}</p>
-          </div>
+        <div className="mb-1 mt-4">
+          <label className="font-bold">জন্মনিবন্ধন/NID নম্বর</label>
+          <input
+            {...register("nid")}
+            type="number"
+            placeholder="জন্মনিবন্ধন/NID নম্বর লিখুন"
+            disabled={isLoading}
+            className="w-full border-b border-primary py-3"
+          />
+          <p className="text-red-400">{errors.nid?.message}</p>
+        </div>
 
-          <div className="mb-1 mt-4">
-            <label className="font-bold">জন্মনিবন্ধন/NID নম্বর</label>
-            <input
-              {...register("nid")}
-              type="number"
-              placeholder="জন্মনিবন্ধন/NID নম্বর লিখুন"
-              disabled={isLoading}
-              className="w-full border-b border-primary py-3"
-            />
-            <p className="text-red-400">{errors.nid?.message}</p>
-          </div>
+        <div className="mb-1 mt-4">
+          <label className="font-bold">জন্মনিবন্ধন/NID এর ছবি</label>
+          <input
+            {...register("nidURL")}
+            type="file"
+            disabled={isLoading}
+            accept="image/*"
+            className="w-full border-b border-primary py-3"
+          />
+          <p className="text-red-400">{errors.nidURL?.message}</p>
+        </div>
 
-          <div className="mb-1 mt-4">
-            <label className="font-bold">জন্মনিবন্ধন/NID এর ছবি</label>
-            <input
-              {...register("nidURL")}
-              type="file"
-              disabled={isLoading}
-              accept="image/*"
-              className="w-full border-b border-primary py-3"
-            />
-            <p className="text-red-400">{errors.nidURL?.message}</p>
-          </div>
+        <p className="text-red-400">{errors.general?.message}</p>
 
-          <p className="text-red-400">{errors.general?.message}</p>
-
-          <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
-        </form>
-      </MiniContainer>
+        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+      </form>
     </Modal>
   );
 }
