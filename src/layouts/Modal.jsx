@@ -30,7 +30,7 @@ const Modal = ({ isOpen, onClose, children, closeBtn, headerText }) => {
       <div className="flex h-full w-full items-center justify-center">
         <div
           onClick={stopPropagation}
-          className={`max-h-screen max-w-[640px] overflow-hidden rounded-3xl bg-white shadow-lg sm:max-h-[90vh]`}
+          className={`mx-5 max-h-[90vh] max-w-[640px] overflow-hidden rounded-3xl bg-white shadow-lg`}
         >
           {(headerText || closeBtn) && (
             <div className="relative z-50 flex h-16 items-center justify-between p-5 shadow-sm">
@@ -45,7 +45,7 @@ const Modal = ({ isOpen, onClose, children, closeBtn, headerText }) => {
             </div>
           )}
 
-          <div className="hide-scrollbar max-h-[calc(100vh-4rem)] overflow-y-scroll p-5 sm:max-h-[calc(90vh-4rem)]">
+          <div className="hide-scrollbar max-h-[calc(90vh-4rem)] overflow-y-scroll p-5">
             <div className="">{children}</div>
           </div>
         </div>
