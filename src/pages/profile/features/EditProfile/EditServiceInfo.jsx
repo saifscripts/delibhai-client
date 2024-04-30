@@ -9,7 +9,7 @@ import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
-import getAddressId from "../../../utils/getAddressId";
+import getAddressId from "../../utils/getAddressId";
 import AddressModal from "./AddressModal";
 import ServiceTimes from "./ServiceTimes";
 

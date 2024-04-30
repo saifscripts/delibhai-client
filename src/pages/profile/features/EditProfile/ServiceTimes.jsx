@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { AiFillPlusSquare } from "react-icons/ai";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { showErrorToast } from "../../../../lib/toast";
-import { convertTimeFormat } from "../../../utils/convertTime";
+import { convertTimeFormat } from "../../../../utils/convertTime";
 import {
   hasMinimumTimeGap,
   is24Hour,
   isSlotOverlapping,
   isValidTimeSlot,
   remove24HourSlot,
-} from "../../../utils/timeHelpers";
+} from "../../../../utils/timeHelpers";
 
 const getCurrentTime = () => {
   const currentDate = new Date();

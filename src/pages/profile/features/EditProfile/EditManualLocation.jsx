@@ -4,7 +4,7 @@ import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
 import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
-import getAddressId from "../../../utils/getAddressId";
+import getAddressId from "../../utils/getAddressId";
 
 export default function EditManualLocation({ isOpen, onClose }) {
   const [isLoading, setIsLoading] = useState(false);

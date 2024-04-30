@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { useFetchData } from "../../../../api/api";
 import Container from "../../../../layouts/Container";
 import Title from "../../../../layouts/Title";
-import { isCurrentTimeWithinServiceTimes } from "../../../Profile/utils/timeHelpers";
+import { isCurrentTimeWithinServiceTimes } from "../../../../utils/timeHelpers";
 import { getDistance } from "../../utils/getDistance";
 import Hero from "./Hero";
 

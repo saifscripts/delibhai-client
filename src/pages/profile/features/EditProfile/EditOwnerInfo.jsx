@@ -10,7 +10,7 @@ import { AddressFields } from "../../../../features/AddressFields";
 import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
 import { isMobilePhone } from "../../../../utils/isMobilePhone";
-import getAddressId from "../../../utils/getAddressId";
+import getAddressId from "../../utils/getAddressId";
 
 const userSchema = yup.object({
   ownerName: yup
