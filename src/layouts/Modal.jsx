@@ -1,25 +1,22 @@
 import { useEffect } from "react";
 import { TfiClose } from "react-icons/tfi";
 import cn from "../lib/cn";
+import getScrollbarWidth from "../utils/getScrollbarWidth";
 
 const Modal = ({ isOpen, onClose, children, closeBtn, headerText }) => {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflowY = "scroll";
-      document.body.style.position = "fixed";
-      document.body.style.top = "0";
-      document.body.style.bottom = "0";
-      document.body.style.left = "0";
-      document.body.style.right = "0";
-    } else {
-      document.body.style.position = "static";
-      document.body.style.overflow = "visible";
-    }
-  }, [isOpen]);
-
   const stopPropagation = (e) => {
     e.stopPropagation();
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.marginRight = getScrollbarWidth() + "px";
+    } else {
+      document.body.style.overflow = "auto";
+      document.body.style.marginRight = "0";
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
