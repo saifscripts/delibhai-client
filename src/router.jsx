@@ -3,16 +3,6 @@ import AdminRoute from "./components/AdminRoute";
 import PublicRoute from "./components/PublicRoute";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import { Search, SearchResults } from "./features/DHero";
-import {
-  EditAddressInfo,
-  EditContactInfo,
-  EditManualLocationInfo,
-  EditOwnerInfo,
-  EditPersonalInfo,
-  EditServiceInfo,
-  EditVehicleInfo,
-  EditVideoURL,
-} from "./features/Profile";
 import MainLayout from "./layouts/MainLayout";
 import { DHeroLocation } from "./pages/admin";
 import { Home } from "./pages/home";
@@ -56,29 +46,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: "profile/edit/personal-info",
-        element: <EditPersonalInfo />,
-      },
-      {
-        path: "profile/edit/contact-info",
-        element: <EditContactInfo />,
-      },
-      { path: "profile/edit/address", element: <EditAddressInfo /> },
-      {
-        path: "profile/edit/vehicle-info",
-        element: <EditVehicleInfo />,
-      },
-      { path: "profile/edit/owner-info", element: <EditOwnerInfo /> },
-      {
-        path: "profile/edit/service-info",
-        element: <EditServiceInfo />,
-      },
-      {
-        path: "profile/edit/manual-location-info",
-        element: <EditManualLocationInfo />,
-      },
-      { path: "profile/edit/video", element: <EditVideoURL /> },
       {
         path: "hero",
         element: <Search />,
