@@ -13,7 +13,8 @@ const Modal = ({ isOpen, onClose, children, closeBtn, headerText }) => {
       document.body.style.overflow = "hidden";
       document.body.style.marginRight = getScrollbarWidth() + "px";
     } else {
-      document.body.style.overflow = "auto";
+      console.log("closed");
+      document.body.style.overflow = "scroll";
       document.body.style.marginRight = "0";
     }
   }, [isOpen]);
@@ -23,7 +24,7 @@ const Modal = ({ isOpen, onClose, children, closeBtn, headerText }) => {
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 h-screen w-screen bg-black bg-opacity-10"
+      className="fixed inset-0 z-50 h-screen w-screen overflow-y-scroll bg-black bg-opacity-10"
     >
       <div className="flex h-full w-full items-center justify-center">
         <div

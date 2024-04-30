@@ -1,6 +1,15 @@
 import { useState } from "react";
 import Edit from "../../../../components/ui/Edit";
-import EditPersonalInfo from "../EditProfile/EditPersonalInfo";
+import {
+  EditAddress,
+  EditContactInfo,
+  EditManualLocation,
+  EditOwnerInfo,
+  EditPersonalInfo,
+  EditServiceInfo,
+  EditVehicleInfo,
+  EditVideoURL,
+} from "../EditProfile";
 
 export default function InfoContainer({ category, children, editModal }) {
   const [modal, setModal] = useState("");
@@ -12,7 +21,6 @@ export default function InfoContainer({ category, children, editModal }) {
   const closeModal = () => {
     setModal("");
   };
-
   return (
     <div className="mb-3">
       <div className="mb-2 flex items-center justify-between">
@@ -23,6 +31,16 @@ export default function InfoContainer({ category, children, editModal }) {
       {children}
 
       <EditPersonalInfo isOpen={modal === "personal"} onClose={closeModal} />
+      <EditContactInfo isOpen={modal === "contact"} onClose={closeModal} />
+      <EditAddress isOpen={modal === "address"} onClose={closeModal} />
+      <EditVehicleInfo isOpen={modal === "vehicle"} onClose={closeModal} />
+      <EditManualLocation
+        isOpen={modal === "manual-location"}
+        onClose={closeModal}
+      />
+      <EditServiceInfo isOpen={modal === "service"} onClose={closeModal} />
+      <EditVideoURL isOpen={modal === "video"} onClose={closeModal} />
+      <EditOwnerInfo isOpen={modal === "owner"} onClose={closeModal} />
     </div>
   );
 }

@@ -115,15 +115,15 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
       closeBtn
       headerText="ব্যক্তিগত তথ্য"
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-        <div className="mb-1 mt-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-[512px] max-w-full">
+        <div className="mb-1">
           <label className="font-bold">নিজের নাম</label>
           <input
             {...register("name")}
             type="text"
             placeholder="নিজের নাম লিখুন"
             disabled={isLoading}
-            className="w-full border-b border-primary py-3"
+            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.name?.message}</p>
         </div>
@@ -135,7 +135,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             type="text"
             placeholder="পিতার নাম লিখুন"
             disabled={isLoading}
-            className="w-full border-b border-primary py-3"
+            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.fatherName?.message}</p>
         </div>
@@ -180,7 +180,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             type="number"
             placeholder="বয়স লিখুন"
             disabled={isLoading}
-            className="w-full border-b border-primary py-3"
+            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.age?.message}</p>
         </div>
@@ -192,7 +192,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             type="number"
             placeholder="জন্মনিবন্ধন/NID নম্বর লিখুন"
             disabled={isLoading}
-            className="w-full border-b border-primary py-3"
+            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.nid?.message}</p>
         </div>
@@ -204,7 +204,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             type="file"
             disabled={isLoading}
             accept="image/*"
-            className="w-full border-b border-primary py-3"
+            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.nidURL?.message}</p>
         </div>
