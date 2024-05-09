@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useUpdateData } from "../api/api";
+import { useAuth } from "../features/Authentication/contexts/AuthContext";
 
-const LocationTracker = ({ userId }) => {
+const LocationTracker = () => {
   const { updateData } = useUpdateData();
+  const { currentUser } = useAuth();
 
   // Function to get the user's current location
   const getLocation = () => {
@@ -11,7 +13,7 @@ const LocationTracker = ({ userId }) => {
         (position) => {
           const { latitude, longitude } = position.coords;
           const liveLocation = { latitude, longitude };
-          updateData(`/v1/user/location/${userId}`, {
+          updateData(`/v1/user/location/${currentUser?._id}`, {
             liveLocation,
           });
         },
@@ -30,7 +32,7 @@ const LocationTracker = ({ userId }) => {
 
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
+  }, [currentUser]);
 
   return <></>;
 };
