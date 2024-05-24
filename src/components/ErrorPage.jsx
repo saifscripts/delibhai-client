@@ -1,12 +1,8 @@
-import { useNavigate, useRouteError } from "react-router-dom";
+import { Link, useNavigate, useRouteError } from "react-router-dom";
 import Container from "../layouts/Container";
-
-const { host, protocol } = location;
-const domain = host.split(".").slice(1).join(".");
 
 function ErrorPage() {
   const error = useRouteError();
-  console.log(error);
   const navigate = useNavigate();
 
   return (
@@ -26,11 +22,13 @@ function ErrorPage() {
           >
             Previous Page
           </button>
-          <a href={`${protocol}//${domain}`}>
-            <button className="rounded-md bg-secondary px-4 py-2 font-semibold text-white hover:bg-accent">
-              Home Page
-            </button>
-          </a>
+
+          <Link
+            to="/"
+            className="rounded-md bg-secondary px-4 py-2 font-semibold text-white hover:bg-accent"
+          >
+            Home Page
+          </Link>
         </div>
       </div>
     </Container>
