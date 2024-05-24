@@ -19,6 +19,13 @@ export default function Profile() {
     );
   }
 
+  if (!userInfo?.userInfo) {
+    throw new Response("Not Found", {
+      status: 404,
+      statusText: "User not found!",
+    });
+  }
+
   return (
     <UserContext.Provider value={userInfo}>
       <MiniContainer>

@@ -15,10 +15,12 @@ const useUserInfo = (id) => {
       setIsLoading(false);
     } else {
       fetchData(`/v1/user/${id}`).then((data) => {
-        if(data.success) {
-          setUserInfo(data.data)
-          setIsLoading(false);
+        if (data.success) {
+          setUserInfo(data.data);
+        } else {
+          setUserInfo(null);
         }
+        setIsLoading(false);
       });
     }
   }, [id, currentUser]);
