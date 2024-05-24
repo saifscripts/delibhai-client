@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import AdminRoute from "./components/AdminRoute";
+import ErrorPage from "./components/ErrorPage";
 import PublicRoute from "./components/PublicRoute";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import { Search, SearchResults } from "./features/DHero";
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       { path: "", element: <Home /> },
       {
