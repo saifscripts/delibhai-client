@@ -4,6 +4,7 @@ import { useFetchData, usePostData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
+import { useAuth } from "../contexts/AuthContext";
 import { SubmitModal, Timer } from "../index";
 
 function OTPVerification() {
@@ -12,6 +13,7 @@ function OTPVerification() {
   const [timerRunning, setTimerRunning] = useState(true);
   const [OTP, setOTP] = useState(["", "", "", "", "", ""]);
   const [error, setError] = useState("");
+  const {setCurrentUser} = useAuth()
 
   const inputRefs = [
     useRef(null),
@@ -80,6 +82,9 @@ function OTPVerification() {
     if (data?.success) {
       setError("");
       setIsSubmitModalOpen(true);
+      const { token } = data.data;
+      localStorage.setItem("authToken", token);
+      setCurrentUser(data?.data?.user);
     } else {
       setError(error?.message);
     }
@@ -145,3 +150,4 @@ function OTPVerification() {
 }
 
 export { OTPVerification };
+

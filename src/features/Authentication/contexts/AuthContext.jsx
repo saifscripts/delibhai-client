@@ -29,9 +29,9 @@ export const AuthProvider = ({ children }) => {
 
     // If signup is successful, set the token to the local storage and update current user
     if (data?.success) {
-      const { token } = data.data;
-      localStorage.setItem("authToken", token);
-      setCurrentUser(data?.data?.user);
+      //   const { token } = data.data;
+      //   localStorage.setItem("authToken", token);
+      //   setCurrentUser(data?.data?.user);
     }
 
     // Returns same data sent from the server
