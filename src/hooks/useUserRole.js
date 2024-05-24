@@ -8,14 +8,13 @@ const useUserRole = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchData("/v1/user/me").then(( data ) => {
-      if(data?.success) {
+    fetchData("/v1/user/me").then((data) => {
+      if (data?.success) {
         setIsLoggedIn(true);
-        setRole(data?.data.role);
+        setRole(data?.data?.role);
       }
       setIsLoading(false);
     });
-    
   }, []);
 
   return { isLoggedIn, role, isLoading };
