@@ -40,26 +40,26 @@ export default function EditManualLocation({ isOpen, onClose }) {
     resolver: yupResolver(userSchema),
   });
 
-  // Function to get the user's current location
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setValue("latitude", latitude);
-          setValue("longitude", longitude);
-        },
-        (error) => {
-          console.error("Error getting location:", error);
-        },
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
-  };
-
   useEffect(() => {
+    // Function to get the user's current location
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setValue("latitude", latitude);
+            setValue("longitude", longitude);
+          },
+          (error) => {
+            console.error("Error getting location:", error);
+          },
+        );
+      } else {
+        console.error("Geolocation is not supported by this browser.");
+      }
+    };
     getLocation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const onSubmit = async (manualLocation) => {
