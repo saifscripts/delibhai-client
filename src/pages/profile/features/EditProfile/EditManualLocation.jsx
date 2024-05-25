@@ -1,33 +1,74 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
-import { AddressFields } from "../../../../features/AddressFields";
 import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
-import getAddressId from "../../utils/getAddressId";
+
+const userSchema = yup.object({
+  latitude: yup
+    .number()
+    .typeError("Latitude must be a number")
+    .test(
+      "isValidLatitude",
+      `Invalid latitude!`,
+      (num) => isFinite(num) && Math.abs(num) <= 90,
+    ),
+  longitude: yup
+    .number()
+    .typeError("Longitude must be a number")
+    .test(
+      "isValidLongitude",
+      `Invalid longitude!`,
+      (num) => isFinite(num) && Math.abs(num) <= 180,
+    ),
+});
 
 export default function EditManualLocation({ isOpen, onClose }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [manualLocation, setManualLocation] = useState(null);
-
   const { currentUser, setCurrentUser } = useAuth();
-
-  useEffect(() => {
-    const manualLocation = currentUser?.manualLocation;
-
-    manualLocation && setManualLocation(manualLocation);
-  }, [currentUser]);
-
   const { updateData } = useUpdateData();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm({
+    resolver: yupResolver(userSchema),
+  });
+
+  // Function to get the user's current location
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setValue("latitude", latitude);
+          setValue("longitude", longitude);
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+        },
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, [isOpen]);
+
+  const onSubmit = async (manualLocation) => {
     setIsLoading(true);
 
-    const userData = { manualLocation: getAddressId(manualLocation) };
-
     // Update data
-    const { data } = await updateData(`/v1/user/${currentUser._id}`, userData);
+    const { data } = await updateData(`/v1/user/${currentUser._id}`, {
+      manualLocation,
+    });
 
     if (data?.success) {
       setCurrentUser(data.data);
@@ -44,14 +85,30 @@ export default function EditManualLocation({ isOpen, onClose }) {
       closeBtn
       headerText="ম্যানুয়াল লোকেশন"
     >
-      <form onSubmit={handleSubmit} className="w-[512px] max-w-full">
-        <AddressFields
-          villageType="select"
-          address={manualLocation}
-          setAddress={setManualLocation}
-        />
+      <form onSubmit={handleSubmit(onSubmit)} className="w-[512px] max-w-full">
+        <div className="mb-1">
+          <label className="font-bold">Latitude</label>
+          <input
+            type="text"
+            disabled={isLoading}
+            placeholder="Latitude"
+            {...register("latitude")}
+            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
+          />
+          <p className="text-red-400">{errors.latitude?.message}</p>
+        </div>
 
-        {/* Should add station here or inside Address component */}
+        <div className="mb-1">
+          <label className="font-bold">Longitude</label>
+          <input
+            type="text"
+            placeholder="Longitude"
+            disabled={isLoading}
+            {...register("longitude")}
+            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
+          />
+          <p className="text-red-400">{errors.longitude?.message}</p>
+        </div>
 
         <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
       </form>
