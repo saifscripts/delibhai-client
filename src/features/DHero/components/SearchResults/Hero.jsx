@@ -23,7 +23,7 @@ export default function Hero({ hero }) {
         <img src={avatarURL || dp} alt="name" className="w-full rounded-full" />
         <div
           className={cn(
-            "absolute bottom-[6px] right-[6px] aspect-square w-5 rounded-full border-2 border-white",
+            "absolute bottom-[5%] right-[5%] aspect-square w-[20%] rounded-full border-2 border-white",
             { "bg-primary": isOnline, "bg-accent": !isOnline },
           )}
         ></div>
