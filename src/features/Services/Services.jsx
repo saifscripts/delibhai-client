@@ -14,16 +14,16 @@ const Services = () => {
         <h2 className="mb-10 text-center text-3xl font-semibold text-black sm:text-4xl md:text-5xl">
           ডেলিভাই সার্ভিসসমূহ
         </h2>
-        <ScrollMenu arrow className="gap-10">
+        <ScrollMenu arrow className="gap-5">
           {services.map(({ id, title, icon, to }) => (
             <ScrollItem
-              className="flex aspect-square w-60 items-center justify-center rounded-md p-5 shadow-lg"
+              className="flex aspect-square w-60 items-center justify-center rounded-md border border-neutral transition-transform duration-300 hover:scale-105 hover:bg-neutral hover:bg-opacity-50"
               key={id}
             >
               <Link
                 to={to}
                 key={id}
-                className="flex flex-col items-center justify-center gap-4 lg:gap-6"
+                className="flex h-full w-full flex-col items-center justify-center gap-4 lg:gap-6"
               >
                 <img
                   src={icon}
