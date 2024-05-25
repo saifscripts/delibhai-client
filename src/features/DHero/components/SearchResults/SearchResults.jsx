@@ -14,12 +14,18 @@ export default function SearchResults() {
 
   useEffect(() => {
     const _searchParams = Object.fromEntries([...searchParams]);
-    const { vehicle, lat, long, dVil } = _searchParams;
+    const { vehicle, location, lat, long, dVil } = _searchParams;
 
-    const userCurrentLocation = {
-      latitude: lat,
-      longitude: long,
-    };
+    const userCurrentLocation =
+      location === "gps"
+        ? {
+            latitude: lat,
+            longitude: long,
+          }
+        : {
+            latitude: undefined,
+            longitude: undefined,
+          };
 
     fetchData("/v1/user/heros", {
       vehicle,
