@@ -4,6 +4,7 @@ import { useAuth } from "../../../../features/Authentication/contexts/AuthContex
 import UserContext from "../../contexts/UserContext";
 import profileSchema from "../../data/profileSchema";
 import { GPSLocation } from "../GPSLocation";
+import { ManualLocation } from "../ManualLocation";
 import { Ratings } from "../Ratings";
 import { Reviews } from "../Reviews";
 import { RiderActivity } from "../RiderActivity";
@@ -29,6 +30,10 @@ export default function ProfileInfo() {
             ({ dataKey, label, icon, dataModifier, isPrivate }) => {
               if (dataKey === "vehiclePhotos") {
                 return <VehiclePhotos key={dataKey} />;
+              }
+
+              if (dataKey === "manualLocation") {
+                return <ManualLocation key={dataKey} />;
               }
 
               if (dataKey === "liveLocation") {

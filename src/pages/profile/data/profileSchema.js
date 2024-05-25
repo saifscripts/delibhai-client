@@ -163,10 +163,10 @@ const profileSchema = {
       category: "গাড়ির ছবি",
       fields: [
         {
-          dataKey: 'vehiclePhotos'
-        }
-      ]
-    }
+          dataKey: "vehiclePhotos",
+        },
+      ],
+    },
   ],
   service: [
     {
@@ -206,25 +206,17 @@ const profileSchema = {
       fields: [
         {
           dataKey: "manualLocation",
-          dataModifier: getAddressTitles,
-          label: "ঠিকানা",
-          icon: marker,
-        },
-        {
-          dataKey: "station",
-          label: "স্ট্যাশন",
-          icon: station,
         },
       ],
     },
     {
-      category: "GPS Location",
+      category: "লাইভ লোকেশন",
       fields: [
         {
-          dataKey: 'liveLocation'
-        }
-      ]
-    }
+          dataKey: "liveLocation",
+        },
+      ],
+    },
   ],
   video: [
     {
@@ -232,35 +224,35 @@ const profileSchema = {
       editModal: "video",
       fields: [
         {
-          dataKey: 'videoURL'
-        }
-      ]
-    }
+          dataKey: "videoURL",
+        },
+      ],
+    },
   ],
   review: [
     {
       category: "রাইডার এক্টিভিটি",
       fields: [
         {
-          dataKey: 'riderActivity'
-        }
-      ]
+          dataKey: "riderActivity",
+        },
+      ],
     },
     {
       category: "রেটিং এবং রিভিও",
       fields: [
         {
-          dataKey: 'ratings'
-        }
-      ]
+          dataKey: "ratings",
+        },
+      ],
     },
     {
       fields: [
         {
-          dataKey: 'reviews'
-        }
-      ]
-    }
+          dataKey: "reviews",
+        },
+      ],
+    },
   ],
 };
 

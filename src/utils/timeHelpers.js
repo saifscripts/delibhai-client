@@ -44,7 +44,7 @@ export const isSlotOverlapping = (newSlot, existingSlots) => {
   return false;
 };
 
-export const isCurrentTimeWithinServiceTimes = (slots) => {
+export const isCurrentTimeWithinServiceTimes = (slots = []) => {
   const now = new Date();
   const currentHour = now.getHours();
   const currentMinute = now.getMinutes();
@@ -86,6 +86,6 @@ export const remove24HourSlot = (slots) => {
 
     return !(slotStartMinutes === 0 && slotEndMinutes === 23 * 60 + 59);
   });
-  
+
   return filtered;
 };

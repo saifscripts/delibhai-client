@@ -14,18 +14,12 @@ export default function SearchResults() {
 
   useEffect(() => {
     const _searchParams = Object.fromEntries([...searchParams]);
-    const { vehicle, location, lat, long, dVil } = _searchParams;
+    const { vehicle, lat, long, dVil } = _searchParams;
 
-    const userCurrentLocation =
-      location === "gps"
-        ? {
-            latitude: lat,
-            longitude: long,
-          }
-        : {
-            latitude: 22.898743,
-            longitude: 91.677568,
-          };
+    const userCurrentLocation = {
+      latitude: lat,
+      longitude: long,
+    };
 
     fetchData("/v1/user/heros", {
       vehicle,
@@ -33,19 +27,10 @@ export default function SearchResults() {
     }).then((data) => {
       if (data?.data?.success) {
         let heros = data.data.data;
-        const timestamp = Date.now();
 
         heros = heros.map((hero) => {
-          const isOnline =
-            hero?.liveLocation &&
-            timestamp - hero.liveLocation.timestamp < 1000;
-
-          const heroCurrentLocation = isOnline
-            ? hero?.liveLocation
-            : hero?.manualLocation?.geoLocation || {
-                latitude: 22.892515,
-                longitude: 91.674607,
-              };
+          const heroCurrentLocation =
+            hero?.liveLocation || hero?.manualLocation;
 
           return {
             ...hero,
@@ -54,7 +39,6 @@ export default function SearchResults() {
               userCurrentLocation,
               heroCurrentLocation,
             ),
-            destinationDistance: (Math.random() * 20).toFixed(2),
           };
         });
 
@@ -64,9 +48,6 @@ export default function SearchResults() {
 
           if (a.currentDistance - b.currentDistance > 0) return 1;
           if (a.currentDistance - b.currentDistance < 0) return -1;
-
-          // if (a.destinationDistance - b.destinationDistance > 0) return 1;
-          // if (a.destinationDistance - b.destinationDistance < 0) return -1;
         });
 
         setHeros(heros);
