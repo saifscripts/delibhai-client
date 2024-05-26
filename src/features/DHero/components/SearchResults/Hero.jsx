@@ -7,7 +7,15 @@ import PrimaryButton from "../../../../components/ui/PrimaryButton";
 import cn from "../../../../lib/cn.js";
 
 export default function Hero({ hero }) {
-  const { name, avatarURL, _id, mobile, isOnline, currentDistance } = hero;
+  const {
+    name,
+    avatarURL,
+    _id,
+    mobile,
+    isOnline,
+    currentDistance,
+    isHighlight,
+  } = hero;
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -17,7 +25,12 @@ export default function Hero({ hero }) {
   return (
     <div
       onClick={handleClick}
-      className="flex items-center gap-5 rounded-lg p-4 hover:bg-neutral active:bg-neutral"
+      className={cn(
+        "flex items-center gap-5 rounded-lg p-4 hover:bg-neutral active:bg-neutral",
+        {
+          "bg-primary bg-opacity-20": isHighlight,
+        },
+      )}
     >
       <div className="relative w-28 rounded-full">
         <img src={avatarURL || dp} alt="name" className="w-full rounded-full" />
