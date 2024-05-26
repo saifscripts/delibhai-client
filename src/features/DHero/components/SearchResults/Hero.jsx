@@ -26,9 +26,9 @@ export default function Hero({ hero }) {
     <div
       onClick={handleClick}
       className={cn(
-        "flex items-center gap-5 rounded-lg p-4 hover:bg-neutral active:bg-neutral",
+        "flex cursor-pointer items-center gap-5 rounded-lg p-4 hover:bg-neutral active:bg-neutral",
         {
-          "bg-primary bg-opacity-20": isHighlight,
+          "border-2 border-primary": isHighlight,
         },
       )}
     >
