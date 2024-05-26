@@ -20,7 +20,7 @@ import vehicleModel from "../assets/icons/vehicle-model.svg";
 import vehicleNumber from "../assets/icons/vehicle-number.svg";
 import vehicleType from "../assets/icons/vehicle.svg";
 import getAddressTitles from "../utils/getAddressTitles";
-import getVillages from "../utils/getVillages";
+import getVillages, { getVillageTitle } from "../utils/getVillages";
 import modifyAge from "../utils/modifyAge";
 
 const profileSchema = {
@@ -183,7 +183,12 @@ const profileSchema = {
           label: "গাড়ির সেবা",
           icon: serviceType,
         },
-        { dataKey: "mainStation", label: "প্রধান স্ট্যাশন", icon: station },
+        {
+          dataKey: "mainStation",
+          dataModifier: getVillageTitle,
+          label: "প্রধান স্ট্যাশন",
+          icon: station,
+        },
         {
           dataKey: "serviceAddress",
           dataModifier: getVillages,

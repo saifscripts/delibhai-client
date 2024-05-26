@@ -7,6 +7,7 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import * as yup from "yup";
 import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
+import { AddressFields } from "../../../../features/AddressFields";
 import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
 import getAddressId from "../../utils/getAddressId";
@@ -32,6 +33,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   const [isLoading, setIsLoading] = useState(false);
   const [serviceAddress, setServiceAddress] = useState([]);
   const [address, setAddress] = useState(null);
+  const [mainStationAddress, setMainStationAddress] = useState(null);
   const [addressIndex, setAddressIndex] = useState(null);
   const [serviceTimes, setServiceTimes] = useState([]);
   const [is24HourServiceTime, setIs24HourServiceTime] = useState(false);
@@ -41,9 +43,11 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   const { updateData } = useUpdateData();
 
   useEffect(() => {
+    const mainStation = currentUser?.mainStation;
     const serviceAddress = currentUser?.serviceAddress;
     const serviceTimes = currentUser?.serviceTimes;
 
+    mainStation && setMainStationAddress(mainStation);
     serviceAddress && setServiceAddress(serviceAddress);
     serviceTimes && setServiceTimes(serviceTimes);
   }, [currentUser]);
@@ -63,9 +67,13 @@ export default function EditServiceInfo({ isOpen, onClose }) {
 
   const onSubmit = async (userData) => {
     setIsLoading(true);
+
+    userData.mainStation = getAddressId(mainStationAddress);
+
     userData.serviceAddress = serviceAddress?.map((address) =>
       getAddressId(address),
     );
+
     if (is24HourServiceTime) {
       userData.serviceTimes = [{ start: "00:00", end: "23:59" }];
     } else {
@@ -118,6 +126,16 @@ export default function EditServiceInfo({ isOpen, onClose }) {
           </select>
           <p className="text-red-400">{errors.serviceType?.message}</p>
         </div>
+
+        <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
+          প্রধান স্ট্যাশন
+        </p>
+
+        <AddressFields
+          villageType="select"
+          address={mainStationAddress}
+          setAddress={setMainStationAddress}
+        />
 
         <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
           সার্ভিস প্রদানের এলাকা
