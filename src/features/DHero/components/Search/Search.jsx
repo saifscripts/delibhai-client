@@ -1,4 +1,3 @@
-import { getAllDivision } from "bd-divisions-to-unions";
 import { useEffect, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
@@ -9,19 +8,12 @@ import CurrentLocation from "./CurrentLocation";
 import Destination from "./Destination";
 import VehicleCategories from "./VehicleCategories";
 
-const defaultAddressValue = {
-  division: getAllDivision(),
-  district: null,
-  upazila: null,
-  union: null,
-};
-
 export default function Search() {
   const [vehicleType, setVehicleType] = useState("বাইক");
   const [locationType, setLocationType] = useState("gps");
   const [geoLocation, setGeoLocation] = useState(null);
-  const [manualLocation, setManualLocation] = useState(defaultAddressValue);
-  const [destination, setDestination] = useState(defaultAddressValue);
+  const [manualLocation, setManualLocation] = useState(null);
+  const [destination, setDestination] = useState(null);
   const navigate = useNavigate();
 
   // restore states from the local storage
