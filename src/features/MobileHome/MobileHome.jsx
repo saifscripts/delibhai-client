@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import services from "../../data/services";
 import Container from "../../layouts/Container";
-import Title from "../../layouts/Title";
 
 const MobileHome = () => {
   return (
     <div className="min-h-screen bg-secondary">
       <Container>
-        <Title color="white" title="ডেলিভাই সার্ভিস সমূহ" />
+        {/* <Title color="white" title="ডেলিভাই সার্ভিস সমূহ" /> */}
         {/* Categories */}
         <div className="grid grid-cols-2 gap-4 py-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4 lg:gap-8 xl:grid-cols-5">
           {services.map(({ id, icon, title, to }) => (
