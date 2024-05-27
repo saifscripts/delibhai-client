@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import dp from "../../../../assets/default.jpg";
 import PrimaryButton from "../../../../components/ui/PrimaryButton";
 import cn from "../../../../lib/cn.js";
+import star from "./star.svg";
 
 export default function Hero({ hero }) {
   const {
@@ -25,12 +26,7 @@ export default function Hero({ hero }) {
   return (
     <div
       onClick={handleClick}
-      className={cn(
-        "flex cursor-pointer items-center gap-5 rounded-lg p-4 hover:bg-neutral active:bg-neutral",
-        {
-          "border-2 border-primary": isHighlight,
-        },
-      )}
+      className="flex cursor-pointer items-center gap-5 rounded-lg p-4 hover:bg-primary hover:bg-opacity-10 active:bg-primary"
     >
       <div className="relative w-28 rounded-full">
         <img src={avatarURL || dp} alt="name" className="w-full rounded-full" />
@@ -48,6 +44,13 @@ export default function Hero({ hero }) {
         <div className="mb-2 flex items-center gap-1 text-gray-700">
           <span>{<GrLocation />}</span>
           <span>{currentDistance} km</span>
+
+          {isHighlight && (
+            <span className="flex items-center gap-1">
+              <img src={star} alt="" />
+              <span>প্রধান স্ট্যাশন</span>
+            </span>
+          )}
         </div>
 
         <div className="flex gap-3">
