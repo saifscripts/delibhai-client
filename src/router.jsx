@@ -56,7 +56,7 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/admin",
+    path: "/admin-dashboard",
     element: (
       <AdminRoute>
         <DHeroLocation />

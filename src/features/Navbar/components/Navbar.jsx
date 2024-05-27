@@ -1,20 +1,23 @@
 import { RxHamburgerMenu } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/logos/logo.png";
 import { useAuth } from "../../../features/Authentication/contexts/AuthContext";
-import getLocation from "../../../utils/getLocation";
+import cn from "../../../lib/cn";
 import useSidebar from "../hooks/useSidebar";
 import NavLinks from "./NavLinks";
 import Sidebar from "./Sidebar";
 
-const { protocol, domain } = getLocation();
-
 const Navbar = () => {
   const { isSidebarOpen, handleSidebarToggle } = useSidebar();
   const { currentUser } = useAuth();
+  const { pathname } = useLocation();
 
   return (
-    <nav className="sticky top-0 z-50 bg-white lg:shadow-sm">
+    <nav
+      className={cn("sticky top-0 z-50 bg-white lg:shadow-sm", {
+        "bg-secondary sm:bg-white": pathname === "/",
+      })}
+    >
       <div className="container flex h-16 items-center justify-between sm:h-24">
         {/* Sidebar */}
         <Sidebar
@@ -38,12 +41,12 @@ const Navbar = () => {
           </Link>
 
           {currentUser?.role === "admin" && (
-            <a
-              href={`${protocol}//admin.${domain}`}
+            <Link
+              to="/admin-dashboard"
               className="hidden bg-secondary px-6 py-3 font-semibold hover:brightness-90 lg:inline-block"
             >
               Dashboard
-            </a>
+            </Link>
           )}
         </div>
 
