@@ -4,11 +4,10 @@ import ErrorPage from "./components/ErrorPage";
 import PublicRoute from "./components/PublicRoute";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
 import { Search, SearchResults } from "./features/DHero";
+import { Profile, ProfileInfo } from "./features/profile";
 import MainLayout from "./layouts/MainLayout";
 import { DHeroLocation } from "./pages/admin";
 import { Home } from "./pages/home";
-import { Profile } from "./pages/profile";
-import { ProfileInfo } from "./pages/profile/features/ProfileInfo";
 
 const router = createBrowserRouter([
   {
