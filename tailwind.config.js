@@ -2,7 +2,7 @@
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class',
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -27,11 +27,11 @@ export default {
         height: "height",
       },
       spacing: {
-        '192': '48rem',
+        192: "48rem",
       },
       minWidth: {
-        '192': '48rem',
-      }
+        192: "48rem",
+      },
     },
     container: {
       center: true,
