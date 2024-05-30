@@ -34,18 +34,12 @@ export default function SearchResults() {
       if (data?.data?.success) {
         let heros = data.data.data;
 
-        const currentTime = Date.now();
-
         heros = heros.map((hero) => {
-          const isLive = hero?.liveLocation?.timestamp > currentTime - 5000;
-
-          const heroCurrentLocation = isLive
-            ? hero?.liveLocation
-            : hero?.manualLocation;
+          const heroCurrentLocation =
+            hero?.liveLocation || hero?.manualLocation;
 
           return {
             ...hero,
-            isLive: isLive,
             isHighlight: hero?.mainStation?.village === dVil, // highlight if destination === main station
             isOnline: isCurrentTimeWithinServiceTimes(hero.serviceTimes),
             currentDistance: getDistance(
