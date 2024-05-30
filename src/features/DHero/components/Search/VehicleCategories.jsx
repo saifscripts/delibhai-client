@@ -4,18 +4,23 @@ import { ScrollItem, ScrollMenu } from "../../../../lib/scrollable-menu";
 
 function VehicleCategories({ vehicleType, setVehicleType }) {
   return (
-    <ScrollMenu arrow>
+    <ScrollMenu arrow className="gap-2">
       {vehicles.map(({ title, icon }) => (
         <ScrollItem
           key={title}
           onClick={() => setVehicleType(title)}
           className={cn(
-            "flex aspect-square w-24 flex-col items-center justify-center gap-3 rounded-lg p-3 shadow-md sm:w-32",
-            { "bg-secondary bg-opacity-30": vehicleType === title },
+            "h-24 w-28 rounded-lg border border-neutral px-3 py-1 hover:bg-neutral hover:bg-opacity-50 active:bg-secondary active:bg-opacity-30 sm:h-28 sm:w-32",
+            {
+              "bg-secondary bg-opacity-30 hover:bg-secondary":
+                vehicleType === title,
+            },
           )}
         >
-          <img src={icon} alt={title} className="aspect-square w-2/3" />
-          <p className="text-center text-base sm:text-xl">{title}</p>
+          <div className="h-16 w-full sm:h-20">
+            <img src={icon} alt={title} className="aspect-video h-full" />
+          </div>
+          <p className="text-center text-base sm:text-lg">{title}</p>
         </ScrollItem>
       ))}
     </ScrollMenu>
