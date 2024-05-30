@@ -1,10 +1,10 @@
 import { BsTelephoneFill } from "react-icons/bs";
-import { GrLocation } from "react-icons/gr";
 import { PiPaperPlaneTiltFill } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import dp from "../../../../assets/default.jpg";
 import PrimaryButton from "../../../../components/ui/PrimaryButton";
 import cn from "../../../../lib/cn.js";
+import Distance from "./Distance.jsx";
 import HighlightFlag from "./HighLightFlag.jsx";
 
 export default function Hero({ hero }) {
@@ -16,6 +16,7 @@ export default function Hero({ hero }) {
     isOnline,
     currentDistance,
     isHighlight,
+    isLive,
   } = hero;
   const navigate = useNavigate();
 
@@ -42,10 +43,7 @@ export default function Hero({ hero }) {
         <h3 className="mb-3 text-xl">{name}</h3>
 
         <div className="mb-2 flex items-center justify-between text-gray-700">
-          <div className="flex items-center gap-1">
-            <span>{<GrLocation />}</span>
-            <span>{currentDistance} km</span>
-          </div>
+          <Distance currentDistance={currentDistance} isLive={isLive} />
 
           {isHighlight && <HighlightFlag />}
         </div>
