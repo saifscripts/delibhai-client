@@ -35,8 +35,8 @@ function Login() {
     const { data, error } = await login(userData);
 
     if (data?.success) {
-      // return navigate(`/profile/${_id}`);
-      return navigate("/");
+      console.log(data);
+      return navigate(`/profile/${data?.data?.user?._id}`);
     }
 
     // Handle app level errors
