@@ -35,7 +35,6 @@ function Login() {
     const { data, error } = await login(userData);
 
     if (data?.success) {
-      console.log(data);
       return navigate(`/profile/${data?.data?.user?._id}`);
     }
 
