@@ -4,6 +4,7 @@ import Skeleton from "../../../components/Skeleton";
 import MiniContainer from "../../../layouts/MiniContainer";
 import UserContext from "../contexts/UserContext";
 import useUserInfo from "../hooks/useUserInfo";
+import { CTAButtons } from "./CTAButtons";
 import { ProfileHeader } from "./ProfileHeader";
 import { ProfileMenu } from "./ProfileMenu";
 
@@ -19,6 +20,8 @@ export default function Profile() {
     );
   }
 
+  console.log(userInfo);
+
   if (!userInfo?.userInfo) {
     throw new Response("Not Found", {
       status: 404,
@@ -32,6 +35,7 @@ export default function Profile() {
         <ProfileHeader />
         <ProfileMenu />
         <Outlet />
+        <CTAButtons />
       </MiniContainer>
     </UserContext.Provider>
   );

@@ -19,7 +19,7 @@ export default function ProfileInfo() {
   const { currentUser } = useAuth();
 
   return (
-    <>
+    <div className="pb-16">
       {profileSchema[category]?.map((item) => (
         <InfoContainer
           key={item.category}
@@ -82,6 +82,6 @@ export default function ProfileInfo() {
           )}
         </InfoContainer>
       ))}
-    </>
+    </div>
   );
 }

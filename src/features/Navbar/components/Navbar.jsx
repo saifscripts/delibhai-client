@@ -14,7 +14,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={cn("sticky top-0 z-50 bg-white lg:shadow-sm", {
+      className={cn("sticky top-0 z-[99999] bg-white lg:shadow-sm", {
         "bg-secondary sm:bg-white": pathname === "/",
       })}
     >
