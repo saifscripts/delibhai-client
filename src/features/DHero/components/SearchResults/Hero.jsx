@@ -1,11 +1,12 @@
 import { BsTelephoneFill } from "react-icons/bs";
+import { HiOutlineStar } from "react-icons/hi";
 import { PiPaperPlaneTiltFill } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import dp from "../../../../assets/default.jpg";
 import PrimaryButton from "../../../../components/ui/PrimaryButton";
 import cn from "../../../../lib/cn.js";
+import getVillageTitle from "../../../../utils/getVillageTitle.js";
 import Distance from "./Distance.jsx";
-import HighlightFlag from "./HighLightFlag.jsx";
 
 export default function Hero({ hero }) {
   const {
@@ -17,17 +18,21 @@ export default function Hero({ hero }) {
     currentDistance,
     isHighlight,
     isLive,
+    mainStation,
   } = hero;
+
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/profile/${_id}`);
   };
 
+  const station = getVillageTitle(mainStation);
+
   return (
     <div
       onClick={handleClick}
-      className="flex cursor-pointer items-center gap-5 rounded-lg p-4 hover:bg-primary hover:bg-opacity-10 active:bg-primary active:bg-opacity-10"
+      className="flex cursor-pointer items-center gap-5 rounded-lg px-4 py-2 hover:bg-primary hover:bg-opacity-10 active:bg-primary active:bg-opacity-10"
     >
       <div className="relative aspect-square w-28 rounded-full">
         <img src={avatarURL || dp} alt="name" className="w-full rounded-full" />
@@ -40,13 +45,29 @@ export default function Hero({ hero }) {
       </div>
 
       <div>
-        <h3 className="mb-3 text-xl">{name}</h3>
+        <h3 className="text-xl font-bold">{name}</h3>
 
-        <div className="mb-2 flex items-center justify-between text-gray-700">
-          <Distance currentDistance={currentDistance} isLive={isLive} />
+        <div className="flex items-center gap-1">
+          <div className="relative">
+            {isHighlight && (
+              <span className="absolute animate-ping">
+                <HiOutlineStar className="text-red-400" />
+              </span>
+            )}
+            <span className="relative">
+              <HiOutlineStar
+                className={cn({
+                  "text-red-400": isHighlight,
+                  "text-accent": !isHighlight,
+                })}
+              />
+            </span>
+          </div>
 
-          {isHighlight && <HighlightFlag />}
+          <span>স্ট্যাশন: {station}</span>
         </div>
+
+        <Distance currentDistance={currentDistance} isLive={isLive} />
 
         <div className="flex gap-3">
           <Link onClick={(e) => e.stopPropagation()}>

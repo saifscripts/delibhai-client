@@ -3,7 +3,7 @@ import cn from "../../../../lib/cn";
 
 export default function Distance({ currentDistance, isLive }) {
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1 leading-relaxed">
       <div className="relative">
         {isLive && (
           <span className="absolute animate-ping">

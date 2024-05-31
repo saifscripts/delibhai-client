@@ -33,6 +33,7 @@ export default function SearchResults() {
     }).then((data) => {
       if (data?.data?.success) {
         let heros = data.data.data;
+        console.log(heros);
 
         heros = heros.map((hero) => {
           const heroCurrentLocation =
@@ -40,7 +41,7 @@ export default function SearchResults() {
 
           return {
             ...hero,
-            isHighlight: hero?.mainStation?.village === dVil, // highlight if destination === main station
+            isHighlight: hero?.mainStation?.village?._id === dVil, // highlight if destination === main station
             isOnline: isCurrentTimeWithinServiceTimes(hero.serviceTimes),
             currentDistance: getDistance(
               userCurrentLocation,
@@ -67,7 +68,7 @@ export default function SearchResults() {
     <>
       <Title color="black" title="ডেলিভাই হিরো" />
       <Container>
-        <div className="mx-auto my-8 flex w-fit max-w-full flex-col gap-4">
+        <div className="mx-auto my-8 flex w-fit max-w-full flex-col gap-2">
           {heros?.map((hero) => (
             <Hero hero={hero} key={hero._id} />
           ))}

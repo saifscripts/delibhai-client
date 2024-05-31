@@ -1,4 +1,5 @@
 import { getServiceTimes } from "../../../utils/convertTime";
+import getVillageTitle from "../../../utils/getVillageTitle";
 import nid from "../assets/icons/NID.svg";
 import age from "../assets/icons/age.svg";
 import bloodGroup from "../assets/icons/blood-group.svg";
@@ -20,7 +21,6 @@ import vehicleModel from "../assets/icons/vehicle-model.svg";
 import vehicleNumber from "../assets/icons/vehicle-number.svg";
 import vehicleType from "../assets/icons/vehicle.svg";
 import getAddressTitles from "../utils/getAddressTitles";
-import getVillageTitle from "../utils/getVillageTitle";
 import getVillagesTitle from "../utils/getVillagesTitle";
 import modifyAge from "../utils/modifyAge";
 
