@@ -68,7 +68,7 @@ export default function SearchResults() {
     <>
       <Title color="black" title="ডেলিভাই হিরো" />
       <Container>
-        <div className="mx-auto my-8 flex w-fit max-w-full flex-col gap-2">
+        <div className="mx-auto my-8 flex w-fit max-w-full flex-col gap-3">
           {heros?.map((hero) => (
             <Hero hero={hero} key={hero._id} />
           ))}

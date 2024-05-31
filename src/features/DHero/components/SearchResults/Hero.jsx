@@ -45,9 +45,9 @@ export default function Hero({ hero }) {
       </div>
 
       <div>
-        <h3 className="text-xl font-bold">{name}</h3>
+        <h3 className="text-xl">{name}</h3>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 text-accent">
           <div className="relative">
             {isHighlight && (
               <span className="absolute animate-ping">
