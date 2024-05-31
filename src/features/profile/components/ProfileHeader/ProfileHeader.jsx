@@ -22,7 +22,7 @@ export default function ProfileHeader() {
             #{userInfo?._id?.slice(0, 5)}
           </span>
 
-          <div className="relative z-10 flex h-10 items-center rounded-full bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] py-3 pl-4 pr-10 text-xs min-[400px]:pr-12 min-[500px]:pr-16 min-[500px]:text-base">
+          <div className="relative z-10 flex h-10 items-center rounded-full bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] py-3 pl-4 pr-10 text-xs min-[500px]:text-base">
             <span>
               {userInfo?.vehicleType && userInfo?.vehicleType + " রাইডার"}
             </span>
