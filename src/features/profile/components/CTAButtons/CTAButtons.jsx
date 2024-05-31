@@ -9,7 +9,7 @@ export default function CTAButtons() {
   const { userInfo } = useContext(UserContext);
 
   return (
-    <div className="container fixed bottom-10 left-0 right-0 z-50 flex max-w-3xl items-center justify-center">
+    <div className="container fixed bottom-10 left-0 right-0 z-50 flex max-w-3xl items-center justify-center sm:bottom-2">
       <div className="grid w-full grid-cols-2 gap-3">
         <Link onClick={(e) => e.stopPropagation()}>
           <PrimaryButton className="w-full" icon={<PiPaperPlaneTiltFill />} />
