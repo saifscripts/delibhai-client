@@ -1,20 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { TfiClose } from "react-icons/tfi";
 import cn from "../lib/cn";
 import getScrollbarWidth from "../utils/getScrollbarWidth";
 
 const Modal = ({ isOpen, onClose, children, closeBtn, headerText }) => {
-  const stopPropagation = (e) => {
-    e.stopPropagation();
+  const [shouldModalClose, setShouldModalClose] = useState(false);
+
+  const handleClose = () => {
+    if (shouldModalClose) onClose();
   };
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflowY = "hidden";
       document.body.style.marginRight = getScrollbarWidth() + "px";
     } else {
-      console.log("closed");
-      document.body.style.overflow = "scroll";
+      document.body.style.overflowY = "scroll";
       document.body.style.marginRight = "0";
     }
   }, [isOpen]);
@@ -23,12 +24,16 @@ const Modal = ({ isOpen, onClose, children, closeBtn, headerText }) => {
 
   return (
     <div
-      onClick={onClose}
-      className="fixed inset-0 z-50 h-screen w-screen overflow-y-scroll bg-black bg-opacity-10"
+      onClick={handleClose}
+      onMouseDown={() => setShouldModalClose(true)}
+      className="fixed inset-0 z-[99999] h-screen w-screen overflow-y-scroll bg-black bg-opacity-10"
     >
       <div className="flex h-full w-full items-center justify-center">
         <div
-          onClick={stopPropagation}
+          onMouseDown={(e) => {
+            e.stopPropagation();
+            setShouldModalClose(false);
+          }}
           className={`max-h-screen max-w-[640px] overflow-hidden rounded-3xl bg-white shadow-lg sm:max-h-[90vh]`}
         >
           {(headerText || closeBtn) && (
