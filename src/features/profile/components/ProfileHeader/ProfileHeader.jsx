@@ -26,11 +26,11 @@ export default function ProfileHeader() {
             <span>
               {userInfo?.vehicleType && userInfo?.vehicleType + " রাইডার"}
             </span>
-            <div className="absolute right-0 top-1/2 w-16 -translate-y-1/2 translate-x-1/2">
+            <div className="absolute right-0 top-1/2 h-16 w-16 -translate-y-1/2 translate-x-1/2">
               <img
                 src={vehicleIcon}
                 alt={userInfo?.vehicleType}
-                className="w-full"
+                className="mx-auto h-full"
               />
             </div>
             <div className="absolute right-0 top-1/2 -z-20 aspect-square w-24 -translate-y-1/2 translate-x-1/2 rounded-full bg-secondary p-4 opacity-10"></div>
