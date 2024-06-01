@@ -1,7 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import isEmail from "validator/lib/isEmail";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
@@ -24,11 +23,6 @@ const userSchema = yup.object({
       ["পুরুষ", "মহিলা", "অন্যান্য"],
       "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য.",
     ),
-  email: yup
-    .string()
-    .trim()
-    .lowercase()
-    .test("isValidEmail", `Email is not valid.`, isEmail),
   mobile: yup
     .string()
     .trim()
@@ -128,18 +122,6 @@ function Signup() {
             <option value="অন্যান্য">অন্যান্য</option>
           </select>
           <p className="text-red-400">{errors.gender?.message}</p>
-        </div>
-
-        <div className="mb-1 mt-4">
-          <label className="font-bold">ই-মেইল</label>
-          <input
-            {...register("email")}
-            type="text"
-            placeholder="ই-মেইল লিখুন"
-            disabled={isLoading}
-            className="w-full border-b border-primary py-3"
-          />
-          <p className="text-red-400">{errors.email?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
