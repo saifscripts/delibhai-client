@@ -3,9 +3,8 @@ import { BiSearchAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../../components/ui/Button";
 import MiniContainer from "../../../../layouts/MiniContainer";
-import Title from "../../../../layouts/Title";
-import CurrentLocation from "./CurrentLocation";
 import Destination from "./Destination";
+import GPSLocation from "./GPSLocation";
 import VehicleCategories from "./VehicleCategories";
 
 export default function Search() {
@@ -51,7 +50,6 @@ export default function Search() {
   return (
     <div className="relative min-h-screen">
       <MiniContainer>
-        <Title title="ডেলিভাই হিরো" />
         <h2 className="pt-4 text-2xl font-semibold">গাড়ির ধরণ</h2>
 
         <VehicleCategories
@@ -59,12 +57,9 @@ export default function Search() {
           setVehicleType={setVehicleType}
         />
 
-        <CurrentLocation
-          locationType={locationType}
-          manualLocation={manualLocation}
+        <h2 className="mb-4 mt-8 text-2xl font-semibold">আপনার লোকেশন</h2>
+        <GPSLocation
           geoLocation={geoLocation}
-          setLocationType={setLocationType}
-          setManualLocation={setManualLocation}
           setGeoLocation={setGeoLocation}
         />
 

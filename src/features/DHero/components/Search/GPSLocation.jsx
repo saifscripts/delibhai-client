@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import Map from "../../../../components/Map";
 
-function GPSLocation({ setLocationType, geoLocation, setGeoLocation }) {
+function GPSLocation({ geoLocation, setGeoLocation }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -30,7 +31,8 @@ function GPSLocation({ setLocationType, geoLocation, setGeoLocation }) {
     );
 
     return () => navigator.geolocation.clearWatch(watchId);
-  }, [setLocationType]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (loading) {
     return <h2 className="text-center text-2xl">Loading...</h2>;
@@ -38,20 +40,13 @@ function GPSLocation({ setLocationType, geoLocation, setGeoLocation }) {
 
   if (error) {
     return (
-      <div className="flex aspect-video w-full flex-col items-center justify-center gap-2 rounded-lg border p-5">
+      <div className="flex w-full flex-col items-center justify-center gap-2 rounded-lg border p-5 py-5">
         <p className="text-center text-xl text-red-400">{error}</p>
       </div>
     );
   }
 
-  return (
-    <div className="flex aspect-video w-full flex-col items-center justify-center gap-2 rounded-lg border">
-      <p className="text-center text-2xl">Latitude: {geoLocation?.latitude}</p>
-      <p className="text-center text-2xl">
-        Longitude: {geoLocation?.longitude}
-      </p>
-    </div>
-  );
+  return <Map geoLocation={geoLocation} />;
 }
 
 export default GPSLocation;

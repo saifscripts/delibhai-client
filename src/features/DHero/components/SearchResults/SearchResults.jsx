@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useFetchData } from "../../../../api/api";
 import Container from "../../../../layouts/Container";
-import Title from "../../../../layouts/Title";
 import { isCurrentTimeWithinServiceTimes } from "../../../../utils/timeHelpers";
 import { getDistance } from "../../utils/getDistance";
 import Hero from "./Hero";
@@ -65,15 +64,12 @@ export default function SearchResults() {
   }, [searchParams]);
 
   return (
-    <>
-      <Title color="black" title="ডেলিভাই হিরো" />
-      <Container>
-        <div className="mx-auto my-8 flex w-fit max-w-full flex-col gap-3">
-          {heros?.map((hero) => (
-            <Hero hero={hero} key={hero._id} />
-          ))}
-        </div>
-      </Container>
-    </>
+    <Container>
+      <div className="mx-auto my-8 flex w-fit max-w-full flex-col gap-3">
+        {heros?.map((hero) => (
+          <Hero hero={hero} key={hero._id} />
+        ))}
+      </div>
+    </Container>
   );
 }
