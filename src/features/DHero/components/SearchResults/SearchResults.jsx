@@ -41,7 +41,12 @@ export default function SearchResults() {
           return {
             ...hero,
             isHighlight: hero?.mainStation?.village?._id === dVil, // highlight if destination === main station
-            isOnline: isCurrentTimeWithinServiceTimes(hero.serviceTimes),
+            isOnline:
+              hero.serviceStatus === "off"
+                ? false
+                : hero.serviceStatus === "on"
+                  ? true
+                  : isCurrentTimeWithinServiceTimes(hero.serviceTimes),
             currentDistance: getDistance(
               userCurrentLocation,
               heroCurrentLocation,
