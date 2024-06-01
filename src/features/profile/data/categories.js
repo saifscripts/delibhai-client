@@ -9,7 +9,7 @@ const categories = [
   { name: "general", title: "সাধারণ তথ্য", icon: user, index: true },
   { name: "vehicle", title: "বাহনের তথ্য", icon: vehicle },
   { name: "service", title: "সেবাদান তথ্য", icon: service },
-  { name: "location", title: "মাই লোকেশন", icon: location },
+  { name: "location", title: "লোকেশন", icon: location },
   { name: "video", title: "ভিডিও", icon: video },
   { name: "review", title: "রিভিও", icon: star },
 ];
