@@ -15,7 +15,7 @@ export default function CTAButtons() {
   }
 
   return (
-    <div className="container fixed bottom-10 left-0 right-0 z-50 flex max-w-3xl items-center justify-center sm:bottom-2">
+    <div className="container fixed bottom-0 left-0 right-0 z-50 flex w-full max-w-3xl items-center justify-center bg-white pb-10 pt-2 sm:pb-2">
       <div className="grid w-full grid-cols-2 gap-3">
         <Link onClick={(e) => e.stopPropagation()}>
           <PrimaryButton className="w-full" icon={<PiPaperPlaneTiltFill />} />
