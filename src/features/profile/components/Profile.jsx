@@ -4,7 +4,7 @@ import Skeleton from "../../../components/Skeleton";
 import MiniContainer from "../../../layouts/MiniContainer";
 import UserContext from "../contexts/UserContext";
 import useUserInfo from "../hooks/useUserInfo";
-import { CTAButtons } from "./CTAButtons";
+import { BottomPanel } from "./BottomPanel";
 import { ProfileHeader } from "./ProfileHeader";
 import { ProfileMenu } from "./ProfileMenu";
 
@@ -35,7 +35,7 @@ export default function Profile() {
         <ProfileHeader />
         <ProfileMenu />
         <Outlet />
-        <CTAButtons />
+        <BottomPanel />
       </MiniContainer>
     </UserContext.Provider>
   );
