@@ -25,7 +25,7 @@ export default function ServiceStatusButtons() {
 
     if (response?.success) {
       setCurrentUser(response.data);
-      setServiceStatus(response.data?.serviceStatus);
+      //   setServiceStatus(response.data?.serviceStatus);
     } else {
       setServiceStatus(currentUser?.serviceStatus || "scheduled");
     }
