@@ -93,7 +93,7 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
 
       {/* Panel sliding from the bottom */}
       <div
-        className={`fixed bottom-0 left-0 right-0 z-50 rounded-t-xl bg-white transition-transform ${
+        className={`fixed bottom-0 left-0 right-0 z-[99999] rounded-t-xl bg-white transition-transform ${
           editModal ? "translate-y-0" : "translate-y-full"
         }`}
       >

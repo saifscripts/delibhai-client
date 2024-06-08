@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ReactCrop, {
   centerCrop,
   convertToPixelCrop,
@@ -23,6 +23,7 @@ export default function ResizeModal({
   const [isLoading, setIsLoading] = useState(false);
   const { updateData } = useUpdateData();
   const { currentUser, setCurrentUser } = useAuth();
+  const saveButtonRef = useRef(null);
 
   const onImageLoad = (e) => {
     if (crop) return;
@@ -90,8 +91,26 @@ export default function ResizeModal({
     }
   };
 
+  useEffect(() => {
+    const handleEnterPress = (e) => {
+      if (e.key === "Enter") {
+        saveButtonRef?.current?.click();
+      }
+    };
+
+    window.addEventListener("keypress", handleEnterPress);
+
+    () => window.removeEventListener("keypress", handleEnterPress);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <div className="fixed inset-0 z-[9999999] flex items-center justify-center bg-black bg-opacity-20">
+    <div
+      className="fixed inset-0 z-[9999999] flex items-center justify-center bg-black bg-opacity-20"
+      onKeyDown={(e) => {
+        console.log(e.key);
+      }}
+    >
       <div className="mx-4 rounded-md bg-white p-4">
         {imageSrc && (
           <div className="flex flex-col items-center justify-center gap-5">
@@ -116,12 +135,13 @@ export default function ResizeModal({
             </ReactCrop>
             <div className="space-x-3">
               <button
-                className="rounded-md bg-primary px-3 py-1 text-white"
+                className="rounded-md border border-accent px-3 py-1 text-accent"
                 onClick={() => setResizeModal(false)}
               >
-                Cancel
+                বাতিল
               </button>
               <button
+                ref={saveButtonRef}
                 disabled={isLoading}
                 className={`rounded-md px-3 py-1 text-white ${
                   isLoading ? "bg-gray-500" : "bg-primary"
@@ -131,7 +151,7 @@ export default function ResizeModal({
                   handleCrop();
                 }}
               >
-                Crop Image
+                সেইভ করুন
               </button>
             </div>
           </div>
