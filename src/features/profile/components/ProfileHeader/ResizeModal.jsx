@@ -100,7 +100,7 @@ export default function ResizeModal({
 
     window.addEventListener("keypress", handleEnterPress);
 
-    () => window.removeEventListener("keypress", handleEnterPress);
+    return () => window.removeEventListener("keypress", handleEnterPress);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
