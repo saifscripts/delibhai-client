@@ -91,7 +91,7 @@ export default function ResizeModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-20">
+    <div className="fixed inset-0 z-[9999999] flex items-center justify-center bg-black bg-opacity-20">
       <div className="mx-4 rounded-md bg-white p-4">
         {imageSrc && (
           <div className="flex flex-col items-center justify-center gap-5">
