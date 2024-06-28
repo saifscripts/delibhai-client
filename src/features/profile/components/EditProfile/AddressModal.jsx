@@ -1,10 +1,9 @@
 import { cloneDeep } from "lodash";
-import { useEffect } from "react";
 import { AiFillPlusSquare } from "react-icons/ai";
 import { AddressFields } from "../../../../features/AddressFields";
 import MiniContainer from "../../../../layouts/MiniContainer";
 import Modal from "../../../../layouts/Modal";
-import { showErrorToast } from "../../../../lib/toast";
+// import { showErrorToast } from "../../../../lib/toast";
 
 export default function AddressModal({
   isOpen,
@@ -15,20 +14,20 @@ export default function AddressModal({
   setServiceAddress,
   addressIndex,
 }) {
-  useEffect(() => {
-    const isUnionExist = serviceAddress?.some(
-      (add) => add?.union?._id === address?.union?._id,
-    );
+  //   useEffect(() => {
+  //     const isUnionExist = serviceAddress?.some(
+  //       (adr) => adr?.union?._id === address?.union?._id,
+  //     );
 
-    if (addressIndex === serviceAddress.length && isUnionExist) {
-      return showErrorToast("ইউনিয়নটি ইতিমধ্যে যোগ করা হয়েছে!");
-    }
-  }, [address, serviceAddress, addressIndex]);
+  //     if (addressIndex === serviceAddress.length && isUnionExist) {
+  //       return showErrorToast("ইউনিয়নটি ইতিমধ্যে যোগ করা হয়েছে!");
+  //     }
+  //   }, [address, serviceAddress, addressIndex]);
   const handleSave = (e) => {
     e.preventDefault();
 
     // const isUnionExist = serviceAddress?.some(
-    //   (add) => add?.union?._id === address?.union?._id,
+    //   (adr) => adr?.union?._id === address?.union?._id,
     // );
 
     // if (addressIndex === serviceAddress.length && isUnionExist) {
