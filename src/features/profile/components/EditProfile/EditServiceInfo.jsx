@@ -33,7 +33,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   const [isLoading, setIsLoading] = useState(false);
   const [serviceAddress, setServiceAddress] = useState([]);
   const [address, setAddress] = useState(null);
-  const [mainStationAddress, setMainStationAddress] = useState(null);
+  const [mainStationAddress, setMainStationAddress] = useState({});
   const [addressIndex, setAddressIndex] = useState(null);
   const [serviceTimes, setServiceTimes] = useState([]);
   const [is24HourServiceTime, setIs24HourServiceTime] = useState(false);
@@ -67,6 +67,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
 
   const onSubmit = async (userData) => {
     setIsLoading(true);
+    console.log({ serviceAddress });
 
     userData.mainStation = getAddressId(mainStationAddress);
 

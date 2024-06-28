@@ -27,13 +27,13 @@ export default function AddressModal({
   const handleSave = (e) => {
     e.preventDefault();
 
-    const isUnionExist = serviceAddress?.some(
-      (add) => add?.union?._id === address?.union?._id,
-    );
+    // const isUnionExist = serviceAddress?.some(
+    //   (add) => add?.union?._id === address?.union?._id,
+    // );
 
-    if (addressIndex === serviceAddress.length && isUnionExist) {
-      return showErrorToast("ইউনিয়নটি ইতিমধ্যে যোগ করা হয়েছে!");
-    }
+    // if (addressIndex === serviceAddress.length && isUnionExist) {
+    //   return showErrorToast("ইউনিয়নটি ইতিমধ্যে যোগ করা হয়েছে!");
+    // }
 
     const _serviceAddress = cloneDeep(serviceAddress);
     _serviceAddress[addressIndex] = address;
