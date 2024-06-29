@@ -10,15 +10,17 @@ const ServiceAddressCard = ({
   serviceAddress,
   setServiceAddress,
 }) => {
-  const title = address?.union?.title
+  const title = address?.village?.length
     ? `${address?.union?.title} ইউনিয়ন`
-    : address?.upazila?.title
-      ? `সমগ্র ${address?.upazila?.title} উপজেলা`
-      : address?.district?.title
-        ? `সমগ্র ${address?.district?.title} জেলা`
-        : address?.division?.title
-          ? `সমগ্র ${address?.division?.title} বিভাগ`
-          : "";
+    : address?.union?.title
+      ? `সমগ্র ${address?.union?.title} ইউনিয়ন`
+      : address?.upazila?.title
+        ? `সমগ্র ${address?.upazila?.title} উপজেলা`
+        : address?.district?.title
+          ? `সমগ্র ${address?.district?.title} জেলা`
+          : address?.division?.title
+            ? `সমগ্র ${address?.division?.title} বিভাগ`
+            : "";
 
   return (
     <div className="rounded-lg bg-secondary bg-opacity-10 p-2">
