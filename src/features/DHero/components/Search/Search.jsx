@@ -9,9 +9,7 @@ import VehicleCategories from "./VehicleCategories";
 
 export default function Search() {
   const [vehicleType, setVehicleType] = useState("বাইক");
-  const [locationType, setLocationType] = useState("gps");
   const [geoLocation, setGeoLocation] = useState(null);
-  const [manualLocation, setManualLocation] = useState(null);
   const [destination, setDestination] = useState(null);
   const navigate = useNavigate();
 
@@ -20,12 +18,8 @@ export default function Search() {
     const searchParams = JSON.parse(localStorage.getItem("heroSearchParams"));
 
     if (searchParams) {
-      const { vehicleType, locationType, manualLocation, destination } =
-        searchParams;
-
+      const { vehicleType, destination } = searchParams;
       setVehicleType(vehicleType);
-      setLocationType(locationType);
-      setManualLocation(manualLocation);
       setDestination(destination);
     }
   }, []);
@@ -34,16 +28,14 @@ export default function Search() {
     // combine all states as searchParams obj
     const searchParams = {
       vehicleType,
-      locationType,
       geoLocation,
-      manualLocation,
       destination,
     };
 
     localStorage.setItem("heroSearchParams", JSON.stringify(searchParams));
 
     navigate(
-      `search?vehicle=${vehicleType}&location=${locationType}&lat=${geoLocation?.latitude}&long=${geoLocation?.longitude}&cVil=${manualLocation?.village?._id}&dVil=${destination?.village?._id}`,
+      `search?vehicle=${vehicleType}&lat=${geoLocation?.latitude}&long=${geoLocation?.longitude}&destination=${JSON.stringify(destination)}`,
     );
   };
 
