@@ -21,8 +21,8 @@ import vehicleModel from "../assets/icons/vehicle-model.svg";
 import vehicleNumber from "../assets/icons/vehicle-number.svg";
 import vehicleType from "../assets/icons/vehicle.svg";
 import getAddressTitles from "../utils/getAddressTitles";
-import getVillagesTitle from "../utils/getVillagesTitle";
 import modifyAge from "../utils/modifyAge";
+import modifyServiceAddress from "../utils/modifyServiceAddress";
 
 const profileSchema = {
   general: [
@@ -192,7 +192,7 @@ const profileSchema = {
         },
         {
           dataKey: "serviceAddress",
-          dataModifier: getVillagesTitle,
+          dataModifier: modifyServiceAddress,
           label: "সার্ভিস প্রদানের এলাকা সমূহ",
           icon: serviceAddress,
         },
