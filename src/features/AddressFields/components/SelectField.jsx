@@ -17,7 +17,6 @@ export default function SelectField({
         className="w-full border-b border-primary bg-transparent py-3"
       >
         <option>সিলেক্ট করুন</option>
-        {name === "division" ? <option value="">সমগ্র বাংলাদেশ</option> : null}
         {fields?.map(({ _id, title }) => (
           <option key={_id} value={_id}>
             {title}
