@@ -23,10 +23,10 @@ const userSchema = yup.object({
       ["পুরুষ", "মহিলা", "অন্যান্য"],
       "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য.",
     ),
-  phone: yup
+  mobile: yup
     .string()
     .trim()
-    .required("Phone number is required.")
+    .required("Mobile number is required.")
     .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
   password: yup
     .string()
@@ -68,8 +68,6 @@ function Signup() {
   const onSubmit = async (userData) => {
     const result = await signupRider(userData);
 
-    console.log(result);
-
     if (result?.data?.success) {
       return navigate("/otp-verification", {
         state: {
@@ -80,8 +78,12 @@ function Signup() {
     }
 
     if (result?.error?.status === 409) {
-      setError("phone", {
-        message: "A user already exists with this mobile number!",
+      setError("mobile", {
+        message: result?.error?.data?.message,
+      });
+    } else if (result?.error) {
+      setError("general", {
+        message: result?.error?.data?.message,
       });
     }
   };
@@ -122,13 +124,13 @@ function Signup() {
         <div className="mb-1 mt-4">
           <label className="font-bold">মোবাইল নাম্বার</label>
           <input
-            {...register("phone")}
+            {...register("mobile")}
             type="text"
             placeholder="মোবাইল নাম্বার লিখুন"
             disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.phone?.message}</p>
+          <p className="text-red-400">{errors.mobile?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">

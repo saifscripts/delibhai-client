@@ -4,14 +4,14 @@ export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     signupRider: builder.mutation({
       query: (data) => ({
-        url: "/user/create-rider",
+        url: "/rider/signup",
         method: "POST",
         body: data,
       }),
     }),
     verifyRiderOTP: builder.mutation({
       query: (data) => ({
-        url: "/user/create-rider/verify-otp",
+        url: "/rider/verify-otp",
         method: "POST",
         body: data,
       }),
