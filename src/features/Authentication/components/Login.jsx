@@ -5,10 +5,10 @@ import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
+import { useLoginMutation } from "../../../redux/features/auth/authApi";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
-import { useAuth } from "../contexts/AuthContext";
 
-const userSchema = yup.object({
+const credentialSchema = yup.object({
   mobile: yup
     .string()
     .trim()
@@ -23,33 +23,30 @@ function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setError,
   } = useForm({
-    resolver: yupResolver(userSchema),
+    resolver: yupResolver(credentialSchema),
   });
 
-  const { isLoading, login } = useAuth();
+  const [login] = useLoginMutation();
 
-  const onSubmit = async (userData) => {
-    const { data, error } = await login(userData);
+  const onSubmit = async (credentials) => {
+    const result = await login(credentials);
 
-    if (data?.success) {
-      return navigate(`/profile/${data?.data?.user?._id}`);
+    console.log(result);
+
+    if (result?.data?.success) {
+      return navigate(`/profile/${result?.data?.data?.user?._id}`);
     }
 
     // Handle app level errors
-    if (error?.code === "mobileNotExist") {
+    if (result?.error?.status === 404) {
       setError("mobile", {
-        message: error.message,
+        message: result?.error?.data?.message,
       });
-    } else {
-      setError("general", { message: error?.message });
-    }
-
-    // Handle AxiosError
-    if (error?.name === "AxiosError") {
-      setError("general", { message: error?.message });
+    } else if (result?.error) {
+      setError("general", { message: result?.error?.data?.message });
     }
   };
 
@@ -66,7 +63,7 @@ function Login() {
             {...register("mobile")}
             type="text"
             placeholder="মোবাইল নাম্বার লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.mobile?.message}</p>
@@ -78,7 +75,7 @@ function Login() {
             {...register("password")}
             type="password"
             placeholder="পাসওয়ার্ড দিন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.password?.message}</p>
@@ -86,7 +83,7 @@ function Login() {
 
         <p className="text-red-400">{errors.general?.message}</p>
 
-        <Submit disabled={isLoading} value="লগিন" />
+        <Submit disabled={isSubmitting} value="লগিন" />
       </form>
     </MiniContainer>
   );
