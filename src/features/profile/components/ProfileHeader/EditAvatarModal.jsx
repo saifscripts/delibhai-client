@@ -4,8 +4,12 @@ import { AiFillCamera } from "react-icons/ai";
 import { GiResize } from "react-icons/gi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "react-image-crop/dist/ReactCrop.css";
+import { useDispatch, useSelector } from "react-redux";
 import { updateData } from "../../../../lib/api";
-import { useAuth } from "../../../Authentication/contexts/AuthContext";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 import EditOption from "./EditOption";
 import ResizeModal from "./ResizeModal";
 
@@ -15,7 +19,8 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState();
   const [resizeModal, setResizeModal] = useState(false);
-  const { currentUser, setCurrentUser } = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
 
   const onSelectFile = (e) => {
     setCrop(null);
@@ -51,8 +56,8 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
   };
 
   const onResize = () => {
-    setImageSrc(currentUser?.avatarSrcURL);
-    setCrop(currentUser?.avatarCropData);
+    setImageSrc(user?.avatarSrcURL);
+    setCrop(user?.avatarCropData);
     setEditModal(false);
     setResizeModal(true);
   };
@@ -60,13 +65,14 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
   const onDelete = async () => {
     const fields = { avatarURL: 1, avatarSrcURL: 1, avatarCropData: 1 };
 
-    const data = await updateData(
-      `/v1/user/remove-fields/${currentUser._id}`,
-      fields,
-    );
+    const data = await updateData(`/v1/user/remove-fields/${user._id}`, fields);
 
     if (data?.success) {
-      setCurrentUser(data.data);
+      dispatch(
+        setUser({
+          user: data.data,
+        }),
+      );
       setEditModal(false);
     }
   };
@@ -106,7 +112,7 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
             onChange={onSelectFile}
             onClick={(e) => (e.target.value = null)}
           />
-          {currentUser?.avatarURL && (
+          {user?.avatarURL && (
             <>
               <EditOption
                 icon={<GiResize />}

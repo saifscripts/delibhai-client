@@ -2,13 +2,17 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import isEmail from "validator/lib/isEmail";
 import * as yup from "yup";
 import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 import { isMobilePhone } from "../../../../utils/isMobilePhone";
 import getAddressId from "../../utils/getAddressId";
 
@@ -29,15 +33,17 @@ const userSchema = yup.object({
 });
 
 export default function EditOwnerInfo({ isOpen, onClose }) {
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
   const [isLoading, setIsLoading] = useState(false);
   const [ownerAddress, setOwnerAddress] = useState(null);
-  const { currentUser, setCurrentUser } = useAuth();
+
   const { updateData } = useUpdateData();
 
   useEffect(() => {
-    const ownerAddress = currentUser?.ownerAddress;
+    const ownerAddress = user?.ownerAddress;
     ownerAddress && setOwnerAddress(ownerAddress);
-  }, [currentUser]);
+  }, [user]);
 
   const {
     register,
@@ -47,9 +53,9 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      ownerName: currentUser?.ownerName,
-      ownerMobile: currentUser?.ownerMobile,
-      ownerEmail: currentUser?.ownerEmail,
+      ownerName: user?.ownerName,
+      ownerMobile: user?.ownerMobile,
+      ownerEmail: user?.ownerEmail,
     },
   });
 
@@ -58,13 +64,14 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
     userData.ownerAddress = getAddressId(ownerAddress);
 
     // Update data
-    const { data, error } = await updateData(
-      `/v1/user/${currentUser._id}`,
-      userData,
-    );
+    const { data, error } = await updateData(`/v1/user/${user._id}`, userData);
 
     if (data?.success) {
-      setCurrentUser(data.data);
+      dispatch(
+        setUser({
+          user: data.data,
+        }),
+      );
       onClose();
     } else {
       setError("general", { message: error?.message });

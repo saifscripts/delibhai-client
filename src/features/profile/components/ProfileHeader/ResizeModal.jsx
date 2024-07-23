@@ -5,9 +5,13 @@ import ReactCrop, {
   convertToPixelCrop,
   makeAspectCrop,
 } from "react-image-crop";
+import { useDispatch, useSelector } from "react-redux";
 import { useUpdateData } from "../../../../api/api";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 import base64ToFormData from "../../../../utils/base64ToFormData";
-import { useAuth } from "../../../Authentication/contexts/AuthContext";
 import getCroppedData from "../../utils/getCroppedData";
 
 const ASPECT_RATIO = 1;
@@ -22,7 +26,9 @@ export default function ResizeModal({
   const imageRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const { updateData } = useUpdateData();
-  const { currentUser, setCurrentUser } = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
+
   const saveButtonRef = useRef(null);
 
   const onImageLoad = (e) => {
@@ -79,13 +85,14 @@ export default function ResizeModal({
       avatarCropData: crop,
     };
 
-    const { data } = await updateData(
-      `/v1/user/${currentUser._id}`,
-      avatarData,
-    );
+    const { data } = await updateData(`/v1/user/${user._id}`, avatarData);
 
     if (data?.success) {
-      setCurrentUser(data.data);
+      dispatch(
+        setUser({
+          user: data.data,
+        }),
+      );
       setResizeModal(false);
       setIsLoading(false);
     }

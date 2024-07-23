@@ -1,10 +1,14 @@
 import { isEqual } from "lodash";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 import getAddressId from "../../utils/getAddressId";
 import RadioInput from "./RadioInput";
 
@@ -13,18 +17,18 @@ export default function EditAddressInfo({ isOpen, onClose }) {
   const [isAddressEqual, setIsAddressEqual] = useState(true);
   const [presentAddress, setPresentAddress] = useState(null);
   const [permanentAddress, setPermanentAddress] = useState(null);
-
-  const { currentUser, setCurrentUser } = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
 
   useEffect(() => {
-    const presentAddress = currentUser?.presentAddress;
-    const permanentAddress = currentUser?.permanentAddress;
+    const presentAddress = user?.presentAddress;
+    const permanentAddress = user?.permanentAddress;
 
     presentAddress && setPresentAddress(presentAddress);
     permanentAddress && setPermanentAddress(permanentAddress);
 
     setIsAddressEqual(isEqual(presentAddress, permanentAddress));
-  }, [currentUser]);
+  }, [user]);
 
   const { updateData } = useUpdateData();
 
@@ -42,10 +46,14 @@ export default function EditAddressInfo({ isOpen, onClose }) {
     }
 
     // Update data
-    const { data } = await updateData(`/v1/user/${currentUser._id}`, address);
+    const { data } = await updateData(`/v1/user/${user._id}`, address);
 
     if (data?.success) {
-      setCurrentUser(data.data);
+      dispatch(
+        setUser({
+          user: data.data,
+        }),
+      );
       onClose();
     }
 

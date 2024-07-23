@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
 import { useUpdateData } from "../../../../api/api";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 
 export default function VehiclePhoto({ url, index, userId }) {
   const [deleteBtn, setDeleteBtn] = useState(-1);
   const [isLoading, setIsLoading] = useState(false);
-  const { currentUser, setCurrentUser } = useAuth();
   const { updateData } = useUpdateData();
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
 
   useEffect(() => {
     const hideDeleteBtn = () => {
@@ -25,15 +30,19 @@ export default function VehiclePhoto({ url, index, userId }) {
   const removePhoto = async () => {
     setIsLoading(true);
 
-    const vehiclePhotos = currentUser?.vehiclePhotos;
+    const vehiclePhotos = user?.vehiclePhotos;
     vehiclePhotos?.splice(index, 1);
 
-    const { data } = await updateData(`/v1/user/${currentUser._id}`, {
+    const { data } = await updateData(`/v1/user/${user._id}`, {
       vehiclePhotos,
     });
 
     if (data?.success) {
-      setCurrentUser(data.data);
+      dispatch(
+        setUser({
+          user: data.data,
+        }),
+      );
     }
 
     setIsLoading(false);
@@ -68,7 +77,7 @@ export default function VehiclePhoto({ url, index, userId }) {
       }`}
     >
       <DeleteButton />
-      {userId === currentUser?._id && (
+      {userId === user?._id && (
         <BsThreeDotsVertical
           className="absolute right-0 top-0"
           onClick={showDeleteBtn}

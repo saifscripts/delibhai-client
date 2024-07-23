@@ -3,11 +3,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 import { isNID } from "../../../../utils/isNID";
 
 const userSchema = yup.object({
@@ -39,8 +43,9 @@ const userSchema = yup.object({
 });
 
 export default function EditPersonalInfo({ isOpen, onClose }) {
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
   const [isLoading, setIsLoading] = useState(false);
-  const { currentUser, setCurrentUser } = useAuth();
   const { updateData } = useUpdateData();
 
   const {
@@ -51,12 +56,12 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      name: currentUser?.name,
-      fatherName: currentUser?.fatherName,
-      gender: currentUser?.gender,
-      bloodGroup: currentUser?.bloodGroup,
-      age: currentUser?.age,
-      nid: currentUser?.nid,
+      name: user?.name,
+      fatherName: user?.fatherName,
+      gender: user?.gender,
+      bloodGroup: user?.bloodGroup,
+      age: user?.age,
+      nid: user?.nid,
     },
   });
 
@@ -93,13 +98,14 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
     }
 
     // Update data
-    const { data, error } = await updateData(
-      `/v1/user/${currentUser._id}`,
-      userData,
-    );
+    const { data, error } = await updateData(`/v1/user/${user._id}`, userData);
 
     if (data?.success) {
-      setCurrentUser(data.data);
+      dispatch(
+        setUser({
+          user: data.data,
+        }),
+      );
       onClose();
     } else {
       setError("general", { message: error?.message });

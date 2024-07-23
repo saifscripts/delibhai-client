@@ -1,12 +1,16 @@
 /* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import vehicles from "../../../../data/vehicles";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 
 const vehicleTitles = vehicles.map(({ title }) => title);
 
@@ -22,7 +26,8 @@ const userSchema = yup.object({
 });
 
 export default function EditVehicleInfo({ isOpen, onClose }) {
-  const { currentUser, setCurrentUser } = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
   const { isLoading, updateData } = useUpdateData();
 
   const {
@@ -33,22 +38,23 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      vehicleType: currentUser?.vehicleType,
-      vehicleBrand: currentUser?.vehicleBrand,
-      vehicleModel: currentUser?.vehicleModel,
-      vehicleNumber: currentUser?.vehicleNumber,
-      vehicleName: currentUser?.vehicleName,
+      vehicleType: user?.vehicleType,
+      vehicleBrand: user?.vehicleBrand,
+      vehicleModel: user?.vehicleModel,
+      vehicleNumber: user?.vehicleNumber,
+      vehicleName: user?.vehicleName,
     },
   });
 
   const onSubmit = async (userData) => {
-    const { data, error } = await updateData(
-      `/v1/user/${currentUser._id}`,
-      userData,
-    );
+    const { data, error } = await updateData(`/v1/user/${user._id}`, userData);
 
     if (data?.success) {
-      setCurrentUser(data.data);
+      dispatch(
+        setUser({
+          user: data.data,
+        }),
+      );
       onClose();
     } else {
       setError("general", { message: error?.message });

@@ -1,10 +1,11 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useUpdateData } from "../api/api";
-import { useAuth } from "../features/Authentication/contexts/AuthContext";
+import { getAuthUser } from "../redux/features/auth/authSlice";
 
 const LocationTracker = () => {
   const { updateData } = useUpdateData();
-  const { currentUser } = useAuth();
+  const user = useSelector(getAuthUser);
 
   // Function to get the user's current location
   const getLocation = () => {
@@ -13,7 +14,7 @@ const LocationTracker = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
           const liveLocation = { latitude, longitude };
-          updateData(`/v1/user/location/${currentUser?._id}`, {
+          updateData(`/v1/user/location/${user?._id}`, {
             liveLocation,
           });
         },
@@ -30,7 +31,7 @@ const LocationTracker = () => {
 
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser]);
+  }, [user]);
 
   return <></>;
 };

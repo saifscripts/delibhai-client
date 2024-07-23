@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { updateData } from "../../../../lib/api/api";
-import { useAuth } from "../../../Authentication/contexts/AuthContext";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 import offDisabled from "./assets/off-disabled.svg";
 import off from "./assets/off.svg";
 import onDisabled from "./assets/on-disabled.svg";
@@ -9,25 +13,30 @@ import scheduledDisabled from "./assets/scheduled-disabled.svg";
 import scheduled from "./assets/scheduled.svg";
 
 export default function ServiceStatusButtons() {
-  const { currentUser, setCurrentUser } = useAuth();
   const [serviceStatus, setServiceStatus] = useState("scheduled");
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
 
   useEffect(() => {
-    setServiceStatus(currentUser?.serviceStatus || "scheduled");
-  }, [currentUser]);
+    setServiceStatus(user?.serviceStatus || "scheduled");
+  }, [user]);
 
   const handleServiceStatus = async (status) => {
     setServiceStatus(status);
 
-    const response = await updateData(`/v1/user/${currentUser._id}`, {
+    const response = await updateData(`/v1/user/${user._id}`, {
       serviceStatus: status,
     });
 
     if (response?.success) {
-      setCurrentUser(response.data);
+      dispatch(
+        setUser({
+          user: response.data,
+        }),
+      );
       //   setServiceStatus(response.data?.serviceStatus);
     } else {
-      setServiceStatus(currentUser?.serviceStatus || "scheduled");
+      setServiceStatus(user?.serviceStatus || "scheduled");
     }
   };
 

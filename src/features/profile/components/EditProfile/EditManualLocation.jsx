@@ -1,11 +1,15 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 
 const userSchema = yup.object({
   geoLocation: yup
@@ -22,8 +26,9 @@ const userSchema = yup.object({
 });
 
 export default function EditManualLocation({ isOpen, onClose }) {
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
   const [isLoading, setIsLoading] = useState(false);
-  const { currentUser, setCurrentUser } = useAuth();
   const { updateData } = useUpdateData();
 
   const {
@@ -64,12 +69,16 @@ export default function EditManualLocation({ isOpen, onClose }) {
     const manualLocation = { latitude, longitude };
 
     // Update data
-    const { data } = await updateData(`/v1/user/${currentUser._id}`, {
+    const { data } = await updateData(`/v1/user/${user._id}`, {
       manualLocation,
     });
 
     if (data?.success) {
-      setCurrentUser(data.data);
+      dispatch(
+        setUser({
+          user: data.data,
+        }),
+      );
       onClose();
     }
 

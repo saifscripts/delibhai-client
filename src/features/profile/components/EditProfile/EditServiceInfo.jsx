@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillPlusSquare } from "react-icons/ai";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 import getAddressId from "../../utils/getAddressId";
 import AddressModal from "./AddressModal";
 import ServiceTimes from "./ServiceTimes";
@@ -30,6 +34,8 @@ const userSchema = yup.object({
 });
 
 export default function EditServiceInfo({ isOpen, onClose }) {
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
   const [isLoading, setIsLoading] = useState(false);
   const [serviceAddress, setServiceAddress] = useState([]);
   const [address, setAddress] = useState(null);
@@ -39,18 +45,17 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   const [is24HourServiceTime, setIs24HourServiceTime] = useState(false);
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
 
-  const { currentUser, setCurrentUser } = useAuth();
   const { updateData } = useUpdateData();
 
   useEffect(() => {
-    const mainStation = currentUser?.mainStation;
-    const serviceAddress = currentUser?.serviceAddress;
-    const serviceTimes = currentUser?.serviceTimes;
+    const mainStation = user?.mainStation;
+    const serviceAddress = user?.serviceAddress;
+    const serviceTimes = user?.serviceTimes;
 
     mainStation && setMainStationAddress(mainStation);
     serviceAddress && setServiceAddress(serviceAddress);
     serviceTimes && setServiceTimes(serviceTimes);
-  }, [currentUser]);
+  }, [user]);
 
   const {
     register,
@@ -60,8 +65,8 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      serviceUsage: currentUser?.serviceUsage,
-      serviceType: currentUser?.serviceType,
+      serviceUsage: user?.serviceUsage,
+      serviceType: user?.serviceType,
     },
   });
 
@@ -81,13 +86,14 @@ export default function EditServiceInfo({ isOpen, onClose }) {
     }
 
     // Update data
-    const { data, error } = await updateData(
-      `/v1/user/${currentUser._id}`,
-      userData,
-    );
+    const { data, error } = await updateData(`/v1/user/${user._id}`, userData);
 
     if (data?.success) {
-      setCurrentUser(data.data);
+      dispatch(
+        setUser({
+          user: data.data,
+        }),
+      );
       onClose();
     } else {
       setError("general", { message: error?.message });

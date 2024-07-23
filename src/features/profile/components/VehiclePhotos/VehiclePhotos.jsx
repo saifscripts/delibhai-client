@@ -1,8 +1,12 @@
 import axios from "axios";
 import { useContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useUpdateData } from "../../../../api/api";
 import camera from "../../../../assets/icons/camera.svg";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 import UserContext from "../../contexts/UserContext";
 import VehiclePhoto from "./VehiclePhoto";
 
@@ -10,15 +14,16 @@ export default function VehiclePhotos() {
   const [isLoading, setIsLoading] = useState(false);
   const { userInfo } = useContext(UserContext);
   const { updateData } = useUpdateData();
-  const { currentUser, setCurrentUser } = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
 
     // clone vehicle photo from the state
     let _vehiclePhotos = [];
-    if (currentUser?.vehiclePhotos) {
-      _vehiclePhotos = [...currentUser.vehiclePhotos];
+    if (user?.vehiclePhotos) {
+      _vehiclePhotos = [...user.vehiclePhotos];
     }
 
     // create formData from the image
@@ -41,13 +46,17 @@ export default function VehiclePhotos() {
     }
 
     // update the image url in database
-    const { data } = await updateData(`/v1/user/${currentUser._id}`, {
+    const { data } = await updateData(`/v1/user/${user._id}`, {
       vehiclePhotos: [..._vehiclePhotos, response.data.data.url],
     });
 
     // update current user state if database is updated
     if (data?.success) {
-      setCurrentUser(data.data);
+      dispatch(
+        setUser({
+          user: data.data,
+        }),
+      );
     }
 
     setIsLoading(false);
@@ -64,24 +73,23 @@ export default function VehiclePhotos() {
             userId={userInfo?._id}
           />
         ))}
-        {userInfo?.vehiclePhotos?.length < 4 &&
-          userInfo?._id === currentUser?._id && (
-            <form
-              className={`relative z-10 flex aspect-square w-28 flex-shrink-0 flex-col items-center justify-center rounded-lg bg-accent ${
-                isLoading && "opacity-30"
-              }`}
-            >
-              <img src={camera} alt="Camera" />
-              <input
-                type="file"
-                accept="image/*"
-                disabled={isLoading}
-                className="absolute bottom-0 left-0 right-0 top-0 z-20 opacity-0"
-                onChange={handleSubmit}
-                onClick={(e) => (e.target.value = null)} // reset value
-              />
-            </form>
-          )}
+        {userInfo?.vehiclePhotos?.length < 4 && userInfo?._id === user?._id && (
+          <form
+            className={`relative z-10 flex aspect-square w-28 flex-shrink-0 flex-col items-center justify-center rounded-lg bg-accent ${
+              isLoading && "opacity-30"
+            }`}
+          >
+            <img src={camera} alt="Camera" />
+            <input
+              type="file"
+              accept="image/*"
+              disabled={isLoading}
+              className="absolute bottom-0 left-0 right-0 top-0 z-20 opacity-0"
+              onChange={handleSubmit}
+              onClick={(e) => (e.target.value = null)} // reset value
+            />
+          </form>
+        )}
       </div>
     </div>
   );

@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useFetchData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import { useVerifyRiderOTPMutation } from "../../../redux/features/auth/authApi";
-import { useAuth } from "../contexts/AuthContext";
+import { setUser } from "../../../redux/features/auth/authSlice";
 import { SubmitModal, Timer } from "../index";
 
 function OTPVerification() {
@@ -14,7 +15,7 @@ function OTPVerification() {
   const [timerRunning, setTimerRunning] = useState(true);
   const [OTP, setOTP] = useState(["", "", "", "", "", ""]);
   const [error, setError] = useState("");
-  const { setCurrentUser } = useAuth();
+  const dispatch = useDispatch();
 
   const inputRefs = [
     useRef(null),
@@ -81,11 +82,14 @@ function OTPVerification() {
     });
 
     if (result?.data?.success) {
+      dispatch(
+        setUser({
+          user: result?.data?.data?.user,
+          token: result?.data?.data?.accessToken,
+        }),
+      );
       setError("");
       setIsSubmitModalOpen(true);
-      const token = result?.data?.data?.token;
-      localStorage.setItem("authToken", token);
-      setCurrentUser(result?.data?.data?.user);
     } else {
       console.log(result?.error?.data);
       setError(result?.error?.data?.message);

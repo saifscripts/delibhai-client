@@ -1,13 +1,16 @@
-/* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import isEmail from "validator/lib/isEmail";
 import isURL from "validator/lib/isURL";
 import * as yup from "yup";
 import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
 import Modal from "../../../../layouts/Modal";
+import {
+  getAuthUser,
+  setUser,
+} from "../../../../redux/features/auth/authSlice";
 import { isMobilePhone } from "../../../../utils/isMobilePhone";
 
 const userSchema = yup.object({
@@ -31,7 +34,8 @@ const userSchema = yup.object({
 });
 
 export default function EditContactInfo({ isOpen, onClose }) {
-  const { currentUser, setCurrentUser } = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector(getAuthUser);
   const { isLoading, updateData } = useUpdateData();
 
   const {
@@ -42,21 +46,22 @@ export default function EditContactInfo({ isOpen, onClose }) {
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      mobile: currentUser?.mobile,
-      altMobile: currentUser?.altMobile,
-      email: currentUser?.email,
-      facebookURL: currentUser?.facebookURL,
+      mobile: user?.mobile,
+      altMobile: user?.altMobile,
+      email: user?.email,
+      facebookURL: user?.facebookURL,
     },
   });
 
   const onSubmit = async (userData) => {
-    const { data, error } = await updateData(
-      `/v1/user/${currentUser._id}`,
-      userData,
-    );
+    const { data, error } = await updateData(`/v1/user/${user._id}`, userData);
 
     if (data?.success) {
-      setCurrentUser(data.data);
+      dispatch(
+        setUser({
+          user: data.data,
+        }),
+      );
       onClose();
     } else {
       setError("general", { message: error?.message });
