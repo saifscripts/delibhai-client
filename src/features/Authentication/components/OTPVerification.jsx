@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useFetchData, usePostData } from "../../../api/api";
+import { useFetchData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
+import { useVerifyRiderOTPMutation } from "../../../redux/features/auth/authApi";
 import { useAuth } from "../contexts/AuthContext";
 import { SubmitModal, Timer } from "../index";
 
@@ -13,7 +14,7 @@ function OTPVerification() {
   const [timerRunning, setTimerRunning] = useState(true);
   const [OTP, setOTP] = useState(["", "", "", "", "", ""]);
   const [error, setError] = useState("");
-  const {setCurrentUser} = useAuth()
+  const { setCurrentUser } = useAuth();
 
   const inputRefs = [
     useRef(null),
@@ -24,7 +25,7 @@ function OTPVerification() {
     useRef(null),
   ];
 
-  const { isLoading, postData } = usePostData();
+  const [verifyRiderOTP, { isLoading }] = useVerifyRiderOTPMutation();
   const { fetchData } = useFetchData();
 
   const handleChange = (e, index) => {
@@ -74,21 +75,27 @@ function OTPVerification() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await postData("/v1/user/verify-otp", {
-      id: state.id,
+    const result = await verifyRiderOTP({
+      _id: state.id,
       otp: OTP.join(""),
     });
 
-    if (data?.success) {
+    if (result?.data?.success) {
       setError("");
       setIsSubmitModalOpen(true);
-      const { token } = data.data;
+      const token = result?.data?.data?.token;
       localStorage.setItem("authToken", token);
-      setCurrentUser(data?.data?.user);
+      setCurrentUser(result?.data?.data?.user);
     } else {
-      setError(error?.message);
+      console.log(result?.error?.data);
+      setError(result?.error?.data?.message);
     }
   };
+
+  // autofill otp (for testing purpose) --- delete this later
+  useEffect(() => {
+    setOTP(state?.otp?.split(""));
+  }, [state.otp]);
 
   return (
     <>
@@ -150,4 +157,3 @@ function OTPVerification() {
 }
 
 export { OTPVerification };
-

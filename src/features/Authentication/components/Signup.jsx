@@ -6,8 +6,8 @@ import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
+import { useSignupRiderMutation } from "../../../redux/features/auth/authApi";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
-import { useAuth } from "../contexts/AuthContext";
 
 const userSchema = yup.object({
   name: yup
@@ -23,10 +23,10 @@ const userSchema = yup.object({
       ["পুরুষ", "মহিলা", "অন্যান্য"],
       "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য.",
     ),
-  mobile: yup
+  phone: yup
     .string()
     .trim()
-    .required("Mobile number is required.")
+    .required("Phone number is required.")
     .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
   password: yup
     .string()
@@ -57,37 +57,32 @@ function Signup() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setError,
   } = useForm({
     resolver: yupResolver(userSchema),
   });
 
-  const { signup, isLoading } = useAuth();
+  const [signupRider] = useSignupRiderMutation();
 
   const onSubmit = async (userData) => {
-    const { data, error } = await signup(userData);
+    const result = await signupRider(userData);
 
-    if (data?.success) {
+    console.log(result);
+
+    if (result?.data?.success) {
       return navigate("/otp-verification", {
-        state: { id: data.data.user._id },
+        state: {
+          id: result?.data?.data?._id,
+          otp: result?.data?.data?.otp,
+        },
       });
     }
 
-    if (error?.error?.keyPattern?.mobile) {
-      setError("mobile", {
-        message: "A user already exist with this mobile number.",
+    if (result?.error?.status === 409) {
+      setError("phone", {
+        message: "A user already exists with this mobile number!",
       });
-    }
-
-    if (error?.code === "duplicateEmail") {
-      setError("email", {
-        message: error.message,
-      });
-    }
-
-    if (error?.name === "AxiosError") {
-      setError("general", { message: error?.message });
     }
   };
 
@@ -104,7 +99,7 @@ function Signup() {
             {...register("name")}
             type="text"
             placeholder="পুরো নাম লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.name?.message}</p>
@@ -114,7 +109,7 @@ function Signup() {
           <label className="font-bold">লিঙ্গ</label>
           <select
             {...register("gender")}
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary bg-transparent py-3"
           >
             <option value="পুরুষ">পুরুষ</option>
@@ -127,13 +122,13 @@ function Signup() {
         <div className="mb-1 mt-4">
           <label className="font-bold">মোবাইল নাম্বার</label>
           <input
-            {...register("mobile")}
+            {...register("phone")}
             type="text"
             placeholder="মোবাইল নাম্বার লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.mobile?.message}</p>
+          <p className="text-red-400">{errors.phone?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -142,7 +137,7 @@ function Signup() {
             {...register("password")}
             type="password"
             placeholder="পাসওয়ার্ড দিন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.password?.message}</p>
@@ -154,7 +149,7 @@ function Signup() {
             {...register("confirmPassword")}
             type="password"
             placeholder="পুনরায় পাসওয়ার্ড দিন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.confirmPassword?.message}</p>
@@ -162,7 +157,7 @@ function Signup() {
 
         <p className="text-red-400">{errors.general?.message}</p>
 
-        <Submit disabled={isLoading} value="ওটিপি কোড পাঠান" />
+        <Submit disabled={isSubmitting} value="ওটিপি কোড পাঠান" />
       </form>
     </MiniContainer>
   );
