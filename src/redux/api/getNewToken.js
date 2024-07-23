@@ -1,4 +1,4 @@
-const getRefreshToken = async () => {
+const getNewToken = async () => {
   const res = await fetch(
     `${import.meta.env.VITE_BASE_URL2}/api/v1/auth/refresh-token`,
     {
@@ -11,4 +11,4 @@ const getRefreshToken = async () => {
   return data?.data?.accessToken;
 };
 
-export default getRefreshToken;
+export default getNewToken;

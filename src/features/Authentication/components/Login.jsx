@@ -1,11 +1,13 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import { useLoginMutation } from "../../../redux/features/auth/authApi";
+import { setUser } from "../../../redux/features/auth/authSlice";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
 
 const credentialSchema = yup.object({
@@ -30,13 +32,18 @@ function Login() {
   });
 
   const [login] = useLoginMutation();
+  const dispatch = useDispatch();
 
   const onSubmit = async (credentials) => {
     const result = await login(credentials);
 
-    console.log(result);
-
     if (result?.data?.success) {
+      dispatch(
+        setUser({
+          user: result?.data?.data?.user,
+          token: result?.data?.data?.accessToken,
+        }),
+      );
       return navigate(`/profile/${result?.data?.data?.user?._id}`);
     }
 
