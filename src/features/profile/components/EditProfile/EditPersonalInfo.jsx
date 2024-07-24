@@ -1,17 +1,15 @@
-/* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
-import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import Modal from "../../../../layouts/Modal";
 import {
   getAuthUser,
   setUser,
 } from "../../../../redux/features/auth/authSlice";
+import { useUpdateUserMutation } from "../../../../redux/features/user/userApi";
 import { isNID } from "../../../../utils/isNID";
 
 const userSchema = yup.object({
@@ -45,34 +43,24 @@ const userSchema = yup.object({
 export default function EditPersonalInfo({ isOpen, onClose }) {
   const dispatch = useDispatch();
   const user = useSelector(getAuthUser);
-  const [isLoading, setIsLoading] = useState(false);
-  const { updateData } = useUpdateData();
+  const [updateUser] = useUpdateUserMutation();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setError,
   } = useForm({
     resolver: yupResolver(userSchema),
-    defaultValues: {
-      name: user?.name,
-      fatherName: user?.fatherName,
-      gender: user?.gender,
-      bloodGroup: user?.bloodGroup,
-      age: user?.age,
-      nid: user?.nid,
-    },
+    defaultValues: user,
   });
 
-  const onSubmit = async (userData) => {
-    setIsLoading(true);
-
+  const onSubmit = async (data) => {
     // If user select nid image
-    if (userData.nidURL[0]) {
+    if (data.nidURL[0]) {
       // Create formData and append the image file
       const formData = new FormData();
-      formData.append("image", userData.nidURL[0]);
+      formData.append("image", data.nidURL[0]);
 
       // Upload the image to the imagebb
       const imgbbResult = await axios.post(
@@ -84,34 +72,31 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
 
       // If image upload is not successful, setError message and return
       if (!imgbbResult?.data?.success) {
-        setIsLoading(false);
         return setError("general", {
           message: imgbbResult.data.error.message || "Something went wrong",
         });
       }
 
       // If image upload is successful, set the url as nidURL field value
-      userData.nidURL = imgbbResult.data.data.url;
+      data.nidURL = imgbbResult.data.data.url;
     } else {
       // If user doesn't select any image to upload, set nidURL = undefined
-      userData.nidURL = undefined;
+      data.nidURL = undefined;
     }
 
     // Update data
-    const { data, error } = await updateData(`/v1/user/${user._id}`, userData);
+    const result = await updateUser(data);
 
-    if (data?.success) {
+    if (result?.data?.success) {
       dispatch(
         setUser({
-          user: data.data,
+          user: result?.data?.data,
         }),
       );
       onClose();
     } else {
-      setError("general", { message: error?.message });
+      setError("general", { message: result?.error?.data?.message });
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -128,7 +113,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             {...register("name")}
             type="text"
             placeholder="নিজের নাম লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.name?.message}</p>
@@ -140,7 +125,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             {...register("fatherName")}
             type="text"
             placeholder="পিতার নাম লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.fatherName?.message}</p>
@@ -150,7 +135,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
           <label className="font-bold">লিঙ্গ</label>
           <select
             {...register("gender")}
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary bg-transparent py-3"
           >
             <option value="পুরুষ">পুরুষ</option>
@@ -164,7 +149,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
           <label className="font-bold">রক্তের গ্রুপ</label>
           <select
             {...register("bloodGroup")}
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary bg-transparent py-3"
           >
             <option value="এ+">এ+</option>
@@ -185,7 +170,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             {...register("age")}
             type="number"
             placeholder="বয়স লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.age?.message}</p>
@@ -197,7 +182,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             {...register("nid")}
             type="number"
             placeholder="জন্মনিবন্ধন/NID নম্বর লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.nid?.message}</p>
@@ -208,7 +193,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
           <input
             {...register("nidURL")}
             type="file"
-            disabled={isLoading}
+            disabled={isSubmitting}
             accept="image/*"
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
@@ -217,7 +202,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
 
         <p className="text-red-400">{errors.general?.message}</p>
 
-        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isSubmitting} type="submit" value="সংরক্ষণ করুন" />
       </form>
     </Modal>
   );
