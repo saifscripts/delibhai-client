@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateData } from "../../../../lib/api/api";
 import {
   getAuthUser,
   setUser,
 } from "../../../../redux/features/auth/authSlice";
+import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import offDisabled from "./assets/off-disabled.svg";
 import off from "./assets/off.svg";
 import onDisabled from "./assets/on-disabled.svg";
@@ -16,6 +16,7 @@ export default function ServiceStatusButtons() {
   const [serviceStatus, setServiceStatus] = useState("scheduled");
   const dispatch = useDispatch();
   const user = useSelector(getAuthUser);
+  const [updateRider] = useUpdateRiderMutation();
 
   useEffect(() => {
     setServiceStatus(user?.serviceStatus || "scheduled");
@@ -24,14 +25,14 @@ export default function ServiceStatusButtons() {
   const handleServiceStatus = async (status) => {
     setServiceStatus(status);
 
-    const response = await updateData(`/v1/user/${user._id}`, {
+    const result = await updateRider({
       serviceStatus: status,
     });
 
-    if (response?.success) {
+    if (result?.data?.success) {
       dispatch(
         setUser({
-          user: response.data,
+          user: result?.data?.data,
         }),
       );
       //   setServiceStatus(response.data?.serviceStatus);

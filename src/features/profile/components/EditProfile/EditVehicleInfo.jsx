@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
-import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import vehicles from "../../../../data/vehicles";
 import Modal from "../../../../layouts/Modal";
@@ -11,6 +10,7 @@ import {
   getAuthUser,
   setUser,
 } from "../../../../redux/features/auth/authSlice";
+import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 
 const vehicleTitles = vehicles.map(({ title }) => title);
 
@@ -28,36 +28,36 @@ const userSchema = yup.object({
 export default function EditVehicleInfo({ isOpen, onClose }) {
   const dispatch = useDispatch();
   const user = useSelector(getAuthUser);
-  const { isLoading, updateData } = useUpdateData();
+  const [updateRider] = useUpdateRiderMutation();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setError,
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      vehicleType: user?.vehicleType,
-      vehicleBrand: user?.vehicleBrand,
-      vehicleModel: user?.vehicleModel,
-      vehicleNumber: user?.vehicleNumber,
-      vehicleName: user?.vehicleName,
+      vehicleType: user.vehicleType,
+      vehicleBrand: user.vehicleBrand,
+      vehicleModel: user.vehicleModel,
+      vehicleNumber: user.vehicleNumber,
+      vehicleName: user.vehicleName,
     },
   });
 
-  const onSubmit = async (userData) => {
-    const { data, error } = await updateData(`/v1/user/${user._id}`, userData);
+  const onSubmit = async (data) => {
+    const result = await updateRider(data);
 
-    if (data?.success) {
+    if (result?.data?.success) {
       dispatch(
         setUser({
-          user: data.data,
+          user: result?.data?.data,
         }),
       );
       onClose();
     } else {
-      setError("general", { message: error?.message });
+      setError("general", { message: result?.error?.data?.message });
     }
   };
 
@@ -73,7 +73,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
           <label className="font-bold">গাড়ির ধরণ</label>
           <select
             {...register("vehicleType")}
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary bg-transparent py-3"
           >
             <option>গাড়ির ধরণ নির্বাচন করুন</option>
@@ -93,7 +93,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             {...register("vehicleBrand")}
             type="text"
             placeholder="গাড়ির ব্র্যান্ড লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.vehicleBrand?.message}</p>
@@ -105,7 +105,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             {...register("vehicleModel")}
             type="text"
             placeholder="গাড়ির মডেল লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.vehicleModel?.message}</p>
@@ -117,7 +117,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             {...register("vehicleNumber")}
             type="text"
             placeholder="গাড়ির নম্বর লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.vehicleNumber?.message}</p>
@@ -129,7 +129,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             {...register("vehicleName")}
             type="text"
             placeholder="গাড়ির নাম লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.vehicleName?.message}</p>
@@ -137,7 +137,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
 
         <p className="text-red-400">{errors.general?.message}</p>
 
-        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isSubmitting} type="submit" value="সংরক্ষণ করুন" />
       </form>
     </Modal>
   );

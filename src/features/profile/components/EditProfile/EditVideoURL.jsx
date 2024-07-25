@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import isURL from "validator/lib/isURL";
 import * as yup from "yup";
-import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import Modal from "../../../../layouts/Modal";
 import {
   getAuthUser,
   setUser,
 } from "../../../../redux/features/auth/authSlice";
+import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 
 const userSchema = yup.object({
   videoURL: yup
@@ -20,12 +20,12 @@ const userSchema = yup.object({
 export default function EditVideoURL({ isOpen, onClose }) {
   const dispatch = useDispatch();
   const user = useSelector(getAuthUser);
-  const { isLoading, updateData } = useUpdateData();
+  const [updateRider] = useUpdateRiderMutation();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setError,
   } = useForm({
     resolver: yupResolver(userSchema),
@@ -34,18 +34,18 @@ export default function EditVideoURL({ isOpen, onClose }) {
     },
   });
 
-  const onSubmit = async (userData) => {
-    const { data, error } = await updateData(`/v1/user/${user._id}`, userData);
+  const onSubmit = async (data) => {
+    const result = await updateRider(data);
 
-    if (data?.success) {
+    if (result?.data?.success) {
       dispatch(
         setUser({
-          user: data.data,
+          user: result?.data?.data,
         }),
       );
       onClose();
     } else {
-      setError("general", { message: error?.message });
+      setError("general", { message: result?.error?.data?.message });
     }
   };
 
@@ -63,7 +63,7 @@ export default function EditVideoURL({ isOpen, onClose }) {
             {...register("videoURL")}
             type="text"
             placeholder="ইউটিউব ভিডিও লিংক লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.videoURL?.message}</p>
@@ -71,7 +71,7 @@ export default function EditVideoURL({ isOpen, onClose }) {
 
         <p className="text-red-400">{errors.general?.message}</p>
 
-        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isSubmitting} type="submit" value="সংরক্ষণ করুন" />
       </form>
     </Modal>
   );

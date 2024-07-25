@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { useUpdateData } from "../../../../api/api";
 import {
   getAuthUser,
   setUser,
 } from "../../../../redux/features/auth/authSlice";
+import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 
 export default function VehiclePhoto({ url, index, userId }) {
   const [deleteBtn, setDeleteBtn] = useState(-1);
   const [isLoading, setIsLoading] = useState(false);
-  const { updateData } = useUpdateData();
   const dispatch = useDispatch();
   const user = useSelector(getAuthUser);
+  const [updateRider] = useUpdateRiderMutation();
 
   useEffect(() => {
     const hideDeleteBtn = () => {
@@ -30,17 +30,18 @@ export default function VehiclePhoto({ url, index, userId }) {
   const removePhoto = async () => {
     setIsLoading(true);
 
-    const vehiclePhotos = user?.vehiclePhotos;
-    vehiclePhotos?.splice(index, 1);
+    const vehiclePhotos = user?.vehiclePhotos || [];
+    const updatedVehiclePhotos = [...vehiclePhotos];
+    updatedVehiclePhotos?.splice(index, 1);
 
-    const { data } = await updateData(`/v1/user/${user._id}`, {
-      vehiclePhotos,
+    const result = await updateRider({
+      vehiclePhotos: updatedVehiclePhotos,
     });
 
-    if (data?.success) {
+    if (result?.data?.success) {
       dispatch(
         setUser({
-          user: data.data,
+          user: result?.data?.data,
         }),
       );
     }

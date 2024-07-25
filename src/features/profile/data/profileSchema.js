@@ -9,8 +9,8 @@ import facebook from "../assets/icons/facebook.svg";
 import father from "../assets/icons/father.svg";
 import marker from "../assets/icons/marker.svg";
 import phone from "../assets/icons/phone.svg";
-import serviceAddress from "../assets/icons/service-area.svg";
-import serviceType from "../assets/icons/service-type.svg";
+import serviceArea from "../assets/icons/service-area.svg";
+import rentType from "../assets/icons/service-type.svg";
 import gender from "../assets/icons/sex.svg";
 import station from "../assets/icons/station.svg";
 import steering from "../assets/icons/steering.svg";
@@ -65,12 +65,12 @@ const profileSchema = {
       editModal: "contact",
       fields: [
         {
-          dataKey: "mobile",
+          dataKey: "contactNo1",
           label: "মোবাইল নম্বর",
           icon: phone,
         },
         {
-          dataKey: "altMobile",
+          dataKey: "contactNo2",
           label: "বিকল্প মোবাইল নম্বর",
           icon: phone,
         },
@@ -149,7 +149,7 @@ const profileSchema = {
           icon: marker,
         },
         {
-          dataKey: "ownerMobile",
+          dataKey: "ownerContactNo",
           label: "মোবাইল",
           icon: phone,
         },
@@ -175,14 +175,14 @@ const profileSchema = {
       editModal: "service",
       fields: [
         {
-          dataKey: "serviceUsage",
+          dataKey: "serviceType",
           label: "গাড়ির ব্যবহার",
           icon: steering,
         },
         {
-          dataKey: "serviceType",
+          dataKey: "rentType",
           label: "গাড়ির সেবা",
-          icon: serviceType,
+          icon: rentType,
         },
         {
           dataKey: "mainStation",
@@ -191,13 +191,13 @@ const profileSchema = {
           icon: station,
         },
         {
-          dataKey: "serviceAddress",
+          dataKey: "serviceArea",
           dataModifier: getVillagesTitle,
           label: "সার্ভিস প্রদানের এলাকা সমূহ",
-          icon: serviceAddress,
+          icon: serviceArea,
         },
         {
-          dataKey: "serviceTimes",
+          dataKey: "serviceTimeSlots",
           dataModifier: getServiceTimes,
           label: "সার্ভিস প্রদানের সময়",
           icon: clock,

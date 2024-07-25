@@ -2,7 +2,6 @@ import { Fragment, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { RouterProvider } from "react-router-dom";
-import LocationTracker from "./components/LocationTracker.jsx";
 import { useGetMeQuery } from "./redux/features/auth/authApi.js";
 import { setUser } from "./redux/features/auth/authSlice.js";
 import router from "./router.jsx";
@@ -20,7 +19,7 @@ export default function App() {
     <Fragment>
       <RouterProvider router={router} />
       <Toaster />
-      <LocationTracker />
+      {/* <LocationTracker /> */}
     </Fragment>
   );
 }

@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
+import { isEmpty } from "lodash";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import isEmail from "validator/lib/isEmail";
 import * as yup from "yup";
-import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
 import Modal from "../../../../layouts/Modal";
@@ -13,6 +13,7 @@ import {
   getAuthUser,
   setUser,
 } from "../../../../redux/features/auth/authSlice";
+import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import { isMobilePhone } from "../../../../utils/isMobilePhone";
 import getAddressId from "../../utils/getAddressId";
 
@@ -21,7 +22,7 @@ const userSchema = yup.object({
     .string()
     .trim()
     .min(3, "Name must be at least 3 characters long."),
-  ownerMobile: yup
+  ownerContactNo: yup
     .string()
     .trim()
     .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
@@ -35,10 +36,8 @@ const userSchema = yup.object({
 export default function EditOwnerInfo({ isOpen, onClose }) {
   const dispatch = useDispatch();
   const user = useSelector(getAuthUser);
-  const [isLoading, setIsLoading] = useState(false);
   const [ownerAddress, setOwnerAddress] = useState(null);
-
-  const { updateData } = useUpdateData();
+  const [updateRider] = useUpdateRiderMutation();
 
   useEffect(() => {
     const ownerAddress = user?.ownerAddress;
@@ -48,36 +47,34 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setError,
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
       ownerName: user?.ownerName,
-      ownerMobile: user?.ownerMobile,
+      ownerContactNo: user?.ownerContactNo,
       ownerEmail: user?.ownerEmail,
     },
   });
 
-  const onSubmit = async (userData) => {
-    setIsLoading(true);
-    userData.ownerAddress = getAddressId(ownerAddress);
+  const onSubmit = async (data) => {
+    const address = getAddressId(ownerAddress);
+    data.ownerAddress = isEmpty(address) ? undefined : address;
 
     // Update data
-    const { data, error } = await updateData(`/v1/user/${user._id}`, userData);
+    const result = await updateRider(data);
 
-    if (data?.success) {
+    if (result?.data?.success) {
       dispatch(
         setUser({
-          user: data.data,
+          user: result?.data?.data,
         }),
       );
       onClose();
     } else {
-      setError("general", { message: error?.message });
+      setError("general", { message: result?.error?.data?.message });
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -94,7 +91,7 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
             {...register("ownerName")}
             type="text"
             placeholder="কোম্পানি/মালিকের নাম লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.ownerName?.message}</p>
@@ -111,13 +108,13 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
         <div className="mb-1 mt-4">
           <label className="font-bold">মোবাইল</label>
           <input
-            {...register("ownerMobile")}
+            {...register("ownerContactNo")}
             type="text"
             placeholder="মোবাইল নাম্বার লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.ownerMobile?.message}</p>
+          <p className="text-red-400">{errors.ownerContactNo?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -126,13 +123,13 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
             {...register("ownerEmail")}
             type="text"
             placeholder="ই-মেইল লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.ownerEmail?.message}</p>
         </div>
 
-        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isSubmitting} type="submit" value="সংরক্ষণ করুন" />
       </form>
     </Modal>
   );

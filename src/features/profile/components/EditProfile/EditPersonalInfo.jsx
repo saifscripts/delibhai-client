@@ -52,7 +52,13 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
     setError,
   } = useForm({
     resolver: yupResolver(userSchema),
-    defaultValues: user,
+    defaultValues: {
+      name: user?.name,
+      fatherName: user?.fatherName,
+      gender: user?.gender,
+      bloodGroup: user?.bloodGroup,
+      nid: user?.nid,
+    },
   });
 
   const onSubmit = async (data) => {

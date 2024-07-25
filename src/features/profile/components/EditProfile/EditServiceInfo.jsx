@@ -1,12 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { cloneDeep } from "lodash";
+import { cloneDeep, isEmpty } from "lodash";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillPlusSquare } from "react-icons/ai";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
-import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
 import Modal from "../../../../layouts/Modal";
@@ -14,29 +13,29 @@ import {
   getAuthUser,
   setUser,
 } from "../../../../redux/features/auth/authSlice";
+import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import getAddressId from "../../utils/getAddressId";
 import AddressModal from "./AddressModal";
 import ServiceTimes from "./ServiceTimes";
 
 const userSchema = yup.object({
-  serviceUsage: yup
-    .string()
-    .oneOf(
-      ["ব্যক্তিগত", "ভাড়ায় চালিত"],
-      "${value} is an invalid service usage.",
-    ),
   serviceType: yup
     .string()
     .oneOf(
-      ["লোকাল ভাড়া", "রিজার্ভ ভাড়া", "লোকাল ও রিজার্ভ ভাড়া", "কন্টাক্ট ভাড়া"],
+      ["ব্যক্তিগত", "ভাড়ায় চালিত"],
       "${value} is an invalid service type.",
+    ),
+  rentType: yup
+    .string()
+    .oneOf(
+      ["লোকাল ভাড়া", "রিজার্ভ ভাড়া", "লোকাল ও রিজার্ভ ভাড়া", "কন্টাক্ট ভাড়া"],
+      "${value} is an invalid rent type.",
     ),
 });
 
 export default function EditServiceInfo({ isOpen, onClose }) {
   const dispatch = useDispatch();
   const user = useSelector(getAuthUser);
-  const [isLoading, setIsLoading] = useState(false);
   const [serviceAddress, setServiceAddress] = useState([]);
   const [address, setAddress] = useState(null);
   const [mainStationAddress, setMainStationAddress] = useState(null);
@@ -44,8 +43,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   const [serviceTimes, setServiceTimes] = useState([]);
   const [is24HourServiceTime, setIs24HourServiceTime] = useState(false);
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
-
-  const { updateData } = useUpdateData();
+  const [updateRider] = useUpdateRiderMutation();
 
   useEffect(() => {
     const mainStation = user?.mainStation;
@@ -60,46 +58,45 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setError,
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      serviceUsage: user?.serviceUsage,
       serviceType: user?.serviceType,
+      rentType: user?.rentType,
     },
   });
 
-  const onSubmit = async (userData) => {
-    setIsLoading(true);
+  const onSubmit = async (data) => {
+    const address = getAddressId(mainStationAddress);
+    data.mainStation = isEmpty(address) ? undefined : address;
+    // data.mainStation = getAddressId(mainStationAddress);
 
-    userData.mainStation = getAddressId(mainStationAddress);
-
-    userData.serviceAddress = serviceAddress?.map((address) =>
+    data.serviceAddress = serviceAddress?.map((address) =>
       getAddressId(address),
     );
 
     if (is24HourServiceTime) {
-      userData.serviceTimes = [{ start: "00:00", end: "23:59" }];
+      data.serviceTimes = [{ start: "00:00", end: "23:59" }];
     } else {
-      userData.serviceTimes = serviceTimes;
+      data.serviceTimes = serviceTimes;
     }
 
     // Update data
-    const { data, error } = await updateData(`/v1/user/${user._id}`, userData);
+    const result = await updateRider(data);
 
-    if (data?.success) {
+    if (result?.data?.success) {
       dispatch(
         setUser({
-          user: data.data,
+          user: result?.data?.data,
         }),
       );
       onClose();
     } else {
-      setError("general", { message: error?.message });
+      console.log(result?.error?.data);
+      setError("general", { message: result?.error?.data?.message });
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -108,21 +105,21 @@ export default function EditServiceInfo({ isOpen, onClose }) {
         <div className="mb-1 mt-4">
           <label className="font-bold">গাড়ির ব্যবহার</label>
           <select
-            {...register("serviceUsage")}
-            disabled={isLoading}
+            {...register("serviceType")}
+            disabled={isSubmitting}
             className="w-full border-b border-primary bg-transparent py-3"
           >
             <option value="ব্যক্তিগত">ব্যক্তিগত</option>
             <option value="ভাড়ায় চালিত">ভাড়ায় চালিত</option>
           </select>
-          <p className="text-red-400">{errors.serviceUsage?.message}</p>
+          <p className="text-red-400">{errors.serviceType?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
           <label className="font-bold">গাড়ির সেবা</label>
           <select
-            {...register("serviceType")}
-            disabled={isLoading}
+            {...register("rentType")}
+            disabled={isSubmitting}
             className="w-full border-b border-primary bg-transparent py-3"
           >
             <option value="লোকাল ভাড়া">লোকাল ভাড়া</option>
@@ -130,7 +127,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
             <option value="লোকাল ও রিজার্ভ ভাড়া">লোকাল ও রিজার্ভ ভাড়া</option>
             <option value="কন্টাক্ট ভাড়া">কন্টাক্ট ভাড়া</option>
           </select>
-          <p className="text-red-400">{errors.serviceType?.message}</p>
+          <p className="text-red-400">{errors.rentType?.message}</p>
         </div>
 
         <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
@@ -216,7 +213,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
 
         <p className="text-red-400">{errors.general?.message}</p>
 
-        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isSubmitting} type="submit" value="সংরক্ষণ করুন" />
       </form>
 
       <AddressModal
