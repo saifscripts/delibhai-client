@@ -13,7 +13,7 @@ export default function SearchResults() {
 
   useEffect(() => {
     const _searchParams = Object.fromEntries([...searchParams]);
-    const { vehicle, location, lat, long, dVil } = _searchParams;
+    const { vehicle, lat, long, destination } = _searchParams;
 
     const userCurrentLocation =
       location === "gps"
@@ -28,7 +28,7 @@ export default function SearchResults() {
 
     fetchData("/v1/user/heros", {
       vehicle,
-      dVil,
+      destination,
     }).then((data) => {
       if (data?.data?.success) {
         let heros = data.data.data;
@@ -39,7 +39,8 @@ export default function SearchResults() {
 
           return {
             ...hero,
-            isHighlight: hero?.mainStation?.village?._id === dVil, // highlight if destination === main station
+            isHighlight:
+              hero?.mainStation?.village?._id === destination?.village?._id, // highlight if destination === main station
             isOnline:
               hero.serviceStatus === "off"
                 ? false

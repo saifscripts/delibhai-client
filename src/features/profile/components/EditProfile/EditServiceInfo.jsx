@@ -1,9 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { cloneDeep, isEmpty } from "lodash";
+import { isEmpty } from "lodash";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillPlusSquare } from "react-icons/ai";
-import { MdDelete, MdEdit } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
@@ -16,6 +15,7 @@ import {
 import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import getAddressId from "../../utils/getAddressId";
 import AddressModal from "./AddressModal";
+import ServiceAddressCard from "./ServiceAddressCard";
 import ServiceTimes from "./ServiceTimes";
 
 const userSchema = yup.object({
@@ -38,7 +38,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   const user = useSelector(getAuthUser);
   const [serviceAddress, setServiceAddress] = useState([]);
   const [address, setAddress] = useState(null);
-  const [mainStationAddress, setMainStationAddress] = useState(null);
+  const [mainStationAddress, setMainStationAddress] = useState({});
   const [addressIndex, setAddressIndex] = useState(null);
   const [serviceTimes, setServiceTimes] = useState([]);
   const [is24HourServiceTime, setIs24HourServiceTime] = useState(false);
@@ -146,48 +146,16 @@ export default function EditServiceInfo({ isOpen, onClose }) {
 
         <div className="my-6 flex flex-col gap-2">
           {serviceAddress?.map((address, index) => (
-            <div
+            <ServiceAddressCard
               key={index}
-              className="rounded-lg bg-secondary bg-opacity-10 p-2"
-            >
-              <div className="flex flex-col gap-5 rounded-lg bg-primary bg-opacity-5 p-3">
-                <div className="flex items-center justify-between">
-                  <p className="mb-1 font-semibold">
-                    {address?.union?.title} ইউনিয়ন
-                  </p>
-                  <div className="space-x-1">
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-
-                        setAddress(address);
-                        setAddressIndex(index);
-                        setIsAddressModalOpen(true);
-                      }}
-                      className="rounded-lg p-2 text-primary hover:bg-neutral"
-                    >
-                      {<MdEdit />}
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-
-                        const _serviceAddress = cloneDeep(serviceAddress);
-                        _serviceAddress.splice(index, 1);
-                        setServiceAddress(_serviceAddress);
-                      }}
-                      className="rounded-lg p-2 text-red-400 hover:bg-neutral"
-                    >
-                      {<MdDelete />}
-                    </button>
-                  </div>
-                </div>
-
-                <p>{address?.village?.map(({ title }) => title).join(", ")}</p>
-              </div>
-            </div>
+              index={index}
+              address={address}
+              setAddress={setAddress}
+              setAddressIndex={setAddressIndex}
+              setIsAddressModalOpen={setIsAddressModalOpen}
+              serviceAddress={serviceAddress}
+              setServiceAddress={setServiceAddress}
+            />
           ))}
         </div>
 

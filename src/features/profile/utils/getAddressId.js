@@ -1,13 +1,21 @@
+const isArray = (arr) => Array.isArray(arr);
+
 const getAddressId = (address) => {
-    const _address = {};
-    for (const field in address) {
-        if(Array.isArray(address[field])) {
-            _address[field] = address[field].map(f => f._id);
-        } else {
-            _address[field] = address[field]._id;
-        }
+  const _address = {};
+
+  for (const [key, value] of Object.entries(address)) {
+    if (!value || (isArray(value) && !value.length)) {
+      continue;
     }
-    return _address;
-}
+
+    if (isArray(value)) {
+      _address[key] = value?.map((item) => item?._id);
+    } else {
+      _address[key] = value?._id;
+    }
+  }
+
+  return _address;
+};
 
 export default getAddressId;
