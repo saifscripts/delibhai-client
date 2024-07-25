@@ -20,8 +20,6 @@ export default function Profile() {
     );
   }
 
-  console.log(userInfo);
-
   if (!userInfo?.userInfo) {
     throw new Response("Not Found", {
       status: 404,

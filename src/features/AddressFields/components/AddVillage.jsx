@@ -30,8 +30,6 @@ export default function AddVillage() {
 
     const response = await postData("/v1/village/create", villageArray);
 
-    console.log(response);
-
     if (response?.success) {
       const _addressFields = cloneDeep(addressFields);
       _addressFields.villages.unshift(...response.data);
@@ -47,7 +45,7 @@ export default function AddVillage() {
 
   const handleVillageEdit = async () => {
     const { _id, title, unionId } = editVillage;
-    console.log(editVillage);
+
     const response = await updateData(`/v1/village/update/${_id}`, {
       title,
       unionId,

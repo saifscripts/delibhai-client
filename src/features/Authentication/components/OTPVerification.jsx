@@ -91,7 +91,6 @@ function OTPVerification() {
       setError("");
       setIsSubmitModalOpen(true);
     } else {
-      console.log(result?.error?.data);
       setError(result?.error?.data?.message);
     }
   };

@@ -32,7 +32,6 @@ export default function SearchResults() {
     }).then((data) => {
       if (data?.data?.success) {
         let heros = data.data.data;
-        console.log(heros);
 
         heros = heros.map((hero) => {
           const heroCurrentLocation =
