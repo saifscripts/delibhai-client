@@ -3,7 +3,7 @@ const isArray = (arr) => Array.isArray(arr);
 const getAddressId = (address) => {
   const _address = {};
 
-  for (const [key, value] of Object.entries(address)) {
+  for (const [key, value] of Object.entries(address || {})) {
     if (!value || (isArray(value) && !value.length)) {
       continue;
     }

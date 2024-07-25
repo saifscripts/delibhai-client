@@ -1,7 +1,6 @@
 import { isEqual } from "lodash";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
 import Modal from "../../../../layouts/Modal";
@@ -9,16 +8,19 @@ import {
   getAuthUser,
   setUser,
 } from "../../../../redux/features/auth/authSlice";
+import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import getAddressId from "../../utils/getAddressId";
 import RadioInput from "./RadioInput";
 
 export default function EditAddressInfo({ isOpen, onClose }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const [isAddressEqual, setIsAddressEqual] = useState(true);
   const [presentAddress, setPresentAddress] = useState(null);
   const [permanentAddress, setPermanentAddress] = useState(null);
   const dispatch = useDispatch();
   const user = useSelector(getAuthUser);
+  const [updateRider] = useUpdateRiderMutation();
 
   useEffect(() => {
     const presentAddress = user?.presentAddress;
@@ -30,11 +32,10 @@ export default function EditAddressInfo({ isOpen, onClose }) {
     setIsAddressEqual(isEqual(presentAddress, permanentAddress));
   }, [user]);
 
-  const { updateData } = useUpdateData();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
 
     const address = {
       presentAddress: getAddressId(presentAddress),
@@ -46,15 +47,17 @@ export default function EditAddressInfo({ isOpen, onClose }) {
     }
 
     // Update data
-    const { data } = await updateData(`/v1/user/${user._id}`, address);
+    const result = await updateRider(address);
 
-    if (data?.success) {
+    if (result?.data?.success) {
       dispatch(
         setUser({
-          user: data.data,
+          user: result?.data?.data,
         }),
       );
       onClose();
+    } else {
+      setError(result?.error?.data?.message);
     }
 
     setIsLoading(false);
@@ -94,6 +97,8 @@ export default function EditAddressInfo({ isOpen, onClose }) {
             villageType="select"
           />
         )}
+
+        <p className="mt-2 text-center text-red-400">{error}</p>
 
         <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
       </form>
