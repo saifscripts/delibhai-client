@@ -3,18 +3,19 @@ import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useFetchData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
+import { useVerifyOTP } from "../../../hooks/auth.hook";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import { useVerifyRiderOTPMutation } from "../../../redux/features/auth/authApi";
 import { setUser } from "../../../redux/features/auth/authSlice";
+import { setAuthToken } from "../../../utils/authToken";
 import { SubmitModal, Timer } from "../index";
 
 function OTPVerification() {
+  const { mutate: verifyOTP, isPending, isSuccess, data } = useVerifyOTP();
   const { state } = useLocation();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(true);
   const [OTP, setOTP] = useState(["", "", "", "", "", ""]);
-  const [error, setError] = useState("");
   const dispatch = useDispatch();
 
   const inputRefs = [
@@ -26,7 +27,6 @@ function OTPVerification() {
     useRef(null),
   ];
 
-  const [verifyRiderOTP, { isLoading }] = useVerifyRiderOTPMutation();
   const { fetchData } = useFetchData();
 
   const handleChange = (e, index) => {
@@ -54,14 +54,11 @@ function OTPVerification() {
   const resendOTP = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await fetchData(`/v1/user/resend-otp/${state.id}`);
+    const { data } = await fetchData(`/v1/user/resend-otp/${state.id}`);
 
     if (data?.success) {
-      setError("");
       setTimerRunning(true);
       setOTP(["", "", "", "", "", ""]);
-    } else {
-      setError(error?.message);
     }
   };
 
@@ -76,29 +73,30 @@ function OTPVerification() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await verifyRiderOTP({
-      _id: state.id,
+    verifyOTP({
+      _id: state._id,
       otp: OTP.join(""),
     });
+  };
 
-    if (result?.data?.success) {
+  useEffect(() => {
+    if (!isPending && isSuccess && data?.success) {
       dispatch(
         setUser({
-          user: result?.data?.data?.user,
-          token: result?.data?.data?.accessToken,
+          user: data?.data?.user,
+          token: data?.data?.accessToken,
         }),
       );
-      setError("");
+      setAuthToken(data?.data?.accessToken);
       setIsSubmitModalOpen(true);
-    } else {
-      setError(result?.error?.data?.message);
     }
-  };
+  }, [data, dispatch, isPending, isSuccess]);
 
   // autofill otp (for testing purpose) --- delete this later
   useEffect(() => {
+    console.log(state);
     setOTP(state?.otp?.split(""));
-  }, [state.otp]);
+  }, [state]);
 
   return (
     <>
@@ -110,7 +108,6 @@ function OTPVerification() {
               subtitle="আমাদের পাঠানো SMS এ প্রাপ্ত কোডটি প্রদান করুন +8801823540325"
             />
 
-            <p className="mt-4 text-center text-xl text-red-400">{error}</p>
             <Timer
               time={60 * 1000}
               timerRunning={timerRunning}
@@ -127,7 +124,7 @@ function OTPVerification() {
                     onChange={(e) => handleChange(e, index)}
                     onKeyDown={preventUpDown}
                     maxLength="1"
-                    disabled={isLoading}
+                    disabled={isPending}
                     className="aspect-square w-12 rounded-lg border border-secondary px-4 text-xl focus:border-primary focus:outline-none"
                   />
                 ))}
@@ -146,7 +143,7 @@ function OTPVerification() {
 
               <Submit
                 value="সাবমিট করুন"
-                disabled={isLoading || OTP.some((field) => field === "")}
+                disabled={isPending || OTP.some((field) => field === "")}
                 className="rounded-lg"
                 onClick={handleSubmit}
               />

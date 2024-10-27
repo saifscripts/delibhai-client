@@ -11,7 +11,7 @@ export const authApi = baseApi.injectEndpoints({
     }),
     verifyRiderOTP: builder.mutation({
       query: (data) => ({
-        url: "/rider/verify-otp",
+        url: "/auth/verify-otp",
         method: "POST",
         body: data,
       }),

@@ -1,12 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import isStrongPassword from "validator/lib/isStrongPassword";
 import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
+import { useRegisterRider } from "../../../hooks/auth.hook";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import { useSignupRiderMutation } from "../../../redux/features/auth/authApi";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
 
 const userSchema = yup.object({
@@ -52,41 +51,15 @@ const userSchema = yup.object({
 });
 
 function Signup() {
-  const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setError,
   } = useForm({
     resolver: yupResolver(userSchema),
   });
 
-  const [signupRider] = useSignupRiderMutation();
-
-  const onSubmit = async (userData) => {
-    const result = await signupRider(userData);
-
-    if (result?.data?.success) {
-      return navigate("/otp-verification", {
-        state: {
-          id: result?.data?.data?._id,
-          otp: result?.data?.data?.otp,
-        },
-      });
-    }
-
-    if (result?.error?.status === 409) {
-      setError("mobile", {
-        message: result?.error?.data?.message,
-      });
-    } else if (result?.error) {
-      setError("general", {
-        message: result?.error?.data?.message,
-      });
-    }
-  };
+  const { mutate: registerRider } = useRegisterRider();
 
   return (
     <MiniContainer>
@@ -94,7 +67,7 @@ function Signup() {
         title="একটি একাউন্ট তৈরী করুন"
         subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
       />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(registerRider)}>
         <div className="mb-1 mt-4">
           <label className="font-bold">পুরো নাম</label>
           <input

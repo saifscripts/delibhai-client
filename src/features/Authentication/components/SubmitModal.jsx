@@ -17,7 +17,7 @@ function SubmitModal({ onClose, isOpen, id }) {
       />
       <div className="mb-4 text-center">
         <div className="mb-1 text-xl text-primary">Successful</div>
-        <div className="w-60">Thank you for registering as dHero</div>
+        <div className="w-60">Thank you for registering as a rider</div>
       </div>
       {/* <img src={loader} alt="Loading..." /> */}
       <div className="flex justify-center gap-3">
