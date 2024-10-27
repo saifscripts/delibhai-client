@@ -3,7 +3,7 @@ import { logout, setUser } from "../features/auth/authSlice";
 import getNewToken from "./getNewToken";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: `${import.meta.env.VITE_BASE_URL2}/api/v1`,
+  baseUrl: import.meta.env.VITE_BASE_URL,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;

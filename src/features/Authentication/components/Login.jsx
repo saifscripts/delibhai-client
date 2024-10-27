@@ -8,6 +8,7 @@ import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import { useLoginMutation } from "../../../redux/features/auth/authApi";
 import { setUser } from "../../../redux/features/auth/authSlice";
+import { setAuthToken } from "../../../utils/authToken";
 import { isMobilePhone } from "../../../utils/isMobilePhone";
 
 const credentialSchema = yup.object({
@@ -44,6 +45,8 @@ function Login() {
           token: result?.data?.data?.accessToken,
         }),
       );
+
+      setAuthToken(result?.data?.data?.accessToken);
       return navigate(`/profile/${result?.data?.data?.user?._id}`);
     }
 
