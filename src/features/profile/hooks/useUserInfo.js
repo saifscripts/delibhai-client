@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { fetchData } from "../../../lib/api/api";
+import { fetchData } from "../../../lib/fetch";
 import { getAuthUser } from "../../../redux/features/auth/authSlice";
 
 const useUserInfo = (id) => {

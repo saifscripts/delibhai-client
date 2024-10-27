@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillCamera } from "react-icons/ai";
 import { GiResize } from "react-icons/gi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "react-image-crop/dist/ReactCrop.css";
 import { useDispatch, useSelector } from "react-redux";
-import { updateData } from "../../../../lib/api";
+import { useRemoveAvatar } from "../../../../hooks/profile.hook";
 import {
   getAuthUser,
   setUser,
@@ -21,6 +21,12 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
   const [resizeModal, setResizeModal] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(getAuthUser);
+  const {
+    mutate: removeAvatar,
+    data: updatedUser,
+    isPending,
+    isSuccess,
+  } = useRemoveAvatar();
 
   const onSelectFile = (e) => {
     setCrop(null);
@@ -62,20 +68,16 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
     setResizeModal(true);
   };
 
-  const onDelete = async () => {
-    const fields = { avatarURL: 1, avatarSrcURL: 1, avatarCropData: 1 };
-
-    const data = await updateData(`/v1/user/remove-fields/${user._id}`, fields);
-
-    if (data?.success) {
+  useEffect(() => {
+    if (!isPending && isSuccess && updatedUser?.success) {
       dispatch(
         setUser({
-          user: data.data,
+          user: updatedUser.data,
         }),
       );
       setEditModal(false);
     }
-  };
+  }, [isPending, isSuccess, updatedUser, dispatch, setEditModal]);
 
   return (
     <>
@@ -124,7 +126,7 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
                 icon={<RiDeleteBin5Fill />}
                 text="ছবি ডিলিট করুন"
                 type="button"
-                onClick={onDelete}
+                onClick={removeAvatar}
               />
             </>
           )}

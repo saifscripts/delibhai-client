@@ -1,4 +1,4 @@
-import { fetchData } from "../../../lib/api/api";
+import { fetchData } from "../../../lib/fetch";
 
 const getVillages = async (unionId) => {
   if (!unionId) return;

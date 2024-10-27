@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchData } from "../lib/api/api";
+import { fetchData } from "../lib/fetch";
 
 const useUserRole = () => {
   const [role, setRole] = useState("");

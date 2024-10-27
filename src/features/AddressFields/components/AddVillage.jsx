@@ -1,7 +1,7 @@
 import { cloneDeep } from "lodash";
 import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { deleteData, postData, updateData } from "../../../lib/api/api";
+import { deleteData, postData, updateData } from "../../../lib/fetch";
 import { showErrorToast } from "../../../lib/toast";
 import { useAddress } from "../contexts/AddressContext";
 import generateAddressFields from "../utils/generateAddressFields";
