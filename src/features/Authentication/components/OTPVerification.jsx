@@ -1,17 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { useFetchData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
-import { useVerifyOTP } from "../../../hooks/auth.hook";
+import { useResendOTP, useVerifyOTP } from "../../../hooks/auth.hook";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
+import cn from "../../../lib/cn";
 import { setUser } from "../../../redux/features/auth/authSlice";
 import { setAuthToken } from "../../../utils/authToken";
 import { SubmitModal, Timer } from "../index";
 
 function OTPVerification() {
-  const { mutate: verifyOTP, isPending, isSuccess, data } = useVerifyOTP();
+  const {
+    mutate: verifyOTP,
+    isPending: isVerifyPending,
+    isSuccess: isVerifySuccess,
+    data: verifyData,
+  } = useVerifyOTP();
+  const {
+    mutate: resendOTP,
+    isPending: isResendPending,
+    isSuccess: isResendSuccess,
+    data: resendData,
+  } = useResendOTP();
   const { state } = useLocation();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(true);
@@ -26,8 +37,6 @@ function OTPVerification() {
     useRef(null),
     useRef(null),
   ];
-
-  const { fetchData } = useFetchData();
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -51,20 +60,17 @@ function OTPVerification() {
     }
   };
 
-  const resendOTP = async (e) => {
+  const handleResendOTP = async (e) => {
     e.preventDefault();
 
-    const { data } = await fetchData(`/v1/user/resend-otp/${state.id}`);
-
-    if (data?.success) {
-      setTimerRunning(true);
-      setOTP(["", "", "", "", "", ""]);
-    }
+    resendOTP({
+      _id: state._id,
+    });
   };
 
   function preventUpDown(event) {
+    // 38 is the up arrow key, 40 is the down arrow key
     if (event.keyCode === 38 || event.keyCode === 40) {
-      // 38 is the up arrow key, 40 is the down arrow key
       event.preventDefault();
       return false;
     }
@@ -80,21 +86,27 @@ function OTPVerification() {
   };
 
   useEffect(() => {
-    if (!isPending && isSuccess && data?.success) {
+    if (isResendSuccess && resendData?.success) {
+      setTimerRunning(true);
+      setOTP(resendData?.data?.otp?.split(""));
+    }
+  }, [isResendSuccess, resendData]);
+
+  useEffect(() => {
+    if (isVerifySuccess && verifyData?.success) {
       dispatch(
         setUser({
-          user: data?.data?.user,
-          token: data?.data?.accessToken,
+          user: verifyData?.data?.user,
+          token: verifyData?.data?.accessToken,
         }),
       );
-      setAuthToken(data?.data?.accessToken);
+      setAuthToken(verifyData?.data?.accessToken);
       setIsSubmitModalOpen(true);
     }
-  }, [data, dispatch, isPending, isSuccess]);
+  }, [verifyData, dispatch, isVerifySuccess]);
 
   // autofill otp (for testing purpose) --- delete this later
   useEffect(() => {
-    console.log(state);
     setOTP(state?.otp?.split(""));
   }, [state]);
 
@@ -124,7 +136,7 @@ function OTPVerification() {
                     onChange={(e) => handleChange(e, index)}
                     onKeyDown={preventUpDown}
                     maxLength="1"
-                    disabled={isPending}
+                    disabled={isVerifyPending || isResendPending}
                     className="aspect-square w-12 rounded-lg border border-secondary px-4 text-xl focus:border-primary focus:outline-none"
                   />
                 ))}
@@ -133,9 +145,12 @@ function OTPVerification() {
               <p className="mx-auto my-4 w-fit">
                 আমি কোনো কোড পাই নি.{" "}
                 <button
-                  onClick={resendOTP}
-                  disabled={timerRunning}
-                  className={`text-${timerRunning ? "accent" : "secondary"}`}
+                  onClick={handleResendOTP}
+                  disabled={timerRunning || isVerifyPending || isResendPending}
+                  className={cn("text-secondary", {
+                    "text-accent":
+                      timerRunning || isVerifyPending || isResendPending,
+                  })}
                 >
                   পুনরায় পাঠান
                 </button>
@@ -143,7 +158,11 @@ function OTPVerification() {
 
               <Submit
                 value="সাবমিট করুন"
-                disabled={isPending || OTP.some((field) => field === "")}
+                disabled={
+                  isVerifyPending ||
+                  isResendPending ||
+                  OTP.some((field) => field === "")
+                }
                 className="rounded-lg"
                 onClick={handleSubmit}
               />
