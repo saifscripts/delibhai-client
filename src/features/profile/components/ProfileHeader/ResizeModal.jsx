@@ -5,12 +5,8 @@ import ReactCrop, {
   convertToPixelCrop,
   makeAspectCrop,
 } from "react-image-crop";
-import { useDispatch, useSelector } from "react-redux";
 import { useUpdateData } from "../../../../api/api";
-import {
-  getAuthUser,
-  setUser,
-} from "../../../../redux/features/auth/authSlice";
+import { useAuth } from "../../../../hooks/auth.hook";
 import base64ToFormData from "../../../../utils/base64ToFormData";
 import getCroppedData from "../../utils/getCroppedData";
 
@@ -26,8 +22,7 @@ export default function ResizeModal({
   const imageRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const { updateData } = useUpdateData();
-  const dispatch = useDispatch();
-  const user = useSelector(getAuthUser);
+  const { user } = useAuth();
 
   const saveButtonRef = useRef(null);
 
@@ -88,11 +83,6 @@ export default function ResizeModal({
     const { data } = await updateData(`/v1/user/${user._id}`, avatarData);
 
     if (data?.success) {
-      dispatch(
-        setUser({
-          user: data.data,
-        }),
-      );
       setResizeModal(false);
       setIsLoading(false);
     }

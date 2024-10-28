@@ -1,29 +1,27 @@
 import axios from "axios";
-import { useContext, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 import camera from "../../../../assets/icons/camera.svg";
-import {
-  getAuthUser,
-  setUser,
-} from "../../../../redux/features/auth/authSlice";
+import { useAuth } from "../../../../hooks/auth.hook";
+import { useUser } from "../../../../hooks/profile.hook";
 import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
-import UserContext from "../../contexts/UserContext";
 import VehiclePhoto from "./VehiclePhoto";
 
 export default function VehiclePhotos() {
   const [isLoading, setIsLoading] = useState(false);
-  const { userInfo } = useContext(UserContext);
-  const dispatch = useDispatch();
-  const user = useSelector(getAuthUser);
   const [updateRider] = useUpdateRiderMutation();
+  const { id } = useParams();
+  const { user: authUser } = useAuth();
+  const { data: userData } = useUser(id);
+  const user = userData?.data;
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
 
     // clone vehicle photo from the state
     let _vehiclePhotos = [];
-    if (user?.vehiclePhotos) {
-      _vehiclePhotos = [...user.vehiclePhotos];
+    if (authUser?.vehiclePhotos) {
+      _vehiclePhotos = [...authUser.vehiclePhotos];
     }
 
     // create formData from the image
@@ -52,11 +50,12 @@ export default function VehiclePhotos() {
 
     // update current user state if database is updated
     if (result?.data?.success) {
-      dispatch(
-        setUser({
-          user: result?.data?.data,
-        }),
-      );
+      // invalidate ['user', 'me'] query
+      //   dispatch(
+      //     setUser({
+      //       user: result?.data?.data,
+      //     }),
+      //   );
     }
 
     setIsLoading(false);
@@ -65,16 +64,11 @@ export default function VehiclePhotos() {
   return (
     <div className="mb-6 overflow-y-hidden">
       <div className="-mb-5 flex gap-2 overflow-x-scroll pb-5">
-        {userInfo?.vehiclePhotos?.map((url, index) => (
-          <VehiclePhoto
-            url={url}
-            key={url}
-            index={index}
-            userId={userInfo?._id}
-          />
+        {user?.vehiclePhotos?.map((url, index) => (
+          <VehiclePhoto url={url} key={url} index={index} userId={user?._id} />
         ))}
-        {(!user?.vehiclePhotos || userInfo?.vehiclePhotos?.length < 4) &&
-          userInfo?._id === user?._id && (
+        {(!authUser?.vehiclePhotos || user?.vehiclePhotos?.length < 4) &&
+          user?._id === authUser?._id && (
             <form
               className={`relative z-10 flex aspect-square w-28 flex-shrink-0 flex-col items-center justify-center rounded-lg bg-accent ${
                 isLoading && "opacity-30"

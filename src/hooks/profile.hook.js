@@ -1,6 +1,17 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { removeAvatar } from "../services/profile.service";
+import { getUser, removeAvatar } from "../services/profile.service";
+
+export const useUser = (id) => {
+  const result =  useQuery({
+    queryKey: ["USER"],
+    queryFn: async () => await getUser(id),
+  });
+
+  const user = result?.data?.data;
+
+  return { ...result, user };
+};
 
 export const useRemoveAvatar = () => {
   const queryClient = useQueryClient();

@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAuthUser,
-  setUser,
-} from "../../../../redux/features/auth/authSlice";
+import { useAuth } from "../../../../hooks/auth.hook";
 import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 
 export default function VehiclePhoto({ url, index, userId }) {
   const [deleteBtn, setDeleteBtn] = useState(-1);
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
-  const user = useSelector(getAuthUser);
   const [updateRider] = useUpdateRiderMutation();
+  const { user } = useAuth();
 
   useEffect(() => {
     const hideDeleteBtn = () => {
@@ -39,11 +34,7 @@ export default function VehiclePhoto({ url, index, userId }) {
     });
 
     if (result?.data?.success) {
-      dispatch(
-        setUser({
-          user: result?.data?.data,
-        }),
-      );
+      // TODO: invalidate 'user' and 'me' query
     }
 
     setIsLoading(false);

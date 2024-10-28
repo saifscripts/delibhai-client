@@ -4,12 +4,8 @@ import { AiFillCamera } from "react-icons/ai";
 import { GiResize } from "react-icons/gi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "react-image-crop/dist/ReactCrop.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useAuth } from "../../../../hooks/auth.hook";
 import { useRemoveAvatar } from "../../../../hooks/profile.hook";
-import {
-  getAuthUser,
-  setUser,
-} from "../../../../redux/features/auth/authSlice";
 import EditOption from "./EditOption";
 import ResizeModal from "./ResizeModal";
 
@@ -19,8 +15,8 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState();
   const [resizeModal, setResizeModal] = useState(false);
-  const dispatch = useDispatch();
-  const user = useSelector(getAuthUser);
+  const { user } = useAuth();
+
   const {
     mutate: removeAvatar,
     data: updatedUser,
@@ -70,14 +66,9 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
 
   useEffect(() => {
     if (!isPending && isSuccess && updatedUser?.success) {
-      dispatch(
-        setUser({
-          user: updatedUser.data,
-        }),
-      );
       setEditModal(false);
     }
-  }, [isPending, isSuccess, updatedUser, dispatch, setEditModal]);
+  }, [isPending, isSuccess, updatedUser, setEditModal]);
 
   return (
     <>

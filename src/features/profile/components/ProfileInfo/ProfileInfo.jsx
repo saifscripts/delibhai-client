@@ -1,8 +1,6 @@
-import { useContext } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getAuthUser } from "../../../../redux/features/auth/authSlice";
-import UserContext from "../../contexts/UserContext";
+import { useAuth } from "../../../../hooks/auth.hook";
+import { useUser } from "../../../../hooks/profile.hook";
 import profileSchema from "../../data/profileSchema";
 import { GPSLocation } from "../GPSLocation";
 import { ManualLocation } from "../ManualLocation";
@@ -16,8 +14,8 @@ import InfoContainer from "./InfoContainer";
 
 export default function ProfileInfo() {
   const { category = "general", id } = useParams();
-  const { userInfo } = useContext(UserContext);
-  const user = useSelector(getAuthUser);
+  const { user } = useUser(id);
+  const { user: authUser } = useAuth();
 
   return (
     <div className="pb-20">
@@ -25,7 +23,7 @@ export default function ProfileInfo() {
         <InfoContainer
           key={item.category}
           category={item.category}
-          editModal={id === user?._id && item.editModal}
+          editModal={id === authUser?._id && item.editModal}
         >
           {item?.fields?.map(
             ({ dataKey, label, icon, dataModifier, isPrivate }) => {
@@ -57,7 +55,7 @@ export default function ProfileInfo() {
                 return <Reviews key={dataKey} />;
               }
 
-              const data = userInfo[dataKey];
+              const data = user[dataKey];
               let fieldValue;
 
               if (data) {
@@ -66,7 +64,8 @@ export default function ProfileInfo() {
                 fieldValue = undefined;
               }
 
-              const isHidden = (isPrivate || !fieldValue) && id !== user?._id;
+              const isHidden =
+                (isPrivate || !fieldValue) && id !== authUser?._id;
 
               return (
                 !isHidden && (

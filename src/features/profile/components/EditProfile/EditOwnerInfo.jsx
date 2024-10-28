@@ -3,16 +3,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { isEmpty } from "lodash";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import isEmail from "validator/lib/isEmail";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
+import { useAuth } from "../../../../hooks/auth.hook";
 import Modal from "../../../../layouts/Modal";
-import {
-  getAuthUser,
-  setUser,
-} from "../../../../redux/features/auth/authSlice";
 import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import { isMobilePhone } from "../../../../utils/isMobilePhone";
 import getAddressId from "../../utils/getAddressId";
@@ -34,8 +30,8 @@ const userSchema = yup.object({
 });
 
 export default function EditOwnerInfo({ isOpen, onClose }) {
-  const dispatch = useDispatch();
-  const user = useSelector(getAuthUser);
+  const { user } = useAuth();
+
   const [ownerAddress, setOwnerAddress] = useState(null);
   const [updateRider] = useUpdateRiderMutation();
 
@@ -66,11 +62,6 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
     const result = await updateRider(data);
 
     if (result?.data?.success) {
-      dispatch(
-        setUser({
-          user: result?.data?.data,
-        }),
-      );
       onClose();
     } else {
       setError("general", { message: result?.error?.data?.message });

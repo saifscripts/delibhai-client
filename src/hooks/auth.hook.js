@@ -1,13 +1,14 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {
+  getMe,
   login,
   registerRider,
   resendOTP,
   verifyOTP,
 } from "../services/auth.service";
-import { setAuthToken } from "../utils/authToken";
+import { removeAuthToken, setAuthToken } from "../utils/authToken";
 
 export const useRegisterRider = () => {
   const navigate = useNavigate();
@@ -51,6 +52,24 @@ export const useLogin = () => {
       toast.error(error.message);
     },
   });
+};
+
+export const useAuth = () => {
+  const queryClient = useQueryClient();
+
+  const result = useQuery({
+    queryKey: ["ME"],
+    queryFn: async () => await getMe(),
+  });
+
+  const user = result?.data?.data;
+
+  const logout = () => {
+    removeAuthToken();
+    queryClient.invalidateQueries({ queryKey: ["ME"] });
+  };
+
+  return { ...result, user, logout };
 };
 
 export const useVerifyOTP = () => {

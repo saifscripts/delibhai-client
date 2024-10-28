@@ -1,17 +1,16 @@
 import { RxHamburgerMenu } from "react-icons/rx";
-import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/logos/logo.png";
+import { useAuth } from "../../../hooks/auth.hook";
 import cn from "../../../lib/cn";
-import { getAuthUser } from "../../../redux/features/auth/authSlice";
 import useSidebar from "../hooks/useSidebar";
 import NavLinks from "./NavLinks";
 import Sidebar from "./Sidebar";
 
 const Navbar = () => {
   const { isSidebarOpen, handleSidebarToggle } = useSidebar();
-  const user = useSelector(getAuthUser);
   const { pathname } = useLocation();
+  const { user } = useAuth();
 
   return (
     <nav

@@ -3,15 +3,11 @@ import { isEmpty } from "lodash";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillPlusSquare } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
+import { useAuth } from "../../../../hooks/auth.hook";
 import Modal from "../../../../layouts/Modal";
-import {
-  getAuthUser,
-  setUser,
-} from "../../../../redux/features/auth/authSlice";
 import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import getAddressId from "../../utils/getAddressId";
 import AddressModal from "./AddressModal";
@@ -34,8 +30,6 @@ const userSchema = yup.object({
 });
 
 export default function EditServiceInfo({ isOpen, onClose }) {
-  const dispatch = useDispatch();
-  const user = useSelector(getAuthUser);
   const [serviceAddress, setServiceAddress] = useState([]);
   const [address, setAddress] = useState(null);
   const [mainStationAddress, setMainStationAddress] = useState({});
@@ -44,6 +38,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   const [is24HourServiceTime, setIs24HourServiceTime] = useState(false);
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
   const [updateRider] = useUpdateRiderMutation();
+  const { user } = useAuth();
 
   useEffect(() => {
     const mainStation = user?.mainStation;
@@ -87,11 +82,6 @@ export default function EditServiceInfo({ isOpen, onClose }) {
     const result = await updateRider(data);
 
     if (result?.data?.success) {
-      dispatch(
-        setUser({
-          user: result?.data?.data,
-        }),
-      );
       onClose();
     } else {
       console.log(result?.error?.data);

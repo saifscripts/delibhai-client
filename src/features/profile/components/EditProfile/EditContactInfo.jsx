@@ -1,15 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import isEmail from "validator/lib/isEmail";
 import isURL from "validator/lib/isURL";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
+import { useAuth } from "../../../../hooks/auth.hook";
 import Modal from "../../../../layouts/Modal";
-import {
-  getAuthUser,
-  setUser,
-} from "../../../../redux/features/auth/authSlice";
 import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import { isMobilePhone } from "../../../../utils/isMobilePhone";
 
@@ -34,8 +30,8 @@ const userSchema = yup.object({
 });
 
 export default function EditContactInfo({ isOpen, onClose }) {
-  const dispatch = useDispatch();
-  const user = useSelector(getAuthUser);
+  const { user } = useAuth();
+
   const [updateRider] = useUpdateRiderMutation();
 
   const {
@@ -57,11 +53,6 @@ export default function EditContactInfo({ isOpen, onClose }) {
     const result = await updateRider(userData);
 
     if (result?.data?.success) {
-      dispatch(
-        setUser({
-          user: result?.data?.data,
-        }),
-      );
       onClose();
     } else {
       setError("general", { message: result?.error?.data?.message });

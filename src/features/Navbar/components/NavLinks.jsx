@@ -1,15 +1,13 @@
 import { AiFillHome, AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { MdAppRegistration } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getAuthUser, logout } from "../../../redux/features/auth/authSlice";
+import { useAuth } from "../../../hooks/auth.hook";
 import CustomNavLink from "./CustomNavLink";
 
 const NavLinks = () => {
-  const user = useSelector(getAuthUser);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   return (
     <>
@@ -35,7 +33,7 @@ const NavLinks = () => {
       {user && (
         <button
           onClick={() => {
-            dispatch(logout());
+            logout();
             navigate("/login");
           }}
           className="lg:blok flex items-center gap-5 px-8 py-4 text-sm hover:cursor-pointer active:bg-primary lg:rounded-lg lg:px-4 lg:py-4 lg:hover:bg-neutral"

@@ -1,14 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import isURL from "validator/lib/isURL";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
+import { useAuth } from "../../../../hooks/auth.hook";
 import Modal from "../../../../layouts/Modal";
-import {
-  getAuthUser,
-  setUser,
-} from "../../../../redux/features/auth/authSlice";
 import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 
 const userSchema = yup.object({
@@ -18,9 +14,8 @@ const userSchema = yup.object({
 });
 
 export default function EditVideoURL({ isOpen, onClose }) {
-  const dispatch = useDispatch();
-  const user = useSelector(getAuthUser);
   const [updateRider] = useUpdateRiderMutation();
+  const { user } = useAuth();
 
   const {
     register,
@@ -38,11 +33,6 @@ export default function EditVideoURL({ isOpen, onClose }) {
     const result = await updateRider(data);
 
     if (result?.data?.success) {
-      dispatch(
-        setUser({
-          user: result?.data?.data,
-        }),
-      );
       onClose();
     } else {
       setError("general", { message: result?.error?.data?.message });

@@ -1,16 +1,14 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import camera from "../../../../assets/icons/camera.svg";
 import Avatar from "../../../../components/Avatar";
-import { getAuthUser } from "../../../../redux/features/auth/authSlice";
+import { useAuth } from "../../../../hooks/auth.hook";
 import EditAvatarModal from "./EditAvatarModal";
 
 export default function ProfileAvatar({ avatarURL }) {
   const [editModal, setEditModal] = useState(false);
-  const user = useSelector(getAuthUser);
-
   const { id } = useParams();
+  const { user } = useAuth();
 
   return (
     <>

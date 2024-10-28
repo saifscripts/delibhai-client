@@ -2,11 +2,12 @@ import Review from "./Review";
 import staticReviews from "./staticReviews";
 
 export default function Reviews() {
-  //   const { userInfo } = useContext(UserContext);
+  // const { id } = useParams();
+  // const { user } = useUser(id);
 
   return (
     <div className="grid gap-8 px-2 py-3">
-      {/* use userInfo.review later */}
+      {/* use user.review later */}
       {staticReviews?.map(
         ({ id, userImage, userName, rating, date, review }) => (
           <Review

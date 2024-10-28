@@ -1,14 +1,10 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
+import { useAuth } from "../../../../hooks/auth.hook";
 import Modal from "../../../../layouts/Modal";
-import {
-  getAuthUser,
-  setUser,
-} from "../../../../redux/features/auth/authSlice";
 import { useUpdateUserMutation } from "../../../../redux/features/user/userApi";
 import { isNID } from "../../../../utils/isNID";
 
@@ -41,9 +37,8 @@ const userSchema = yup.object({
 });
 
 export default function EditPersonalInfo({ isOpen, onClose }) {
-  const dispatch = useDispatch();
-  const user = useSelector(getAuthUser);
   const [updateUser] = useUpdateUserMutation();
+  const { user } = useAuth();
 
   const {
     register,
@@ -94,11 +89,6 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
     const result = await updateUser(data);
 
     if (result?.data?.success) {
-      dispatch(
-        setUser({
-          user: result?.data?.data,
-        }),
-      );
       onClose();
     } else {
       setError("general", { message: result?.error?.data?.message });

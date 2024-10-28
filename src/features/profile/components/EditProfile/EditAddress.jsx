@@ -1,13 +1,9 @@
 import { isEqual } from "lodash";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
+import { useAuth } from "../../../../hooks/auth.hook";
 import Modal from "../../../../layouts/Modal";
-import {
-  getAuthUser,
-  setUser,
-} from "../../../../redux/features/auth/authSlice";
 import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import getAddressId from "../../utils/getAddressId";
 import RadioInput from "./RadioInput";
@@ -18,8 +14,8 @@ export default function EditAddressInfo({ isOpen, onClose }) {
   const [isAddressEqual, setIsAddressEqual] = useState(true);
   const [presentAddress, setPresentAddress] = useState(null);
   const [permanentAddress, setPermanentAddress] = useState(null);
-  const dispatch = useDispatch();
-  const user = useSelector(getAuthUser);
+  const { user } = useAuth();
+
   const [updateRider] = useUpdateRiderMutation();
 
   useEffect(() => {
@@ -50,11 +46,6 @@ export default function EditAddressInfo({ isOpen, onClose }) {
     const result = await updateRider(address);
 
     if (result?.data?.success) {
-      dispatch(
-        setUser({
-          user: result?.data?.data,
-        }),
-      );
       onClose();
     } else {
       setError(result?.error?.data?.message);
