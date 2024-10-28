@@ -1,7 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { registerRider, resendOTP, verifyOTP } from "../services/auth.service";
+import {
+  login,
+  registerRider,
+  resendOTP,
+  verifyOTP,
+} from "../services/auth.service";
+import { setAuthToken } from "../utils/authToken";
 
 export const useRegisterRider = () => {
   const navigate = useNavigate();
@@ -27,6 +33,26 @@ export const useRegisterRider = () => {
   });
 };
 
+export const useLogin = () => {
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationKey: ["LOGIN"],
+    mutationFn: login,
+    onSuccess: (data) => {
+      if (data?.success) {
+        navigate(`/profile/${data?.data?.user?._id}`);
+        setAuthToken(data?.data?.accessToken);
+      } else {
+        toast.error(data?.message);
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
 export const useVerifyOTP = () => {
   const queryClient = useQueryClient();
 
@@ -36,6 +62,7 @@ export const useVerifyOTP = () => {
     onSuccess: (data) => {
       if (data?.success) {
         queryClient.invalidateQueries({ queryKey: ["ME"] });
+        setAuthToken(data?.data?.accessToken);
       } else {
         toast.error(data?.message);
       }

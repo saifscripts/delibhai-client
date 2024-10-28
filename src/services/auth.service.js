@@ -9,6 +9,15 @@ export const registerRider = async (body) => {
   }
 };
 
+export const login = async (body) => {
+  try {
+    const { data } = await axios.post("/auth/login", body);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
 export const verifyOTP = async (body) => {
   try {
     const { data } = await axios.post("/auth/verify-otp", body);

@@ -6,8 +6,6 @@ import { useResendOTP, useVerifyOTP } from "../../../hooks/auth.hook";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
 import cn from "../../../lib/cn";
-import { setUser } from "../../../redux/features/auth/authSlice";
-import { setAuthToken } from "../../../utils/authToken";
 import { SubmitModal, Timer } from "../index";
 
 function OTPVerification() {
@@ -94,13 +92,6 @@ function OTPVerification() {
 
   useEffect(() => {
     if (isVerifySuccess && verifyData?.success) {
-      dispatch(
-        setUser({
-          user: verifyData?.data?.user,
-          token: verifyData?.data?.accessToken,
-        }),
-      );
-      setAuthToken(verifyData?.data?.accessToken);
       setIsSubmitModalOpen(true);
     }
   }, [verifyData, dispatch, isVerifySuccess]);
