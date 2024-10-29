@@ -33,11 +33,11 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      vehicleType: user.vehicleType,
-      vehicleBrand: user.vehicleBrand,
-      vehicleModel: user.vehicleModel,
-      vehicleNumber: user.vehicleNumber,
-      vehicleName: user.vehicleName,
+      vehicleType: user?.vehicleType,
+      vehicleBrand: user?.vehicleBrand,
+      vehicleModel: user?.vehicleModel,
+      vehicleNumber: user?.vehicleNumber,
+      vehicleName: user?.vehicleName,
     },
   });
 

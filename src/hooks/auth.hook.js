@@ -66,7 +66,7 @@ export const useAuth = () => {
 
   const logout = () => {
     removeAuthToken();
-    queryClient.invalidateQueries({ queryKey: ["ME"] });
+    queryClient.resetQueries({ queryKey: ["ME"] });
   };
 
   return { ...result, user, logout };
