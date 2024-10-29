@@ -12,10 +12,10 @@ const NavLinks = () => {
   return (
     <>
       <CustomNavLink to="/" icon={<AiFillHome />} text="হোম পেইজ" />
-      {user ? null : (
+      {!user && (
         <CustomNavLink icon={<AiOutlineLogin />} to="/login" text="লগইন করুন" />
       )}
-      {user ? null : (
+      {!user && (
         <CustomNavLink
           to="/signup"
           icon={<MdAppRegistration />}
