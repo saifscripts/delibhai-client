@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import vehicles from "../../../../data/vehicles";
 import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 
 const vehicleTitles = vehicles.map(({ title }) => title);
 
@@ -22,14 +23,17 @@ const userSchema = yup.object({
 });
 
 export default function EditVehicleInfo({ isOpen, onClose }) {
-  const [updateRider] = useUpdateRiderMutation();
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isSuccess,
+  } = useUpdateRider();
   const { user } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setError,
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
@@ -41,15 +45,12 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
     },
   });
 
-  const onSubmit = async (data) => {
-    const result = await updateRider(data);
-
-    if (result?.data?.success) {
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
       onClose();
-    } else {
-      setError("general", { message: result?.error?.data?.message });
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal
@@ -58,7 +59,10 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
       closeBtn
       headerText="গাড়ির সাধারণ তথ্য"
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="w-[512px] max-w-full">
+      <form
+        onSubmit={handleSubmit(updateRider)}
+        className="w-[512px] max-w-full"
+      >
         <div className="mb-1">
           <label className="font-bold">গাড়ির ধরণ</label>
           <select

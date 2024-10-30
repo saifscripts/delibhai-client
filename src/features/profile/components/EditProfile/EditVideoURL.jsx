@@ -1,11 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import isURL from "validator/lib/isURL";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 
 const userSchema = yup.object({
   videoURL: yup
@@ -14,14 +15,17 @@ const userSchema = yup.object({
 });
 
 export default function EditVideoURL({ isOpen, onClose }) {
-  const [updateRider] = useUpdateRiderMutation();
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isSuccess,
+  } = useUpdateRider();
   const { user } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setError,
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
@@ -29,15 +33,12 @@ export default function EditVideoURL({ isOpen, onClose }) {
     },
   });
 
-  const onSubmit = async (data) => {
-    const result = await updateRider(data);
-
-    if (result?.data?.success) {
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
       onClose();
-    } else {
-      setError("general", { message: result?.error?.data?.message });
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal
@@ -46,7 +47,10 @@ export default function EditVideoURL({ isOpen, onClose }) {
       closeBtn
       headerText="ডিহিরোর অভিব্যক্তি"
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="w-[512px] max-w-full">
+      <form
+        onSubmit={handleSubmit(updateRider)}
+        className="w-[512px] max-w-full"
+      >
         <div className="mb-1 mt-4">
           <label className="font-bold">ভিডিও লিংক</label>
           <input
