@@ -16,7 +16,6 @@ export default function GPSLocation() {
       if (success) {
         const timestamp = Date.now();
         const isOnline = timestamp - data.timestamp < 1000;
-        console.log(isOnline);
         setGeoLocation(isOnline ? data : null);
       }
       setLoading(false);

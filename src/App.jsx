@@ -12,7 +12,6 @@ export default function App() {
       <LocationTracker />
       <ReactHotToaster />
       <Toaster />
-      {/* <LocationTracker /> */}
     </Fragment>
   );
 }
