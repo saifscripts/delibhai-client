@@ -3,20 +3,22 @@ import { useEffect, useState } from "react";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
 import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import getAddressId from "../../utils/getAddressId";
 import RadioInput from "./RadioInput";
 
 export default function EditAddressInfo({ isOpen, onClose }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const [isAddressEqual, setIsAddressEqual] = useState(true);
   const [presentAddress, setPresentAddress] = useState(null);
   const [permanentAddress, setPermanentAddress] = useState(null);
   const { user } = useAuth();
-
-  const [updateRider] = useUpdateRiderMutation();
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isPending,
+    isSuccess,
+  } = useUpdateRider();
 
   useEffect(() => {
     const presentAddress = user?.presentAddress;
@@ -30,8 +32,6 @@ export default function EditAddressInfo({ isOpen, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError("");
 
     const address = {
       presentAddress: getAddressId(presentAddress),
@@ -43,16 +43,14 @@ export default function EditAddressInfo({ isOpen, onClose }) {
     }
 
     // Update data
-    const result = await updateRider(address);
-
-    if (result?.data?.success) {
-      onClose();
-    } else {
-      setError(result?.error?.data?.message);
-    }
-
-    setIsLoading(false);
+    updateRider(address);
   };
+
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
+      onClose();
+    }
+  }, [isSuccess, updatedRider, onClose]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeBtn headerText="ঠিকানা">
@@ -88,10 +86,7 @@ export default function EditAddressInfo({ isOpen, onClose }) {
             villageType="select"
           />
         )}
-
-        <p className="mt-2 text-center text-red-400">{error}</p>
-
-        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isPending} type="submit" value="সংরক্ষণ করুন" />
       </form>
     </Modal>
   );
