@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useAuth } from "../../../../hooks/auth.hook";
-import { useUser } from "../../../../hooks/profile.hook";
+import { useUser } from "../../../../hooks/user.hook";
 import CallButtons from "./CallButtons";
 import ServiceStatusButtons from "./ServiceStatusButtons";
 

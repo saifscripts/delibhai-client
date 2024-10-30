@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import vehicles from "../../../../data/vehicles";
-import { useUser } from "../../../../hooks/profile.hook";
+import { useUser } from "../../../../hooks/user.hook";
 import ProfileAvatar from "./ProfileAvatar";
 
 export default function ProfileHeader() {

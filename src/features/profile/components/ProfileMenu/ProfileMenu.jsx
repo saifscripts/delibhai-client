@@ -1,6 +1,6 @@
 import "react-circular-progressbar/dist/styles.css";
 import { useParams } from "react-router-dom";
-import { useUser } from "../../../../hooks/profile.hook";
+import { useUser } from "../../../../hooks/user.hook";
 import categories from "../../data/categories";
 import profileSchema from "../../data/profileSchema";
 import Category from "./Category";

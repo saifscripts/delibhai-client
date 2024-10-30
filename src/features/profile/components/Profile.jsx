@@ -1,7 +1,7 @@
 // others
 import { Outlet, useParams } from "react-router-dom";
 import Skeleton from "../../../components/Skeleton";
-import { useUser } from "../../../hooks/profile.hook";
+import { useUser } from "../../../hooks/user.hook";
 import MiniContainer from "../../../layouts/MiniContainer";
 import { BottomPanel } from "./BottomPanel";
 import { ProfileHeader } from "./ProfileHeader";

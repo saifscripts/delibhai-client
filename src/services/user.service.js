@@ -9,6 +9,16 @@ export const getUser = async (id) => {
   }
 };
 
+export const updateRider = async (body) => {
+  try {
+    const { data } = await axios.put(`/rider/`, body);
+    return data;
+  } catch (error) {
+    console.log(error.response.data);
+    throw new Error(error.response.data.message);
+  }
+};
+
 export const removeAvatar = async () => {
   try {
     const { data } = await axios.delete("/user/avatar");

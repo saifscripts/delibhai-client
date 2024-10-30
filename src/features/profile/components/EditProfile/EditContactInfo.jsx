@@ -1,12 +1,13 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import isEmail from "validator/lib/isEmail";
 import isURL from "validator/lib/isURL";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import { isMobilePhone } from "../../../../utils/isMobilePhone";
 
 const userSchema = yup.object({
@@ -31,14 +32,16 @@ const userSchema = yup.object({
 
 export default function EditContactInfo({ isOpen, onClose }) {
   const { user } = useAuth();
-
-  const [updateRider] = useUpdateRiderMutation();
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isSuccess,
+  } = useUpdateRider();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setError,
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
@@ -49,15 +52,11 @@ export default function EditContactInfo({ isOpen, onClose }) {
     },
   });
 
-  const onSubmit = async (userData) => {
-    const result = await updateRider(userData);
-
-    if (result?.data?.success) {
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
       onClose();
-    } else {
-      setError("general", { message: result?.error?.data?.message });
     }
-  };
+  }, [isSuccess, updatedRider, onClose]);
 
   return (
     <Modal
@@ -66,7 +65,10 @@ export default function EditContactInfo({ isOpen, onClose }) {
       closeBtn
       headerText="কন্টাক্ট ইনফো"
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="w-[512px] max-w-full">
+      <form
+        onSubmit={handleSubmit(updateRider)}
+        className="w-[512px] max-w-full"
+      >
         <div className="mb-1">
           <label className="font-bold">মোবাইল নাম্বার</label>
           <input

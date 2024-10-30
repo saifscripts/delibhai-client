@@ -2,7 +2,7 @@ import { BsTelephoneFill } from "react-icons/bs";
 import { PiPaperPlaneTiltFill } from "react-icons/pi";
 import { Link, useParams } from "react-router-dom";
 import PrimaryButton from "../../../../components/ui/PrimaryButton";
-import { useUser } from "../../../../hooks/profile.hook";
+import { useUser } from "../../../../hooks/user.hook";
 
 export default function CallButtons() {
   const { id } = useParams();

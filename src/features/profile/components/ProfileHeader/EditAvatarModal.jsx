@@ -5,7 +5,7 @@ import { GiResize } from "react-icons/gi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "react-image-crop/dist/ReactCrop.css";
 import { useAuth } from "../../../../hooks/auth.hook";
-import { useRemoveAvatar } from "../../../../hooks/profile.hook";
+import { useRemoveAvatar } from "../../../../hooks/user.hook";
 import EditOption from "./EditOption";
 import ResizeModal from "./ResizeModal";
 

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import camera from "../../../../assets/icons/camera.svg";
 import { useAuth } from "../../../../hooks/auth.hook";
-import { useUser } from "../../../../hooks/profile.hook";
+import { useUser } from "../../../../hooks/user.hook";
 import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import VehiclePhoto from "./VehiclePhoto";
 

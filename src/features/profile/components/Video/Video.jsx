@@ -1,6 +1,6 @@
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
-import { useUser } from "../../../../hooks/profile.hook";
+import { useUser } from "../../../../hooks/user.hook";
 
 export default function Video() {
   const { id } = useParams();
