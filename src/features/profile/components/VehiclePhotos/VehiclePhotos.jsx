@@ -1,19 +1,18 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 import camera from "../../../../assets/icons/camera.svg";
 import { useAuth } from "../../../../hooks/auth.hook";
-import { useUser } from "../../../../hooks/user.hook";
-import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
+import { useUpdateRider, useUser } from "../../../../hooks/user.hook";
 import VehiclePhoto from "./VehiclePhoto";
 
 export default function VehiclePhotos() {
   const [isLoading, setIsLoading] = useState(false);
-  const [updateRider] = useUpdateRiderMutation();
+  const { mutate: updateRider, isPending } = useUpdateRider();
   const { id } = useParams();
   const { user: authUser } = useAuth();
-  const { data: userData } = useUser(id);
-  const user = userData?.data;
+  const { user } = useUser(id);
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
@@ -29,37 +28,32 @@ export default function VehiclePhotos() {
     const formData = new FormData();
     formData.append("image", files[0]);
 
-    // upload image to the imgbb
-    let response = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${
-        import.meta.env.VITE_IMGBB_API_KEY
-      }`,
-      formData,
-    );
+    let response;
 
-    // return if upload is not success
-    if (!response?.data?.success) {
+    // upload image to the imgbb
+    try {
+      response = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_API_KEY
+        }`,
+        formData,
+      );
+    } catch (error) {
+      toast.error("Failed to upload image");
       setIsLoading(false);
-      return;
     }
 
     // update the image url in database
-    const result = await updateRider({
+    updateRider({
       vehiclePhotos: [..._vehiclePhotos, response.data.data.url],
     });
-
-    // update current user state if database is updated
-    if (result?.data?.success) {
-      // invalidate ['user', 'me'] query
-      //   dispatch(
-      //     setUser({
-      //       user: result?.data?.data,
-      //     }),
-      //   );
-    }
-
-    setIsLoading(false);
   };
+
+  useEffect(() => {
+    if (!isPending) {
+      setIsLoading(false);
+    }
+  }, [isPending]);
 
   return (
     <div className="mb-6 overflow-y-hidden">

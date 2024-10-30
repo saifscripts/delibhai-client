@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useAuth } from "../../../../hooks/auth.hook";
-import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 
 export default function VehiclePhoto({ url, index, userId }) {
   const [deleteBtn, setDeleteBtn] = useState(-1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [updateRider] = useUpdateRiderMutation();
+  const { mutate: updateRider, isPending } = useUpdateRider();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -23,21 +22,13 @@ export default function VehiclePhoto({ url, index, userId }) {
   }, [setDeleteBtn]);
 
   const removePhoto = async () => {
-    setIsLoading(true);
-
     const vehiclePhotos = user?.vehiclePhotos || [];
     const updatedVehiclePhotos = [...vehiclePhotos];
     updatedVehiclePhotos?.splice(index, 1);
 
-    const result = await updateRider({
+    updateRider({
       vehiclePhotos: updatedVehiclePhotos,
     });
-
-    if (result?.data?.success) {
-      // TODO: invalidate 'user' and 'me' query
-    }
-
-    setIsLoading(false);
   };
 
   const showDeleteBtn = (e) => {
@@ -65,7 +56,7 @@ export default function VehiclePhoto({ url, index, userId }) {
         backgroundImage: `url(${url})`,
       }}
       className={`relative flex aspect-square w-28 flex-shrink-0 flex-col items-center justify-center overflow-hidden rounded-lg bg-cover bg-center bg-no-repeat p-1 hover:shadow-xl ${
-        isLoading && "opacity-30"
+        isPending && "opacity-30"
       }`}
     >
       <DeleteButton />
