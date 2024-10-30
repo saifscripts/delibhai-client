@@ -1,9 +1,9 @@
-import { fetchData } from "../../../lib/fetch";
+import axios from "../../../lib/api";
 
 const getVillages = async (unionId) => {
   if (!unionId) return;
-  const { data } = await fetchData(`/v1/village/`, { unionId });
-  return data;
+  const { data } = await axios.get(`/village/${unionId}`);
+  return data.data;
 };
 
 export default getVillages;
