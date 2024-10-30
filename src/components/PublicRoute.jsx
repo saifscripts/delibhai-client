@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import useUserRole from "../hooks/useUserRole.js";
+import { useAuth } from "../hooks/auth.hook.js";
 
 function PublicRoute({ children }) {
-  const { isLoggedIn, isLoading } = useUserRole();
+  const { user, isPending } = useAuth();
   const navigate = useNavigate();
 
-  if (isLoading) {
+  if (isPending) {
     return <h2 className="text-center text-2xl font-semibold">Loading...</h2>;
   }
 
-  if (isLoggedIn) {
+  if (user) {
     return navigate("/");
   }
 
