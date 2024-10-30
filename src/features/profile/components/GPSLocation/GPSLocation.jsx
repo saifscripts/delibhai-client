@@ -6,7 +6,6 @@ import { getRiderLocation } from "../../../../services/user.service";
 export default function GPSLocation() {
   const [geoLocation, setGeoLocation] = useState(null);
   const [loading, setLoading] = useState(false);
-
   const { id } = useParams();
 
   useEffect(() => {

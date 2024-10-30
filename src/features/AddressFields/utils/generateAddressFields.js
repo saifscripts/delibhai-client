@@ -1,8 +1,10 @@
+import {
+  getDistricts,
+  getUnions,
+  getUpazilas,
+  getVillages,
+} from "../../../services/address.service.js";
 import divisions from "../data/divisions.js";
-import getDistricts from "./getDistricts.js";
-import getUnions from "./getUnions.js";
-import getUpazilas from "./getUpazilas.js";
-import getVillages from "./getVillages.js";
 
 const generateAddressFields = async (address) => {
   if (!address) {
@@ -13,9 +15,9 @@ const generateAddressFields = async (address) => {
 
   return {
     divisions,
-    districts: getDistricts(division?._id),
-    upazilas: getUpazilas(district?._id),
-    unions: getUnions(upazila?._id),
+    districts: await getDistricts(division?._id),
+    upazilas: await getUpazilas(district?._id),
+    unions: await getUnions(upazila?._id),
     villages: await getVillages(union?._id),
   };
 };
