@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 
 const userSchema = yup.object({
   manualLocation: yup
@@ -20,7 +20,11 @@ const userSchema = yup.object({
 });
 
 export default function EditManualLocation({ isOpen, onClose }) {
-  const [updateRider] = useUpdateRiderMutation();
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isSuccess,
+  } = useUpdateRider();
   const { user } = useAuth();
 
   const {
@@ -28,7 +32,6 @@ export default function EditManualLocation({ isOpen, onClose }) {
     handleSubmit,
     formState: { errors, isSubmitting },
     setValue,
-    setError,
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
@@ -57,16 +60,12 @@ export default function EditManualLocation({ isOpen, onClose }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
-  const onSubmit = async (data) => {
-    const result = await updateRider(data);
-    console.log(result);
-
-    if (result?.data?.success) {
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
       onClose();
-    } else {
-      setError("general", { message: result?.error?.data?.message });
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal
@@ -75,7 +74,10 @@ export default function EditManualLocation({ isOpen, onClose }) {
       closeBtn
       headerText="ম্যানুয়াল লোকেশন"
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="w-[512px] max-w-full">
+      <form
+        onSubmit={handleSubmit(updateRider)}
+        className="w-[512px] max-w-full"
+      >
         <div className="mb-1">
           <label className="font-bold">Geo Location</label>
           <input

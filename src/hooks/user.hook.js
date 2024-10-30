@@ -23,6 +23,7 @@ export const useUpdateRider = () => {
       if (data?.success) {
         queryClient.invalidateQueries({ queryKey: ["ME"] });
         queryClient.invalidateQueries({ queryKey: ["USER"] });
+        toast.success("Profile updated successfully");
       } else {
         toast.error(data?.message);
       }

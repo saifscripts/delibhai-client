@@ -31,12 +31,12 @@ const userSchema = yup.object({
 });
 
 export default function EditContactInfo({ isOpen, onClose }) {
-  const { user } = useAuth();
   const {
     mutate: updateRider,
     data: updatedRider,
     isSuccess,
   } = useUpdateRider();
+  const { user } = useAuth();
 
   const {
     register,
@@ -56,7 +56,8 @@ export default function EditContactInfo({ isOpen, onClose }) {
     if (isSuccess && updatedRider?.success) {
       onClose();
     }
-  }, [isSuccess, updatedRider, onClose]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal

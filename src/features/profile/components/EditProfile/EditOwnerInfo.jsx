@@ -8,8 +8,8 @@ import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
 import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import { isMobilePhone } from "../../../../utils/isMobilePhone";
 import getAddressId from "../../utils/getAddressId";
 
@@ -30,21 +30,18 @@ const userSchema = yup.object({
 });
 
 export default function EditOwnerInfo({ isOpen, onClose }) {
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isSuccess,
+  } = useUpdateRider();
   const { user } = useAuth();
-
   const [ownerAddress, setOwnerAddress] = useState(null);
-  const [updateRider] = useUpdateRiderMutation();
-
-  useEffect(() => {
-    const ownerAddress = user?.ownerAddress;
-    ownerAddress && setOwnerAddress(ownerAddress);
-  }, [user]);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setError,
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
@@ -57,16 +54,20 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
   const onSubmit = async (data) => {
     const address = getAddressId(ownerAddress);
     data.ownerAddress = isEmpty(address) ? undefined : address;
-
-    // Update data
-    const result = await updateRider(data);
-
-    if (result?.data?.success) {
-      onClose();
-    } else {
-      setError("general", { message: result?.error?.data?.message });
-    }
+    updateRider(data);
   };
+
+  useEffect(() => {
+    const ownerAddress = user?.ownerAddress;
+    ownerAddress && setOwnerAddress(ownerAddress);
+  }, [user]);
+
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
+      onClose();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal
