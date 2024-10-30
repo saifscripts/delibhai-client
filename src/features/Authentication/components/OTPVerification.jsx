@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import Submit from "../../../components/forms/Submit";
 import { useResendOTP, useVerifyOTP } from "../../../hooks/auth.hook";
@@ -25,7 +24,6 @@ function OTPVerification() {
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(true);
   const [OTP, setOTP] = useState(["", "", "", "", "", ""]);
-  const dispatch = useDispatch();
 
   const inputRefs = [
     useRef(null),
@@ -94,7 +92,7 @@ function OTPVerification() {
     if (isVerifySuccess && verifyData?.success) {
       setIsSubmitModalOpen(true);
     }
-  }, [verifyData, dispatch, isVerifySuccess]);
+  }, [verifyData, isVerifySuccess]);
 
   // autofill otp (for testing purpose) --- delete this later
   useEffect(() => {
