@@ -1,8 +1,8 @@
 import { cloneDeep } from "lodash";
 import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { toast } from "sonner";
 import axios from "../../../lib/api";
-import { showErrorToast } from "../../../lib/toast";
 import { useAddress } from "../contexts/AddressContext";
 import generateAddressFields from "../utils/generateAddressFields";
 import cn from "./../../../lib/cn";
@@ -36,7 +36,7 @@ export default function AddVillage() {
       setAddressFields(_addressFields);
       setVillages("");
     } else if (response?.code === "ALREADY_EXIST") {
-      showErrorToast(
+      toast.error(
         `${response?.data?.titles.join(", ")} ইতিমধ্যে যোগ করা হয়েছে।`,
       );
     }
@@ -55,7 +55,7 @@ export default function AddVillage() {
       setIsRenameModalOpen(false);
       setAddressFields(await generateAddressFields(address)); // refetch updated data
     } else {
-      showErrorToast(`${response?.data?.title} ইতিমধ্যে যোগ করা হয়েছে`);
+      toast.error(`${response?.data?.title} ইতিমধ্যে যোগ করা হয়েছে`);
     }
   };
 

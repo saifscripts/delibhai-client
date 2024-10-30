@@ -5,7 +5,6 @@ import { AddressFields } from "../../../../features/AddressFields";
 import MiniContainer from "../../../../layouts/MiniContainer";
 import Modal from "../../../../layouts/Modal";
 import isAddressExist from "../../utils/isAddressExist";
-// import { showErrorToast } from "../../../../lib/toast";
 
 export default function AddressModal({
   isOpen,
@@ -23,7 +22,7 @@ export default function AddressModal({
   //     );
 
   //     if (addressIndex === serviceAddress.length && isUnionExist) {
-  //       return showErrorToast("ইউনিয়নটি ইতিমধ্যে যোগ করা হয়েছে!");
+  //       return toast.error("ইউনিয়নটি ইতিমধ্যে যোগ করা হয়েছে!");
   //     }
   //   }, [address, serviceAddress, addressIndex]);
   useEffect(() => {

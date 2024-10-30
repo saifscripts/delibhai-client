@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { AiFillCamera } from "react-icons/ai";
 import { GiResize } from "react-icons/gi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "react-image-crop/dist/ReactCrop.css";
+import { toast } from "sonner";
 import { useAuth } from "../../../../hooks/auth.hook";
 import { useRemoveAvatar } from "../../../../hooks/user.hook";
 import EditOption from "./EditOption";
@@ -39,13 +39,7 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
       imageElement.addEventListener("load", (e) => {
         const { naturalWidth, naturalHeight } = e.currentTarget;
         if (naturalWidth < MIN_DIMENSION || naturalHeight < MIN_DIMENSION) {
-          toast.error("Image must be at least 150 x 150 pixels", {
-            duration: 4000,
-            position: "top-center",
-            style: {
-              backgroundColor: "#efef8d",
-            },
-          });
+          toast.error("Image must be at least 150 x 150 pixels");
           setResizeModal(false);
           return setImageSrc("");
         }
