@@ -1,11 +1,13 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { useUpdateUserMutation } from "../../../../redux/features/user/userApi";
 import { isNID } from "../../../../utils/isNID";
 
 const userSchema = yup.object({
@@ -37,14 +39,17 @@ const userSchema = yup.object({
 });
 
 export default function EditPersonalInfo({ isOpen, onClose }) {
-  const [updateUser] = useUpdateUserMutation();
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isSuccess,
+  } = useUpdateRider();
   const { user } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setError,
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
@@ -73,9 +78,9 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
 
       // If image upload is not successful, setError message and return
       if (!imgbbResult?.data?.success) {
-        return setError("general", {
-          message: imgbbResult.data.error.message || "Something went wrong",
-        });
+        return toast.error(
+          imgbbResult.data.error.message || "Something went wrong",
+        );
       }
 
       // If image upload is successful, set the url as nidURL field value
@@ -86,14 +91,15 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
     }
 
     // Update data
-    const result = await updateUser(data);
-
-    if (result?.data?.success) {
-      onClose();
-    } else {
-      setError("general", { message: result?.error?.data?.message });
-    }
+    updateRider(data);
   };
+
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
+      onClose();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal
