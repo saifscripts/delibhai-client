@@ -5,8 +5,7 @@ import ReactCrop, {
   convertToPixelCrop,
   makeAspectCrop,
 } from "react-image-crop";
-import { useUpdateData } from "../../../../api/api";
-import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateAvatar } from "../../../../hooks/user.hook";
 import base64ToFormData from "../../../../utils/base64ToFormData";
 import getCroppedData from "../../utils/getCroppedData";
 
@@ -21,8 +20,11 @@ export default function ResizeModal({
 }) {
   const imageRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { updateData } = useUpdateData();
-  const { user } = useAuth();
+  const {
+    mutate: updateAvatar,
+    data: updatedUser,
+    isSuccess,
+  } = useUpdateAvatar();
 
   const saveButtonRef = useRef(null);
 
@@ -76,17 +78,20 @@ export default function ResizeModal({
 
     const avatarData = {
       avatarURL: response[0]?.data?.data?.url,
-      avatarSrcURL: response[1]?.data?.data?.url,
+      avatarOriginURL: response[1]?.data?.data?.url,
       avatarCropData: crop,
     };
 
-    const { data } = await updateData(`/v1/user/${user._id}`, avatarData);
+    updateAvatar(avatarData);
+  };
 
-    if (data?.success) {
+  useEffect(() => {
+    if (isSuccess && updatedUser?.success) {
       setResizeModal(false);
       setIsLoading(false);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedUser?.success]);
 
   useEffect(() => {
     const handleEnterPress = (e) => {

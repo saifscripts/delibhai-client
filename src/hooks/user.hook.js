@@ -1,6 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { getUser, removeAvatar, updateRider } from "../services/user.service";
+import {
+  getUser,
+  removeAvatar,
+  updateAvatar,
+  updateRider,
+} from "../services/user.service";
 
 export const useUser = (id) => {
   const result = useQuery({
@@ -24,6 +29,27 @@ export const useUpdateRider = () => {
         queryClient.invalidateQueries({ queryKey: ["ME"] });
         queryClient.invalidateQueries({ queryKey: ["USER"] });
         toast.success("Profile updated successfully");
+      } else {
+        toast.error(data?.message);
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const useUpdateAvatar = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["UPDATE_AVATAR"],
+    mutationFn: updateAvatar,
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: ["ME"] });
+        queryClient.invalidateQueries({ queryKey: ["USER"] });
+        toast.success("Avatar updated successfully");
       } else {
         toast.error(data?.message);
       }

@@ -19,6 +19,15 @@ export const updateRider = async (body) => {
   }
 };
 
+export const updateAvatar = async (avatarData) => {
+  try {
+    const { data } = await axios.put("/user/avatar", avatarData);
+    return data;
+  } catch (error) {
+    throw new Error(generateErrorMessage(error));
+  }
+};
+
 export const removeAvatar = async () => {
   try {
     const { data } = await axios.delete("/user/avatar");

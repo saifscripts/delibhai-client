@@ -58,7 +58,7 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
   };
 
   const onResize = () => {
-    setImageSrc(user?.avatarSrcURL);
+    setImageSrc(user?.avatarOriginURL);
     setCrop(user?.avatarCropData);
     setEditModal(false);
     setResizeModal(true);
