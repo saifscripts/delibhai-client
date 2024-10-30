@@ -1,11 +1,9 @@
 import { useCallback, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useUpdateData } from "../api/api";
-import { getAuthUser } from "../redux/features/auth/authSlice";
+import { useAuth } from "../hooks/auth.hook";
+import { updateRiderLocation } from "../services/user.service";
 
 const LocationTracker = () => {
-  const { updateData } = useUpdateData();
-  const user = useSelector(getAuthUser);
+  const { user } = useAuth();
 
   // Function to get the user's current location
   const getLocation = useCallback(() => {
@@ -14,18 +12,16 @@ const LocationTracker = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
           const liveLocation = { latitude, longitude };
-          updateData(`/v1/user/location/${user?._id}`, {
-            liveLocation,
-          });
+          updateRiderLocation({ liveLocation });
         },
         () => {},
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
-  }, [user?._id, updateData]);
+  }, []);
 
-  // Send location data to the server using Socket.IO
+  // TODO:Send location data to the server using Socket.IO
   useEffect(() => {
     let intervalId;
 

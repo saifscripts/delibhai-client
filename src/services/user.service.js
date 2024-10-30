@@ -19,6 +19,15 @@ export const getRiderLocation = async (id) => {
   }
 };
 
+export const updateRiderLocation = async (location) => {
+  try {
+    const { data } = await axios.put(`/rider/location/`, location);
+    return data;
+  } catch (error) {
+    console.log(generateErrorMessage(error));
+  }
+};
+
 export const updateRider = async (body) => {
   try {
     const { data } = await axios.put(`/rider/`, body);
