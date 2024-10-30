@@ -1,33 +1,25 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import isEmail from "validator/lib/isEmail";
-import isURL from "validator/lib/isURL";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { useAuth } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { isMobilePhone } from "../../../../utils/isMobilePhone";
+import isMobilePhone from "../../../../utils/validators/isMobilePhone";
 
 const userSchema = yup.object({
   contactNo1: yup
     .string()
     .trim()
     .required("Mobile number is required.")
-    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
+    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone),
   contactNo2: yup
     .string()
     .trim()
-    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
-  email: yup
-    .string()
-    .trim()
-    .lowercase()
-    .test("isValidEmail", `Email is not valid.`, isEmail),
-  facebookURL: yup
-    .string()
-    .test("isFacebookURL", "Please provide a valid url.", isURL),
+    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone),
+  email: yup.string().trim().lowercase().email(),
+  facebookURL: yup.string().url(),
 });
 
 export default function EditContactInfo({ isOpen, onClose }) {

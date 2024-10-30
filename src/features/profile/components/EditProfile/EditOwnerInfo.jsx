@@ -3,14 +3,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import isEmpty from "lodash/isEmpty";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import isEmail from "validator/lib/isEmail";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
 import { useAuth } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { isMobilePhone } from "../../../../utils/isMobilePhone";
+import isMobilePhone from "../../../../utils/validators/isMobilePhone";
 import getAddressId from "../../utils/getAddressId";
 
 const userSchema = yup.object({
@@ -21,12 +20,8 @@ const userSchema = yup.object({
   ownerContactNo: yup
     .string()
     .trim()
-    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
-  ownerEmail: yup
-    .string()
-    .trim()
-    .lowercase()
-    .test("isValidEmail", `Email is not valid.`, isEmail),
+    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone),
+  ownerEmail: yup.string().trim().lowercase().email(),
 });
 
 export default function EditOwnerInfo({ isOpen, onClose }) {

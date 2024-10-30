@@ -1,7 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import isURL from "validator/lib/isURL";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { useAuth } from "../../../../hooks/auth.hook";
@@ -9,9 +8,7 @@ import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
 
 const userSchema = yup.object({
-  videoURL: yup
-    .string()
-    .test("isYoutubeURL", "Please provide a valid url.", isURL),
+  videoURL: yup.string().url(),
 });
 
 export default function EditVideoURL({ isOpen, onClose }) {

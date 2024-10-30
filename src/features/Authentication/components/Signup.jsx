@@ -1,12 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import isStrongPassword from "validator/lib/isStrongPassword";
 import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
 import { useRegisterRider } from "../../../hooks/auth.hook";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import { isMobilePhone } from "../../../utils/isMobilePhone";
+import isMobilePhone from "../../../utils/validators/isMobilePhone";
+import isStrongPassword from "../../../utils/validators/isStrongPassword";
 
 const userSchema = yup.object({
   name: yup
@@ -26,7 +26,7 @@ const userSchema = yup.object({
     .string()
     .trim()
     .required("Mobile number is required.")
-    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
+    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone),
   password: yup
     .string()
     .required("Password is required.")

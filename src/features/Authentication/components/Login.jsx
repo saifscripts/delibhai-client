@@ -5,14 +5,14 @@ import Submit from "../../../components/forms/Submit";
 import { useLogin } from "../../../hooks/auth.hook";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import { isMobilePhone } from "../../../utils/isMobilePhone";
+import isMobilePhone from "../../../utils/validators/isMobilePhone";
 
 const credentialSchema = yup.object({
   mobile: yup
     .string()
     .trim()
     .required("Mobile number is required.")
-    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
+    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone),
   password: yup.string().required("Password is required."),
 });
 
