@@ -10,6 +10,15 @@ export const getUser = async (id) => {
   }
 };
 
+export const getRiderLocation = async (id) => {
+  try {
+    const { data } = await axios.get(`/rider/location/${id}`);
+    return data;
+  } catch (error) {
+    console.log(generateErrorMessage(error));
+  }
+};
+
 export const updateRider = async (body) => {
   try {
     const { data } = await axios.put(`/rider/`, body);
