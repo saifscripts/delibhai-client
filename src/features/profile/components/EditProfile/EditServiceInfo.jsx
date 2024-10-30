@@ -7,8 +7,8 @@ import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
 import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { useUpdateRiderMutation } from "../../../../redux/features/user copy/riderApi";
 import getAddressId from "../../utils/getAddressId";
 import AddressModal from "./AddressModal";
 import ServiceAddressCard from "./ServiceAddressCard";
@@ -37,7 +37,11 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   const [serviceTimes, setServiceTimes] = useState([]);
   const [is24HourServiceTime, setIs24HourServiceTime] = useState(false);
   const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
-  const [updateRider] = useUpdateRiderMutation();
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isSuccess,
+  } = useUpdateRider();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -54,7 +58,6 @@ export default function EditServiceInfo({ isOpen, onClose }) {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setError,
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
@@ -79,15 +82,15 @@ export default function EditServiceInfo({ isOpen, onClose }) {
     }
 
     // Update data
-    const result = await updateRider(data);
-
-    if (result?.data?.success) {
-      onClose();
-    } else {
-      console.log(result?.error?.data);
-      setError("general", { message: result?.error?.data?.message });
-    }
+    updateRider(data);
   };
+
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
+      onClose();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeBtn headerText="সার্ভিস তথ্য">
