@@ -8,6 +8,7 @@ export const getDistricts = async (divisionId) => {
     return data.data;
   } catch (error) {
     console.log(generateErrorMessage(error));
+    return [];
   }
 };
 
@@ -18,6 +19,7 @@ export const getUpazilas = async (districtId) => {
     return data.data;
   } catch (error) {
     console.log(generateErrorMessage(error));
+    return [];
   }
 };
 
@@ -28,6 +30,7 @@ export const getUnions = async (upazilaId) => {
     return data.data;
   } catch (error) {
     console.log(generateErrorMessage(error));
+    return [];
   }
 };
 
@@ -38,5 +41,6 @@ export const getVillages = async (unionId) => {
     return data.data;
   } catch (error) {
     console.log(generateErrorMessage(error));
+    return [];
   }
 };

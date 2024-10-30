@@ -1,4 +1,4 @@
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 
 const modifyServiceAddress = (serviceAddress) => {
   const _serviceAddress = cloneDeep(serviceAddress);

@@ -1,4 +1,4 @@
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { toast } from "sonner";

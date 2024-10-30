@@ -1,4 +1,4 @@
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 import { useEffect, useState } from "react";
 import { AiFillPlusSquare } from "react-icons/ai";
 import { AddressFields } from "../../../../features/AddressFields";

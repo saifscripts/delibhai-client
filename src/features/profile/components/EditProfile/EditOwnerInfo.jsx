@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import isEmail from "validator/lib/isEmail";
