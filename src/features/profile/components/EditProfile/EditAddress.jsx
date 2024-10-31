@@ -5,7 +5,6 @@ import { AddressFields } from "../../../../features/AddressFields";
 import { useAuth } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import getAddressId from "../../utils/getAddressId";
 import RadioInput from "./RadioInput";
 
 export default function EditAddressInfo({ isOpen, onClose }) {
@@ -34,8 +33,8 @@ export default function EditAddressInfo({ isOpen, onClose }) {
     e.preventDefault();
 
     const address = {
-      presentAddress: getAddressId(presentAddress),
-      permanentAddress: getAddressId(permanentAddress),
+      presentAddress,
+      permanentAddress,
     };
 
     if (isAddressEqual) {
@@ -50,7 +49,8 @@ export default function EditAddressInfo({ isOpen, onClose }) {
     if (isSuccess && updatedRider?.success) {
       onClose();
     }
-  }, [isSuccess, updatedRider, onClose]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeBtn headerText="ঠিকানা">

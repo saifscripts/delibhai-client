@@ -27,81 +27,107 @@ export const AddressProvider = ({
   }, [address]);
 
   const handleDivisionChange = (e) => {
+    const selectedDivision = e.target.value
+      ? {
+          _id: e.target.value,
+          title: e.target.selectedOptions[0].innerText,
+        }
+      : undefined;
+
+    if (!selectedDivision) return setAddress(undefined);
+
     setAddress({
-      division: {
-        _id: e.target.value,
-        title: e.target.selectedOptions[0].innerText,
-      },
+      division: selectedDivision,
       district: undefined,
       upazila: undefined,
       union: undefined,
-      village: [],
+      village: undefined,
     });
   };
 
   const handleDistrictChange = (e) => {
+    const selectedDistrict = e.target.value
+      ? {
+          _id: e.target.value,
+          title: e.target.selectedOptions[0].innerText,
+        }
+      : undefined;
+
     setAddress((prevAddress) => ({
       ...prevAddress,
-      district: {
-        _id: e.target.value,
-        title: e.target.selectedOptions[0].innerText,
-      },
+      district: selectedDistrict,
       upazila: undefined,
       union: undefined,
-      village: [],
+      village: undefined,
     }));
   };
 
   const handleUpazilaChange = (e) => {
+    const selectedUpazila = e.target.value
+      ? {
+          _id: e.target.value,
+          title: e.target.selectedOptions[0].innerText,
+        }
+      : undefined;
+
     setAddress((prevAddress) => ({
       ...prevAddress,
-      upazila: {
-        _id: e.target.value,
-        title: e.target.selectedOptions[0].innerText,
-      },
+      upazila: selectedUpazila,
       union: undefined,
-      village: [],
+      village: undefined,
     }));
   };
 
   const handleUnionChange = (e) => {
+    const selectedUnion = e.target.value
+      ? {
+          _id: e.target.value,
+          title: e.target.selectedOptions[0].innerText,
+        }
+      : undefined;
+
     setAddress((prevAddress) => ({
       ...prevAddress,
-      union: {
-        _id: e.target.value,
-        title: e.target.selectedOptions[0].innerText,
-      },
-      village: [],
+      union: selectedUnion,
+      village: undefined,
     }));
   };
 
   const handleWardChange = (e) => setWard(e.target.value);
 
   const handleVillageSelect = (e) => {
+    const selectedVillage = e.target.value
+      ? {
+          _id: e.target.value,
+          title: e.target.selectedOptions[0].innerText,
+        }
+      : undefined;
+
     setAddress((prevAddress) => ({
       ...prevAddress,
-      village: {
-        _id: e.target.value,
-        title: e.target.selectedOptions[0].innerText,
-      },
+      village: selectedVillage,
     }));
   };
 
   const handleVillageCheck = (e) => {
-    const value = {
-      _id: e.target.value,
-      title: e.target.labels[0].innerText.trim(),
-    };
+    const selectedVillage = e.target.value
+      ? {
+          _id: e.target.value,
+          title: e.target.labels[0].innerText.trim(),
+        }
+      : undefined;
 
     const checked = e.target.checked;
 
     setAddress((prevAddress) => {
-      let _villages = [...prevAddress.village];
+      let _villages = Array.isArray(prevAddress.village)
+        ? [...prevAddress.village]
+        : [];
 
       if (checked) {
-        _villages.push(value);
+        _villages.push(selectedVillage);
       } else {
-        _villages = _villages.filter((v) => v._id !== value._id);
+        _villages = _villages.filter((v) => v._id !== selectedVillage._id);
       }
 
       return {

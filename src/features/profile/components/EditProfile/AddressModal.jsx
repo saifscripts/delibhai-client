@@ -28,6 +28,7 @@ export default function AddressModal({
   useEffect(() => {
     setError("");
   }, [address]);
+
   const handleSave = (e) => {
     e.preventDefault();
     setError("");

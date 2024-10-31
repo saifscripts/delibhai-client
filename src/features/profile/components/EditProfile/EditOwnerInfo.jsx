@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
-import isEmpty from "lodash/isEmpty";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -10,7 +9,6 @@ import { useAuth } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
 import isMobilePhone from "../../../../utils/validators/isMobilePhone";
-import getAddressId from "../../utils/getAddressId";
 
 const userSchema = yup.object({
   ownerName: yup
@@ -31,7 +29,7 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
     isSuccess,
   } = useUpdateRider();
   const { user } = useAuth();
-  const [ownerAddress, setOwnerAddress] = useState(null);
+  const [ownerAddress, setOwnerAddress] = useState(undefined);
 
   const {
     register,
@@ -47,8 +45,7 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
   });
 
   const onSubmit = async (data) => {
-    const address = getAddressId(ownerAddress);
-    data.ownerAddress = isEmpty(address) ? undefined : address;
+    data.ownerAddress = ownerAddress;
     updateRider(data);
   };
 

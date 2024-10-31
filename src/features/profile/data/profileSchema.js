@@ -191,7 +191,7 @@ const profileSchema = {
           icon: station,
         },
         {
-          dataKey: "serviceAddress",
+          dataKey: "serviceArea",
           dataModifier: modifyServiceAddress,
           label: "সার্ভিস প্রদানের এলাকা সমূহ",
           icon: serviceArea,

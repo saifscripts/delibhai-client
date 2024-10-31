@@ -9,7 +9,6 @@ import { AddressFields } from "../../../../features/AddressFields";
 import { useAuth } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import getAddressId from "../../utils/getAddressId";
 import AddressModal from "./AddressModal";
 import ServiceAddressCard from "./ServiceAddressCard";
 import ServiceTimes from "./ServiceTimes";
@@ -30,7 +29,7 @@ const userSchema = yup.object({
 });
 
 export default function EditServiceInfo({ isOpen, onClose }) {
-  const [serviceAddress, setServiceAddress] = useState([]);
+  const [serviceArea, setServiceArea] = useState([]);
   const [address, setAddress] = useState(null);
   const [mainStationAddress, setMainStationAddress] = useState({});
   const [addressIndex, setAddressIndex] = useState(null);
@@ -46,11 +45,11 @@ export default function EditServiceInfo({ isOpen, onClose }) {
 
   useEffect(() => {
     const mainStation = user?.mainStation;
-    const serviceAddress = user?.serviceAddress;
+    const serviceArea = user?.serviceArea;
     const serviceTimes = user?.serviceTimes;
 
     mainStation && setMainStationAddress(mainStation);
-    serviceAddress && setServiceAddress(serviceAddress);
+    serviceArea && setServiceArea(serviceArea);
     serviceTimes && setServiceTimes(serviceTimes);
   }, [user]);
 
@@ -67,13 +66,11 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   });
 
   const onSubmit = async (data) => {
-    const address = getAddressId(mainStationAddress);
-    data.mainStation = isEmpty(address) ? undefined : address;
-    // data.mainStation = getAddressId(mainStationAddress);
+    data.mainStation = isEmpty(mainStationAddress)
+      ? undefined
+      : mainStationAddress;
 
-    data.serviceAddress = serviceAddress?.map((address) =>
-      getAddressId(address),
-    );
+    data.serviceArea = serviceArea;
 
     if (is24HourServiceTime) {
       data.serviceTimes = [{ start: "00:00", end: "23:59" }];
@@ -138,7 +135,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
         </p>
 
         <div className="my-6 flex flex-col gap-2">
-          {serviceAddress?.map((address, index) => (
+          {serviceArea?.map((address, index) => (
             <ServiceAddressCard
               key={index}
               index={index}
@@ -146,8 +143,8 @@ export default function EditServiceInfo({ isOpen, onClose }) {
               setAddress={setAddress}
               setAddressIndex={setAddressIndex}
               setIsAddressModalOpen={setIsAddressModalOpen}
-              serviceAddress={serviceAddress}
-              setServiceAddress={setServiceAddress}
+              serviceAddress={serviceArea}
+              setServiceAddress={setServiceArea}
             />
           ))}
         </div>
@@ -157,7 +154,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
             e.preventDefault();
             setIsAddressModalOpen(true);
             setAddress(null);
-            setAddressIndex(serviceAddress.length);
+            setAddressIndex(serviceArea.length);
           }}
           className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-2 py-2 text-xl text-white"
         >
@@ -182,8 +179,8 @@ export default function EditServiceInfo({ isOpen, onClose }) {
         onClose={() => setIsAddressModalOpen(false)}
         address={address}
         setAddress={setAddress}
-        serviceAddress={serviceAddress}
-        setServiceAddress={setServiceAddress}
+        serviceAddress={serviceArea}
+        setServiceAddress={setServiceArea}
         addressIndex={addressIndex}
       />
     </Modal>
