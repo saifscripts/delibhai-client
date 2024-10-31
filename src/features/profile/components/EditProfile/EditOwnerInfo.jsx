@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
+import isEmpty from "lodash/isEmpty";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -29,7 +30,7 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
     isSuccess,
   } = useUpdateRider();
   const { user } = useAuth();
-  const [ownerAddress, setOwnerAddress] = useState(undefined);
+  const [ownerAddress, setOwnerAddress] = useState({});
 
   const {
     register,
@@ -45,7 +46,7 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
   });
 
   const onSubmit = async (data) => {
-    data.ownerAddress = ownerAddress;
+    data.ownerAddress = isEmpty(ownerAddress) ? {} : ownerAddress;
     updateRider(data);
   };
 
