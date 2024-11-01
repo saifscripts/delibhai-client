@@ -14,11 +14,11 @@ export default function GPSLocation() {
       const { success, data } = await getRiderLocation(id);
       if (success) {
         const timestamp = Date.now();
-        const isOnline = timestamp - data.timestamp < 1000;
+        const isOnline = timestamp - data.timestamp < 5000;
         setGeoLocation(isOnline ? data : null);
       }
       setLoading(false);
-    }, 500);
+    }, 2000);
 
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -26,7 +26,7 @@ const LocationTracker = () => {
     let intervalId;
 
     if (user?.role === "rider" || user?.role === "admin") {
-      intervalId = setInterval(getLocation, 500);
+      intervalId = setInterval(getLocation, 2000);
     }
 
     return () => clearInterval(intervalId);
