@@ -1,8 +1,8 @@
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { deleteData, postData, updateData } from "../../../lib/api/api";
-import { showErrorToast } from "../../../lib/toast";
+import { toast } from "sonner";
+import axios from "../../../lib/api";
 import { useAddress } from "../contexts/AddressContext";
 import generateAddressFields from "../utils/generateAddressFields";
 import cn from "./../../../lib/cn";
@@ -28,17 +28,15 @@ export default function AddVillage() {
       title: village.trim(),
     }));
 
-    const response = await postData("/v1/village/create", villageArray);
+    const response = await axios.post("/village", { villages: villageArray });
 
-    console.log(response);
-
-    if (response?.success) {
+    if (response?.data?.success) {
       const _addressFields = cloneDeep(addressFields);
-      _addressFields.villages.unshift(...response.data);
+      _addressFields.villages.unshift(...response.data.data);
       setAddressFields(_addressFields);
       setVillages("");
     } else if (response?.code === "ALREADY_EXIST") {
-      showErrorToast(
+      toast.error(
         `${response?.data?.titles.join(", ")} ইতিমধ্যে যোগ করা হয়েছে।`,
       );
     }
@@ -47,25 +45,25 @@ export default function AddVillage() {
 
   const handleVillageEdit = async () => {
     const { _id, title, unionId } = editVillage;
-    console.log(editVillage);
-    const response = await updateData(`/v1/village/update/${_id}`, {
+
+    const response = await axios.put(`/village/${_id}`, {
       title,
       unionId,
     });
 
-    if (response?.success) {
+    if (response?.data?.success) {
       setIsRenameModalOpen(false);
       setAddressFields(await generateAddressFields(address)); // refetch updated data
     } else {
-      showErrorToast(`${response?.data?.title} ইতিমধ্যে যোগ করা হয়েছে`);
+      toast.error(`${response?.data?.title} ইতিমধ্যে যোগ করা হয়েছে`);
     }
   };
 
   const handleVillageDelete = async () => {
     const { _id } = editVillage;
-    const response = await deleteData(`/v1/village/delete/${_id}`);
+    const response = await axios.delete(`/village/${_id}`);
 
-    if (response?.success) {
+    if (response?.data?.success) {
       setIsDeleteModalOpen(false);
       setAddressFields(await generateAddressFields(address)); // refetch updated data
     }

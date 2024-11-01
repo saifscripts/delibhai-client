@@ -1,14 +1,15 @@
-import { useContext } from "react";
 import ReactPlayer from "react-player";
-import UserContext from "../../contexts/UserContext";
+import { useParams } from "react-router-dom";
+import { useUser } from "../../../../hooks/user.hook";
 
 export default function Video() {
-  const { userInfo } = useContext(UserContext);
+  const { id } = useParams();
+  const { user } = useUser(id);
 
-  if (userInfo?.videoURL) {
+  if (user?.videoURL) {
     return (
       <div className="flex w-full items-center justify-center overflow-hidden rounded-lg bg-black">
-        <ReactPlayer loop url={userInfo.videoURL} />
+        <ReactPlayer loop url={user.videoURL} />
       </div>
     );
   }

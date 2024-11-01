@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { useUpdateData } from "../../../../api/api";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
+import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 
 export default function VehiclePhoto({ url, index, userId }) {
   const [deleteBtn, setDeleteBtn] = useState(-1);
-  const [isLoading, setIsLoading] = useState(false);
-  const { currentUser, setCurrentUser } = useAuth();
-  const { updateData } = useUpdateData();
+  const { mutate: updateRider, isPending } = useUpdateRider();
+  const { user } = useAuth();
 
   useEffect(() => {
     const hideDeleteBtn = () => {
@@ -23,20 +22,13 @@ export default function VehiclePhoto({ url, index, userId }) {
   }, [setDeleteBtn]);
 
   const removePhoto = async () => {
-    setIsLoading(true);
+    const vehiclePhotos = user?.vehiclePhotos || [];
+    const updatedVehiclePhotos = [...vehiclePhotos];
+    updatedVehiclePhotos?.splice(index, 1);
 
-    const vehiclePhotos = currentUser?.vehiclePhotos;
-    vehiclePhotos?.splice(index, 1);
-
-    const { data } = await updateData(`/v1/user/${currentUser._id}`, {
-      vehiclePhotos,
+    updateRider({
+      vehiclePhotos: updatedVehiclePhotos,
     });
-
-    if (data?.success) {
-      setCurrentUser(data.data);
-    }
-
-    setIsLoading(false);
   };
 
   const showDeleteBtn = (e) => {
@@ -64,11 +56,11 @@ export default function VehiclePhoto({ url, index, userId }) {
         backgroundImage: `url(${url})`,
       }}
       className={`relative flex aspect-square w-28 flex-shrink-0 flex-col items-center justify-center overflow-hidden rounded-lg bg-cover bg-center bg-no-repeat p-1 hover:shadow-xl ${
-        isLoading && "opacity-30"
+        isPending && "opacity-30"
       }`}
     >
       <DeleteButton />
-      {userId === currentUser?._id && (
+      {userId === user?._id && (
         <BsThreeDotsVertical
           className="absolute right-0 top-0"
           onClick={showDeleteBtn}

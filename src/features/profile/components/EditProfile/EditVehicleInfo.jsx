@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import vehicles from "../../../../data/vehicles";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
+import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
 
 const vehicleTitles = vehicles.map(({ title }) => title);
@@ -22,38 +23,34 @@ const userSchema = yup.object({
 });
 
 export default function EditVehicleInfo({ isOpen, onClose }) {
-  const { currentUser, setCurrentUser } = useAuth();
-  const { isLoading, updateData } = useUpdateData();
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isSuccess,
+  } = useUpdateRider();
+  const { user } = useAuth();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    setError,
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      vehicleType: currentUser?.vehicleType,
-      vehicleBrand: currentUser?.vehicleBrand,
-      vehicleModel: currentUser?.vehicleModel,
-      vehicleNumber: currentUser?.vehicleNumber,
-      vehicleName: currentUser?.vehicleName,
+      vehicleType: user?.vehicleType,
+      vehicleBrand: user?.vehicleBrand,
+      vehicleModel: user?.vehicleModel,
+      vehicleNumber: user?.vehicleNumber,
+      vehicleName: user?.vehicleName,
     },
   });
 
-  const onSubmit = async (userData) => {
-    const { data, error } = await updateData(
-      `/v1/user/${currentUser._id}`,
-      userData,
-    );
-
-    if (data?.success) {
-      setCurrentUser(data.data);
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
       onClose();
-    } else {
-      setError("general", { message: error?.message });
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal
@@ -62,12 +59,15 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
       closeBtn
       headerText="গাড়ির সাধারণ তথ্য"
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="w-[512px] max-w-full">
+      <form
+        onSubmit={handleSubmit(updateRider)}
+        className="w-[512px] max-w-full"
+      >
         <div className="mb-1">
           <label className="font-bold">গাড়ির ধরণ</label>
           <select
             {...register("vehicleType")}
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary bg-transparent py-3"
           >
             <option>গাড়ির ধরণ নির্বাচন করুন</option>
@@ -87,7 +87,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             {...register("vehicleBrand")}
             type="text"
             placeholder="গাড়ির ব্র্যান্ড লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.vehicleBrand?.message}</p>
@@ -99,7 +99,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             {...register("vehicleModel")}
             type="text"
             placeholder="গাড়ির মডেল লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.vehicleModel?.message}</p>
@@ -111,7 +111,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             {...register("vehicleNumber")}
             type="text"
             placeholder="গাড়ির নম্বর লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.vehicleNumber?.message}</p>
@@ -123,7 +123,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             {...register("vehicleName")}
             type="text"
             placeholder="গাড়ির নাম লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.vehicleName?.message}</p>
@@ -131,7 +131,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
 
         <p className="text-red-400">{errors.general?.message}</p>
 
-        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isSubmitting} type="submit" value="সংরক্ষণ করুন" />
       </form>
     </Modal>
   );

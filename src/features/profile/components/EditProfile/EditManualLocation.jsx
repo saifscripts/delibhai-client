@@ -1,38 +1,42 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
+import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
 
 const userSchema = yup.object({
-  geoLocation: yup
-    .string()
-    .test("isValidGeoLocation", `Invalid GeoLocation!`, (geo) => {
-      const [lat, lon] = geo.split(",").map((l) => l.trim());
-      return (
-        isFinite(lat) &&
-        Math.abs(lat) <= 90 &&
-        isFinite(lon) &&
-        Math.abs(lon) <= 180
-      );
+  manualLocation: yup
+    .object({
+      latitude: yup.number(),
+      longitude: yup.number(),
+    })
+    .transform((value) => {
+      const [latitude, longitude] = value.split(",").map((l) => l.trim());
+      return { latitude, longitude };
     }),
 });
 
 export default function EditManualLocation({ isOpen, onClose }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const { currentUser, setCurrentUser } = useAuth();
-  const { updateData } = useUpdateData();
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isSuccess,
+  } = useUpdateRider();
+  const { user } = useAuth();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     setValue,
   } = useForm({
     resolver: yupResolver(userSchema),
+    defaultValues: {
+      manualLocation: `${user?.manualLocation?.latitude}, ${user?.manualLocation?.longitude}`,
+    },
   });
 
   useEffect(() => {
@@ -42,39 +46,26 @@ export default function EditManualLocation({ isOpen, onClose }) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
-            setValue("geoLocation", `${latitude}, ${longitude}`);
+            setValue("manualLocation", `${latitude}, ${longitude}`);
           },
           (error) => {
             console.error("Error getting location:", error);
           },
         );
       } else {
-        console.error("Geolocation is not supported by this browser.");
+        console.error("Geolocation is not supported  by this browser.");
       }
     };
     getLocation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
-  const onSubmit = async ({ geoLocation }) => {
-    setIsLoading(true);
-
-    const [latitude, longitude] = geoLocation.split(",").map((l) => l.trim());
-
-    const manualLocation = { latitude, longitude };
-
-    // Update data
-    const { data } = await updateData(`/v1/user/${currentUser._id}`, {
-      manualLocation,
-    });
-
-    if (data?.success) {
-      setCurrentUser(data.data);
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
       onClose();
     }
-
-    setIsLoading(false);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal
@@ -83,20 +74,23 @@ export default function EditManualLocation({ isOpen, onClose }) {
       closeBtn
       headerText="ম্যানুয়াল লোকেশন"
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="w-[512px] max-w-full">
+      <form
+        onSubmit={handleSubmit(updateRider)}
+        className="w-[512px] max-w-full"
+      >
         <div className="mb-1">
           <label className="font-bold">Geo Location</label>
           <input
             type="text"
-            disabled={isLoading}
+            disabled={isSubmitting}
             placeholder="Geo Location"
-            {...register("geoLocation")}
+            {...register("manualLocation")}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.geoLocation?.message}</p>
+          <p className="text-red-400">{errors.manualLocation?.message}</p>
         </div>
 
-        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isSubmitting} type="submit" value="সংরক্ষণ করুন" />
       </form>
     </Modal>
   );

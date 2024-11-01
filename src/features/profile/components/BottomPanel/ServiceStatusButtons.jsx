@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { updateData } from "../../../../lib/api/api";
-import { useAuth } from "../../../Authentication/contexts/AuthContext";
+
+import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import offDisabled from "./assets/off-disabled.svg";
 import off from "./assets/off.svg";
 import onDisabled from "./assets/on-disabled.svg";
@@ -9,26 +10,20 @@ import scheduledDisabled from "./assets/scheduled-disabled.svg";
 import scheduled from "./assets/scheduled.svg";
 
 export default function ServiceStatusButtons() {
-  const { currentUser, setCurrentUser } = useAuth();
   const [serviceStatus, setServiceStatus] = useState("scheduled");
+  const { mutate: updateRider } = useUpdateRider();
+  const { user } = useAuth();
 
   useEffect(() => {
-    setServiceStatus(currentUser?.serviceStatus || "scheduled");
-  }, [currentUser]);
+    setServiceStatus(user?.serviceStatus || "scheduled");
+  }, [user]);
 
   const handleServiceStatus = async (status) => {
     setServiceStatus(status);
 
-    const response = await updateData(`/v1/user/${currentUser._id}`, {
+    updateRider({
       serviceStatus: status,
     });
-
-    if (response?.success) {
-      setCurrentUser(response.data);
-      //   setServiceStatus(response.data?.serviceStatus);
-    } else {
-      setServiceStatus(currentUser?.serviceStatus || "scheduled");
-    }
   };
 
   return (

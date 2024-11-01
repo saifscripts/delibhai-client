@@ -1,67 +1,55 @@
-/* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import isEmail from "validator/lib/isEmail";
-import isURL from "validator/lib/isURL";
 import * as yup from "yup";
-import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
+import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { isMobilePhone } from "../../../../utils/isMobilePhone";
+import isMobilePhone from "../../../../utils/validators/isMobilePhone";
 
 const userSchema = yup.object({
-  mobile: yup
+  contactNo1: yup
     .string()
     .trim()
     .required("Mobile number is required.")
-    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
-  altMobile: yup
+    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone),
+  contactNo2: yup
     .string()
     .trim()
-    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
-  email: yup
-    .string()
-    .trim()
-    .lowercase()
-    .test("isValidEmail", `Email is not valid.`, isEmail),
-  facebookURL: yup
-    .string()
-    .test("isFacebookURL", "Please provide a valid url.", isURL),
+    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone),
+  email: yup.string().trim().lowercase().email(),
+  facebookURL: yup.string().url(),
 });
 
 export default function EditContactInfo({ isOpen, onClose }) {
-  const { currentUser, setCurrentUser } = useAuth();
-  const { isLoading, updateData } = useUpdateData();
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isSuccess,
+  } = useUpdateRider();
+  const { user } = useAuth();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    setError,
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      mobile: currentUser?.mobile,
-      altMobile: currentUser?.altMobile,
-      email: currentUser?.email,
-      facebookURL: currentUser?.facebookURL,
+      contactNo1: user?.contactNo1,
+      contactNo2: user?.contactNo2,
+      email: user?.email,
+      facebookURL: user?.facebookURL,
     },
   });
 
-  const onSubmit = async (userData) => {
-    const { data, error } = await updateData(
-      `/v1/user/${currentUser._id}`,
-      userData,
-    );
-
-    if (data?.success) {
-      setCurrentUser(data.data);
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
       onClose();
-    } else {
-      setError("general", { message: error?.message });
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal
@@ -70,29 +58,32 @@ export default function EditContactInfo({ isOpen, onClose }) {
       closeBtn
       headerText="কন্টাক্ট ইনফো"
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="w-[512px] max-w-full">
+      <form
+        onSubmit={handleSubmit(updateRider)}
+        className="w-[512px] max-w-full"
+      >
         <div className="mb-1">
           <label className="font-bold">মোবাইল নাম্বার</label>
           <input
-            {...register("mobile")}
+            {...register("contactNo1")}
             type="text"
             placeholder="মোবাইল নাম্বার লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.mobile?.message}</p>
+          <p className="text-red-400">{errors.contactNo1?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
           <label className="font-bold">বিকল্প মোবাইল নম্বর</label>
           <input
-            {...register("altMobile")}
+            {...register("contactNo2")}
             type="text"
             placeholder="বিকল্প মোবাইল নাম্বার লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.altMobile?.message}</p>
+          <p className="text-red-400">{errors.contactNo2?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -101,7 +92,7 @@ export default function EditContactInfo({ isOpen, onClose }) {
             {...register("email")}
             type="text"
             placeholder="ই-মেইল লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.email?.message}</p>
@@ -113,7 +104,7 @@ export default function EditContactInfo({ isOpen, onClose }) {
             {...register("facebookURL")}
             type="text"
             placeholder="ফেইসবুক লিংক লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.facebookURL?.message}</p>
@@ -121,7 +112,7 @@ export default function EditContactInfo({ isOpen, onClose }) {
 
         <p className="text-red-400">{errors.general?.message}</p>
 
-        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isSubmitting} type="submit" value="সংরক্ষণ করুন" />
       </form>
     </Modal>
   );

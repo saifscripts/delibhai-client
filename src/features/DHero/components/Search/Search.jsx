@@ -1,50 +1,39 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../../components/ui/Button";
 import MiniContainer from "../../../../layouts/MiniContainer";
-import Destination from "./Destination";
 import GPSLocation from "./GPSLocation";
 import VehicleCategories from "./VehicleCategories";
 
 export default function Search() {
   const [vehicleType, setVehicleType] = useState("বাইক");
-  const [locationType, setLocationType] = useState("gps");
   const [geoLocation, setGeoLocation] = useState(null);
-  const [manualLocation, setManualLocation] = useState(null);
-  const [destination, setDestination] = useState(null);
+  //   const [destination, setDestination] = useState(null);
   const navigate = useNavigate();
 
   // restore states from the local storage
-  useEffect(() => {
-    const searchParams = JSON.parse(localStorage.getItem("heroSearchParams"));
+  //   useEffect(() => {
+  //     const searchParams = JSON.parse(localStorage.getItem("heroSearchParams"));
 
-    if (searchParams) {
-      const { vehicleType, locationType, manualLocation, destination } =
-        searchParams;
-
-      setVehicleType(vehicleType);
-      setLocationType(locationType);
-      setManualLocation(manualLocation);
-      setDestination(destination);
-    }
-  }, []);
+  //     if (searchParams) {
+  //       const { vehicleType, destination } = searchParams;
+  //       setVehicleType(vehicleType);
+  //       setDestination(destination);
+  //     }
+  //   }, []);
 
   const handleSearch = () => {
     // combine all states as searchParams obj
-    const searchParams = {
-      vehicleType,
-      locationType,
-      geoLocation,
-      manualLocation,
-      destination,
-    };
+    const searchParams = new URLSearchParams();
 
-    localStorage.setItem("heroSearchParams", JSON.stringify(searchParams));
+    searchParams.set("vehicleType", vehicleType);
+    searchParams.set("latitude", geoLocation.latitude);
+    searchParams.set("longitude", geoLocation.longitude);
 
-    navigate(
-      `search?vehicle=${vehicleType}&location=${locationType}&lat=${geoLocation?.latitude}&long=${geoLocation?.longitude}&cVil=${manualLocation?.village?._id}&dVil=${destination?.village?._id}`,
-    );
+    // localStorage.setItem("heroSearchParams", JSON.stringify(searchParams));
+
+    navigate(`search?${searchParams.toString()}`);
   };
 
   return (
@@ -63,14 +52,14 @@ export default function Search() {
           setGeoLocation={setGeoLocation}
         />
 
-        <Destination
+        {/* <Destination
           destination={destination}
           setDestination={setDestination}
-        />
+        /> */}
 
         <Button
           type="submit"
-          value="Search"
+          value="সার্চ করুন"
           icon={<BiSearchAlt />}
           onClick={handleSearch}
         />

@@ -5,9 +5,8 @@ import ReactCrop, {
   convertToPixelCrop,
   makeAspectCrop,
 } from "react-image-crop";
-import { useUpdateData } from "../../../../api/api";
+import { useUpdateAvatar } from "../../../../hooks/user.hook";
 import base64ToFormData from "../../../../utils/base64ToFormData";
-import { useAuth } from "../../../Authentication/contexts/AuthContext";
 import getCroppedData from "../../utils/getCroppedData";
 
 const ASPECT_RATIO = 1;
@@ -21,8 +20,12 @@ export default function ResizeModal({
 }) {
   const imageRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { updateData } = useUpdateData();
-  const { currentUser, setCurrentUser } = useAuth();
+  const {
+    mutate: updateAvatar,
+    data: updatedUser,
+    isSuccess,
+  } = useUpdateAvatar();
+
   const saveButtonRef = useRef(null);
 
   const onImageLoad = (e) => {
@@ -75,21 +78,20 @@ export default function ResizeModal({
 
     const avatarData = {
       avatarURL: response[0]?.data?.data?.url,
-      avatarSrcURL: response[1]?.data?.data?.url,
+      avatarOriginURL: response[1]?.data?.data?.url,
       avatarCropData: crop,
     };
 
-    const { data } = await updateData(
-      `/v1/user/${currentUser._id}`,
-      avatarData,
-    );
+    updateAvatar(avatarData);
+  };
 
-    if (data?.success) {
-      setCurrentUser(data.data);
+  useEffect(() => {
+    if (isSuccess && updatedUser?.success) {
       setResizeModal(false);
       setIsLoading(false);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedUser?.success]);
 
   useEffect(() => {
     const handleEnterPress = (e) => {
@@ -105,12 +107,7 @@ export default function ResizeModal({
   }, []);
 
   return (
-    <div
-      className="fixed inset-0 z-[9999999] flex items-center justify-center bg-black bg-opacity-20"
-      onKeyDown={(e) => {
-        console.log(e.key);
-      }}
-    >
+    <div className="fixed inset-0 z-[9999999] flex items-center justify-center bg-black bg-opacity-20">
       <div className="mx-4 rounded-md bg-white p-4">
         {imageSrc && (
           <div className="flex flex-col items-center justify-center gap-5">

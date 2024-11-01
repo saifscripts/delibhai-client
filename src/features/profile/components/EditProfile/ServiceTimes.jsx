@@ -1,8 +1,8 @@
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 import { useEffect, useState } from "react";
 import { AiFillPlusSquare } from "react-icons/ai";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { showErrorToast } from "../../../../lib/toast";
+import { toast } from "sonner";
 import { convertTimeFormat } from "../../../../utils/convertTime";
 import {
   hasMinimumTimeGap,
@@ -63,15 +63,15 @@ export default function ServiceTimes({
     e.preventDefault();
 
     if (!isValidTimeSlot(newTimeSlot)) {
-      return showErrorToast("সঠিক সময় প্রদান করুন");
+      return toast.error("সঠিক সময় প্রদান করুন");
     }
 
     if (!hasMinimumTimeGap(newTimeSlot)) {
-      return showErrorToast("ন্যূনতম ৩০ মিনিট ব্যবধান থাকা বাধ্যতামূলক");
+      return toast.error("ন্যূনতম ৩০ মিনিট ব্যবধান থাকা বাধ্যতামূলক");
     }
 
     if (isSlotOverlapping(newTimeSlot, serviceTimes)) {
-      return showErrorToast("উক্ত সময় ইতিমধ্যে প্রদান করা হয়েছে");
+      return toast.error("উক্ত সময় ইতিমধ্যে প্রদান করা হয়েছে");
     }
 
     const _serviceTimes = cloneDeep(serviceTimes);

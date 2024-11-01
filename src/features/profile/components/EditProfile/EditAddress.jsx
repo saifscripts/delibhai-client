@@ -1,40 +1,40 @@
-import { isEqual } from "lodash";
+import isEqual from "lodash/isEqual";
 import { useEffect, useState } from "react";
-import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
+import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import getAddressId from "../../utils/getAddressId";
 import RadioInput from "./RadioInput";
 
 export default function EditAddressInfo({ isOpen, onClose }) {
-  const [isLoading, setIsLoading] = useState(false);
   const [isAddressEqual, setIsAddressEqual] = useState(true);
   const [presentAddress, setPresentAddress] = useState(null);
   const [permanentAddress, setPermanentAddress] = useState(null);
-
-  const { currentUser, setCurrentUser } = useAuth();
+  const { user } = useAuth();
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isPending,
+    isSuccess,
+  } = useUpdateRider();
 
   useEffect(() => {
-    const presentAddress = currentUser?.presentAddress;
-    const permanentAddress = currentUser?.permanentAddress;
+    const presentAddress = user?.presentAddress;
+    const permanentAddress = user?.permanentAddress;
 
     presentAddress && setPresentAddress(presentAddress);
     permanentAddress && setPermanentAddress(permanentAddress);
 
     setIsAddressEqual(isEqual(presentAddress, permanentAddress));
-  }, [currentUser]);
-
-  const { updateData } = useUpdateData();
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
 
     const address = {
-      presentAddress: getAddressId(presentAddress),
-      permanentAddress: getAddressId(permanentAddress),
+      presentAddress,
+      permanentAddress,
     };
 
     if (isAddressEqual) {
@@ -42,15 +42,15 @@ export default function EditAddressInfo({ isOpen, onClose }) {
     }
 
     // Update data
-    const { data } = await updateData(`/v1/user/${currentUser._id}`, address);
+    updateRider(address);
+  };
 
-    if (data?.success) {
-      setCurrentUser(data.data);
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
       onClose();
     }
-
-    setIsLoading(false);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeBtn headerText="ঠিকানা">
@@ -86,8 +86,7 @@ export default function EditAddressInfo({ isOpen, onClose }) {
             villageType="select"
           />
         )}
-
-        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isPending} type="submit" value="সংরক্ষণ করুন" />
       </form>
     </Modal>
   );

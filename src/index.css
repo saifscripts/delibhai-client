@@ -4,7 +4,9 @@
 
 body {
   margin: 0;
-  font-family: "Hind Siliguri", sans-serif;
+  font-family: "Noto Serif Bengali", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

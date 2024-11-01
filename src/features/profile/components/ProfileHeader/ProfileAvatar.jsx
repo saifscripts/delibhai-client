@@ -2,14 +2,13 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import camera from "../../../../assets/icons/camera.svg";
 import Avatar from "../../../../components/Avatar";
-import { useAuth } from "../../../Authentication/contexts/AuthContext";
+import { useAuth } from "../../../../hooks/auth.hook";
 import EditAvatarModal from "./EditAvatarModal";
 
 export default function ProfileAvatar({ avatarURL }) {
   const [editModal, setEditModal] = useState(false);
-
   const { id } = useParams();
-  const { currentUser } = useAuth();
+  const { user } = useAuth();
 
   return (
     <>
@@ -17,7 +16,7 @@ export default function ProfileAvatar({ avatarURL }) {
 
       <div className="relative">
         <Avatar className="w-32 min-[400px]:w-40" src={avatarURL} />
-        {id === currentUser?._id && <EditButton setEditModal={setEditModal} />}
+        {id === user?._id && <EditButton setEditModal={setEditModal} />}
       </div>
     </>
   );

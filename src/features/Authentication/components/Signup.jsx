@@ -1,13 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import isStrongPassword from "validator/lib/isStrongPassword";
 import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
+import { useRegisterRider } from "../../../hooks/auth.hook";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import { isMobilePhone } from "../../../utils/isMobilePhone";
-import { useAuth } from "../contexts/AuthContext";
+import isMobilePhone from "../../../utils/validators/isMobilePhone";
+import isStrongPassword from "../../../utils/validators/isStrongPassword";
 
 const userSchema = yup.object({
   name: yup
@@ -27,7 +26,7 @@ const userSchema = yup.object({
     .string()
     .trim()
     .required("Mobile number is required.")
-    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
+    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone),
   password: yup
     .string()
     .required("Password is required.")
@@ -52,44 +51,15 @@ const userSchema = yup.object({
 });
 
 function Signup() {
-  const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    setError,
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(userSchema),
   });
 
-  const { signup, isLoading } = useAuth();
-
-  const onSubmit = async (userData) => {
-    const { data, error } = await signup(userData);
-
-    if (data?.success) {
-      return navigate("/otp-verification", {
-        state: { id: data.data.user._id },
-      });
-    }
-
-    if (error?.error?.keyPattern?.mobile) {
-      setError("mobile", {
-        message: "A user already exist with this mobile number.",
-      });
-    }
-
-    if (error?.code === "duplicateEmail") {
-      setError("email", {
-        message: error.message,
-      });
-    }
-
-    if (error?.name === "AxiosError") {
-      setError("general", { message: error?.message });
-    }
-  };
+  const { mutate: registerRider } = useRegisterRider();
 
   return (
     <MiniContainer>
@@ -97,14 +67,14 @@ function Signup() {
         title="একটি একাউন্ট তৈরী করুন"
         subtitle="অনুগ্রহ করে সঠিক তথ্য দিয়ে একটি একাউন্ড তৈরী করুন"
       />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(registerRider)}>
         <div className="mb-1 mt-4">
           <label className="font-bold">পুরো নাম</label>
           <input
             {...register("name")}
             type="text"
             placeholder="পুরো নাম লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.name?.message}</p>
@@ -114,7 +84,7 @@ function Signup() {
           <label className="font-bold">লিঙ্গ</label>
           <select
             {...register("gender")}
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary bg-transparent py-3"
           >
             <option value="পুরুষ">পুরুষ</option>
@@ -130,7 +100,7 @@ function Signup() {
             {...register("mobile")}
             type="text"
             placeholder="মোবাইল নাম্বার লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.mobile?.message}</p>
@@ -142,7 +112,7 @@ function Signup() {
             {...register("password")}
             type="password"
             placeholder="পাসওয়ার্ড দিন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.password?.message}</p>
@@ -154,7 +124,7 @@ function Signup() {
             {...register("confirmPassword")}
             type="password"
             placeholder="পুনরায় পাসওয়ার্ড দিন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.confirmPassword?.message}</p>
@@ -162,7 +132,7 @@ function Signup() {
 
         <p className="text-red-400">{errors.general?.message}</p>
 
-        <Submit disabled={isLoading} value="ওটিপি কোড পাঠান" />
+        <Submit disabled={isSubmitting} value="ওটিপি কোড পাঠান" />
       </form>
     </MiniContainer>
   );

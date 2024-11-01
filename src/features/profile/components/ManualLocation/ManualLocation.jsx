@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import Map from "../../../../components/Map";
-import UserContext from "../../contexts/UserContext";
+import { useUser } from "../../../../hooks/user.hook";
 
 export default function ManualLocation() {
-  const { userInfo } = useContext(UserContext);
+  const { id } = useParams();
+  const { user } = useUser(id);
 
-  return <Map geoLocation={userInfo?.manualLocation} />;
+  return <Map geoLocation={user?.manualLocation} />;
 }

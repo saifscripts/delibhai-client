@@ -1,12 +1,13 @@
-import { useContext } from "react";
 import "react-circular-progressbar/dist/styles.css";
-import UserContext from "../../contexts/UserContext";
+import { useParams } from "react-router-dom";
+import { useUser } from "../../../../hooks/user.hook";
 import categories from "../../data/categories";
 import profileSchema from "../../data/profileSchema";
 import Category from "./Category";
 
 export default function ProfileMenu() {
-  const { userInfo } = useContext(UserContext);
+  const { id } = useParams();
+  const { user } = useUser(id);
 
   const calculatePercent = (categoryName) => {
     let total = 0;
@@ -16,7 +17,7 @@ export default function ProfileMenu() {
       total += fields.length;
 
       fields.map(({ dataKey }) => {
-        if (userInfo[dataKey]) completed += 1;
+        if (user[dataKey]) completed += 1;
       });
     });
 

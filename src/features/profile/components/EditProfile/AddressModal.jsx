@@ -1,10 +1,10 @@
-import { cloneDeep } from "lodash";
-import { useEffect } from "react";
+import cloneDeep from "lodash/cloneDeep";
+import { useEffect, useState } from "react";
 import { AiFillPlusSquare } from "react-icons/ai";
 import { AddressFields } from "../../../../features/AddressFields";
 import MiniContainer from "../../../../layouts/MiniContainer";
 import Modal from "../../../../layouts/Modal";
-import { showErrorToast } from "../../../../lib/toast";
+import isAddressExist from "../../utils/isAddressExist";
 
 export default function AddressModal({
   isOpen,
@@ -15,24 +15,29 @@ export default function AddressModal({
   setServiceAddress,
   addressIndex,
 }) {
-  useEffect(() => {
-    const isUnionExist = serviceAddress?.some(
-      (add) => add?.union?._id === address?.union?._id,
-    );
+  const [error, setError] = useState("");
+  //   useEffect(() => {
+  //     const isUnionExist = serviceAddress?.some(
+  //       (adr) => adr?.union?._id === address?.union?._id,
+  //     );
 
-    if (addressIndex === serviceAddress.length && isUnionExist) {
-      return showErrorToast("ইউনিয়নটি ইতিমধ্যে যোগ করা হয়েছে!");
-    }
-  }, [address, serviceAddress, addressIndex]);
+  //     if (addressIndex === serviceAddress.length && isUnionExist) {
+  //       return toast.error("ইউনিয়নটি ইতিমধ্যে যোগ করা হয়েছে!");
+  //     }
+  //   }, [address, serviceAddress, addressIndex]);
+  useEffect(() => {
+    setError("");
+  }, [address]);
+
   const handleSave = (e) => {
     e.preventDefault();
+    setError("");
 
-    const isUnionExist = serviceAddress?.some(
-      (add) => add?.union?._id === address?.union?._id,
-    );
-
-    if (addressIndex === serviceAddress.length && isUnionExist) {
-      return showErrorToast("ইউনিয়নটি ইতিমধ্যে যোগ করা হয়েছে!");
+    if (
+      addressIndex === serviceAddress.length &&
+      isAddressExist(address, serviceAddress)
+    ) {
+      return setError("ঠিকানাটি ইতিমধ্যে যোগ করা হয়েছে!");
     }
 
     const _serviceAddress = cloneDeep(serviceAddress);
@@ -51,6 +56,7 @@ export default function AddressModal({
           setAddress={setAddress}
         />
 
+        <p className="mb-3 text-center text-red-400">{error}</p>
         <button
           onClick={handleSave}
           className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-2 py-2 text-xl text-white"

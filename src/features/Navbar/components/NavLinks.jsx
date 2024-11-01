@@ -2,20 +2,20 @@ import { AiFillHome, AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { MdAppRegistration } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../features/Authentication/contexts/AuthContext";
+import { useAuth } from "../../../hooks/auth.hook";
 import CustomNavLink from "./CustomNavLink";
 
 const NavLinks = () => {
-  const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   return (
     <>
       <CustomNavLink to="/" icon={<AiFillHome />} text="হোম পেইজ" />
-      {currentUser ? null : (
+      {!user && (
         <CustomNavLink icon={<AiOutlineLogin />} to="/login" text="লগইন করুন" />
       )}
-      {currentUser ? null : (
+      {!user && (
         <CustomNavLink
           to="/signup"
           icon={<MdAppRegistration />}
@@ -23,14 +23,14 @@ const NavLinks = () => {
           highlight
         />
       )}
-      {currentUser && (
+      {user && (
         <CustomNavLink
-          to={`/profile/${currentUser?._id}`}
+          to={`/profile/${user?._id}`}
           icon={<CgProfile />}
           text="প্রোফাইল"
         />
       )}
-      {currentUser && (
+      {user && (
         <button
           onClick={() => {
             logout();

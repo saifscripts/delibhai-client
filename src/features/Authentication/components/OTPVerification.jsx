@@ -1,19 +1,29 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useFetchData, usePostData } from "../../../api/api";
 import Submit from "../../../components/forms/Submit";
+import { useResendOTP, useVerifyOTP } from "../../../hooks/auth.hook";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import { useAuth } from "../contexts/AuthContext";
+import cn from "../../../lib/cn";
 import { SubmitModal, Timer } from "../index";
 
 function OTPVerification() {
+  const {
+    mutate: verifyOTP,
+    isPending: isVerifyPending,
+    isSuccess: isVerifySuccess,
+    data: verifyData,
+  } = useVerifyOTP();
+  const {
+    mutate: resendOTP,
+    isPending: isResendPending,
+    isSuccess: isResendSuccess,
+    data: resendData,
+  } = useResendOTP();
   const { state } = useLocation();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(true);
   const [OTP, setOTP] = useState(["", "", "", "", "", ""]);
-  const [error, setError] = useState("");
-  const {setCurrentUser} = useAuth()
 
   const inputRefs = [
     useRef(null),
@@ -23,9 +33,6 @@ function OTPVerification() {
     useRef(null),
     useRef(null),
   ];
-
-  const { isLoading, postData } = usePostData();
-  const { fetchData } = useFetchData();
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -49,23 +56,17 @@ function OTPVerification() {
     }
   };
 
-  const resendOTP = async (e) => {
+  const handleResendOTP = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await fetchData(`/v1/user/resend-otp/${state.id}`);
-
-    if (data?.success) {
-      setError("");
-      setTimerRunning(true);
-      setOTP(["", "", "", "", "", ""]);
-    } else {
-      setError(error?.message);
-    }
+    resendOTP({
+      _id: state._id,
+    });
   };
 
   function preventUpDown(event) {
+    // 38 is the up arrow key, 40 is the down arrow key
     if (event.keyCode === 38 || event.keyCode === 40) {
-      // 38 is the up arrow key, 40 is the down arrow key
       event.preventDefault();
       return false;
     }
@@ -74,21 +75,29 @@ function OTPVerification() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await postData("/v1/user/verify-otp", {
-      id: state.id,
+    verifyOTP({
+      _id: state._id,
       otp: OTP.join(""),
     });
-
-    if (data?.success) {
-      setError("");
-      setIsSubmitModalOpen(true);
-      const { token } = data.data;
-      localStorage.setItem("authToken", token);
-      setCurrentUser(data?.data?.user);
-    } else {
-      setError(error?.message);
-    }
   };
+
+  useEffect(() => {
+    if (isResendSuccess && resendData?.success) {
+      setTimerRunning(true);
+      setOTP(resendData?.data?.otp?.split(""));
+    }
+  }, [isResendSuccess, resendData]);
+
+  useEffect(() => {
+    if (isVerifySuccess && verifyData?.success) {
+      setIsSubmitModalOpen(true);
+    }
+  }, [verifyData, isVerifySuccess]);
+
+  // autofill otp (for testing purpose) --- delete this later
+  useEffect(() => {
+    setOTP(state?.otp?.split(""));
+  }, [state]);
 
   return (
     <>
@@ -100,7 +109,6 @@ function OTPVerification() {
               subtitle="আমাদের পাঠানো SMS এ প্রাপ্ত কোডটি প্রদান করুন +8801823540325"
             />
 
-            <p className="mt-4 text-center text-xl text-red-400">{error}</p>
             <Timer
               time={60 * 1000}
               timerRunning={timerRunning}
@@ -117,7 +125,7 @@ function OTPVerification() {
                     onChange={(e) => handleChange(e, index)}
                     onKeyDown={preventUpDown}
                     maxLength="1"
-                    disabled={isLoading}
+                    disabled={isVerifyPending || isResendPending}
                     className="aspect-square w-12 rounded-lg border border-secondary px-4 text-xl focus:border-primary focus:outline-none"
                   />
                 ))}
@@ -126,9 +134,12 @@ function OTPVerification() {
               <p className="mx-auto my-4 w-fit">
                 আমি কোনো কোড পাই নি.{" "}
                 <button
-                  onClick={resendOTP}
-                  disabled={timerRunning}
-                  className={`text-${timerRunning ? "accent" : "secondary"}`}
+                  onClick={handleResendOTP}
+                  disabled={timerRunning || isVerifyPending || isResendPending}
+                  className={cn("text-secondary", {
+                    "text-accent":
+                      timerRunning || isVerifyPending || isResendPending,
+                  })}
                 >
                   পুনরায় পাঠান
                 </button>
@@ -136,7 +147,11 @@ function OTPVerification() {
 
               <Submit
                 value="সাবমিট করুন"
-                disabled={isLoading || OTP.some((field) => field === "")}
+                disabled={
+                  isVerifyPending ||
+                  isResendPending ||
+                  OTP.some((field) => field === "")
+                }
                 className="rounded-lg"
                 onClick={handleSubmit}
               />
@@ -150,4 +165,3 @@ function OTPVerification() {
 }
 
 export { OTPVerification };
-

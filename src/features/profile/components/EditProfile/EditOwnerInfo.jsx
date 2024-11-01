@@ -1,77 +1,66 @@
 /* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
+import isEmpty from "lodash/isEmpty";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import isEmail from "validator/lib/isEmail";
 import * as yup from "yup";
-import { useUpdateData } from "../../../../api/api";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
+import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
-import { isMobilePhone } from "../../../../utils/isMobilePhone";
-import getAddressId from "../../utils/getAddressId";
+import isMobilePhone from "../../../../utils/validators/isMobilePhone";
 
 const userSchema = yup.object({
   ownerName: yup
     .string()
     .trim()
     .min(3, "Name must be at least 3 characters long."),
-  ownerMobile: yup
+  ownerContactNo: yup
     .string()
     .trim()
-    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone("bn-BD")),
-  ownerEmail: yup
-    .string()
-    .trim()
-    .lowercase()
-    .test("isValidEmail", `Email is not valid.`, isEmail),
+    .test("isMobilePhone", `Mobile number is invalid.`, isMobilePhone),
+  ownerEmail: yup.string().trim().lowercase().email(),
 });
 
 export default function EditOwnerInfo({ isOpen, onClose }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [ownerAddress, setOwnerAddress] = useState(null);
-  const { currentUser, setCurrentUser } = useAuth();
-  const { updateData } = useUpdateData();
-
-  useEffect(() => {
-    const ownerAddress = currentUser?.ownerAddress;
-    ownerAddress && setOwnerAddress(ownerAddress);
-  }, [currentUser]);
+  const {
+    mutate: updateRider,
+    data: updatedRider,
+    isSuccess,
+  } = useUpdateRider();
+  const { user } = useAuth();
+  const [ownerAddress, setOwnerAddress] = useState({});
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    setError,
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(userSchema),
     defaultValues: {
-      ownerName: currentUser?.ownerName,
-      ownerMobile: currentUser?.ownerMobile,
-      ownerEmail: currentUser?.ownerEmail,
+      ownerName: user?.ownerName,
+      ownerContactNo: user?.ownerContactNo,
+      ownerEmail: user?.ownerEmail,
     },
   });
 
-  const onSubmit = async (userData) => {
-    setIsLoading(true);
-    userData.ownerAddress = getAddressId(ownerAddress);
-
-    // Update data
-    const { data, error } = await updateData(
-      `/v1/user/${currentUser._id}`,
-      userData,
-    );
-
-    if (data?.success) {
-      setCurrentUser(data.data);
-      onClose();
-    } else {
-      setError("general", { message: error?.message });
-    }
-
-    setIsLoading(false);
+  const onSubmit = async (data) => {
+    data.ownerAddress = isEmpty(ownerAddress) ? {} : ownerAddress;
+    updateRider(data);
   };
+
+  useEffect(() => {
+    const ownerAddress = user?.ownerAddress;
+    ownerAddress && setOwnerAddress(ownerAddress);
+  }, [user]);
+
+  useEffect(() => {
+    if (isSuccess && updatedRider?.success) {
+      onClose();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, updatedRider]);
 
   return (
     <Modal
@@ -87,7 +76,7 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
             {...register("ownerName")}
             type="text"
             placeholder="কোম্পানি/মালিকের নাম লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.ownerName?.message}</p>
@@ -104,13 +93,13 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
         <div className="mb-1 mt-4">
           <label className="font-bold">মোবাইল</label>
           <input
-            {...register("ownerMobile")}
+            {...register("ownerContactNo")}
             type="text"
             placeholder="মোবাইল নাম্বার লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.ownerMobile?.message}</p>
+          <p className="text-red-400">{errors.ownerContactNo?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -119,13 +108,13 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
             {...register("ownerEmail")}
             type="text"
             placeholder="ই-মেইল লিখুন"
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
           <p className="text-red-400">{errors.ownerEmail?.message}</p>
         </div>
 
-        <Button disabled={isLoading} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isSubmitting} type="submit" value="সংরক্ষণ করুন" />
       </form>
     </Modal>
   );

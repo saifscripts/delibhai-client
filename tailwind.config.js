@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import daisyui from "daisyui";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -17,7 +18,6 @@ export default {
       },
       fontFamily: {
         noto: "'Noto Serif Bengali', serif;",
-        hind: "'Hind Siliguri', sans-serif",
         inter: "'Inter', sans-serif",
       },
       boxShadow: {
@@ -56,5 +56,5 @@ export default {
     ],
   },
   // ONLY FOR DUMMY HOME PAGE. REMOVE THIS LATER
-  plugins: [require("daisyui")],
+  plugins: [daisyui],
 };

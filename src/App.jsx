@@ -1,19 +1,15 @@
-import { Toaster } from "react-hot-toast";
+import { Fragment } from "react";
 import { RouterProvider } from "react-router-dom";
+import { Toaster } from "sonner";
 import LocationTracker from "./components/LocationTracker.jsx";
-import { useAuth } from "./features/Authentication/contexts/AuthContext.jsx";
 import router from "./router.jsx";
 
 export default function App() {
-  const { currentUser } = useAuth();
   return (
-    <>
+    <Fragment>
       <RouterProvider router={router} />
+      <LocationTracker />
       <Toaster />
-      {currentUser &&
-        (currentUser.role === "hero" || currentUser.role === "admin") && (
-          <LocationTracker />
-        )}
-    </>
+    </Fragment>
   );
 }

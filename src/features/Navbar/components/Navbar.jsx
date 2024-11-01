@@ -1,7 +1,7 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/logos/logo.png";
-import { useAuth } from "../../../features/Authentication/contexts/AuthContext";
+import { useAuth } from "../../../hooks/auth.hook";
 import cn from "../../../lib/cn";
 import useSidebar from "../hooks/useSidebar";
 import NavLinks from "./NavLinks";
@@ -9,8 +9,8 @@ import Sidebar from "./Sidebar";
 
 const Navbar = () => {
   const { isSidebarOpen, handleSidebarToggle } = useSidebar();
-  const { currentUser } = useAuth();
   const { pathname } = useLocation();
+  const { user } = useAuth();
 
   return (
     <nav
@@ -40,7 +40,7 @@ const Navbar = () => {
             <img src={logo} alt="deliBhai Logo" className="w-28 sm:w-44" />
           </Link>
 
-          {currentUser?.role === "admin" && (
+          {user?.role === "admin" && (
             <Link
               to="/admin-dashboard"
               className="hidden bg-secondary px-6 py-3 font-semibold hover:brightness-90 lg:inline-block"

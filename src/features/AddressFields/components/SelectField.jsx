@@ -16,7 +16,7 @@ export default function SelectField({
         onChange={onChange}
         className="w-full border-b border-primary bg-transparent py-3"
       >
-        <option>সিলেক্ট করুন</option>
+        <option value="">সিলেক্ট করুন</option>
         {fields?.map(({ _id, title }) => (
           <option key={_id} value={_id}>
             {title}

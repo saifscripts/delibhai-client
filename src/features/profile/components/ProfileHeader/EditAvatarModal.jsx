@@ -1,11 +1,11 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 import { AiFillCamera } from "react-icons/ai";
 import { GiResize } from "react-icons/gi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "react-image-crop/dist/ReactCrop.css";
-import { updateData } from "../../../../lib/api";
-import { useAuth } from "../../../Authentication/contexts/AuthContext";
+import { toast } from "sonner";
+import { useAuth } from "../../../../hooks/auth.hook";
+import { useRemoveAvatar } from "../../../../hooks/user.hook";
 import EditOption from "./EditOption";
 import ResizeModal from "./ResizeModal";
 
@@ -15,7 +15,14 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState();
   const [resizeModal, setResizeModal] = useState(false);
-  const { currentUser, setCurrentUser } = useAuth();
+  const { user } = useAuth();
+
+  const {
+    mutate: removeAvatar,
+    data: updatedUser,
+    isPending,
+    isSuccess,
+  } = useRemoveAvatar();
 
   const onSelectFile = (e) => {
     setCrop(null);
@@ -32,13 +39,7 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
       imageElement.addEventListener("load", (e) => {
         const { naturalWidth, naturalHeight } = e.currentTarget;
         if (naturalWidth < MIN_DIMENSION || naturalHeight < MIN_DIMENSION) {
-          toast.error("Image must be at least 150 x 150 pixels", {
-            duration: 4000,
-            position: "top-center",
-            style: {
-              backgroundColor: "#efef8d",
-            },
-          });
+          toast.error("Image must be at least 150 x 150 pixels");
           setResizeModal(false);
           return setImageSrc("");
         }
@@ -51,25 +52,17 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
   };
 
   const onResize = () => {
-    setImageSrc(currentUser?.avatarSrcURL);
-    setCrop(currentUser?.avatarCropData);
+    setImageSrc(user?.avatarOriginURL);
+    setCrop(user?.avatarCropData);
     setEditModal(false);
     setResizeModal(true);
   };
 
-  const onDelete = async () => {
-    const fields = { avatarURL: 1, avatarSrcURL: 1, avatarCropData: 1 };
-
-    const data = await updateData(
-      `/v1/user/remove-fields/${currentUser._id}`,
-      fields,
-    );
-
-    if (data?.success) {
-      setCurrentUser(data.data);
+  useEffect(() => {
+    if (!isPending && isSuccess && updatedUser?.success) {
       setEditModal(false);
     }
-  };
+  }, [isPending, isSuccess, updatedUser, setEditModal]);
 
   return (
     <>
@@ -106,7 +99,7 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
             onChange={onSelectFile}
             onClick={(e) => (e.target.value = null)}
           />
-          {currentUser?.avatarURL && (
+          {user?.avatarURL && (
             <>
               <EditOption
                 icon={<GiResize />}
@@ -118,7 +111,7 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
                 icon={<RiDeleteBin5Fill />}
                 text="ছবি ডিলিট করুন"
                 type="button"
-                onClick={onDelete}
+                onClick={removeAvatar}
               />
             </>
           )}

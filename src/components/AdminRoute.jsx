@@ -1,17 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../features/Authentication/contexts/AuthContext.jsx";
-import useUserRole from "../hooks/useUserRole.js";
+import { useAuth } from "../hooks/auth.hook";
 
 function AdminRoute({ children }) {
-  const { isLoggedIn, role, isLoading } = useUserRole();
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { user, isLoading, logout } = useAuth();
+  const role = user?.role;
 
   if (isLoading) {
     return <h2 className="text-center text-2xl font-semibold">Loading...</h2>;
   }
 
-  if (!isLoggedIn) {
+  if (!user) {
     return navigate("/login");
   }
 

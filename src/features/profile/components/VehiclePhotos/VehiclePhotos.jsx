@@ -1,24 +1,26 @@
 import axios from "axios";
-import { useContext, useState } from "react";
-import { useUpdateData } from "../../../../api/api";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 import camera from "../../../../assets/icons/camera.svg";
-import { useAuth } from "../../../../features/Authentication/contexts/AuthContext";
-import UserContext from "../../contexts/UserContext";
+import { useAuth } from "../../../../hooks/auth.hook";
+import { useUpdateRider, useUser } from "../../../../hooks/user.hook";
 import VehiclePhoto from "./VehiclePhoto";
 
 export default function VehiclePhotos() {
   const [isLoading, setIsLoading] = useState(false);
-  const { userInfo } = useContext(UserContext);
-  const { updateData } = useUpdateData();
-  const { currentUser, setCurrentUser } = useAuth();
+  const { mutate: updateRider, isPending } = useUpdateRider();
+  const { id } = useParams();
+  const { user: authUser } = useAuth();
+  const { user } = useUser(id);
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
 
     // clone vehicle photo from the state
     let _vehiclePhotos = [];
-    if (currentUser?.vehiclePhotos) {
-      _vehiclePhotos = [...currentUser.vehiclePhotos];
+    if (authUser?.vehiclePhotos) {
+      _vehiclePhotos = [...authUser.vehiclePhotos];
     }
 
     // create formData from the image
@@ -26,46 +28,41 @@ export default function VehiclePhotos() {
     const formData = new FormData();
     formData.append("image", files[0]);
 
-    // upload image to the imgbb
-    let response = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${
-        import.meta.env.VITE_IMGBB_API_KEY
-      }`,
-      formData,
-    );
+    let response;
 
-    // return if upload is not success
-    if (!response?.data?.success) {
+    // upload image to the imgbb
+    try {
+      response = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${
+          import.meta.env.VITE_IMGBB_API_KEY
+        }`,
+        formData,
+      );
+    } catch (error) {
+      toast.error("Failed to upload image");
       setIsLoading(false);
-      return;
     }
 
     // update the image url in database
-    const { data } = await updateData(`/v1/user/${currentUser._id}`, {
+    updateRider({
       vehiclePhotos: [..._vehiclePhotos, response.data.data.url],
     });
-
-    // update current user state if database is updated
-    if (data?.success) {
-      setCurrentUser(data.data);
-    }
-
-    setIsLoading(false);
   };
+
+  useEffect(() => {
+    if (!isPending) {
+      setIsLoading(false);
+    }
+  }, [isPending]);
 
   return (
     <div className="mb-6 overflow-y-hidden">
       <div className="-mb-5 flex gap-2 overflow-x-scroll pb-5">
-        {userInfo?.vehiclePhotos?.map((url, index) => (
-          <VehiclePhoto
-            url={url}
-            key={url}
-            index={index}
-            userId={userInfo?._id}
-          />
+        {user?.vehiclePhotos?.map((url, index) => (
+          <VehiclePhoto url={url} key={url} index={index} userId={user?._id} />
         ))}
-        {userInfo?.vehiclePhotos?.length < 4 &&
-          userInfo?._id === currentUser?._id && (
+        {(!authUser?.vehiclePhotos || user?.vehiclePhotos?.length < 4) &&
+          user?._id === authUser?._id && (
             <form
               className={`relative z-10 flex aspect-square w-28 flex-shrink-0 flex-col items-center justify-center rounded-lg bg-accent ${
                 isLoading && "opacity-30"

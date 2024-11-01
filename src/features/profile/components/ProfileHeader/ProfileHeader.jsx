@@ -1,35 +1,34 @@
-import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import vehicles from "../../../../data/vehicles";
-import UserContext from "../../contexts/UserContext";
+import { useUser } from "../../../../hooks/user.hook";
 import ProfileAvatar from "./ProfileAvatar";
 
 export default function ProfileHeader() {
-  const { userInfo } = useContext(UserContext);
+  const { id } = useParams();
+  const { user } = useUser(id);
 
   const vehicleIcon = vehicles.find(
-    ({ title }) => title === userInfo?.vehicleType,
+    ({ title }) => title === user?.vehicleType,
   )?.icon;
 
   return (
     <>
       <div className="flex items-center gap-5">
-        <ProfileAvatar avatarURL={userInfo?.avatarURL} />
+        <ProfileAvatar avatarURL={user?.avatarURL} />
 
         <div>
-          <h3 className="mb-1 text-2xl">{userInfo?.name}</h3>
+          <h3 className="mb-1 text-2xl">{user?.name}</h3>
 
           <span className="border-grey-500 mb-4 inline-block rounded-lg border px-3 font-inter text-gray-500">
-            #{userInfo?._id?.slice(0, 5)}
+            #{user?._id?.slice(0, 5)}
           </span>
 
           <div className="relative z-10 flex h-10 items-center rounded-full bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] py-3 pl-4 pr-10 text-xs min-[500px]:text-base">
-            <span>
-              {userInfo?.vehicleType && userInfo?.vehicleType + " রাইডার"}
-            </span>
+            <span>{user?.vehicleType && user?.vehicleType + " রাইডার"}</span>
             <div className="absolute right-0 top-1/2 h-16 w-16 -translate-y-1/2 translate-x-1/2">
               <img
                 src={vehicleIcon}
-                alt={userInfo?.vehicleType}
+                alt={user?.vehicleType}
                 className="mx-auto h-full"
               />
             </div>

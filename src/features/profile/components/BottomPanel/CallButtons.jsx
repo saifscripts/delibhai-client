@@ -1,12 +1,12 @@
-import { useContext } from "react";
 import { BsTelephoneFill } from "react-icons/bs";
 import { PiPaperPlaneTiltFill } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import PrimaryButton from "../../../../components/ui/PrimaryButton";
-import UserContext from "../../contexts/UserContext";
+import { useUser } from "../../../../hooks/user.hook";
 
 export default function CallButtons() {
-  const { userInfo } = useContext(UserContext);
+  const { id } = useParams();
+  const { user } = useUser(id);
 
   return (
     <div className="grid w-full grid-cols-2 gap-3">
@@ -14,7 +14,7 @@ export default function CallButtons() {
         <PrimaryButton className="w-full" icon={<PiPaperPlaneTiltFill />} />
       </Link>
 
-      <Link to={`tel:${userInfo?.mobile}`} onClick={(e) => e.stopPropagation()}>
+      <Link to={`tel:${user?.mobile}`} onClick={(e) => e.stopPropagation()}>
         <PrimaryButton className="w-full" icon={<BsTelephoneFill />} />
       </Link>
     </div>

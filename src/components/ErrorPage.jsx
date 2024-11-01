@@ -3,6 +3,7 @@ import Container from "../layouts/Container";
 
 function ErrorPage() {
   const error = useRouteError();
+  console.error(error);
   const navigate = useNavigate();
 
   return (
