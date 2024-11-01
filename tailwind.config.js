@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import daisyui from "daisyui";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -55,5 +56,5 @@ export default {
     ],
   },
   // ONLY FOR DUMMY HOME PAGE. REMOVE THIS LATER
-  plugins: [require("daisyui")],
+  plugins: [daisyui],
 };

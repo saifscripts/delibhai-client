@@ -18,7 +18,7 @@ export default function Distance({ currentDistance, isLive }) {
           }
         </span>
       </div>
-      <span>{currentDistance} km</span>
+      <span>{currentDistance.toFixed(1)} km</span>
     </div>
   );
 }

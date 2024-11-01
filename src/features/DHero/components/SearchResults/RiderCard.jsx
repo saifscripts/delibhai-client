@@ -3,23 +3,25 @@ import { HiOutlineStar } from "react-icons/hi";
 import { PiPaperPlaneTiltFill } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import dp from "../../../../assets/default.jpg";
-import PrimaryButton from "../../../../components/ui/PrimaryButton";
+import PrimaryButton from "../../../../components/ui/PrimaryButton.jsx";
 import cn from "../../../../lib/cn.js";
 import getVillageTitle from "../../../../utils/getVillageTitle.js";
 import Distance from "./Distance.jsx";
 
-export default function Hero({ hero }) {
+export default function RiderCard({ rider }) {
   const {
+    _id,
     name,
     avatarURL,
-    _id,
-    mobile,
+    contactNo1,
     isOnline,
-    currentDistance,
-    isHighlight,
+    distance,
+    // isHighlight,
     isLive,
     mainStation,
-  } = hero;
+  } = rider;
+
+  const isHighlight = false;
 
   const navigate = useNavigate();
 
@@ -67,14 +69,14 @@ export default function Hero({ hero }) {
           <span>স্ট্যাশন: {station}</span>
         </div>
 
-        <Distance currentDistance={currentDistance} isLive={isLive} />
+        <Distance currentDistance={distance} isLive={isLive} />
 
         <div className="flex gap-3">
           <Link onClick={(e) => e.stopPropagation()}>
             <PrimaryButton icon={<PiPaperPlaneTiltFill />} />
           </Link>
 
-          <Link to={`tel:${mobile}`} onClick={(e) => e.stopPropagation()}>
+          <Link to={`tel:${contactNo1}`} onClick={(e) => e.stopPropagation()}>
             <PrimaryButton icon={<BsTelephoneFill />} />
           </Link>
         </div>
