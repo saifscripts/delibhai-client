@@ -46,11 +46,11 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   useEffect(() => {
     const mainStation = user?.mainStation;
     const serviceArea = user?.serviceArea;
-    const serviceTimes = user?.serviceTimes;
+    const serviceTimeSlots = user?.serviceTimeSlots;
 
     mainStation && setMainStationAddress(mainStation);
     serviceArea && setServiceArea(serviceArea);
-    serviceTimes && setServiceTimes(serviceTimes);
+    serviceTimeSlots && setServiceTimes(serviceTimeSlots);
   }, [user]);
 
   const {
@@ -73,9 +73,9 @@ export default function EditServiceInfo({ isOpen, onClose }) {
     data.serviceArea = serviceArea;
 
     if (is24HourServiceTime) {
-      data.serviceTimes = [{ start: "00:00", end: "23:59" }];
+      data.serviceTimeSlots = [{ start: "00:00", end: "23:59" }];
     } else {
-      data.serviceTimes = serviceTimes;
+      data.serviceTimeSlots = serviceTimes;
     }
 
     // Update data
