@@ -9,8 +9,6 @@ const NavLinks = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
-  console.log(user);
-
   return (
     <>
       <CustomNavLink to="/" icon={<AiFillHome />} text="হোম পেইজ" />
