@@ -16,7 +16,7 @@ export default function SearchResults() {
             ref={loader}
             className="mx-auto my-8 flex w-fit max-w-full flex-col gap-3"
           >
-            {Array.from({ length: 10 }).map((_, index) => (
+            {Array.from({ length: 3 }).map((_, index) => (
               <RiderSkeleton key={index} />
             ))}
           </div>

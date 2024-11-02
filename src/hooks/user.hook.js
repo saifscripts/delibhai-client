@@ -34,7 +34,6 @@ export const useUpdateRider = () => {
       }
     },
     onError: (error) => {
-      console.log(error);
       toast.error(error.message);
     },
   });

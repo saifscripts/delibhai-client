@@ -33,6 +33,7 @@ export const useRiders = () => {
   useEffect(() => {
     const handleObserver = (entries) => {
       const target = entries[0];
+
       if (target.isIntersecting && hasMore) {
         setPage((prev) => prev + 1);
       }
