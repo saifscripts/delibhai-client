@@ -22,7 +22,7 @@ const modifyServiceAddress = (serviceAddress) => {
 
   return _serviceAddress.map((address) => {
     const title = address?.village?.length
-      ? `${address?.union?.title} ইউনিয়ন: ${address.village.map((v) => v.title)}`
+      ? `${address?.union?.title} ইউনিয়ন: ${address.village.map((v) => v.title.trim()).join(", ")}`
       : address?.union?.title
         ? `সমগ্র ${address?.union?.title} ইউনিয়ন`
         : address?.upazila?.title
