@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useAuth } from "../contexts/auth.context";
 import {
@@ -38,6 +38,7 @@ export const useRegisterRider = () => {
 // Login
 export const useLogin = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { setAuthUser } = useAuth();
 
   return useMutation({
@@ -45,7 +46,9 @@ export const useLogin = () => {
     mutationFn: login,
     onSuccess: (data) => {
       if (data?.success) {
-        navigate(`/profile/${data?.data?.user?._id}`);
+        navigate(location?.state?.from || `/profile/${data?.data?.user?._id}`, {
+          replace: true,
+        });
         setAuthUser(data?.data?.accessToken);
       } else {
         toast.error(data?.message);
