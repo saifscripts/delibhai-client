@@ -2,13 +2,14 @@ import { useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../../components/ui/Button";
+import { useGeolocation } from "../../../../contexts/location.context";
 import MiniContainer from "../../../../layouts/MiniContainer";
 import GPSLocation from "./GPSLocation";
 import VehicleCategories from "./VehicleCategories";
 
 export default function Search() {
   const [vehicleType, setVehicleType] = useState("বাইক");
-  const [geoLocation, setGeoLocation] = useState(null);
+  const { location } = useGeolocation();
   //   const [destination, setDestination] = useState(null);
   const navigate = useNavigate();
 
@@ -28,8 +29,8 @@ export default function Search() {
     const searchParams = new URLSearchParams();
 
     searchParams.set("vehicleType", vehicleType);
-    searchParams.set("latitude", geoLocation.latitude);
-    searchParams.set("longitude", geoLocation.longitude);
+    searchParams.set("latitude", location.latitude);
+    searchParams.set("longitude", location.longitude);
 
     // localStorage.setItem("heroSearchParams", JSON.stringify(searchParams));
 
@@ -46,11 +47,7 @@ export default function Search() {
           setVehicleType={setVehicleType}
         />
 
-        <h2 className="mb-4 mt-8 text-2xl font-semibold">আপনার লোকেশন</h2>
-        <GPSLocation
-          geoLocation={geoLocation}
-          setGeoLocation={setGeoLocation}
-        />
+        <GPSLocation />
 
         {/* <Destination
           destination={destination}
