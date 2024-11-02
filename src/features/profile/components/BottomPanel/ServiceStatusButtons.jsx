@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useAuth } from "../../../../hooks/auth.hook";
+import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 import offDisabled from "./assets/off-disabled.svg";
 import off from "./assets/off.svg";
@@ -12,7 +12,7 @@ import scheduled from "./assets/scheduled.svg";
 export default function ServiceStatusButtons() {
   const [serviceStatus, setServiceStatus] = useState("scheduled");
   const { mutate: updateRider } = useUpdateRider();
-  const { user } = useAuth();
+  const { user } = useMe();
 
   useEffect(() => {
     setServiceStatus(user?.serviceStatus || "scheduled");

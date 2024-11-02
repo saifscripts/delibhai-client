@@ -2,7 +2,7 @@ import isEqual from "lodash/isEqual";
 import { useEffect, useState } from "react";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
-import { useAuth } from "../../../../hooks/auth.hook";
+import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
 import RadioInput from "./RadioInput";
@@ -11,7 +11,7 @@ export default function EditAddressInfo({ isOpen, onClose }) {
   const [isAddressEqual, setIsAddressEqual] = useState(true);
   const [presentAddress, setPresentAddress] = useState(null);
   const [permanentAddress, setPermanentAddress] = useState(null);
-  const { user } = useAuth();
+  const { user } = useMe();
   const {
     mutate: updateRider,
     data: updatedRider,

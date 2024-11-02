@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import camera from "../../../../assets/icons/camera.svg";
-import { useAuth } from "../../../../hooks/auth.hook";
+import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider, useUser } from "../../../../hooks/user.hook";
 import VehiclePhoto from "./VehiclePhoto";
 
@@ -11,7 +11,7 @@ export default function VehiclePhotos() {
   const [isLoading, setIsLoading] = useState(false);
   const { mutate: updateRider, isPending } = useUpdateRider();
   const { id } = useParams();
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMe();
   const { user } = useUser(id);
 
   const handleSubmit = async (event) => {

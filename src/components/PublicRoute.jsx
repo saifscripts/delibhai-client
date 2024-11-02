@@ -1,13 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/auth.hook.js";
+import { useAuth } from "../contexts/auth.context";
 
 function PublicRoute({ children }) {
-  const { user, isPending } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
-
-  if (isPending) {
-    return <h2 className="text-center text-2xl font-semibold">Loading...</h2>;
-  }
 
   if (user) {
     return navigate("/");

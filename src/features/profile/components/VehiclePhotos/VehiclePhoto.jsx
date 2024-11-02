@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { useAuth } from "../../../../hooks/auth.hook";
+import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 
 export default function VehiclePhoto({ url, index, userId }) {
   const [deleteBtn, setDeleteBtn] = useState(-1);
   const { mutate: updateRider, isPending } = useUpdateRider();
-  const { user } = useAuth();
+  const { user } = useMe();
 
   useEffect(() => {
     const hideDeleteBtn = () => {

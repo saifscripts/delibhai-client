@@ -2,12 +2,14 @@ import { AiFillHome, AiOutlineLogin, AiOutlineLogout } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { MdAppRegistration } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../hooks/auth.hook";
+import { useAuth } from "../../../contexts/auth.context";
 import CustomNavLink from "./CustomNavLink";
 
 const NavLinks = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+
+  console.log(user);
 
   return (
     <>
@@ -25,7 +27,7 @@ const NavLinks = () => {
       )}
       {user && (
         <CustomNavLink
-          to={`/profile/${user?._id}`}
+          to={`/profile/${user?.id}`}
           icon={<CgProfile />}
           text="প্রোফাইল"
         />

@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useAuth } from "../contexts/auth.context";
 import {
   getMe,
   login,
@@ -8,8 +9,8 @@ import {
   resendOTP,
   verifyOTP,
 } from "../services/auth.service";
-import { removeAuthToken, setAuthToken } from "../utils/authToken";
 
+// Register Rider
 export const useRegisterRider = () => {
   const navigate = useNavigate();
 
@@ -34,8 +35,10 @@ export const useRegisterRider = () => {
   });
 };
 
+// Login
 export const useLogin = () => {
   const navigate = useNavigate();
+  const { setAuthUser } = useAuth();
 
   return useMutation({
     mutationKey: ["LOGIN"],
@@ -43,7 +46,7 @@ export const useLogin = () => {
     onSuccess: (data) => {
       if (data?.success) {
         navigate(`/profile/${data?.data?.user?._id}`);
-        setAuthToken(data?.data?.accessToken);
+        setAuthUser(data?.data?.accessToken);
       } else {
         toast.error(data?.message);
       }
@@ -54,9 +57,8 @@ export const useLogin = () => {
   });
 };
 
-export const useAuth = () => {
-  const queryClient = useQueryClient();
-
+// Me
+export const useMe = () => {
   const result = useQuery({
     queryKey: ["ME"],
     queryFn: async () => await getMe(),
@@ -64,16 +66,13 @@ export const useAuth = () => {
 
   const user = result?.data?.data;
 
-  const logout = () => {
-    removeAuthToken();
-    queryClient.resetQueries({ queryKey: ["ME"] });
-  };
-
-  return { ...result, user, logout };
+  return { ...result, user };
 };
 
+// Verify OTP
 export const useVerifyOTP = () => {
   const queryClient = useQueryClient();
+  const { setAuthUser } = useAuth();
 
   return useMutation({
     mutationKey: ["VERIFY_OTP"],
@@ -81,7 +80,7 @@ export const useVerifyOTP = () => {
     onSuccess: (data) => {
       if (data?.success) {
         queryClient.invalidateQueries({ queryKey: ["ME"] });
-        setAuthToken(data?.data?.accessToken);
+        setAuthUser(data?.data?.accessToken);
       } else {
         toast.error(data?.message);
       }
@@ -92,6 +91,7 @@ export const useVerifyOTP = () => {
   });
 };
 
+// Resend OTP
 export const useResendOTP = () => {
   return useMutation({
     mutationKey: ["RESEND_OTP"],

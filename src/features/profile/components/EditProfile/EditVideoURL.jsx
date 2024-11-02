@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
-import { useAuth } from "../../../../hooks/auth.hook";
+import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
 
@@ -17,7 +17,7 @@ export default function EditVideoURL({ isOpen, onClose }) {
     data: updatedRider,
     isSuccess,
   } = useUpdateRider();
-  const { user } = useAuth();
+  const { user } = useMe();
 
   const {
     register,

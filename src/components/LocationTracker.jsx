@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from "react";
-import { useAuth } from "../hooks/auth.hook";
+import { useMe } from "../hooks/auth.hook";
 import { updateRiderLocation } from "../services/user.service";
 
 const LocationTracker = () => {
-  const { user } = useAuth();
+  const { user } = useMe();
 
   // Function to get the user's current location
   const getLocation = useCallback(() => {

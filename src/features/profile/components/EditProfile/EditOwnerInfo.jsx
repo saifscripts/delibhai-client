@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
-import { useAuth } from "../../../../hooks/auth.hook";
+import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
 import isMobilePhone from "../../../../utils/validators/isMobilePhone";
@@ -29,7 +29,7 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
     data: updatedRider,
     isSuccess,
   } = useUpdateRider();
-  const { user } = useAuth();
+  const { user } = useMe();
   const [ownerAddress, setOwnerAddress] = useState({});
 
   const {

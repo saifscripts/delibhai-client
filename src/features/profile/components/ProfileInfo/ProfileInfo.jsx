@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useAuth } from "../../../../hooks/auth.hook";
+import { useMe } from "../../../../hooks/auth.hook";
 import { useUser } from "../../../../hooks/user.hook";
 import profileSchema from "../../data/profileSchema";
 import { GPSLocation } from "../GPSLocation";
@@ -15,7 +15,7 @@ import InfoContainer from "./InfoContainer";
 export default function ProfileInfo() {
   const { category = "general", id } = useParams();
   const { user } = useUser(id);
-  const { user: authUser } = useAuth();
+  const { user: authUser } = useMe();
 
   return (
     <div className="pb-20">

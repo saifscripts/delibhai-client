@@ -4,7 +4,7 @@ import { GiResize } from "react-icons/gi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import "react-image-crop/dist/ReactCrop.css";
 import { toast } from "sonner";
-import { useAuth } from "../../../../hooks/auth.hook";
+import { useMe } from "../../../../hooks/auth.hook";
 import { useRemoveAvatar } from "../../../../hooks/user.hook";
 import EditOption from "./EditOption";
 import ResizeModal from "./ResizeModal";
@@ -15,7 +15,7 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
   const [imageSrc, setImageSrc] = useState("");
   const [crop, setCrop] = useState();
   const [resizeModal, setResizeModal] = useState(false);
-  const { user } = useAuth();
+  const { user } = useMe();
 
   const {
     mutate: removeAvatar,

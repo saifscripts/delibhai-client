@@ -6,7 +6,7 @@ import { AiFillPlusSquare } from "react-icons/ai";
 import * as yup from "yup";
 import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
-import { useAuth } from "../../../../hooks/auth.hook";
+import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
 import AddressModal from "./AddressModal";
@@ -41,7 +41,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
     data: updatedRider,
     isSuccess,
   } = useUpdateRider();
-  const { user } = useAuth();
+  const { user } = useMe();
 
   useEffect(() => {
     const mainStation = user?.mainStation;

@@ -1,10 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/auth.hook";
+import { useAuth } from "../contexts/auth.context";
 
 function AdminRoute({ children }) {
   const navigate = useNavigate();
-  const { user, isLoading, logout } = useAuth();
-  const role = user?.role;
+  const { user, logout, isLoading } = useAuth();
 
   if (isLoading) {
     return <h2 className="text-center text-2xl font-semibold">Loading...</h2>;
@@ -14,7 +13,7 @@ function AdminRoute({ children }) {
     return navigate("/login");
   }
 
-  if (role !== "admin") {
+  if (user && user?.role !== "admin") {
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center gap-4">
         <h2 className="text-center text-2xl font-semibold text-red-400">

@@ -1,7 +1,7 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../../assets/logos/logo.png";
-import { useAuth } from "../../../hooks/auth.hook";
+import { useAuth } from "../../../contexts/auth.context";
 import cn from "../../../lib/cn";
 import useSidebar from "../hooks/useSidebar";
 import NavLinks from "./NavLinks";
