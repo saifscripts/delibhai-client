@@ -22,10 +22,12 @@ export const GeolocationProvider = ({ children }) => {
       (position) => {
         const { latitude, longitude } = position.coords;
         const location = { latitude, longitude };
-        updateRiderLocation({ liveLocation: location });
         setLocation(location);
         setError("");
         setIsLoading(false);
+        if (user?.role === "rider" || user?.role === "admin") {
+          updateRiderLocation({ liveLocation: location });
+        }
       },
       (error) => {
         if (error.code === error.PERMISSION_DENIED) {
@@ -33,25 +35,24 @@ export const GeolocationProvider = ({ children }) => {
             "জিপিএস লোকেশন এর পারমিশন দেয়া হয় নি। সেটিং থেকে লোকেশন পারমিশন এলাউ করে দিন।",
           );
         }
+        setIsLoading(false);
       },
     );
-  }, []);
+  }, [user?.role]);
 
   // TODO:Send location data to the server using Socket.IO
   useEffect(() => {
     let intervalId;
 
-    if (user?.role === "rider" || user?.role === "admin") {
-      if (navigator.geolocation) {
-        intervalId = setInterval(getLocation, 2000);
-        setError("");
-      } else {
-        setError("আপনার ব্রাউজারে জিপিএস লোকেশন ট্র্যাকিং সাপোর্ট নেই।");
-      }
+    if (navigator.geolocation) {
+      intervalId = setInterval(getLocation, 2000);
+      setError("");
+    } else {
+      setError("আপনার ব্রাউজারে জিপিএস লোকেশন ট্র্যাকিং সাপোর্ট নেই।");
     }
 
     return () => clearInterval(intervalId);
-  }, [user, getLocation]);
+  }, [getLocation]);
 
   return (
     <GeolocationContext.Provider value={{ location, error, isLoading }}>
