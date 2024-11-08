@@ -28,5 +28,5 @@ export default function GPSLocation() {
     return <h2 className="text-center text-2xl">Loading...</h2>;
   }
 
-  return <Map geoLocation={geoLocation} />;
+  return <Map location={geoLocation} />;
 }

@@ -6,5 +6,5 @@ export default function ManualLocation() {
   const { id } = useParams();
   const { user } = useUser(id);
 
-  return <Map geoLocation={user?.manualLocation} />;
+  return <Map location={user?.manualLocation} />;
 }
