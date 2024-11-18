@@ -2,7 +2,7 @@ import { FiPlayCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import man from "./assets/man.png";
 
-const HeroSection = () => {
+export default function Hero() {
   return (
     <section className="relative">
       <div className="absolute bottom-0 left-0 right-0 top-0 z-10 bg-neutral opacity-20"></div>
@@ -33,6 +33,4 @@ const HeroSection = () => {
       </div>
     </section>
   );
-};
-
-export default HeroSection;
+}

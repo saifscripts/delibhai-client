@@ -7,7 +7,7 @@ import { Search, SearchResults } from "./features/DHero";
 import { Profile, ProfileInfo } from "./features/profile";
 import MainLayout from "./layouts/MainLayout";
 import { DHeroLocation } from "./pages/admin";
-import { Home } from "./pages/home";
+import Home from "./pages/home/Home";
 
 const router = createBrowserRouter([
   {

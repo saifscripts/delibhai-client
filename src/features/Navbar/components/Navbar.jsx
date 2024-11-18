@@ -1,24 +1,18 @@
 import { RxHamburgerMenu } from "react-icons/rx";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../../assets/logos/logo.png";
 import { useAuth } from "../../../contexts/auth.context";
-import cn from "../../../lib/cn";
 import useSidebar from "../hooks/useSidebar";
 import NavLinks from "./NavLinks";
 import Sidebar from "./Sidebar";
 
 const Navbar = () => {
   const { isSidebarOpen, handleSidebarToggle } = useSidebar();
-  const { pathname } = useLocation();
   const { user } = useAuth();
 
   return (
-    <nav
-      className={cn("sticky top-0 z-[99999] bg-white lg:shadow-sm", {
-        "bg-secondary sm:bg-white": pathname === "/",
-      })}
-    >
-      <div className="container flex h-16 items-center justify-between sm:h-24">
+    <nav className="sticky top-0 z-[99999] border-b border-gray-200 bg-white">
+      <div className="container flex h-[64px] items-center justify-between">
         {/* Sidebar */}
         <Sidebar
           isSidebarOpen={isSidebarOpen}
