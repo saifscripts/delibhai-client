@@ -11,7 +11,7 @@ import Carousel from "../../modules/home/carousel";
 export default function Home() {
   return (
     <>
-      <div className="hidden sm:block">
+      <div className="hidden space-y-2 bg-gray-200 sm:block sm:space-y-4">
         <Carousel />
         {/* <Hero /> */}
         <Services />
@@ -22,7 +22,7 @@ export default function Home() {
         <Stats />
         <Footer />
       </div>
-      <div className="sm:hidden">
+      <div className="space-y-2 bg-gray-200 sm:hidden sm:space-y-4">
         <Carousel />
         <MobileHome />
       </div>

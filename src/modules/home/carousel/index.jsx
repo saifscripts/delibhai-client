@@ -51,14 +51,14 @@ export default function Carousel() {
       style={{
         "--swiper-pagination-color": "#00C795",
       }}
-      className="aspect-video max-h-[calc(100svh-64px)] w-full"
+      className="bg-white"
     >
       {slides.map((slide) => (
         <SwiperSlide key={slide._id} className="p-2 pb-10 sm:p-4 sm:pb-10">
-          {slide.type === "image" && (
+          {slide.type === "image" ? (
             <Link
               to={slide.href}
-              className="block h-full w-full overflow-hidden rounded-xl"
+              className="block aspect-[2/1] max-h-[calc(100svh-120px)] w-full overflow-hidden rounded-xl"
             >
               <img
                 src={slide.imageURL}
@@ -66,22 +66,21 @@ export default function Carousel() {
                 className="h-full w-full object-cover object-center"
               />
             </Link>
-          )}
-
-          {slide.type === "video" &&
-            (({ isVisible }) =>
+          ) : (
+            ({ isVisible }) =>
               isVisible && (
                 <ReactPlayer
                   controls
-                  playing
+                  //   playing
                   width="100%"
                   height="100%"
-                  light="https://swiperjs.com/demos/images/nature-3.jpg"
+                  //   light="https://swiperjs.com/demos/images/nature-3.jpg"
                   loop
                   url="https://www.youtube.com/shorts/_HgpFMdZ16c"
-                  className="h-full w-full overflow-hidden rounded-xl"
+                  className="block aspect-[2/1] max-h-[calc(100svh-120px)] w-full overflow-hidden rounded-xl"
                 />
-              ))}
+              )
+          )}
         </SwiperSlide>
       ))}
     </Swiper>

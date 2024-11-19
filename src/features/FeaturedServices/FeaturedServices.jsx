@@ -21,7 +21,7 @@ const FeaturedServices = () => {
   ];
 
   return (
-    <section className="my-24">
+    <section className="bg-white py-12">
       <div className="mx-auto max-w-[920px] px-6">
         {services.map((service) => (
           <Service key={service.id} service={service} />

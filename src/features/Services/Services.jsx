@@ -5,7 +5,7 @@ import { ScrollItem, ScrollMenu } from "../../lib/scrollable-menu";
 
 const Services = () => {
   return (
-    <section className="my-20">
+    <section className="bg-white py-12">
       <Container>
         {/* Section Title */}
         <h3 className="mb-5 text-center text-2xl text-primary md:text-3xl">
