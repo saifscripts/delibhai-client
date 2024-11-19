@@ -3,7 +3,7 @@ import earnings from "./assets/earnings.svg";
 
 const EarningsBanner = () => {
   return (
-    <section className="bg-white py-12">
+    <section className="hidden bg-white py-12 sm:block">
       {/* Section Title */}
       <div className="mx-auto max-w-2xl px-6 text-center">
         <h2 className="heading mb-3 text-3xl font-semibold text-black sm:text-4xl md:text-5xl">

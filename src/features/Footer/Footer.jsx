@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="hidden sm:block">
       {/* First Part */}
       <div className="bg-black text-white">
         <div className="footer mx-auto max-w-4xl p-10">

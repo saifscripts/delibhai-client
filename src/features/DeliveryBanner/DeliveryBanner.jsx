@@ -5,7 +5,7 @@ import delivery4 from "./assets/delivery4.jpg";
 
 const DeliveryBanner = () => {
   return (
-    <section className="bg-white py-12">
+    <section className="hidden bg-white py-12 sm:block">
       {/* Section Title */}
       <div className="mx-auto max-w-2xl px-6">
         <h2 className="heading mb-10 text-center text-3xl font-semibold text-black sm:text-4xl md:text-5xl">

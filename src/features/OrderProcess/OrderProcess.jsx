@@ -23,7 +23,7 @@ const OrderProcess = () => {
   ];
 
   return (
-    <section className="bg-white py-12">
+    <section className="hidden bg-white py-12 sm:block">
       <div className="mx-auto max-w-[920px] px-6">
         {/* Section Title */}
         <h3 className="mb-5 text-center text-2xl text-primary md:text-3xl">

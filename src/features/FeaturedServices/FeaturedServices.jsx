@@ -21,7 +21,7 @@ const FeaturedServices = () => {
   ];
 
   return (
-    <section className="bg-white py-12">
+    <section className="hidden bg-white py-12 sm:block">
       <div className="mx-auto max-w-[920px] px-6">
         {services.map((service) => (
           <Service key={service.id} service={service} />

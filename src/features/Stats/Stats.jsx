@@ -26,7 +26,7 @@ const Stats = () => {
   ];
 
   return (
-    <section className="bg-white py-12">
+    <section className="hidden bg-white py-12 sm:block">
       <div className="mx-auto max-w-[920px] px-6 text-center">
         {/* Section title */}
         <h2 className="mb-10 text-3xl font-semibold text-black sm:text-4xl md:text-5xl">
