@@ -1,11 +1,11 @@
-import ReactPlayer from "react-player/lazy";
-import { Link } from "react-router-dom";
 import { Autoplay, Keyboard, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import ImageSlide from "./ImageSlide";
+import VideoSlide from "./VideoSlide";
 
 const slides = [
   {
@@ -56,30 +56,9 @@ export default function Carousel() {
       {slides.map((slide) => (
         <SwiperSlide key={slide._id} className="p-2 pb-10 sm:p-4 sm:pb-10">
           {slide.type === "image" ? (
-            <Link
-              to={slide.href}
-              className="block aspect-[2/1] max-h-[calc(100svh-120px)] w-full overflow-hidden rounded-xl"
-            >
-              <img
-                src={slide.imageURL}
-                loading="lazy"
-                className="h-full w-full object-cover object-center"
-              />
-            </Link>
+            <ImageSlide slide={slide} />
           ) : (
-            ({ isVisible }) =>
-              isVisible && (
-                <ReactPlayer
-                  controls
-                  //   playing
-                  width="100%"
-                  height="100%"
-                  //   light="https://swiperjs.com/demos/images/nature-3.jpg"
-                  loop
-                  url="https://www.youtube.com/shorts/_HgpFMdZ16c"
-                  className="block aspect-[2/1] max-h-[calc(100svh-120px)] w-full overflow-hidden rounded-xl"
-                />
-              )
+            ({ isVisible }) => isVisible && <VideoSlide slide={slide} />
           )}
         </SwiperSlide>
       ))}
