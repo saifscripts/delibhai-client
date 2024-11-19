@@ -17,7 +17,7 @@ export default function VideoSlide({ slide }) {
         loop
         url={slide.videoURL}
       />
-      <div className="absolute left-0 right-0 top-0 h-[90%] bg-transparent" />
+      <div className="absolute left-0 right-0 top-0 z-10 h-[90%] cursor-pointer bg-transparent" />
     </div>
   );
 }
