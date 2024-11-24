@@ -20,8 +20,8 @@ export default function VideoSlide({ slide }) {
         onPause={() => setPlaying(false)}
         url={slide.videoURL}
       />
-      {/* Overlay (to enable sliding over the video) */}
 
+      {/* Overlay (to enable sliding over the video) */}
       {!playing && (
         <div
           className="absolute left-0 right-0 top-0 z-10 h-[calc(100%-56px)] cursor-pointer bg-transparent"

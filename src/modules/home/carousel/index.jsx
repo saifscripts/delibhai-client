@@ -47,12 +47,12 @@ export default function Carousel() {
       }}
       style={{
         "--swiper-pagination-color": "#00C795",
-        "--swiper-pagination-bottom": "4px",
+        "--swiper-pagination-bottom": "0px",
       }}
       className="bg-white"
     >
       {slides.map((slide) => (
-        <SwiperSlide key={slide._id} className="p-2 pb-8">
+        <SwiperSlide key={slide._id} className="p-2 pb-6">
           {slide.type === "image" ? (
             <ImageSlide slide={slide} />
           ) : (
