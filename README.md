@@ -1,4 +1,4 @@
-# Delibhai | One-Stop Service Solution
+# Delibhai | One-Stop Service Provider
 
 ### [Live URL](https://www.delibhai.com) | [Base URL (Server)](https://delibhai-server.vercel.app)
 
