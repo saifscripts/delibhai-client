@@ -7,10 +7,10 @@ export default function Services() {
     <section className="bg-white py-4 sm:py-8">
       <Container className="">
         <div className="mx-auto max-w-xl">
-          <h2 className="mb-4 text-2xl font-semibold text-[#717273] sm:mb-8 sm:text-center sm:text-4xl">
-            ডেলিভাই সার্ভিস সমূহ
+          <h2 className="mb-4 text-lg font-semibold text-[#717273] sm:mb-8 sm:text-center sm:text-4xl">
+            ডেলিভাই সার্ভিস সমূহ<span className="sm:hidden">:</span>
           </h2>
-          <div className="xs:gap-4 tn:px-5 grid grid-cols-3 gap-2 px-2">
+          <div className="grid grid-cols-3 gap-2 px-2 tn:px-5 xs:gap-4">
             {services.map(({ id, icon, title, to }) => {
               return (
                 <Link
