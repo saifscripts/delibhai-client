@@ -11,7 +11,7 @@ import getUserAgent from "../utils/getUserAgent";
 const userAgent = getUserAgent();
 
 const services = [
-  { id: 1, icon: dhero, title: "বাহন", to: "vehicle", active: true },
+  { id: 1, icon: dhero, title: "বাহন", to: "vehicles", active: true },
   { id: 2, icon: dlabour, title: "লেবার", to: "labour" },
   { id: 3, icon: tutor, title: "টিউটর", to: "tutor" },
   { id: 4, icon: bloodlagbe, title: "ব্লাড লাগবে", to: "blood" },
