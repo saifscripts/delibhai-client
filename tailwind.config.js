@@ -6,6 +6,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        tn: "375px",
+        xs: "400px",
+      },
       // USE EXTENDED COLORS WHEN DAISY UI WILL BE REMOVED
       colors: {
         // // primary: '#00C795',

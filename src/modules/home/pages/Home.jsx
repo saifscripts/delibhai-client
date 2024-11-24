@@ -3,9 +3,9 @@ import { EarningsBanner } from "../../../features/EarningsBanner";
 import { FeaturedServices } from "../../../features/FeaturedServices";
 import { Footer } from "../../../features/Footer";
 import { OrderProcess } from "../../../features/OrderProcess";
-import { Services } from "../../../features/Services";
 import { Stats } from "../../../features/Stats";
 import Carousel from "../components/carousel";
+import Services from "../components/services";
 
 export default function Home() {
   return (
