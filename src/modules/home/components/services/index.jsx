@@ -10,7 +10,7 @@ export default function Services() {
           <h2 className="mb-4 text-lg font-semibold text-[#717273] sm:mb-8 sm:text-center sm:text-4xl">
             ডেলিভাই সার্ভিস সমূহ<span className="sm:hidden">:</span>
           </h2>
-          <div className="grid grid-cols-3 gap-2 px-2 tn:px-5 xs:gap-4">
+          <div className="grid grid-cols-3 gap-3 px-2 tn:px-5 xs:gap-4">
             {services.map(({ id, icon, title, to }) => {
               return (
                 <Link
