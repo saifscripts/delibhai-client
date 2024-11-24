@@ -6,8 +6,8 @@ import { Login, OTPVerification, Signup } from "./features/Authentication";
 import { Search, SearchResults } from "./features/DHero";
 import { Profile, ProfileInfo } from "./features/profile";
 import MainLayout from "./layouts/MainLayout";
-import { DHeroLocation } from "./pages/admin";
-import Home from "./pages/home/Home";
+import DHeroLocation from "./modules/admin/pages/DHeroLocation";
+import Home from "./modules/home/pages/Home";
 
 const router = createBrowserRouter([
   {
