@@ -3,11 +3,12 @@ import AdminRoute from "./components/AdminRoute";
 import ErrorPage from "./components/ErrorPage";
 import PublicRoute from "./components/PublicRoute";
 import { Login, OTPVerification, Signup } from "./features/Authentication";
-import { Search, SearchResults } from "./features/DHero";
+import { SearchResults } from "./features/DHero";
 import { Profile, ProfileInfo } from "./features/profile";
 import MainLayout from "./layouts/MainLayout";
 import DHeroLocation from "./modules/admin/pages/DHeroLocation";
 import Home from "./modules/home/pages/Home";
+import VehiclesSearch from "./modules/vehicles/pages/VehiclesSearch";
 
 const router = createBrowserRouter([
   {
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
       },
       {
         path: "vehicles",
-        element: <Search />,
+        element: <VehiclesSearch />,
       },
       { path: "vehicles/search", element: <SearchResults /> },
     ],
