@@ -11,23 +11,19 @@ const slides = [
   {
     _id: "1",
     type: "image",
-    href: "https://trello.com/b/iLZukXnv/delibhai-web-app",
-    imageURL: "https://swiperjs.com/demos/images/nature-1.jpg",
+    href: "/vehicles",
+    imageURL:
+      "https://res.cloudinary.com/dz6h5okzp/image/upload/v1732405986/724-04_ej0thn.webp",
   },
   {
     _id: "2",
     type: "image",
-    href: "https://trello.com/b/iLZukXnv/delibhai-web-app",
-    imageURL: "https://swiperjs.com/demos/images/nature-2.jpg",
+    href: "/blood",
+    imageURL:
+      "https://res.cloudinary.com/dz6h5okzp/image/upload/v1732406129/724-03_w7knki.webp",
   },
   {
     _id: "3",
-    type: "image",
-    href: "https://trello.com/b/iLZukXnv/delibhai-web-app",
-    imageURL: "https://swiperjs.com/demos/images/nature-3.jpg",
-  },
-  {
-    _id: "4",
     type: "video",
     videoURL: "https://www.youtube.com/shorts/_HgpFMdZ16c",
     thumbURL: "https://swiperjs.com/demos/images/nature-3.jpg",
