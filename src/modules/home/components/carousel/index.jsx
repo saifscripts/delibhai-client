@@ -25,7 +25,7 @@ const slides = [
   {
     _id: "3",
     type: "video",
-    videoURL: "https://www.youtube.com/watch?v=AvjMvlhaLwc",
+    videoURL: "https://www.youtube.com/watch?v=1M0Hg_DWigA",
     thumbURL:
       "https://res.cloudinary.com/dz6h5okzp/image/upload/v1732413874/deliBhai_IT_Banner-01-01_hldxmy.webp",
   },
