@@ -1,3 +1,5 @@
+import Ads from "../../../components/ads";
+import SocialLinks from "../../../components/social-links";
 import { DeliveryBanner } from "../../../features/DeliveryBanner";
 import { EarningsBanner } from "../../../features/EarningsBanner";
 import { FeaturedServices } from "../../../features/FeaturedServices";
@@ -13,11 +15,13 @@ export default function Home() {
       <div className="space-y-2 bg-gray-200 sm:space-y-4">
         <Carousel />
         <Services />
+        <Ads />
         <OrderProcess />
         <FeaturedServices />
         <DeliveryBanner />
         <EarningsBanner />
         <Stats />
+        <SocialLinks />
         <Footer />
       </div>
     </>
