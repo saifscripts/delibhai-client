@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { useGeolocation } from "../../../../contexts/location.context";
 import vehicles from "../../../../data/vehicles";
 import Container from "../../../../layouts/Container";
 import cn from "../../../../lib/cn";
 
-export default function VehicleType({ vehicleType, setVehicleType }) {
+export default function VehicleType() {
   const [showMore, setShowMore] = useState(false);
+  const navigate = useNavigate();
+  const { error } = useGeolocation();
 
-  const items = showMore ? vehicles : vehicles.slice(0, 12);
+  const items = showMore ? vehicles : vehicles.slice(0, 9);
 
   return (
     <section className="bg-white py-4 sm:py-8">
@@ -21,12 +26,17 @@ export default function VehicleType({ vehicleType, setVehicleType }) {
               return (
                 <div
                   key={id}
-                  onClick={() => setVehicleType(title)}
+                  onClick={() => {
+                    if (error) {
+                      toast.error(error);
+                    } else {
+                      navigate(
+                        `search?vehicleType=${title.split(" ").join("+")}`,
+                      );
+                    }
+                  }}
                   className={cn(
                     "flex aspect-square cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-[#D3D3D4] bg-[#F5F6F6] px-1 py-2 hover:border-[#00E7AD] hover:bg-[#8AFFE1] sm:gap-4",
-                    {
-                      "border-[#00E7AD] bg-[#8AFFE1]": vehicleType === title,
-                    },
                   )}
                 >
                   <img
@@ -43,7 +53,7 @@ export default function VehicleType({ vehicleType, setVehicleType }) {
 
             {/* Overlay */}
             {!showMore && (
-              <div className="absolute inset-x-2 -bottom-4 flex h-[30%] items-end justify-center bg-gradient-to-b from-white/0 via-white/70 to-white tn:inset-x-5 sm:-bottom-8">
+              <div className="absolute inset-x-2 -bottom-4 flex h-[40%] items-end justify-center bg-gradient-to-b from-white/0 via-white/70 to-white tn:inset-x-5 sm:-bottom-8">
                 <button
                   className="flex items-center justify-center gap-1 rounded-full border px-3 py-1 text-[#00B487] shadow-xl"
                   onClick={() => setShowMore(true)}

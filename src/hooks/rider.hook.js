@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useGeolocation } from "../contexts/location.context";
 import { getRiders } from "../services/rider.service";
 
 export const useRiders = () => {
@@ -8,6 +9,19 @@ export const useRiders = () => {
   const [riders, setRiders] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const loader = useRef(null);
+  const [geoLocation, setGeoLocation] = useState(null);
+  const { location, error } = useGeolocation();
+
+  useEffect(() => {
+    console.log(error);
+    if (!geoLocation) {
+      setGeoLocation(location);
+    }
+    if (error) {
+      setRiders([]);
+      setHasMore(false);
+    }
+  }, [location, error]);
 
   //   const result = useQuery({
   //     queryKey: ["RIDERS", page],
@@ -17,18 +31,23 @@ export const useRiders = () => {
   useEffect(() => {
     if (page > 0) {
       (async () => {
-        const newRiders = (await getRiders(searchParams, page))?.data;
+        const params = new URLSearchParams(searchParams);
+        if (geoLocation) {
+          params.set("latitude", geoLocation?.latitude);
+          params.set("longitude", geoLocation?.longitude);
+          const newRiders = (await getRiders(params, page))?.data;
 
-        if (newRiders?.length > 0) {
-          setRiders((prev) => [...prev, ...newRiders]);
-        }
+          if (newRiders?.length > 0) {
+            setRiders((prev) => [...prev, ...newRiders]);
+          }
 
-        if (newRiders?.length < 10) {
-          setHasMore(false);
+          if (newRiders?.length < 10) {
+            setHasMore(false);
+          }
         }
       })();
     }
-  }, [page, searchParams]);
+  }, [page, searchParams, geoLocation]);
 
   useEffect(() => {
     const handleObserver = (entries) => {

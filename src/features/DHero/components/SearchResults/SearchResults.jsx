@@ -7,7 +7,6 @@ import RiderSkeleton from "./RiderSkeleton";
 
 export default function SearchResults() {
   const { riders, hasMore, loader } = useRiders();
-
   const { pathname } = useLocation();
 
   useEffect(() => {

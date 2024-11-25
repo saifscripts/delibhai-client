@@ -13,7 +13,7 @@ const GeolocationContext = createContext(null);
 export const GeolocationProvider = ({ children }) => {
   const { user } = useMe();
   const [location, setLocation] = useState(null);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   // Function to get the user's current location

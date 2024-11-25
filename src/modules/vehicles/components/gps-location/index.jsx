@@ -6,7 +6,7 @@ function GPSLocation() {
   const { error, location, isLoading } = useGeolocation();
 
   return (
-    <section className="mb-2 bg-white py-4 sm:mb-4 sm:py-8">
+    <section className="bg-white py-4 sm:py-8">
       <Container className="">
         <div className="mx-auto max-w-xl">
           <h2 className="mb-4 text-lg font-semibold text-[#717273] sm:mb-8 sm:text-center sm:text-4xl">
