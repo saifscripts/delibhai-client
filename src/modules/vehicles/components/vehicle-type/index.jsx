@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+import { BiChevronUp } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useGeolocation } from "../../../../contexts/location.context";
@@ -53,20 +53,24 @@ export default function VehicleType() {
 
             {/* Overlay */}
             {!showMore && (
-              <div className="absolute inset-x-2 -bottom-4 flex h-[40%] items-end justify-center bg-gradient-to-b from-white/0 via-white/70 to-white tn:inset-x-5 sm:-bottom-8">
-                <button
-                  className="flex items-center justify-center gap-1 rounded-full border px-3 py-1 text-[#00B487] shadow-xl"
-                  onClick={() => setShowMore(true)}
-                >
-                  আরো দেখুন
-                  <BiChevronDown className="text-xl" />
-                </button>
-              </div>
+              <div className="absolute inset-x-2 bottom-0 flex h-[40%] items-end justify-center bg-gradient-to-b from-white/0 via-white/70 to-white/90 tn:inset-x-5" />
             )}
           </div>
 
+          {!showMore && (
+            <div className="relative z-10 -mt-2 flex justify-center">
+              <button
+                className="flex items-center justify-center gap-1 rounded-full border px-3 py-1 text-[#00B487] shadow-xl"
+                onClick={() => setShowMore(true)}
+              >
+                আরো দেখুন
+                <BiChevronUp className="text-xl" />
+              </button>
+            </div>
+          )}
+
           {showMore && (
-            <div className="mt-4 flex justify-center">
+            <div className="mt-3 flex justify-center xs:mt-4">
               <button
                 className="flex items-center justify-center gap-1 rounded-full border px-3 py-1 text-[#00B487] shadow-xl"
                 onClick={() => setShowMore(false)}
