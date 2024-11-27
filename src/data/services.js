@@ -12,13 +12,13 @@ import getUserAgent from "../utils/getUserAgent";
 const userAgent = getUserAgent();
 
 const services = [
-  { id: 1, icon: dhero, title: "গাড়ী লাগবে", to: "vehicles", active: true },
-  { id: 2, icon: dlabour, title: "লেবার লাগবে", to: "labour" },
-  { id: 3, icon: tutor, title: "টিউটর লাগবে", to: "tutor" },
-  { id: 4, icon: home, title: "বাসা লাগবে", to: "house" },
-  { id: 5, icon: dshop, title: "শপিং করুন", to: "shop" },
-  { id: 6, icon: dsend, title: "পার্সেল পাঠান", to: "send" },
-  { id: 7, icon: bloodlagbe, title: "ব্লাড লাগবে", to: "blood" },
+  { id: 1, icon: dhero, title: "গাড়ী লাগবে", href: "/vehicles", active: true },
+  { id: 2, icon: dlabour, title: "লেবার লাগবে", href: "/labour" },
+  { id: 3, icon: tutor, title: "টিউটর লাগবে", href: "/tutor" },
+  { id: 4, icon: home, title: "বাসা লাগবে", href: "/house" },
+  { id: 5, icon: dshop, title: "শপিং করুন", href: "/shop" },
+  { id: 6, icon: dsend, title: "পার্সেল পাঠান", href: "/send" },
+  { id: 7, icon: bloodlagbe, title: "ব্লাড লাগবে", href: "/blood" },
   {
     id: 8,
     icon: it,
