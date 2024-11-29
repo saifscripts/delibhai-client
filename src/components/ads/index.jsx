@@ -33,7 +33,7 @@ const slides = [
           ? "fb://page/127914237079370"
           : "fb://profile/127914237079370",
     imageURL:
-      "https://res.cloudinary.com/dz6h5okzp/image/upload/v1732413874/deliBhai_IT_Banner-01-01_hldxmy.webp",
+      "https://res.cloudinary.com/dz6h5okzp/image/upload/v1732908692/deliBhai_IT_Banner_Banner_gy9xmo.png",
   },
 ];
 

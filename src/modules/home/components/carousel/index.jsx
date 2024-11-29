@@ -13,21 +13,21 @@ const slides = [
     type: "image",
     href: "/vehicles",
     imageURL:
-      "https://res.cloudinary.com/dz6h5okzp/image/upload/v1732405986/724-04_ej0thn.webp",
+      "https://res.cloudinary.com/dz6h5okzp/image/upload/v1732909105/gari-lagbe-banner_eggbh1.png",
   },
   {
     _id: "2",
     type: "image",
     href: "/blood",
     imageURL:
-      "https://res.cloudinary.com/dz6h5okzp/image/upload/v1732406129/724-03_w7knki.webp",
+      "https://res.cloudinary.com/dz6h5okzp/image/upload/v1732908984/blood-lagbe-banner_t9qdx4.png",
   },
   {
     _id: "3",
     type: "video",
     videoURL: "https://www.youtube.com/watch?v=1M0Hg_DWigA",
     thumbURL:
-      "https://res.cloudinary.com/dz6h5okzp/image/upload/v1732413874/deliBhai_IT_Banner-01-01_hldxmy.webp",
+      "https://res.cloudinary.com/dz6h5okzp/image/upload/v1732908692/deliBhai_IT_Banner_Banner_gy9xmo.png",
   },
 ];
 
