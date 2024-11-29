@@ -4,7 +4,7 @@ import VehicleType from "../components/vehicle-type";
 
 export default function VehiclesSearch() {
   return (
-    <div className="relative min-h-screen space-y-2 bg-gray-200 sm:space-y-4">
+    <div className="relative space-y-[6px] bg-gray-200 sm:space-y-3">
       <GPSLocation />
       <VehicleType />
       <Ads />

@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Grid from "../../../../components/grid";
+import Section from "../../../../components/section/Section";
+import SectionTitle from "../../../../components/section/SectionTitle";
 import services from "../../../../data/services";
 import Container from "../../../../layouts/Container";
 
@@ -10,15 +12,13 @@ export default function Services() {
   };
 
   return (
-    <section className="bg-white py-4 sm:py-8">
+    <Section>
       <Container className="">
         <div className="mx-auto max-w-xl">
-          <h2 className="mb-4 text-lg font-semibold text-[#717273] sm:mb-8 sm:text-center sm:text-4xl">
-            ডেলিভাই সার্ভিস সমূহ<span className="sm:hidden">:</span>
-          </h2>
+          <SectionTitle>ডেলিভাই সার্ভিস সমূহ</SectionTitle>
           <Grid items={services} onItemClick={handleItemClick} />
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

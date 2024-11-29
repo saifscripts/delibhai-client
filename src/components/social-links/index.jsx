@@ -1,16 +1,16 @@
 import Container from "../../layouts/Container";
+import Section from "../section/Section";
+import SectionTitle from "../section/SectionTitle";
 
 export default function SocialLinks() {
   return (
-    <section className="bg-white py-4 sm:py-8">
+    <Section>
       <Container className="">
         <div className="mx-auto max-w-xl">
-          <h2 className="mb-4 text-lg font-semibold text-[#717273] sm:mb-8 sm:text-center sm:text-4xl">
-            যোগাযোগ করুন<span className="sm:hidden">:</span>
-          </h2>
+          <SectionTitle>যোগাযোগ করুন</SectionTitle>
           <div className="flex h-4 items-center justify-center gap-4"></div>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

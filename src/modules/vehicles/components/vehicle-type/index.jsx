@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Grid from "../../../../components/grid";
+import Section from "../../../../components/section/Section";
+import SectionTitle from "../../../../components/section/SectionTitle";
 import { useGeolocation } from "../../../../contexts/location.context";
 import vehicles from "../../../../data/vehicles";
 import Container from "../../../../layouts/Container";
@@ -18,15 +20,13 @@ export default function VehicleType() {
   };
 
   return (
-    <section className="bg-white py-4 sm:py-8">
+    <Section>
       <Container className="">
         <div className="mx-auto max-w-xl">
-          <h2 className="mb-4 text-lg font-semibold text-[#717273] sm:mb-8 sm:text-center sm:text-4xl">
-            গাড়ি নির্বাচন করুন<span className="sm:hidden">:</span>
-          </h2>
+          <SectionTitle>গাড়ি নির্বাচন করুন</SectionTitle>
           <Grid onItemClick={handleItemClick} items={vehicles} />
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }
