@@ -10,14 +10,13 @@ export default {
         tn: "375px",
         xs: "400px",
       },
-      // USE EXTENDED COLORS WHEN DAISY UI WILL BE REMOVED
       colors: {
-        // // primary: '#00C795',
-        // // secondary: '#30D0A7',
-        // accent: '#707070',
-        // neutral: '#D9D9D9',
-        // medium: '#515050',
-        // light: '#EBEBEB',
+        primary: "#00C795",
+        secondary: "#13EBB4",
+        accent: "#707070",
+        neutral: "#D9D9D9",
+        medium: "#515050",
+        light: "#EBEBEB",
       },
       fontFamily: {
         noto: "'Noto Serif Bengali', serif;",
@@ -46,21 +45,5 @@ export default {
       },
     },
   },
-  // ONLY FOR DUMMY HOME PAGE. REMOVE THIS LATER
-  daisyui: {
-    themes: [
-      {
-        mytheme: {
-          primary: "#00C795",
-          secondary: "#13EBB4",
-          accent: "#707070",
-          neutral: "#D9D9D9",
-          medium: "#515050",
-          light: "#EBEBEB",
-        },
-      },
-    ],
-  },
-  // ONLY FOR DUMMY HOME PAGE. REMOVE THIS LATER
-  plugins: [require("daisyui")],
+  plugins: [],
 };
