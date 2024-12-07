@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
 import { useRegisterRider } from "../../../hooks/auth.hook";
@@ -134,6 +135,12 @@ function Signup() {
 
         <Submit disabled={isSubmitting} value="ওটিপি কোড পাঠান" />
       </form>
+      <p className="text-center text-accent">
+        যদি অলরেডি আপনার একাউন্ট থাকে তাহলে{" "}
+        <Link to="/login" className="text-primary">
+          লগইন করুন
+        </Link>
+      </p>
     </MiniContainer>
   );
 }

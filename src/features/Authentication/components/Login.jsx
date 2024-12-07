@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 import Submit from "../../../components/forms/Submit";
 import { useLogin } from "../../../hooks/auth.hook";
@@ -30,8 +31,8 @@ function Login() {
   return (
     <MiniContainer>
       <Title
-        title="লগিন করুন"
-        subtitle="সঠিক মোবাইল নাম্বার এবং পাসওয়ার্ড দিয়ে লগিন করুন"
+        title="লগইন করুন"
+        subtitle="সঠিক মোবাইল নাম্বার এবং পাসওয়ার্ড দিয়ে লগইন করুন"
       />
       <form onSubmit={handleSubmit(login)}>
         <div className="mb-1 mt-4">
@@ -60,8 +61,14 @@ function Login() {
 
         <p className="text-red-400">{errors.general?.message}</p>
 
-        <Submit disabled={isSubmitting} value="লগিন" />
+        <Submit disabled={isSubmitting} value="লগইন" />
       </form>
+      <p className="text-center text-accent">
+        যদি আপনার একাউন্ট না থাকে তাহলে{" "}
+        <Link to="/signup" className="text-primary">
+          একাউন্ট তৈরী করুন
+        </Link>
+      </p>
     </MiniContainer>
   );
 }
