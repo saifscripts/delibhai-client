@@ -1,4 +1,4 @@
-import Map from "../../../../components/Map";
+import Map from "../../../../components/map";
 import Section from "../../../../components/section/Section";
 import SectionTitle from "../../../../components/section/SectionTitle";
 import { useGeolocation } from "../../../../contexts/location.context";

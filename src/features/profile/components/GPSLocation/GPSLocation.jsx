@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Map from "../../../../components/Map";
+import Map from "../../../../components/map";
 import { getRiderLocation } from "../../../../services/user.service";
 
 export default function GPSLocation() {
   const [geoLocation, setGeoLocation] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     const intervalId = setInterval(async () => {
       const { success, data } = await getRiderLocation(id);
       if (success) {
@@ -17,16 +17,12 @@ export default function GPSLocation() {
         const isOnline = timestamp - data.timestamp < 5000;
         setGeoLocation(isOnline ? data : null);
       }
-      setLoading(false);
+      setIsLoading(false);
     }, 2000);
 
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  if (loading) {
-    return <h2 className="text-center text-2xl">Loading...</h2>;
-  }
-
-  return <Map location={geoLocation} />;
+  return <Map location={geoLocation} isLoading={isLoading} />;
 }
