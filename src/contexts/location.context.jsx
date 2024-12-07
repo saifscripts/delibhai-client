@@ -32,7 +32,7 @@ export const GeolocationProvider = ({ children }) => {
       (error) => {
         if (error.code === error.PERMISSION_DENIED) {
           setError(
-            "জিপিএস লোকেশন এর পারমিশন দেয়া হয় নি। সেটিং থেকে লোকেশন পারমিশন এলাউ করে দিন।",
+            "জিপিএস লোকেশন সক্রিয় নয়। অনুগ্রহ করে সেটিংসে গিয়ে পারমিশন চালু করুন।",
           );
         }
         setIsLoading(false);
