@@ -16,15 +16,17 @@ export default function Grid({ items, onItemClick }) {
               key={item.id}
               onClick={() => onItemClick(item)}
               className={cn(
-                "flex aspect-square cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-[#D3D3D4] bg-[#F5F6F6] px-1 py-2 hover:border-[#00E7AD] hover:bg-[#8AFFE1] sm:gap-4",
+                "flex aspect-square cursor-pointer flex-col items-center justify-between gap-2 rounded-lg border border-[#D3D3D4] bg-[#F5F6F6] px-2 py-2 hover:border-[#00E7AD] hover:bg-[#8AFFE1] sm:gap-4 sm:px-3 sm:py-2",
               )}
             >
-              <img
-                src={item.icon}
-                alt={item.title}
-                className="aspect-square w-[60%]"
-              />
-              <p className="text-center text-sm text-gray-500 sm:text-2xl">
+              <div className="flex h-[75%] w-full items-center justify-center">
+                <img
+                  src={item.icon}
+                  alt={item.title}
+                  className="h-full w-full object-scale-down object-center"
+                />
+              </div>
+              <p className="text-center text-sm text-gray-500 [text-wrap:nowrap] sm:text-xl">
                 {item.title}
               </p>
             </div>

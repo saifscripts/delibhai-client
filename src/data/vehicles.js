@@ -1,7 +1,7 @@
 const vehicles = [
   {
     id: 1,
-    icon: "https://res.cloudinary.com/dz6h5okzp/image/upload/v1733593196/bike_rhdnzw.svg",
+    icon: "https://res.cloudinary.com/dz6h5okzp/image/upload/v1733595305/bike_ncwcfe.png",
     title: "বাইক",
     to: "bike",
   },
