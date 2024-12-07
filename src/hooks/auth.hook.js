@@ -19,10 +19,12 @@ export const useRegisterRider = () => {
     mutationFn: registerRider,
     onSuccess: (data) => {
       if (data?.success) {
+        console.log(data);
         navigate("/otp-verification", {
           state: {
             _id: data?.data?._id,
             otp: data?.data?.otp,
+            mobile: data?.data?.tempMobile,
           },
         });
       } else {

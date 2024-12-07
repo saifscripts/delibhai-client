@@ -14,12 +14,14 @@ function OTPVerification() {
     isSuccess: isVerifySuccess,
     data: verifyData,
   } = useVerifyOTP();
+
   const {
     mutate: resendOTP,
     isPending: isResendPending,
     isSuccess: isResendSuccess,
     data: resendData,
   } = useResendOTP();
+
   const { state } = useLocation();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(true);
@@ -106,7 +108,12 @@ function OTPVerification() {
           <MiniContainer>
             <Title
               title="ওটিপি ভেরিফিকেশন"
-              subtitle="আমাদের পাঠানো SMS এ প্রাপ্ত কোডটি প্রদান করুন +8801823540325"
+              subtitle={
+                <>
+                  <p>আমাদের পাঠানো SMS এ প্রাপ্ত কোডটি প্রদান করুন</p>
+                  <p>+88{state.mobile}</p>
+                </>
+              }
             />
 
             <Timer

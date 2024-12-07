@@ -7,7 +7,7 @@ const Title = ({ title, subtitle, color }) => {
       }`}
     >
       <h1 className={`text-2xl font-bold lg:text-4xl`}>{title}</h1>
-      <p className="mt-2">{subtitle}</p>
+      <div className="mt-2">{subtitle}</div>
     </div>
   );
 };
