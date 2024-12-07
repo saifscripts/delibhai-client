@@ -29,7 +29,7 @@ const Sidebar = ({ isSidebarOpen, handleSidebarToggle }) => {
       </div>
 
       <ul className="flex flex-col">
-        <NavLinks />
+        <NavLinks handleSidebarToggle={handleSidebarToggle} />
       </ul>
     </div>
   );

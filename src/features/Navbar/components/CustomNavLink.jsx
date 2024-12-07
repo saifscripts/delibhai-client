@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const CustomNavLink = ({ to, icon, text, highlight }) => {
+const CustomNavLink = ({ to, icon, text, highlight, handleSidebarToggle }) => {
   return (
     <NavLink
       to={to}
@@ -9,6 +9,7 @@ const CustomNavLink = ({ to, icon, text, highlight }) => {
           ? "bg-slate-700 lg:rounded-lg lg:bg-primary lg:bg-opacity-5 lg:text-primary"
           : ""
       }
+      onClick={handleSidebarToggle}
     >
       <div
         className={`lg:blok flex items-center gap-5 px-8 py-4 text-sm hover:cursor-pointer active:bg-primary lg:rounded-lg lg:px-4 lg:py-4 lg:hover:bg-neutral ${
