@@ -1,3 +1,4 @@
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logos/logo.png";
@@ -45,8 +46,9 @@ const Navbar = () => {
         </div>
 
         {/* Nav menu */}
-        <ul className="hidden gap-2 lg:flex">
-          <NavLinks />
+        <ul className="hidden items-center gap-2 lg:flex">
+          <ThemeSwitcher />
+          {import.meta.env.VITE_ENV === "development" && <NavLinks />}
         </ul>
       </div>
     </nav>

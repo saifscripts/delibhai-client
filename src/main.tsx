@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "./components/theme-provider.js";
 import { AuthProvider } from "./contexts/auth.context.jsx";
 import { GeolocationProvider } from "./contexts/location.context.jsx";
 import "./index.css";
@@ -15,8 +16,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <GeolocationProvider>
-          <RouterProvider router={router} />
-          <Toaster />
+          <ThemeProvider defaultTheme="dark" storageKey="theme">
+            <RouterProvider router={router} />
+            <Toaster />
+          </ThemeProvider>
         </GeolocationProvider>
       </AuthProvider>
     </QueryClientProvider>
