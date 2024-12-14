@@ -13,7 +13,7 @@ export default function AuthLinks({ handleSidebarToggle }) {
       <Button variant="outline" onClick={() => navigate("/login")}>
         লগইন
       </Button>
-      <Button onClick={() => navigate("/login")}>আয় করুন</Button>
+      <Button onClick={() => navigate("/signup")}>আয় করুন</Button>
     </div>
   );
 }
