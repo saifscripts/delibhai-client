@@ -1,6 +1,6 @@
+import { Button } from "@/components/ui/button";
 import isEqual from "lodash/isEqual";
 import { useEffect, useState } from "react";
-import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
 import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
@@ -86,7 +86,9 @@ export default function EditAddressInfo({ isOpen, onClose }) {
             villageType="select"
           />
         )}
-        <Button disabled={isPending} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isPending} type="submit" className="mt-4 w-full">
+          সংরক্ষণ করুন
+        </Button>
       </form>
     </Modal>
   );

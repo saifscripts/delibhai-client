@@ -1,4 +1,5 @@
-import { Link, useNavigate, useRouteError } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { useNavigate, useRouteError } from "react-router-dom";
 import Container from "../layouts/Container";
 
 function ErrorPage() {
@@ -17,19 +18,8 @@ function ErrorPage() {
           name changed or is temporarily unavailable.
         </p>
         <div className="space-x-4">
-          <button
-            onClick={() => navigate(-1)}
-            className="rounded-md bg-secondary px-4 py-2 font-semibold text-white hover:bg-accent"
-          >
-            Previous Page
-          </button>
-
-          <Link
-            to="/"
-            className="rounded-md bg-secondary px-4 py-2 font-semibold text-white hover:bg-accent"
-          >
-            Home Page
-          </Link>
+          <Button onClick={() => navigate(-1)}>Previous Page</Button>
+          <Button onClick={() => navigate("/")}>Home Page</Button>
         </div>
       </div>
     </Container>

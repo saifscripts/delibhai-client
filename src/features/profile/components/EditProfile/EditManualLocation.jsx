@@ -1,8 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import Button from "../../../../components/ui/Button";
 import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
 import Modal from "../../../../layouts/Modal";
@@ -90,7 +90,9 @@ export default function EditManualLocation({ isOpen, onClose }) {
           <p className="text-red-400">{errors.manualLocation?.message}</p>
         </div>
 
-        <Button disabled={isSubmitting} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isSubmitting} type="submit" className="mt-4 w-full">
+          সংরক্ষণ করুন
+        </Button>
       </form>
     </Modal>
   );

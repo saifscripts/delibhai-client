@@ -74,6 +74,35 @@ export default {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
+        screens: {
+          tn: "375px",
+          xs: "400px",
+        },
+        //   colors: {
+        //     primary: "#00C795",
+        //     secondary: "#13EBB4",
+        //     accent: "#707070",
+        //     neutral: "#D9D9D9",
+        //     medium: "#515050",
+        //     light: "#EBEBEB",
+        //   },
+        fontFamily: {
+          noto: "'Noto Serif Bengali', serif;",
+          hind: "'Hind Siliguri', sans-serif",
+          inter: "'Inter', sans-serif",
+        },
+        boxShadow: {
+          "3xl": "0 4px 4px rgba(0, 0, 0, 0.25)",
+        },
+        transitionProperty: {
+          height: "height",
+        },
+        spacing: {
+          192: "48rem",
+        },
+        minWidth: {
+          192: "48rem",
+        },
       },
     },
     container: {

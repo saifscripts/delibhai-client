@@ -1,10 +1,10 @@
+import { Button } from "@/components/ui/button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import isEmpty from "lodash/isEmpty";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AiFillPlusSquare } from "react-icons/ai";
 import * as yup from "yup";
-import Button from "../../../../components/ui/Button";
 import { AddressFields } from "../../../../features/AddressFields";
 import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
@@ -171,7 +171,9 @@ export default function EditServiceInfo({ isOpen, onClose }) {
 
         <p className="text-red-400">{errors.general?.message}</p>
 
-        <Button disabled={isSubmitting} type="submit" value="সংরক্ষণ করুন" />
+        <Button disabled={isSubmitting} type="submit" className="mt-4 w-full">
+          সংরক্ষণ করুন
+        </Button>
       </form>
 
       <AddressModal

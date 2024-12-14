@@ -1,9 +1,9 @@
+import { Button } from "@/components/ui/button";
 import { BsTelephoneFill } from "react-icons/bs";
 import { HiOutlineStar } from "react-icons/hi";
 import { PiPaperPlaneTiltFill } from "react-icons/pi";
 import { Link, useNavigate } from "react-router-dom";
 import dp from "../../../../assets/default.jpg";
-import PrimaryButton from "../../../../components/ui/PrimaryButton.jsx";
 import cn from "../../../../lib/cn.js";
 import getVillageTitle from "../../../../utils/getVillageTitle.js";
 import Distance from "./Distance.jsx";
@@ -73,11 +73,15 @@ export default function RiderCard({ rider }) {
 
         <div className="flex gap-3">
           <Link onClick={(e) => e.stopPropagation()}>
-            <PrimaryButton icon={<PiPaperPlaneTiltFill />} />
+            <Button className="px-6">
+              <PiPaperPlaneTiltFill />
+            </Button>
           </Link>
 
           <Link to={`tel:${contactNo1}`} onClick={(e) => e.stopPropagation()}>
-            <PrimaryButton icon={<BsTelephoneFill />} />
+            <Button className="px-6">
+              <BsTelephoneFill />
+            </Button>
           </Link>
         </div>
       </div>

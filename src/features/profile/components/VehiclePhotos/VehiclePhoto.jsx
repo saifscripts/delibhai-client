@@ -45,7 +45,7 @@ export default function VehiclePhoto({ url, index, userId }) {
         }`}
       >
         <span className="text-sm">ডিলিট</span>
-        <span className="rounded-full bg-neutral p-1">{<AiFillDelete />}</span>
+        <span className="bg-neutral rounded-full p-1">{<AiFillDelete />}</span>
       </button>
     );
   };
