@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import cloneDeep from "lodash/cloneDeep";
 import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
@@ -5,7 +6,6 @@ import { toast } from "sonner";
 import axios from "../../../lib/api";
 import { useAddress } from "../contexts/AddressContext";
 import generateAddressFields from "../utils/generateAddressFields";
-import cn from "./../../../lib/cn";
 import DeleteModal from "./DeleteModal";
 import RenameModal from "./RenameModal";
 import SelectWard from "./SelectWard";
@@ -84,16 +84,9 @@ export default function AddVillage() {
             type="text"
             className="h-12 w-full rounded-md border p-2"
           />
-          <button
-            onClick={handleVillageAdd}
-            type="submit"
-            disabled={loading}
-            className={cn("h-12 rounded-md bg-secondary hover:brightness-90", {
-              "bg-accent text-neutral": loading,
-            })}
-          >
+          <Button onClick={handleVillageAdd} type="submit" disabled={loading}>
             গ্রাম যোগ করুন
-          </button>
+          </Button>
         </form>
       )}
 

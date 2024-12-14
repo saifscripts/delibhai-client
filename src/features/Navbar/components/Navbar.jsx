@@ -1,18 +1,20 @@
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { Button } from "@/components/ui/button";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logos/logo.png";
 import { useAuth } from "../../../contexts/auth.context";
 import useSidebar from "../hooks/useSidebar";
-import NavLinks from "./NavLinks";
+import AuthLinks from "./AuthLinks";
 import Sidebar from "./Sidebar";
+import UserDropdown from "./UserDropdown";
 
 const Navbar = () => {
   const { isSidebarOpen, handleSidebarToggle } = useSidebar();
   const { user } = useAuth();
 
   return (
-    <nav className="sticky top-0 z-[99999] border-b border-gray-200 bg-white">
+    <nav className="sticky top-0 z-50 border-b bg-background">
       <div className="container flex h-[64px] items-center justify-between">
         {/* Sidebar */}
         <Sidebar
@@ -22,7 +24,7 @@ const Navbar = () => {
 
         {/* Hamburger Button */}
         <RxHamburgerMenu
-          className="text-3xl lg:hidden"
+          className="cursor-pointer text-3xl lg:hidden"
           onClick={(e) => {
             e.stopPropagation();
             handleSidebarToggle();
@@ -36,20 +38,18 @@ const Navbar = () => {
           </Link>
 
           {user?.role === "admin" && (
-            <Link
-              to="/admin-dashboard"
-              className="hidden bg-secondary px-6 py-3 font-semibold hover:brightness-90 lg:inline-block"
-            >
-              Dashboard
+            <Link to="/admin-dashboard">
+              <Button variant="secondary">Dashboard</Button>
             </Link>
           )}
         </div>
 
         {/* Nav menu */}
-        <ul className="hidden items-center gap-2 lg:flex">
+        <div className="flex items-center gap-2">
           <ThemeSwitcher />
-          {import.meta.env.VITE_ENV === "development" && <NavLinks />}
-        </ul>
+          <AuthLinks />
+          <UserDropdown />
+        </div>
       </div>
     </nav>
   );

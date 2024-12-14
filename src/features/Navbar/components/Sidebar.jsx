@@ -1,13 +1,17 @@
+import { useAuth } from "@/contexts/auth.context";
+import { DollarSign, Home, LogIn, LogOut, User } from "lucide-react";
 import { RxCross1 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import minilogo from "../../../assets/logos/minilogo.png";
-import NavLinks from "./NavLinks";
+import SidebarItem from "./SidebarItem";
 
 const Sidebar = ({ isSidebarOpen, handleSidebarToggle }) => {
+  const { user, logout } = useAuth();
+
   return (
     <>
       <div
-        className={`fixed bottom-0 left-0 top-0 z-20 w-[300px] bg-slate-800 text-white transition-transform ease-in lg:hidden ${
+        className={`fixed bottom-0 left-0 top-0 z-50 w-[300px] bg-slate-900 text-white transition-transform ease-in lg:hidden ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
@@ -30,7 +34,43 @@ const Sidebar = ({ isSidebarOpen, handleSidebarToggle }) => {
         </div>
 
         <ul className="flex flex-col">
-          <NavLinks handleSidebarToggle={handleSidebarToggle} />
+          <SidebarItem to="/" onClick={handleSidebarToggle}>
+            <Home size={20} />
+            <span>হোম পেইজ</span>
+          </SidebarItem>
+          {user && (
+            <SidebarItem
+              to={`/profile/${user._id}`}
+              onClick={handleSidebarToggle}
+            >
+              <User size={20} />
+              <span>প্রোফাইল</span>
+            </SidebarItem>
+          )}
+          {user && (
+            <SidebarItem
+              to={`/login`}
+              onClick={() => {
+                handleSidebarToggle();
+                logout();
+              }}
+            >
+              <LogOut size={20} />
+              <span>লগ আউট</span>
+            </SidebarItem>
+          )}
+          {!user && (
+            <SidebarItem to={`/login`} onClick={handleSidebarToggle}>
+              <LogIn size={20} />
+              <span>লগইন</span>
+            </SidebarItem>
+          )}
+          {!user && (
+            <SidebarItem to={`/signup`} onClick={handleSidebarToggle}>
+              <DollarSign size={20} />
+              <span>আয় করুন</span>
+            </SidebarItem>
+          )}
         </ul>
       </div>
       {/* Overlay */}

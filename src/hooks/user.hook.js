@@ -1,3 +1,4 @@
+import { getMe } from "@/services/auth.service";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
@@ -11,6 +12,17 @@ export const useUser = (id) => {
   const result = useQuery({
     queryKey: ["USER"],
     queryFn: async () => await getUser(id),
+  });
+
+  const user = result?.data?.data;
+
+  return { ...result, user };
+};
+
+export const useGetMe = () => {
+  const result = useQuery({
+    queryKey: ["ME"],
+    queryFn: async () => await getMe(),
   });
 
   const user = result?.data?.data;

@@ -133,7 +133,7 @@ function OTPVerification() {
                     onKeyDown={preventUpDown}
                     maxLength="1"
                     disabled={isVerifyPending || isResendPending}
-                    className="aspect-square w-12 rounded-lg border border-secondary px-4 text-xl focus:border-primary focus:outline-none"
+                    className="border-tone aspect-square w-12 rounded-lg border px-4 text-xl focus:border-primary focus:outline-none"
                   />
                 ))}
               </div>
@@ -143,7 +143,7 @@ function OTPVerification() {
                 <button
                   onClick={handleResendOTP}
                   disabled={timerRunning || isVerifyPending || isResendPending}
-                  className={cn("text-secondary", {
+                  className={cn("text-tone", {
                     "text-accent":
                       timerRunning || isVerifyPending || isResendPending,
                   })}

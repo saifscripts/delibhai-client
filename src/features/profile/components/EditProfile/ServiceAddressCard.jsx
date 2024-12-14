@@ -23,7 +23,7 @@ const ServiceAddressCard = ({
             : "";
 
   return (
-    <div className="rounded-lg bg-secondary bg-opacity-10 p-2">
+    <div className="bg-tone rounded-lg bg-opacity-10 p-2">
       <div className="flex flex-col gap-5 rounded-lg bg-primary bg-opacity-5 p-3">
         <div className="flex items-center justify-between">
           <p className="mb-1 font-semibold">{title}</p>
@@ -37,7 +37,7 @@ const ServiceAddressCard = ({
                 setAddressIndex(index);
                 setIsAddressModalOpen(true);
               }}
-              className="rounded-lg p-2 text-primary hover:bg-neutral"
+              className="hover:bg-neutral rounded-lg p-2 text-primary"
             >
               {<MdEdit />}
             </button>
@@ -50,7 +50,7 @@ const ServiceAddressCard = ({
                 _serviceAddress.splice(index, 1);
                 setServiceAddress(_serviceAddress);
               }}
-              className="rounded-lg p-2 text-red-400 hover:bg-neutral"
+              className="hover:bg-neutral rounded-lg p-2 text-red-400"
             >
               {<MdDelete />}
             </button>

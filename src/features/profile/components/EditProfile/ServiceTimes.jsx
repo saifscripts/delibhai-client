@@ -112,7 +112,7 @@ export default function ServiceTimes({
             {serviceTimes.map(({ start, end }, index) => (
               <div
                 key={index}
-                className="flex items-center justify-between rounded-lg bg-secondary bg-opacity-30 px-3 py-2 "
+                className="bg-tone flex items-center justify-between rounded-lg bg-opacity-30 px-3 py-2 "
               >
                 <span>{`${convertTimeFormat(start)} থেকে ${convertTimeFormat(
                   end,
@@ -123,13 +123,13 @@ export default function ServiceTimes({
                     onClick={(e) => {
                       e.preventDefault();
                     }}
-                    className="rounded-lg p-2 text-primary hover:bg-neutral"
+                    className="hover:bg-neutral rounded-lg p-2 text-primary"
                   >
                     {<MdEdit />}
                   </button>
                   <button
                     onClick={(e) => removeTime(e, start, end)}
-                    className="rounded-lg p-2 text-red-400 hover:bg-neutral"
+                    className="hover:bg-neutral rounded-lg p-2 text-red-400"
                   >
                     {<MdDelete />}
                   </button>
@@ -138,7 +138,7 @@ export default function ServiceTimes({
             ))}
           </div>
 
-          <div className="my-6 flex flex-col gap-2 rounded-lg bg-secondary bg-opacity-10 p-3">
+          <div className="bg-tone my-6 flex flex-col gap-2 rounded-lg bg-opacity-10 p-3">
             <label className="bg-light flex items-center justify-between rounded-lg p-2">
               শুরুর সময়
               <input

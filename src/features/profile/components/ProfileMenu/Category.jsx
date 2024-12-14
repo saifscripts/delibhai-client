@@ -12,7 +12,7 @@ export default function Category({ name, title, icon, percent, index }) {
       className={({ isActive }) =>
         cn(
           "relative z-10 flex w-24 flex-shrink-0 flex-col items-center justify-center p-1",
-          { "border-b-2 border-secondary": isActive || (!category && index) },
+          { "border-tone border-b-2": isActive || (!category && index) },
         )
       }
       replace

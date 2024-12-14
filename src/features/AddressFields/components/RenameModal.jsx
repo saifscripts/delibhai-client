@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Modal from "../../../layouts/Modal";
 
 const RenameModal = ({
@@ -23,15 +24,10 @@ const RenameModal = ({
         }
       />
       <div className="mt-2 space-x-2 text-right">
-        <button className="w-14 rounded-md border px-2 py-1" onClick={onClose}>
+        <Button variant="outline" onClick={onClose}>
           বাতিল
-        </button>
-        <button
-          onClick={handleVillageEdit}
-          className="w-14 rounded-md border bg-secondary py-1"
-        >
-          সেইভ
-        </button>
+        </Button>
+        <Button onClick={handleVillageEdit}>সেইভ</Button>
       </div>
     </Modal>
   );

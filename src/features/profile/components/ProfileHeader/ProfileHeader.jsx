@@ -19,7 +19,7 @@ export default function ProfileHeader() {
         <div>
           <h3 className="mb-1 text-2xl">{user?.name}</h3>
 
-          <span className="border-grey-500 mb-4 inline-block rounded-lg border px-3 font-inter text-gray-500">
+          <span className="border-grey-500 font-inter mb-4 inline-block rounded-lg border px-3 text-gray-500">
             #{user?._id?.slice(0, 5)}
           </span>
 
@@ -32,8 +32,8 @@ export default function ProfileHeader() {
                 className="mx-auto h-full"
               />
             </div>
-            <div className="absolute right-0 top-1/2 -z-20 aspect-square w-24 -translate-y-1/2 translate-x-1/2 rounded-full bg-secondary p-4 opacity-10"></div>
-            <div className="absolute right-0 top-1/2 -z-10 aspect-square w-[76px] -translate-y-1/2 translate-x-1/2 rounded-full bg-secondary opacity-20"></div>
+            <div className="bg-tone absolute right-0 top-1/2 -z-20 aspect-square w-24 -translate-y-1/2 translate-x-1/2 rounded-full p-4 opacity-10"></div>
+            <div className="bg-tone absolute right-0 top-1/2 -z-10 aspect-square w-[76px] -translate-y-1/2 translate-x-1/2 rounded-full opacity-20"></div>
           </div>
         </div>
       </div>
