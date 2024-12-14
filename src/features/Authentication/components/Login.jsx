@@ -63,7 +63,7 @@ function Login() {
 
         <Submit disabled={isSubmitting} value="লগইন" />
       </form>
-      <p className="text-center text-accent">
+      <p className="text-center">
         যদি আপনার একাউন্ট না থাকে তাহলে{" "}
         <Link to="/signup" className="text-primary">
           একাউন্ট তৈরী করুন

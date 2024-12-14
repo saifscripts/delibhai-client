@@ -34,7 +34,7 @@ const Modal = ({ isOpen, onClose, children, closeBtn, headerText }) => {
             e.stopPropagation();
             setShouldModalClose(false);
           }}
-          className={`max-h-screen max-w-[640px] overflow-hidden rounded-3xl bg-white shadow-lg sm:max-h-[90vh]`}
+          className={`max-h-screen max-w-[640px] overflow-hidden rounded-3xl bg-background shadow-lg dark:bg-muted sm:max-h-[90vh]`}
         >
           {(headerText || closeBtn) && (
             <div className="relative z-50 flex h-16 items-center justify-between p-5 shadow-sm">
@@ -43,7 +43,7 @@ const Modal = ({ isOpen, onClose, children, closeBtn, headerText }) => {
                 onClick={onClose}
                 className="group relative cursor-pointer text-xl"
               >
-                <div className="absolute -inset-2 -z-10 rounded-full group-hover:bg-neutral"></div>
+                <div className="absolute -inset-2 -z-10 rounded-full group-hover:bg-muted dark:group-hover:bg-muted-foreground"></div>
                 {closeBtn && <TfiClose />}
               </div>
             </div>

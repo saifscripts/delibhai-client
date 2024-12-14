@@ -37,7 +37,10 @@ export default function UserDropdown() {
         >
           <Avatar>
             <AvatarImage src={user?.avatarURL || avatar} />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>
+              {user?.name?.split(" ")[0].charAt(0).toUpperCase()}
+              {user?.name?.split(" ")[1].charAt(0).toUpperCase()}
+            </AvatarFallback>
           </Avatar>
           {/* Name and email */}
           <div className="hidden md:block">

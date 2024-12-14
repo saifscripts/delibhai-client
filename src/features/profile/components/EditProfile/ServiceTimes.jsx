@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import cloneDeep from "lodash/cloneDeep";
 import { useEffect, useState } from "react";
 import { AiFillPlusSquare } from "react-icons/ai";
@@ -112,37 +113,41 @@ export default function ServiceTimes({
             {serviceTimes.map(({ start, end }, index) => (
               <div
                 key={index}
-                className="bg-tone flex items-center justify-between rounded-lg bg-opacity-30 px-3 py-2 "
+                className="bg-tone/30 flex items-center justify-between rounded-lg  px-3 py-2 "
               >
                 <span>{`${convertTimeFormat(start)} থেকে ${convertTimeFormat(
                   end,
                 )} পর্যন্ত`}</span>
 
-                <div className="space-x-1">
-                  <button
+                <div>
+                  <Button
                     onClick={(e) => {
                       e.preventDefault();
                     }}
-                    className="hover:bg-neutral rounded-lg p-2 text-primary"
+                    variant="ghost"
+                    size="icon"
+                    className="text-blue-400"
                   >
                     {<MdEdit />}
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     onClick={(e) => removeTime(e, start, end)}
-                    className="hover:bg-neutral rounded-lg p-2 text-red-400"
+                    variant="ghost"
+                    size="icon"
+                    className="text-destructive"
                   >
                     {<MdDelete />}
-                  </button>
+                  </Button>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-tone my-6 flex flex-col gap-2 rounded-lg bg-opacity-10 p-3">
+          <div className="bg-tone/10 my-6 flex flex-col gap-2 rounded-lg p-3">
             <label className="bg-light flex items-center justify-between rounded-lg p-2">
               শুরুর সময়
               <input
-                className="rounded-lg border border-accent bg-inherit p-1"
+                className="rounded-lg border bg-inherit p-1"
                 type="time"
                 value={newTimeSlot.start}
                 onChange={onStartTimeChange}
@@ -151,7 +156,7 @@ export default function ServiceTimes({
             <label className="bg-light flex items-center justify-between rounded-lg p-2">
               শেষের সময়
               <input
-                className="rounded-lg border border-accent bg-inherit p-1"
+                className="rounded-lg border bg-inherit p-1"
                 type="time"
                 value={newTimeSlot.end}
                 onChange={onEndTimeChange}

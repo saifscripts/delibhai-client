@@ -9,14 +9,14 @@ export default function Grid({ items, onItemClick }) {
 
   return (
     <div>
-      <div className="relative mx-auto grid max-w-xl grid-cols-3 gap-3 px-2 tn:px-5 xs:gap-4">
+      <div className="tn:px-5 xs:gap-4 relative mx-auto grid max-w-xl grid-cols-3 gap-3 px-2">
         {showedItems.map((item) => {
           return (
             <div
               key={item.id}
               onClick={() => onItemClick(item)}
               className={cn(
-                "flex aspect-square cursor-pointer flex-col items-center justify-between gap-2 rounded-lg border border-[#D3D3D4] bg-[#F5F6F6] px-2 py-2 hover:border-[#00E7AD] hover:bg-[#8AFFE1] sm:gap-4 sm:px-3 sm:py-2",
+                "group flex aspect-square cursor-pointer flex-col items-center justify-between gap-2 rounded-lg border bg-muted px-2 py-2 hover:border-[#00E7AD] hover:bg-[#8AFFE1] sm:gap-4 sm:px-3 sm:py-2",
               )}
             >
               <div className="flex h-[75%] w-full items-center justify-center">
@@ -26,7 +26,7 @@ export default function Grid({ items, onItemClick }) {
                   className="h-full w-full object-scale-down object-center"
                 />
               </div>
-              <p className="text-center text-sm text-gray-500 [text-wrap:nowrap] sm:text-xl">
+              <p className="text-center text-sm text-muted-foreground [text-wrap:nowrap] dark:group-hover:text-muted sm:text-xl">
                 {item.title}
               </p>
             </div>
@@ -35,7 +35,7 @@ export default function Grid({ items, onItemClick }) {
 
         {/* Overlay */}
         {items.length > 9 && !showMore && (
-          <div className="absolute inset-x-2 bottom-0 flex h-[40%] items-end justify-center bg-gradient-to-b from-white/0 via-white/70 to-white/90 tn:inset-x-5" />
+          <div className="tn:inset-x-5 absolute inset-x-2 bottom-0 flex h-[40%] items-end justify-center bg-gradient-to-b from-white/0 via-white/70 to-white/90" />
         )}
       </div>
 
@@ -52,7 +52,7 @@ export default function Grid({ items, onItemClick }) {
       )}
 
       {items.length > 9 && showMore && (
-        <div className="mt-3 flex justify-center xs:mt-4">
+        <div className="xs:mt-4 mt-3 flex justify-center">
           <button
             className="flex items-center justify-center gap-1 rounded-full border px-3 py-1 text-[#00B487] shadow-xl"
             onClick={() => setShowMore(false)}

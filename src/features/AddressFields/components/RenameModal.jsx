@@ -10,7 +10,7 @@ const RenameModal = ({
 }) => {
   return (
     <Modal isOpen={isOpen} className="p-4">
-      <p className="mb-2 text-accent">গ্রামের নাম পরিবর্তন করুন</p>
+      <p className="mb-2">গ্রামের নাম পরিবর্তন করুন</p>
       <input
         type="text"
         className="border px-3 py-1"

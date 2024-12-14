@@ -2,7 +2,7 @@ export default function RadioInput({ label, checked, onClick }) {
   return (
     <div className="ml-4 flex items-center gap-2">
       <input
-        className="accent-primary focus:border-primary"
+        className="accent-primary"
         type="radio"
         id={label}
         value={label}

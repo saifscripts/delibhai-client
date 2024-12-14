@@ -64,7 +64,7 @@ export default function VehiclePhotos() {
         {(!authUser?.vehiclePhotos || user?.vehiclePhotos?.length < 4) &&
           user?._id === authUser?._id && (
             <form
-              className={`relative z-10 flex aspect-square w-28 flex-shrink-0 flex-col items-center justify-center rounded-lg bg-accent ${
+              className={`relative z-10 flex aspect-square w-28 flex-shrink-0 flex-col items-center justify-center rounded-lg bg-muted-foreground ${
                 isLoading && "opacity-30"
               }`}
             >

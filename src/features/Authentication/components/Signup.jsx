@@ -135,7 +135,7 @@ function Signup() {
 
         <Submit disabled={isSubmitting} value="ওটিপি কোড পাঠান" />
       </form>
-      <p className="text-center text-accent">
+      <p className="text-center">
         যদি অলরেডি আপনার একাউন্ট থাকে তাহলে{" "}
         <Link to="/login" className="text-primary">
           লগইন করুন

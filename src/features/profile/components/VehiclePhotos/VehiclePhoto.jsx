@@ -40,12 +40,12 @@ export default function VehiclePhoto({ url, index, userId }) {
     return (
       <button
         onClick={removePhoto}
-        className={`absolute right-4 top-0 items-center gap-3 rounded-lg bg-white px-3 py-1 shadow-lg ${
+        className={`absolute right-4 top-0 items-center gap-3 rounded-lg bg-muted px-3 py-1 shadow-lg ${
           deleteBtn === index ? "flex" : "hidden"
         }`}
       >
         <span className="text-sm">ডিলিট</span>
-        <span className="bg-neutral rounded-full p-1">{<AiFillDelete />}</span>
+        <span className="rounded-full bg-muted p-1">{<AiFillDelete />}</span>
       </button>
     );
   };

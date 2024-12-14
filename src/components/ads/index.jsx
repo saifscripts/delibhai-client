@@ -55,7 +55,7 @@ export default function Ads() {
         "--swiper-pagination-color": "#00C795",
         "--swiper-pagination-bottom": "0px",
       }}
-      className="bg-white"
+      className="bg-background"
     >
       {slides.map((slide) => (
         <SwiperSlide key={slide._id} className="p-2 pb-6">

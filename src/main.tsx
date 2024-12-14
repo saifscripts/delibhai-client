@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <GeolocationProvider>
-          <ThemeProvider defaultTheme="dark" storageKey="theme">
+          <ThemeProvider defaultTheme="light" storageKey="theme">
             <RouterProvider router={router} />
             <Toaster />
           </ThemeProvider>

@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import cloneDeep from "lodash/cloneDeep";
 import { MdDelete, MdEdit } from "react-icons/md";
 
@@ -23,12 +24,12 @@ const ServiceAddressCard = ({
             : "";
 
   return (
-    <div className="bg-tone rounded-lg bg-opacity-10 p-2">
-      <div className="flex flex-col gap-5 rounded-lg bg-primary bg-opacity-5 p-3">
+    <div className="bg-tone/10 rounded-lg p-2">
+      <div className="flex flex-col gap-5 rounded-lg bg-primary/5 p-3">
         <div className="flex items-center justify-between">
           <p className="mb-1 font-semibold">{title}</p>
-          <div className="space-x-1">
-            <button
+          <div>
+            <Button
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -37,11 +38,13 @@ const ServiceAddressCard = ({
                 setAddressIndex(index);
                 setIsAddressModalOpen(true);
               }}
-              className="hover:bg-neutral rounded-lg p-2 text-primary"
+              variant="ghost"
+              size="icon"
+              className="text-blue-400"
             >
               {<MdEdit />}
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -50,10 +53,12 @@ const ServiceAddressCard = ({
                 _serviceAddress.splice(index, 1);
                 setServiceAddress(_serviceAddress);
               }}
-              className="hover:bg-neutral rounded-lg p-2 text-red-400"
+              variant="ghost"
+              size="icon"
+              className="text-destructive"
             >
               {<MdDelete />}
-            </button>
+            </Button>
           </div>
         </div>
 

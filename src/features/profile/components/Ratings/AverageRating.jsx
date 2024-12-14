@@ -8,7 +8,9 @@ export default function AverageRating({ rating, total }) {
 
       <RatingStars rating={rating} />
 
-      <p className="text-medium text-lg">{englishToBengaliNumber(total)}</p>
+      <p className="text-lg text-foreground/80">
+        {englishToBengaliNumber(total)}
+      </p>
     </div>
   );
 }

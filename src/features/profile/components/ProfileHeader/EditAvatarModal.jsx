@@ -86,11 +86,13 @@ export default function EditAvatarModal({ editModal, setEditModal }) {
 
       {/* Panel sliding from the bottom */}
       <div
-        className={`fixed bottom-0 left-0 right-0 z-[99999] rounded-t-xl bg-white transition-transform ${
+        className={`fixed bottom-0 left-0 right-0 z-[99999] rounded-t-xl bg-muted transition-transform ${
           editModal ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <div className={`mx-auto mt-2 h-1 w-10 rounded-full bg-accent`}></div>
+        <div
+          className={`mx-auto mt-2 h-1 w-10 rounded-full bg-muted-foreground`}
+        ></div>
         <div className="flex flex-col gap-2 py-7">
           <EditOption
             icon={<AiFillCamera />}

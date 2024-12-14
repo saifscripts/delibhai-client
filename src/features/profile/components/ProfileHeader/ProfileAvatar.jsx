@@ -26,7 +26,7 @@ function EditButton({ setEditModal }) {
   return (
     <button
       onClick={() => setEditModal(true)}
-      className="absolute bottom-[5%] right-[5%] flex aspect-square w-[20%] items-center justify-center rounded-full bg-neutral"
+      className="absolute bottom-[5%] right-[5%] flex aspect-square w-[20%] items-center justify-center rounded-full"
     >
       <img src={camera} alt="Camera" />
     </button>

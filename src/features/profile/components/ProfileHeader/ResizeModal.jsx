@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import ReactCrop, {
@@ -108,7 +109,7 @@ export default function ResizeModal({
 
   return (
     <div className="fixed inset-0 z-[9999999] flex items-center justify-center bg-black bg-opacity-20">
-      <div className="mx-4 rounded-md bg-white p-4">
+      <div className="mx-4 rounded-md bg-muted p-4">
         {imageSrc && (
           <div className="flex flex-col items-center justify-center gap-5">
             <ReactCrop
@@ -131,25 +132,19 @@ export default function ResizeModal({
               />
             </ReactCrop>
             <div className="space-x-3">
-              <button
-                className="rounded-md border border-accent px-3 py-1 text-accent"
-                onClick={() => setResizeModal(false)}
-              >
+              <Button variant="outline" onClick={() => setResizeModal(false)}>
                 বাতিল
-              </button>
-              <button
+              </Button>
+              <Button
                 ref={saveButtonRef}
                 disabled={isLoading}
-                className={`rounded-md px-3 py-1 text-white ${
-                  isLoading ? "bg-gray-500" : "bg-primary"
-                }`}
                 onClick={() => {
                   setIsLoading(true);
                   handleCrop();
                 }}
               >
                 সেইভ করুন
-              </button>
+              </Button>
             </div>
           </div>
         )}

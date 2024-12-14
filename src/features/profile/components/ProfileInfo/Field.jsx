@@ -5,7 +5,7 @@ export default function Field({ value, label, icon }) {
         <img src={icon} alt={label} className="w-full" />
       </div>
 
-      <div className="text-medium">
+      <div className="text-foreground/80">
         {Array.isArray(value) ? (
           value.map((value, index) => (
             <p key={index} className="text-lg font-bold">
@@ -13,7 +13,7 @@ export default function Field({ value, label, icon }) {
             </p>
           ))
         ) : (
-          <p className={`text-lg font-bold ${value || "text-red-300"}`}>
+          <p className={`text-lg font-bold ${value || "text-destructiveW"}`}>
             {value || "তথ্য প্রদান করুন"}
           </p>
         )}

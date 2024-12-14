@@ -24,7 +24,9 @@ export default function ProfileHeader() {
           </span>
 
           <div className="relative z-10 flex h-10 items-center rounded-full bg-gradient-to-b from-[#6BFFDA] to-[#00E1A9] py-3 pl-4 pr-10 text-xs min-[500px]:text-base">
-            <span>{user?.vehicleType && user?.vehicleType + " রাইডার"}</span>
+            <span className="dark:text-background">
+              {user?.vehicleType && user?.vehicleType + " রাইডার"}
+            </span>
             <div className="absolute right-0 top-1/2 h-16 w-16 -translate-y-1/2 translate-x-1/2">
               <img
                 src={vehicleIcon}

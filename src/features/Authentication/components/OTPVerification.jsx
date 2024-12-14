@@ -1,10 +1,9 @@
+import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Submit from "../../../components/forms/Submit";
 import { useResendOTP, useVerifyOTP } from "../../../hooks/auth.hook";
 import MiniContainer from "../../../layouts/MiniContainer";
 import Title from "../../../layouts/Title";
-import cn from "../../../lib/cn";
 import { SubmitModal, Timer } from "../index";
 
 function OTPVerification() {
@@ -121,7 +120,7 @@ function OTPVerification() {
               timerRunning={timerRunning}
               setTimerRunning={setTimerRunning}
             />
-            <form>
+            <form className="flex flex-col gap-4">
               <div className="flex justify-center gap-2">
                 {OTP.map((digit, index) => (
                   <input
@@ -138,30 +137,29 @@ function OTPVerification() {
                 ))}
               </div>
 
-              <p className="mx-auto my-4 w-fit">
-                আমি কোনো কোড পাই নি.{" "}
-                <button
+              <p className="mx-auto w-fit">
+                আমি কোনো কোড পাই নি{" "}
+                <Button
                   onClick={handleResendOTP}
                   disabled={timerRunning || isVerifyPending || isResendPending}
-                  className={cn("text-tone", {
-                    "text-accent":
-                      timerRunning || isVerifyPending || isResendPending,
-                  })}
+                  variant="link"
+                  className={`cursor-pointer p-0 text-base ${timerRunning || isVerifyPending || isResendPending ? "text-muted-foreground" : ""}`}
                 >
                   পুনরায় পাঠান
-                </button>
+                </Button>
               </p>
 
-              <Submit
-                value="সাবমিট করুন"
+              <Button
+                className="mx-auto w-full max-w-xl"
                 disabled={
                   isVerifyPending ||
                   isResendPending ||
                   OTP.some((field) => field === "")
                 }
-                className="rounded-lg"
                 onClick={handleSubmit}
-              />
+              >
+                সাবমিট করুন
+              </Button>
             </form>
           </MiniContainer>
           <SubmitModal isOpen={isSubmitModalOpen} id={state.id} />
