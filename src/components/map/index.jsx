@@ -3,16 +3,16 @@ import { MapPin, MapPinOff } from "lucide-react";
 export default function Map({ location, isLoading, error }) {
   if (isLoading) {
     return (
-      <div className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[#00B487]   bg-[#E6FFF9] py-2 text-center text-xl text-[#008C69]">
-        <div className="h-[28px] w-1/3 animate-pulse rounded-xl bg-primary/30" />
-        <div className="h-[28px] w-1/3 animate-pulse rounded-xl bg-primary/30" />
+      <div className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl border border-tone-700 bg-tone-50 text-center text-xl text-tone-800">
+        <div className="h-6 w-1/3 animate-pulse rounded-xl bg-primary/30" />
+        <div className="h-6 w-1/3 animate-pulse rounded-xl bg-primary/30" />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="w-full rounded-2xl border border-[#FF3B30]/20 bg-[#FF3B30]/10 px-4 py-2 text-center text-xl text-[#FF3B30]">
+      <div className="w-full rounded-2xl border border-destructive bg-destructive/20 px-4 py-2 text-center text-xl text-destructive">
         <MapPinOff className="-mt-1 mr-2 inline-block" size={20} />
         <span>{error}</span>
       </div>
@@ -21,7 +21,7 @@ export default function Map({ location, isLoading, error }) {
 
   if (location) {
     return (
-      <div className="w-full rounded-2xl border border-[#00B487] bg-[#E6FFF9] py-2 text-center text-xl text-[#008C69]">
+      <div className="w-full rounded-2xl border border-tone-700 bg-tone-50 py-2 text-center text-xl text-tone-800">
         <MapPin className="-mt-1 mr-2 inline-block" size={20} />
         <span>
           {location?.latitude}, {location?.longitude}
@@ -31,7 +31,7 @@ export default function Map({ location, isLoading, error }) {
   }
 
   return (
-    <div className="w-full rounded-2xl border border-[#FF3B30]/20 bg-[#FF3B30]/10 py-2 text-center text-[#FF3B30]">
+    <div className="w-full rounded-2xl border border-destructive bg-destructive/20 py-2 text-center text-destructive">
       Not Available
     </div>
   );

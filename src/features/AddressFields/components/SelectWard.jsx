@@ -13,7 +13,7 @@ export default function SelectWard() {
       name="ward"
       value={ward}
       onChange={handlers.handleWardChange}
-      className="w-full rounded-md bg-primary bg-opacity-10 px-4 py-[6px]"
+      className="w-full rounded-md bg-primary px-4 py-[6px] text-primary-foreground"
     >
       <option value="">সকল ওয়ার্ড</option>
       {wards?.map(({ _id, title }) => (

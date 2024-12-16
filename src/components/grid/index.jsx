@@ -16,7 +16,7 @@ export default function Grid({ items, onItemClick }) {
               key={item.id}
               onClick={() => onItemClick(item)}
               className={cn(
-                "group flex aspect-square cursor-pointer flex-col items-center justify-between gap-2 rounded-lg border bg-muted px-2 py-2 hover:border-[#00E7AD] hover:bg-[#8AFFE1] sm:gap-4 sm:px-3 sm:py-2",
+                "group flex aspect-square cursor-pointer flex-col items-center justify-between gap-2 rounded-lg border bg-muted px-2 py-2 hover:border-tone-600 hover:bg-tone-200 sm:gap-4 sm:px-3 sm:py-2",
               )}
             >
               <div className="flex h-[75%] w-full items-center justify-center">
@@ -26,7 +26,7 @@ export default function Grid({ items, onItemClick }) {
                   className="h-full w-full object-scale-down object-center"
                 />
               </div>
-              <p className="text-center text-sm text-muted-foreground [text-wrap:nowrap] dark:group-hover:text-muted sm:text-xl">
+              <p className="text-center text-sm text-muted-foreground [text-wrap:nowrap]  dark:group-hover:text-muted sm:text-xl">
                 {item.title}
               </p>
             </div>
@@ -42,7 +42,7 @@ export default function Grid({ items, onItemClick }) {
       {items.length > 9 && !showMore && (
         <div className="relative z-10 -mt-2 flex justify-center">
           <button
-            className="flex items-center justify-center gap-1 rounded-full border px-3 py-1 text-[#00B487] shadow-xl"
+            className="flex items-center justify-center gap-1 rounded-full border px-3 py-1 text-tone-700 shadow-xl"
             onClick={() => setShowMore(true)}
           >
             আরো দেখুন
@@ -54,7 +54,7 @@ export default function Grid({ items, onItemClick }) {
       {items.length > 9 && showMore && (
         <div className="xs:mt-4 mt-3 flex justify-center">
           <button
-            className="flex items-center justify-center gap-1 rounded-full border px-3 py-1 text-[#00B487] shadow-xl"
+            className="flex items-center justify-center gap-1 rounded-full border px-3 py-1 text-tone-700 shadow-xl"
             onClick={() => setShowMore(false)}
           >
             কম দেখুন

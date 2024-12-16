@@ -12,7 +12,7 @@ export default function Category({ name, title, icon, percent, index }) {
       className={({ isActive }) =>
         cn(
           "relative z-10 flex w-24 flex-shrink-0 flex-col items-center justify-center p-1",
-          { "border-tone border-b-2": isActive || (!category && index) },
+          { "border-b-2 border-tone": isActive || (!category && index) },
         )
       }
       replace
@@ -36,7 +36,7 @@ export default function Category({ name, title, icon, percent, index }) {
         />
 
         <div
-          className={`absolute left-1/2 top-1/2 -z-10 flex aspect-square -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black text-[#00E1A9]`}
+          className={`absolute left-1/2 top-1/2 -z-10 flex aspect-square -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-black text-tone-500`}
           style={{ width: 45 }}
         >
           <img src={icon} alt={title} />
@@ -44,7 +44,7 @@ export default function Category({ name, title, icon, percent, index }) {
       </div>
 
       <p className="text-[6px mt-1">{title}</p>
-      <p className="text-[6px -mt-2 text-[#979797]">{percent}%</p>
+      <p className="text-[6px text979797] -mt-2">{percent}%</p>
     </NavLink>
   );
 }

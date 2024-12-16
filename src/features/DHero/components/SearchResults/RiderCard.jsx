@@ -41,7 +41,7 @@ export default function RiderCard({ rider }) {
         <div
           className={cn(
             "absolute bottom-[5%] right-[5%] aspect-square w-[20%] rounded-full border-2 border-white",
-            { "bg-primary": isOnline, "bg-gray-400": !isOnline },
+            { "bg-primary": isOnline, "bg-foreground/40": !isOnline },
           )}
         ></div>
       </div>

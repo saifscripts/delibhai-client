@@ -13,7 +13,7 @@ function ErrorPage() {
         <h1 className="text-center text-3xl lg:text-4xl">
           {error.status} - {error.statusText}
         </h1>
-        <p className="max-w-xl text-center text-gray-600">
+        <p className="max-w-xl text-center text-foreground/60">
           The page/service you are looking for might have been removed had its
           name changed or is temporarily unavailable.
         </p>

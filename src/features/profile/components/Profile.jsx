@@ -1,11 +1,11 @@
 // others
 import { Outlet, useParams } from "react-router-dom";
-import Skeleton from "../../../components/Skeleton";
 import { useUser } from "../../../hooks/user.hook";
 import MiniContainer from "../../../layouts/MiniContainer";
 import { BottomPanel } from "./BottomPanel";
 import { ProfileHeader } from "./ProfileHeader";
 import { ProfileMenu } from "./ProfileMenu";
+import ProfileSkeleton from "./ProfileSkeleton";
 
 export default function Profile() {
   const { id } = useParams();
@@ -15,7 +15,7 @@ export default function Profile() {
   if (isLoading) {
     return (
       <MiniContainer>
-        <Skeleton />;
+        <ProfileSkeleton />
       </MiniContainer>
     );
   }

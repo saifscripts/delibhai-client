@@ -3,7 +3,7 @@ const Title = ({ title, subtitle, color }) => {
   return (
     <div
       className={`text-${color} py-4 text-center ${
-        color === "white" ? "" : "border-b border-gray-300"
+        color === "white" ? "" : "border-b border-foreground/30"
       }`}
     >
       <h1 className={`text-2xl font-bold lg:text-4xl`}>{title}</h1>

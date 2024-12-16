@@ -15,7 +15,7 @@ export default function Review({ image, name, rating, date, review }) {
 
       <div className="my-2 flex items-center gap-2">
         <RatingStars rating={rating} />
-        <span className="text-medium">{date}</span>
+        <span className="text-foreground/80">{date}</span>
       </div>
 
       <p className="text-sm">{review}</p>

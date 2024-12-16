@@ -30,7 +30,7 @@ export default function CheckVillages() {
         </div>
         <div className="flex h-72 flex-col flex-wrap gap-2 overflow-x-auto pl-4">
           {address?.village?.map(({ _id }) => (
-            <p key={_id} className="bg-gray-50 px-2 py-1">
+            <p key={_id} className="bg-foreground/5 px-2 py-1">
               {
                 addressFields?.villages?.find((village) => village?._id === _id)
                   ?.title
