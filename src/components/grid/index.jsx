@@ -35,7 +35,7 @@ export default function Grid({ items, onItemClick }) {
 
         {/* Overlay */}
         {items.length > 9 && !showMore && (
-          <div className="tn:inset-x-5 absolute inset-x-2 bottom-0 flex h-[40%] items-end justify-center bg-gradient-to-b from-white/0 via-white/70 to-white/90" />
+          <div className="tn:inset-x-5 absolute inset-x-2 bottom-0 flex h-[40%] items-end justify-center bg-gradient-to-b from-white/0 via-background/70 to-background/90" />
         )}
       </div>
 
