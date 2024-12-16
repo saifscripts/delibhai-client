@@ -78,7 +78,7 @@ function Signup() {
             disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.name?.message}</p>
+          <p className="text-destructive">{errors.name?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -92,7 +92,7 @@ function Signup() {
             <option value="মহিলা">মহিলা</option>
             <option value="অন্যান্য">অন্যান্য</option>
           </select>
-          <p className="text-red-400">{errors.gender?.message}</p>
+          <p className="text-destructive">{errors.gender?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -104,7 +104,7 @@ function Signup() {
             disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.mobile?.message}</p>
+          <p className="text-destructive">{errors.mobile?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -116,7 +116,7 @@ function Signup() {
             disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.password?.message}</p>
+          <p className="text-destructive">{errors.password?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -128,10 +128,10 @@ function Signup() {
             disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.confirmPassword?.message}</p>
+          <p className="text-destructive">{errors.confirmPassword?.message}</p>
         </div>
 
-        <p className="text-red-400">{errors.general?.message}</p>
+        <p className="text-destructive">{errors.general?.message}</p>
 
         <Submit disabled={isSubmitting} value="ওটিপি কোড পাঠান" />
       </form>

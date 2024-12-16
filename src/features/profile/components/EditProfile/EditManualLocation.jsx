@@ -87,7 +87,7 @@ export default function EditManualLocation({ isOpen, onClose }) {
             {...register("manualLocation")}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.manualLocation?.message}</p>
+          <p className="text-destructive">{errors.manualLocation?.message}</p>
         </div>
 
         <Button disabled={isSubmitting} type="submit" className="mt-4 w-full">

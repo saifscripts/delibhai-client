@@ -53,13 +53,13 @@ export default function RiderCard({ rider }) {
           <div className="relative">
             {isHighlight && (
               <span className="absolute animate-ping">
-                <HiOutlineStar className="text-red-400" />
+                <HiOutlineStar className="text-destructive" />
               </span>
             )}
             <span className="relative">
               <HiOutlineStar
                 className={cn({
-                  "text-red-400": isHighlight,
+                  "text-destructive": isHighlight,
                   "": !isHighlight,
                 })}
               />

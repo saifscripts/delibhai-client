@@ -114,7 +114,7 @@ export default function AddVillage() {
                     setIsDeleteModalOpen(true);
                     setEditVillage(village);
                   }}
-                  className="hidden text-red-400 group-hover:inline-block"
+                  className="hidden text-destructive group-hover:inline-block"
                 >
                   <MdDelete />
                 </button>

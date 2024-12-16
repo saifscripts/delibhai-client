@@ -56,7 +56,7 @@ export default function AddressModal({
           setAddress={setAddress}
         />
 
-        <p className="mb-3 text-center text-red-400">{error}</p>
+        <p className="mb-3 text-center text-destructive">{error}</p>
         <button
           onClick={handleSave}
           className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-2 py-2 text-xl text-white"

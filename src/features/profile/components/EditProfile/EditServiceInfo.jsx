@@ -102,7 +102,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
             <option value="ব্যক্তিগত">ব্যক্তিগত</option>
             <option value="ভাড়ায় চালিত">ভাড়ায় চালিত</option>
           </select>
-          <p className="text-red-400">{errors.serviceType?.message}</p>
+          <p className="text-destructive">{errors.serviceType?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -117,7 +117,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
             <option value="লোকাল ও রিজার্ভ ভাড়া">লোকাল ও রিজার্ভ ভাড়া</option>
             <option value="কন্টাক্ট ভাড়া">কন্টাক্ট ভাড়া</option>
           </select>
-          <p className="text-red-400">{errors.rentType?.message}</p>
+          <p className="text-destructive">{errors.rentType?.message}</p>
         </div>
 
         <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
@@ -169,7 +169,7 @@ export default function EditServiceInfo({ isOpen, onClose }) {
           setIs24HourServiceTime={setIs24HourServiceTime}
         />
 
-        <p className="text-red-400">{errors.general?.message}</p>
+        <p className="text-destructive">{errors.general?.message}</p>
 
         <Button disabled={isSubmitting} type="submit" className="mt-4 w-full">
           সংরক্ষণ করুন

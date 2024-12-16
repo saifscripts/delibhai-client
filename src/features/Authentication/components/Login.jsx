@@ -44,7 +44,7 @@ function Login() {
             disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.mobile?.message}</p>
+          <p className="text-destructive">{errors.mobile?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -56,10 +56,10 @@ function Login() {
             disabled={isSubmitting}
             className="w-full border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.password?.message}</p>
+          <p className="text-destructive">{errors.password?.message}</p>
         </div>
 
-        <p className="text-red-400">{errors.general?.message}</p>
+        <p className="text-destructive">{errors.general?.message}</p>
 
         <Submit disabled={isSubmitting} value="লগইন" />
       </form>

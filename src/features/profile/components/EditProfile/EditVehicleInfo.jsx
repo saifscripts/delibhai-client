@@ -78,7 +78,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
               </option>
             ))}
           </select>
-          <p className="text-red-400">{errors.vehicleType?.message}</p>
+          <p className="text-destructive">{errors.vehicleType?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -90,7 +90,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.vehicleBrand?.message}</p>
+          <p className="text-destructive">{errors.vehicleBrand?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -102,7 +102,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.vehicleModel?.message}</p>
+          <p className="text-destructive">{errors.vehicleModel?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -114,7 +114,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.vehicleNumber?.message}</p>
+          <p className="text-destructive">{errors.vehicleNumber?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -126,10 +126,10 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.vehicleName?.message}</p>
+          <p className="text-destructive">{errors.vehicleName?.message}</p>
         </div>
 
-        <p className="text-red-400">{errors.general?.message}</p>
+        <p className="text-destructive">{errors.general?.message}</p>
 
         <Button disabled={isSubmitting} type="submit" className="mt-4 w-full">
           সংরক্ষণ করুন

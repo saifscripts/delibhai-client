@@ -57,10 +57,10 @@ export default function EditVideoURL({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.videoURL?.message}</p>
+          <p className="text-destructive">{errors.videoURL?.message}</p>
         </div>
 
-        <p className="text-red-400">{errors.general?.message}</p>
+        <p className="text-destructive">{errors.general?.message}</p>
 
         <Button disabled={isSubmitting} type="submit" className="mt-4 w-full">
           সংরক্ষণ করুন

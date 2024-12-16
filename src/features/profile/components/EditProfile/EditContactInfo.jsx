@@ -71,7 +71,7 @@ export default function EditContactInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.contactNo1?.message}</p>
+          <p className="text-destructive">{errors.contactNo1?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -83,7 +83,7 @@ export default function EditContactInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.contactNo2?.message}</p>
+          <p className="text-destructive">{errors.contactNo2?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -95,7 +95,7 @@ export default function EditContactInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.email?.message}</p>
+          <p className="text-destructive">{errors.email?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -107,10 +107,10 @@ export default function EditContactInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.facebookURL?.message}</p>
+          <p className="text-destructive">{errors.facebookURL?.message}</p>
         </div>
 
-        <p className="text-red-400">{errors.general?.message}</p>
+        <p className="text-destructive">{errors.general?.message}</p>
 
         <Button disabled={isSubmitting} type="submit" className="mt-4 w-full">
           সংরক্ষণ করুন

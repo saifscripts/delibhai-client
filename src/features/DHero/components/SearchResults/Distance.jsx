@@ -7,13 +7,13 @@ export default function Distance({ currentDistance, isLive }) {
       <div className="relative">
         {isLive && (
           <span className="absolute animate-ping">
-            {<HiOutlineLocationMarker className="text-red-400" />}
+            {<HiOutlineLocationMarker className="text-destructive" />}
           </span>
         )}
         <span className="relative">
           {
             <HiOutlineLocationMarker
-              className={cn({ "text-red-400": isLive })}
+              className={cn({ "text-destructive": isLive })}
             />
           }
         </span>

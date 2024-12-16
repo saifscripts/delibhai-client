@@ -118,7 +118,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.name?.message}</p>
+          <p className="text-destructive">{errors.name?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -130,7 +130,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.fatherName?.message}</p>
+          <p className="text-destructive">{errors.fatherName?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -144,7 +144,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             <option value="মহিলা">মহিলা</option>
             <option value="অন্যান্য">অন্যান্য</option>
           </select>
-          <p className="text-red-400">{errors.gender?.message}</p>
+          <p className="text-destructive">{errors.gender?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -163,7 +163,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             <option value="এবি-">এবি-</option>
             <option value="ও-">ও-</option>
           </select>
-          <p className="text-red-400">{errors.bloodGroup?.message}</p>
+          <p className="text-destructive">{errors.bloodGroup?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -175,7 +175,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.age?.message}</p>
+          <p className="text-destructive">{errors.age?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -187,7 +187,7 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.nid?.message}</p>
+          <p className="text-destructive">{errors.nid?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -199,10 +199,10 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
             accept="image/*"
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.nidURL?.message}</p>
+          <p className="text-destructive">{errors.nidURL?.message}</p>
         </div>
 
-        <p className="text-red-400">{errors.general?.message}</p>
+        <p className="text-destructive">{errors.general?.message}</p>
 
         <Button disabled={isSubmitting} type="submit" className="mt-4 w-full">
           সংরক্ষণ করুন

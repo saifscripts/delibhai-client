@@ -79,7 +79,7 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.ownerName?.message}</p>
+          <p className="text-destructive">{errors.ownerName?.message}</p>
         </div>
 
         <p className="border-light mb-3 mt-4 border-b py-3 font-bold">ঠিকানা</p>
@@ -99,7 +99,7 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.ownerContactNo?.message}</p>
+          <p className="text-destructive">{errors.ownerContactNo?.message}</p>
         </div>
 
         <div className="mb-1 mt-4">
@@ -111,7 +111,7 @@ export default function EditOwnerInfo({ isOpen, onClose }) {
             disabled={isSubmitting}
             className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-red-400">{errors.ownerEmail?.message}</p>
+          <p className="text-destructive">{errors.ownerEmail?.message}</p>
         </div>
 
         <Button disabled={isSubmitting} type="submit" className="mt-4 w-full">

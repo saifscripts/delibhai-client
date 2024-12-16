@@ -14,5 +14,7 @@ export default function Video() {
     );
   }
 
-  return <p className="text-center text-2xl text-red-400">ভিডিও আপডেট করুন</p>;
+  return (
+    <p className="text-center text-2xl text-destructive">ভিডিও আপডেট করুন</p>
+  );
 }
