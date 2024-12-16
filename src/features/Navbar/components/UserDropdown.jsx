@@ -24,7 +24,10 @@ export default function UserDropdown() {
       <DropdownMenuTrigger>
         <Avatar>
           <AvatarImage src={user?.avatarURL || avatar} />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>
+            {user?.name?.split(" ")[0].charAt(0).toUpperCase()}
+            {user?.name?.split(" ")[1].charAt(0).toUpperCase()}
+          </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
 
@@ -43,7 +46,7 @@ export default function UserDropdown() {
             </AvatarFallback>
           </Avatar>
           {/* Name and email */}
-          <div className="hidden md:block">
+          <div>
             <p className="font-medium leading-tight tracking-tighter">
               {user?.name}
             </p>
