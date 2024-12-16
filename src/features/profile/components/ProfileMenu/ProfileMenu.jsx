@@ -13,7 +13,7 @@ export default function ProfileMenu() {
   const [visible, setVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
-  // Hide navbar on scroll down and show on scroll up
+  // Position profile menu on scroll down and show on scroll up
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
@@ -53,7 +53,7 @@ export default function ProfileMenu() {
         },
       )}
     >
-      <div className="-mb-5 flex gap-2 overflow-x-scroll py-3">
+      <div className="-mb-5 flex gap-2 overflow-x-scroll pb-5 pt-2">
         {categories.map(({ name, title, icon, index }) => (
           <Category
             key={name}
