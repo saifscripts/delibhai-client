@@ -31,7 +31,9 @@ export default function Profile() {
     <MiniContainer>
       <ProfileHeader />
       <ProfileMenu />
-      <Outlet />
+      <div className="min-h-[calc(100svh-136px)]">
+        <Outlet />
+      </div>
       <BottomPanel />
     </MiniContainer>
   );

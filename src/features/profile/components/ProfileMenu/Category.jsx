@@ -15,6 +15,7 @@ export default function Category({ name, title, icon, percent, index }) {
           { "border-b-2 border-tone": isActive || (!category && index) },
         )
       }
+      preventScrollReset
       replace
     >
       <div className="relative w-[50px]">
