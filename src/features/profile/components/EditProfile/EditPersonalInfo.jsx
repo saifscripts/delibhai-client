@@ -1,72 +1,61 @@
+import DatePicker from "@/components/forms/DatePicker";
+import Form from "@/components/forms/Form";
+import Input from "@/components/forms/Input";
+import Select from "@/components/forms/Select";
 import { Button } from "@/components/ui/button";
-import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import axios from "axios";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { XIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import * as yup from "yup";
 import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
-import Modal from "../../../../layouts/Modal";
-import { isNID } from "../../../../utils/isNID";
+import { ProfileInfoSchema } from "../../schemas/personal-info.schema";
+import SaveButton from "./SaveButton";
 
-const userSchema = yup.object({
-  name: yup
-    .string()
-    .trim()
-    .required("Name is required.")
-    .min(3, "Name must be at least 3 characters long."),
-  fatherName: yup
-    .string()
-    .trim()
-    .min(3, "Name must be at least 3 characters long."),
-  gender: yup
-    .string()
-    .required("Gender is required.")
-    .oneOf(
-      ["পুরুষ", "মহিলা", "অন্যান্য"],
-      "${value} is an invalid gender. Gender must be পুরুষ/মহিলা/অন্যান্য.",
-    ),
-  bloodGroup: yup
-    .string()
-    .oneOf(
-      ["এ+", "বি+", "এবি+", "ও+", "এ-", "বি-", "এবি-", "ও-"],
-      "${value} is an invalid blood group.",
-    ),
-  age: yup.number().integer("{value} is not an integer value."),
-  nid: yup.string().test("isValidNID", "NID is not valid.", isNID),
-  nidURL: yup.mixed(),
-});
+const genderOptions = [
+  { value: "পুরুষ", label: "পুরুষ" },
+  { value: "মহিলা", label: "মহিলা" },
+  { value: "অন্যান্য", label: "অন্যান্য" },
+];
 
-export default function EditPersonalInfo({ isOpen, onClose }) {
+const bloodGroupOptions = [
+  { value: "এ+", label: "এ+" },
+  { value: "বি+", label: "বি+" },
+  { value: "এবি+", label: "এবি+" },
+  { value: "ও+", label: "ও+" },
+  { value: "এ-", label: "এ-" },
+  { value: "বি-", label: "বি-" },
+  { value: "এবি-", label: "এবি-" },
+  { value: "ও-", label: "ও-" },
+];
+
+export default function EditPersonalInfo() {
+  const [image, setImage] = useState(null);
+  const [imageData, setImageData] = useState(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
   const {
     mutate: updateRider,
     data: updatedRider,
     isSuccess,
+    isPending,
   } = useUpdateRider();
   const { user } = useMe();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: yupResolver(userSchema),
-    defaultValues: {
-      name: user?.name,
-      fatherName: user?.fatherName,
-      gender: user?.gender,
-      bloodGroup: user?.bloodGroup,
-      nid: user?.nid,
-    },
-  });
-
   const onSubmit = async (data) => {
+    console.log(data);
     // If user select nid image
-    if (data.nidURL[0]) {
+    if (image) {
       // Create formData and append the image file
       const formData = new FormData();
-      formData.append("image", data.nidURL[0]);
+      formData.append("image", image);
 
       // Upload the image to the imagebb
       const imgbbResult = await axios.post(
@@ -95,119 +84,118 @@ export default function EditPersonalInfo({ isOpen, onClose }) {
   };
 
   useEffect(() => {
+    if (image) {
+      setImageData(URL.createObjectURL(image));
+    } else {
+      setImageData(null);
+    }
+  }, [image]);
+
+  useEffect(() => {
+    if (user) {
+      setImageData(user?.nidURL);
+    }
+  }, [user]);
+
+  useEffect(() => {
     if (isSuccess && updatedRider?.success) {
-      onClose();
+      setIsDialogOpen(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, updatedRider]);
 
+  const defaultValues = {
+    name: user?.name,
+    fatherName: user?.fatherName,
+    nid: user?.nid,
+    gender: user?.gender,
+    bloodGroup: user?.bloodGroup,
+    dateOfBirth: user?.dateOfBirth,
+  };
+
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      closeBtn
-      headerText="ব্যক্তিগত তথ্য"
-    >
-      <form onSubmit={handleSubmit(onSubmit)} className="w-[512px] max-w-full">
-        <div className="mb-1">
-          <label className="font-bold">নিজের নাম</label>
-          <input
-            {...register("name")}
-            type="text"
-            placeholder="নিজের নাম লিখুন"
-            disabled={isSubmitting}
-            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
-          />
-          <p className="text-destructive">{errors.name?.message}</p>
-        </div>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogTrigger asChild>
+        <Button variant="link">Edit</Button>
+      </DialogTrigger>
+      <DialogContent className="hide-scrollbar max-h-[100svh] w-[512px] max-w-full overflow-y-auto p-0">
+        <DialogHeader className="border-b bg-background px-4 py-2">
+          <DialogTitle className="text-2xl font-bold">
+            ব্যক্তিগত তথ্য
+          </DialogTitle>
+        </DialogHeader>
 
-        <div className="mb-1 mt-4">
-          <label className="font-bold">পিতার নাম</label>
-          <input
-            {...register("fatherName")}
-            type="text"
+        <Form
+          onSubmit={onSubmit}
+          schema={ProfileInfoSchema}
+          defaultValues={defaultValues}
+          className="w-full p-4"
+        >
+          <Input name="name" label="নিজের নাম" placeholder="নিজের নাম লিখুন" />
+          <Input
+            name="fatherName"
+            label="পিতার নাম"
             placeholder="পিতার নাম লিখুন"
-            disabled={isSubmitting}
-            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-destructive">{errors.fatherName?.message}</p>
-        </div>
-
-        <div className="mb-1 mt-4">
-          <label className="font-bold">লিঙ্গ</label>
-          <select
-            {...register("gender")}
-            disabled={isSubmitting}
-            className="w-full border-b border-primary bg-transparent py-3"
-          >
-            <option value="পুরুষ">পুরুষ</option>
-            <option value="মহিলা">মহিলা</option>
-            <option value="অন্যান্য">অন্যান্য</option>
-          </select>
-          <p className="text-destructive">{errors.gender?.message}</p>
-        </div>
-
-        <div className="mb-1 mt-4">
-          <label className="font-bold">রক্তের গ্রুপ</label>
-          <select
-            {...register("bloodGroup")}
-            disabled={isSubmitting}
-            className="w-full border-b border-primary bg-transparent py-3"
-          >
-            <option value="এ+">এ+</option>
-            <option value="বি+">বি+</option>
-            <option value="এবি+">এবি+</option>
-            <option value="ও+">ও+</option>
-            <option value="এ-">এ-</option>
-            <option value="বি-">বি-</option>
-            <option value="এবি-">এবি-</option>
-            <option value="ও-">ও-</option>
-          </select>
-          <p className="text-destructive">{errors.bloodGroup?.message}</p>
-        </div>
-
-        <div className="mb-1 mt-4">
-          <label className="font-bold">বয়স</label>
-          <input
-            {...register("age")}
-            type="number"
-            placeholder="বয়স লিখুন"
-            disabled={isSubmitting}
-            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
-          />
-          <p className="text-destructive">{errors.age?.message}</p>
-        </div>
-
-        <div className="mb-1 mt-4">
-          <label className="font-bold">জন্মনিবন্ধন/NID নম্বর</label>
-          <input
-            {...register("nid")}
-            type="number"
+          <Input
+            name="nid"
+            label="জন্মনিবন্ধন/NID নম্বর"
             placeholder="জন্মনিবন্ধন/NID নম্বর লিখুন"
-            disabled={isSubmitting}
-            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
           />
-          <p className="text-destructive">{errors.nid?.message}</p>
-        </div>
-
-        <div className="mb-1 mt-4">
-          <label className="font-bold">জন্মনিবন্ধন/NID এর ছবি</label>
-          <input
-            {...register("nidURL")}
-            type="file"
-            disabled={isSubmitting}
-            accept="image/*"
-            className="h-full w-full overflow-y-hidden border-b border-primary py-3"
+          <Select
+            name="gender"
+            label="লিঙ্গ"
+            placeholder="লিঙ্গ নির্বাচন করুন"
+            options={genderOptions}
           />
-          <p className="text-destructive">{errors.nidURL?.message}</p>
-        </div>
+          <Select
+            name="bloodGroup"
+            label="রক্তের গ্রুপ"
+            placeholder="রক্তের গ্রুপ নির্বাচন করুন"
+            options={bloodGroupOptions}
+          />
+          <DatePicker
+            name="dateOfBirth"
+            label="জন্ম তারিখ"
+            placeholder="জন্ম তারিখ নির্বাচন করুন"
+          />
+          <div>
+            <label className="font-bold">জন্মনিবন্ধন/NID এর ছবি</label>
+            <div className="mt-2 flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-primary p-2">
+              <label
+                htmlFor="image-upload"
+                className="relative flex cursor-pointer flex-col items-center justify-center"
+              >
+                {imageData && (
+                  <XIcon
+                    className="absolute -right-1 -top-1 z-10 cursor-pointer rounded-full bg-muted p-1"
+                    size={24}
+                    onClick={() => setImageData(null)}
+                  />
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="absolute inset-0 cursor-pointer opacity-0"
+                  onChange={(e) => setImage(e.target.files[0])}
+                />
+                <img
+                  src={imageData ? imageData : "/assets/icons/upload-icon.svg"}
+                  alt="Upload"
+                  className="rounded-lg"
+                />
+                {!imageData && (
+                  <span className="mt-2 text-sm text-foreground/70">
+                    ছবি আপলোড করুন
+                  </span>
+                )}
+              </label>
+            </div>
+          </div>
 
-        <p className="text-destructive">{errors.general?.message}</p>
-
-        <Button disabled={isSubmitting} type="submit" className="mt-4 w-full">
-          সংরক্ষণ করুন
-        </Button>
-      </form>
-    </Modal>
+          <SaveButton isLoading={isPending} />
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 }

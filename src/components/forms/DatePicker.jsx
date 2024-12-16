@@ -5,11 +5,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input as CNInput } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useFormContext } from "react-hook-form";
 
-export default function Input({ name, label, placeholder, type, className }) {
+export default function DatePicker({ name, label, placeholder, className }) {
   const form = useFormContext();
 
   return (
@@ -22,12 +21,12 @@ export default function Input({ name, label, placeholder, type, className }) {
             <FormLabel className="text-base font-bold">{label}</FormLabel>
           )}
           <FormControl>
-            <CNInput
-              type={type}
+            <input
+              type="date"
               placeholder={placeholder}
               {...field}
               className={cn(
-                "rounded-none border-x-0 border-b border-t-0 border-primary px-0 focus-visible:ring-0",
+                "block w-full border-b border-t-0 border-primary px-0 py-2 focus-visible:ring-0",
                 className,
                 {
                   "border-destructive/80": !!form.formState.errors[name],

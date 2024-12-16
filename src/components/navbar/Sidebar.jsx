@@ -33,12 +33,15 @@ const Sidebar = () => {
         </div>
 
         <ul className="flex flex-col">
-          <SidebarItem to="/">
+          <SidebarItem to="/" onClick={handleSidebarToggle}>
             <Home size={20} />
             <span>হোম পেইজ</span>
           </SidebarItem>
           {user && (
-            <SidebarItem to={`/profile/${user._id}`}>
+            <SidebarItem
+              to={`/profile/${user._id}`}
+              onClick={handleSidebarToggle}
+            >
               <User size={20} />
               <span>প্রোফাইল</span>
             </SidebarItem>
@@ -56,13 +59,13 @@ const Sidebar = () => {
             </SidebarItem>
           )}
           {!user && (
-            <SidebarItem to={`/login`}>
+            <SidebarItem to={`/login`} onClick={handleSidebarToggle}>
               <LogIn size={20} />
               <span>লগইন</span>
             </SidebarItem>
           )}
           {!user && (
-            <SidebarItem to={`/signup`}>
+            <SidebarItem to={`/signup`} onClick={handleSidebarToggle}>
               <DollarSign size={20} />
               <span>আয় করুন</span>
             </SidebarItem>

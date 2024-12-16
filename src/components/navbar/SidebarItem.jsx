@@ -1,13 +1,10 @@
 import { cn } from "@/lib/utils";
 import { NavLink } from "react-router-dom";
-import { useSidebar } from "./sidebar-provider";
 
-export default function SidebarItem({ to, children }) {
-  const { handleSidebarToggle } = useSidebar();
-
+export default function SidebarItem({ to, children, onClick }) {
   return (
     <NavLink
-      onClick={handleSidebarToggle}
+      onClick={onClick}
       to={to}
       className={({ isActive }) =>
         cn(

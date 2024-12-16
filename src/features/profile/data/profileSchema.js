@@ -47,7 +47,7 @@ const profileSchema = {
           icon: bloodGroup,
         },
         {
-          dataKey: "age",
+          dataKey: "dateOfBirth",
           dataModifier: modifyAge,
           label: "বয়স",
           icon: age,
@@ -55,6 +55,12 @@ const profileSchema = {
         {
           dataKey: "nid",
           label: "জন্মনিবন্ধন/NID নম্বর",
+          icon: nid,
+          isPrivate: true,
+        },
+        {
+          dataKey: "nidURL",
+          label: "জন্মনিবন্ধন/NID এর ছবি",
           icon: nid,
           isPrivate: true,
         },

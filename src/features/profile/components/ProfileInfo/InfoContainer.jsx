@@ -1,5 +1,5 @@
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import Edit from "../../../../components/ui/Edit";
 import {
   EditAddress,
   EditContactInfo,
@@ -25,12 +25,19 @@ export default function InfoContainer({ category, children, editModal }) {
     <div className="mb-3">
       <div className="mb-2 flex items-center justify-between">
         <h4 className="text-xl font-bold">{category}</h4>
-        {editModal && <Edit onClick={() => openModal(editModal)} />}
+        {category === "ব্যক্তিগত তথ্য" ? (
+          <EditPersonalInfo />
+        ) : (
+          editModal && (
+            <Button variant="link" onClick={() => openModal(editModal)}>
+              Edit
+            </Button>
+          )
+        )}
       </div>
 
       {children}
 
-      <EditPersonalInfo isOpen={modal === "personal"} onClose={closeModal} />
       <EditContactInfo isOpen={modal === "contact"} onClose={closeModal} />
       <EditAddress isOpen={modal === "address"} onClose={closeModal} />
       <EditVehicleInfo isOpen={modal === "vehicle"} onClose={closeModal} />

@@ -1,3 +1,6 @@
+import { cn } from "@/lib/utils";
+import { z } from "zod";
+
 export default function Field({ value, label, icon }) {
   return (
     <div className="border-light flex items-start gap-3 border-b py-2">
@@ -6,18 +9,36 @@ export default function Field({ value, label, icon }) {
       </div>
 
       <div className="text-foreground/80">
-        {Array.isArray(value) ? (
-          value.map((value, index) => (
-            <p key={index} className="text-lg font-bold">
-              {value}
-            </p>
-          ))
+        {z.string().url().safeParse(value).success ? (
+          <div className="flex flex-col">
+            <p className="mb-1 font-bold">{label}</p>
+            <img
+              src={value}
+              alt={label}
+              className="w-full max-w-md rounded-lg"
+            />
+          </div>
+        ) : Array.isArray(value) ? (
+          <div className="flex flex-col">
+            {value.map((value, index) => (
+              <p key={index} className="text-lg font-bold">
+                {value}
+              </p>
+            ))}
+            <p>{label}</p>
+          </div>
         ) : (
-          <p className={`text-lg font-bold ${value || "text-destructiveW"}`}>
-            {value || "তথ্য প্রদান করুন"}
-          </p>
+          <div className="flex flex-col">
+            <p
+              className={cn("text-lg font-bold", {
+                "text-destructive/80": !value,
+              })}
+            >
+              {value || "তথ্য প্রদান করুন"}
+            </p>
+            <p>{label}</p>
+          </div>
         )}
-        <p>{label}</p>
       </div>
     </div>
   );

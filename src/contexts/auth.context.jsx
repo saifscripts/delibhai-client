@@ -35,11 +35,14 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  return (
-    <AuthContext.Provider value={{ user, setAuthUser, logout, isLoading }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const value = {
+    user,
+    setAuthUser,
+    logout,
+    isLoading,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
