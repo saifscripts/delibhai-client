@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/auth.context";
 import { useGetMe } from "@/hooks/user.hook";
-import { LogOutIcon, UserPenIcon } from "lucide-react";
+import { LayoutDashboard, LogOutIcon, UserPenIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function UserDropdown() {
@@ -64,6 +64,18 @@ export default function UserDropdown() {
           <UserPenIcon size={16} />
           Profile
         </DropdownMenuItem>
+
+        {user?.role === "admin" && (
+          <DropdownMenuItem
+            className="cursor-pointer gap-2 text-base"
+            onClick={() => {
+              navigate(`/admin-dashboard`);
+            }}
+          >
+            <LayoutDashboard size={16} />
+            Dashboard
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuItem className="cursor-pointer p-0 text-base">
           <Button

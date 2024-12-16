@@ -1,9 +1,7 @@
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { Button } from "@/components/ui/button";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logos/logo.png";
-import { useAuth } from "../../../contexts/auth.context";
 import useSidebar from "../hooks/useSidebar";
 import AuthLinks from "./AuthLinks";
 import Sidebar from "./Sidebar";
@@ -11,7 +9,6 @@ import UserDropdown from "./UserDropdown";
 
 const Navbar = () => {
   const { isSidebarOpen, handleSidebarToggle } = useSidebar();
-  const { user } = useAuth();
 
   return (
     <nav className="sticky top-0 z-50 border-b bg-background">
@@ -36,12 +33,6 @@ const Navbar = () => {
           <Link className="hidden lg:block" to={"/"}>
             <img src={logo} alt="deliBhai Logo" className="w-28 sm:w-44" />
           </Link>
-
-          {user?.role === "admin" && (
-            <Link to="/admin-dashboard">
-              <Button variant="secondary">Dashboard</Button>
-            </Link>
-          )}
         </div>
 
         {/* Nav menu */}
