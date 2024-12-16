@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <GeolocationProvider>
           <ThemeProvider defaultTheme="light" storageKey="theme">
             <RouterProvider router={router} />
-            <Toaster />
+            <Toaster position="top-center" />
           </ThemeProvider>
         </GeolocationProvider>
       </AuthProvider>
