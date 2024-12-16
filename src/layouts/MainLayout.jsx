@@ -1,11 +1,13 @@
+import Navbar from "@/components/navbar";
 import { Outlet, ScrollRestoration } from "react-router-dom";
-import { Navbar } from "../features/Navbar";
 
 function MainLayout() {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <main className="mt-[64px]">
+        <Outlet />
+      </main>
       <ScrollRestoration />
     </>
   );

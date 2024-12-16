@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/auth.context";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../contexts/auth.context";
 
 export default function AuthLinks({ handleSidebarToggle }) {
   const navigate = useNavigate();

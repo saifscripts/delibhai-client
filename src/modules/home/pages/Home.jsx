@@ -5,7 +5,7 @@ import Services from "../components/services";
 
 export default function Home() {
   return (
-    <div className="space-y-1.5 bg-black sm:space-y-3">
+    <div className="space-y-1.5 bg-muted dark:bg-black sm:space-y-3">
       <Carousel />
       <Services />
       <Ads />
