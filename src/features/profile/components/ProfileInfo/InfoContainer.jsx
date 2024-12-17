@@ -14,6 +14,8 @@ import {
 export default function InfoContainer({ category, children, editModal }) {
   const [modal, setModal] = useState("");
 
+  console.log({ [category]: children });
+
   const openModal = (modalName) => {
     setModal(modalName);
   };
@@ -21,7 +23,7 @@ export default function InfoContainer({ category, children, editModal }) {
   const closeModal = () => {
     setModal("");
   };
-  return (
+  return children.length > 0 ? (
     <div className="mb-3">
       <div className="mb-2 flex items-center justify-between">
         <h4 className="text-xl font-bold">{category}</h4>
@@ -49,5 +51,5 @@ export default function InfoContainer({ category, children, editModal }) {
       <EditVideoURL isOpen={modal === "video"} onClose={closeModal} />
       <EditOwnerInfo isOpen={modal === "owner"} onClose={closeModal} />
     </div>
-  );
+  ) : null;
 }

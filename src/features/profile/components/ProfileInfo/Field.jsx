@@ -20,11 +20,17 @@ export default function Field({ value, label, icon }) {
           </div>
         ) : Array.isArray(value) ? (
           <div className="flex flex-col">
-            {value.map((value, index) => (
-              <p key={index} className="text-lg font-bold">
-                {value}
+            {value.length > 0 ? (
+              value.map((value, index) => (
+                <p key={index} className="text-lg font-bold">
+                  {value}
+                </p>
+              ))
+            ) : (
+              <p className="text-lg font-bold text-destructive/80">
+                তথ্য প্রদান করুন
               </p>
-            ))}
+            )}
             <p>{label}</p>
           </div>
         ) : (

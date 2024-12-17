@@ -36,7 +36,9 @@ export default function ProfileMenu() {
       total += fields.length;
 
       fields.map(({ dataKey }) => {
-        if (user[dataKey]) completed += 1;
+        if (Array.isArray(user[dataKey]) && user[dataKey]?.length > 0)
+          completed += 1;
+        if (!Array.isArray(user[dataKey]) && user[dataKey]) completed += 1;
       });
     });
 

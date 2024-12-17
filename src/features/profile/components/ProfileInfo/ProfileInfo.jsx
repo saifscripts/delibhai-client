@@ -25,8 +25,17 @@ export default function ProfileInfo() {
           category={item.category}
           editModal={id === authUser?._id && item.editModal}
         >
-          {item?.fields?.map(
-            ({ dataKey, label, icon, dataModifier, isPrivate }) => {
+          {item?.fields
+            ?.filter(
+              (field) =>
+                !(
+                  (field.isPrivate ||
+                    !user[field.dataKey] ||
+                    user[field.dataKey]?.length === 0) &&
+                  id !== authUser?._id
+                ),
+            )
+            .map(({ dataKey, label, icon, dataModifier, isPrivate }) => {
               if (dataKey === "vehiclePhotos") {
                 return <VehiclePhotos key={dataKey} />;
               }
@@ -64,21 +73,15 @@ export default function ProfileInfo() {
                 fieldValue = undefined;
               }
 
-              const isHidden =
-                (isPrivate || !fieldValue) && id !== authUser?._id;
-
               return (
-                !isHidden && (
-                  <Field
-                    key={dataKey}
-                    value={fieldValue}
-                    label={label}
-                    icon={icon}
-                  />
-                )
+                <Field
+                  key={dataKey}
+                  value={fieldValue}
+                  label={label}
+                  icon={icon}
+                />
               );
-            },
-          )}
+            })}
         </InfoContainer>
       ))}
     </div>
