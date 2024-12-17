@@ -9,7 +9,8 @@ export default function Field({ value, label, icon }) {
       </div>
 
       <div className="text-foreground/80">
-        {z.string().url().safeParse(value).success ? (
+        {z.string().url().safeParse(value).success &&
+        !value.includes("facebook") ? (
           <div className="flex flex-col">
             <p className="mb-1 font-bold">{label}</p>
             <img
