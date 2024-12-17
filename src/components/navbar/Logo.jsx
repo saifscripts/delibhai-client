@@ -1,7 +1,5 @@
-import {
-  default as logoDark,
-  default as logoLight,
-} from "@/assets/logos/logo.png";
+import logoDark from "@/assets/logos/logo-dark.svg";
+import logoLight from "@/assets/logos/logo.svg";
 import { Link } from "react-router-dom";
 import { useTheme } from "../theme-provider";
 

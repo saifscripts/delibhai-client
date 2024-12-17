@@ -1,4 +1,4 @@
-import logo from "@/assets/logos/logo.png";
+import logoDark from "@/assets/logos/logo-dark.svg";
 import { useAuth } from "@/contexts/auth.context";
 import { DollarSign, Home, LogIn, LogOut, User } from "lucide-react";
 import { RxCross1 } from "react-icons/rx";
@@ -21,7 +21,7 @@ const Sidebar = () => {
       >
         <div className="flex items-center justify-between border-b border-slate-700 px-4  py-5 lg:hidden">
           <Link to={"/"} onClick={handleSidebarToggle}>
-            <img src={logo} alt="deliBhai Logo" className="w-28 sm:w-44" />
+            <img src={logoDark} alt="deliBhai Logo" className="w-28 sm:w-44" />
           </Link>
 
           <div
