@@ -1,3 +1,4 @@
+import uploadIcon from "@/assets/icons/upload-icon.png";
 import DatePicker from "@/components/forms/DatePicker";
 import Form from "@/components/forms/Form";
 import Input from "@/components/forms/Input";
@@ -179,15 +180,20 @@ export default function EditPersonalInfo() {
                   className="absolute inset-0 cursor-pointer opacity-0"
                   onChange={(e) => setImage(e.target.files[0])}
                 />
-                <img
-                  src={imageData ? imageData : "/assets/icons/upload-icon.svg"}
-                  alt="Upload"
-                  className="rounded-lg"
-                />
+                {imageData && (
+                  <img src={imageData} alt="Upload" className="rounded-lg" />
+                )}
                 {!imageData && (
-                  <span className="mt-2 text-sm text-foreground/70">
-                    ছবি আপলোড করুন
-                  </span>
+                  <div className="flex flex-col items-center justify-center gap-2 py-2 sm:gap-4 sm:py-6">
+                    <img
+                      src={uploadIcon}
+                      alt="Upload"
+                      className="size-20 rounded-lg"
+                    />
+                    <span className="text-sm text-foreground/70">
+                      ছবি আপলোড করুন
+                    </span>
+                  </div>
                 )}
               </label>
             </div>
