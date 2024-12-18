@@ -1,7 +1,7 @@
 import { isNID } from "@/utils/isNID";
 import { z } from "zod";
 
-export const ProfileInfoSchema = z.object({
+export const PersonalInfoSchema = z.object({
   name: z
     .string()
     .trim()

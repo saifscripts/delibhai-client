@@ -14,8 +14,6 @@ import {
 export default function InfoContainer({ category, children, editModal }) {
   const [modal, setModal] = useState("");
 
-  console.log({ [category]: children });
-
   const openModal = (modalName) => {
     setModal(modalName);
   };
@@ -29,6 +27,8 @@ export default function InfoContainer({ category, children, editModal }) {
         <h4 className="text-xl font-bold">{category}</h4>
         {category === "ব্যক্তিগত তথ্য" ? (
           <EditPersonalInfo />
+        ) : category === "কন্টাক্ট ইনফো" ? (
+          <EditContactInfo />
         ) : (
           editModal && (
             <Button variant="link" onClick={() => openModal(editModal)}>

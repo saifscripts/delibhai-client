@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useMe } from "../../../../hooks/auth.hook";
 import { useUpdateRider } from "../../../../hooks/user.hook";
-import { ProfileInfoSchema } from "../../schemas/personal-info.schema";
+import { PersonalInfoSchema } from "../../schemas/personal-info.schema";
 import SaveButton from "./SaveButton";
 
 const genderOptions = [
@@ -126,7 +126,7 @@ export default function EditPersonalInfo() {
 
         <Form
           onSubmit={onSubmit}
-          schema={ProfileInfoSchema}
+          schema={PersonalInfoSchema}
           defaultValues={defaultValues}
           className="w-full p-4"
         >
