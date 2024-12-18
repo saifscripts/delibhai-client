@@ -136,11 +136,6 @@ export default function EditPersonalInfo() {
             label="পিতার নাম"
             placeholder="পিতার নাম লিখুন"
           />
-          <Input
-            name="nid"
-            label="জন্মনিবন্ধন/NID নম্বর"
-            placeholder="জন্মনিবন্ধন/NID নম্বর লিখুন"
-          />
           <Select
             name="gender"
             label="লিঙ্গ"
@@ -157,6 +152,11 @@ export default function EditPersonalInfo() {
             name="dateOfBirth"
             label="জন্ম তারিখ"
             placeholder="জন্ম তারিখ নির্বাচন করুন"
+          />
+          <Input
+            name="nid"
+            label="জন্মনিবন্ধন/NID নম্বর"
+            placeholder="জন্মনিবন্ধন/NID নম্বর লিখুন"
           />
           <div>
             <label className="font-bold">জন্মনিবন্ধন/NID এর ছবি</label>

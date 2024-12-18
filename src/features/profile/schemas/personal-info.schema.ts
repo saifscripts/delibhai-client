@@ -3,16 +3,18 @@ import { z } from "zod";
 
 export const PersonalInfoSchema = z.object({
   name: z
-    .string()
+    .string({ required_error: "Name is required!" })
     .trim()
-    .min(3, "Name must be at least 3 characters long!")
-    .optional(),
+    .min(1, "Name is required!")
+    .min(3, "Name must be at least 3 characters long!"),
   fatherName: z
     .string()
     .trim()
-    .refine((value) => value === "" || value.length > 3, {
+    .transform((val) => (val === "" ? null : val))
+    .refine((value) => value === null || value.length > 3, {
       message: "Father's name must be at least 3 characters long!",
     })
+    .nullable()
     .optional(),
   gender: z
     .enum(["পুরুষ", "মহিলা", "অন্যান্য"], {
@@ -24,11 +26,20 @@ export const PersonalInfoSchema = z.object({
       invalid_type_error: "Invalid blood group!",
     })
     .optional(),
-  dateOfBirth: z.string().date("Invalid date of birth!").optional(),
+  dateOfBirth: z
+    .string()
+    .transform((val) => (val === "" ? null : val))
+    .refine((val) => val === null || z.string().date().safeParse(val).success, {
+      message: "Invalid date of birth!",
+    })
+    .nullable()
+    .optional(),
   nid: z
     .string()
-    .refine((value) => isNID(value), {
+    .transform((val) => (val === "" ? null : val))
+    .refine((val) => val === null || isNID(val), {
       message: "Invalid NID number!",
     })
+    .nullable()
     .optional(),
 });
