@@ -11,6 +11,17 @@ import {
   EditVideoURL,
 } from "../EditProfile";
 
+const getCategoryModal = (category, editModal, editButton) => {
+  switch (category) {
+    case "ব্যক্তিগত তথ্য":
+      return <EditPersonalInfo />;
+    case "কন্টাক্ট ইনফো":
+      return <EditContactInfo />;
+    default:
+      return editModal ? editButton : null;
+  }
+};
+
 export default function InfoContainer({ category, children, editModal }) {
   const [modal, setModal] = useState("");
 
@@ -25,22 +36,17 @@ export default function InfoContainer({ category, children, editModal }) {
     <div className="mb-3">
       <div className="mb-2 flex items-center justify-between">
         <h4 className="text-xl font-bold">{category}</h4>
-        {category === "ব্যক্তিগত তথ্য" ? (
-          <EditPersonalInfo />
-        ) : category === "কন্টাক্ট ইনফো" ? (
-          <EditContactInfo />
-        ) : (
-          editModal && (
-            <Button variant="link" onClick={() => openModal(editModal)}>
-              Edit
-            </Button>
-          )
+        {getCategoryModal(
+          category,
+          editModal,
+          <Button variant="link" onClick={() => openModal(editModal)}>
+            Edit
+          </Button>,
         )}
       </div>
 
       {children}
 
-      <EditContactInfo isOpen={modal === "contact"} onClose={closeModal} />
       <EditAddress isOpen={modal === "address"} onClose={closeModal} />
       <EditVehicleInfo isOpen={modal === "vehicle"} onClose={closeModal} />
       <EditManualLocation
