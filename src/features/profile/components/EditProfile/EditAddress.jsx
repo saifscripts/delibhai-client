@@ -1,6 +1,13 @@
 import AddressInput from '@/components/forms/AddressInput';
 import Form from '@/components/forms/Form';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Dialog,
   DialogContent,
@@ -8,6 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import isEqual from 'lodash/isEqual';
 import { useEffect, useState } from 'react';
 import { z } from 'zod';
 import { useMe } from '../../../../hooks/auth.hook';
@@ -17,9 +25,7 @@ import SaveButton from './SaveButton';
 
 export default function EditAddressInfo({ isOpen, onClose }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  //   const [isAddressEqual, setIsAddressEqual] = useState(true);
-  //   const [presentAddress, setPresentAddress] = useState(null);
-  //   const [permanentAddress, setPermanentAddress] = useState(null);
+  const [isAddressEqual, setIsAddressEqual] = useState(true);
   const {
     mutate: updateRider,
     data: updatedRider,
@@ -28,17 +34,14 @@ export default function EditAddressInfo({ isOpen, onClose }) {
   } = useUpdateRider();
   const { user } = useMe();
 
-  //   useEffect(() => {
-  //     const presentAddress = user?.presentAddress;
-  //     const permanentAddress = user?.permanentAddress;
-
-  //     presentAddress && setPresentAddress(presentAddress);
-  //     permanentAddress && setPermanentAddress(permanentAddress);
-
-  //     setIsAddressEqual(isEqual(presentAddress, permanentAddress));
-  //   }, [user]);
+  useEffect(() => {
+    setIsAddressEqual(isEqual(user?.presentAddress, user?.permanentAddress));
+  }, [user]);
 
   const onSubmit = async (data) => {
+    data.permanentAddress = isAddressEqual
+      ? data.presentAddress
+      : data.permanentAddress;
     console.log(data);
     // updateRider(data);
   };
@@ -60,8 +63,8 @@ export default function EditAddressInfo({ isOpen, onClose }) {
       <DialogTrigger asChild>
         <Button variant="link">Edit</Button>
       </DialogTrigger>
-      <DialogContent className="hide-scrollbar max-h-[100svh] w-[512px] max-w-full overflow-y-scroll p-0">
-        <DialogHeader className="border-b bg-background px-4 py-2">
+      <DialogContent className="hide-scrollbar max-h-[100svh] w-[512px] overflow-y-auto max-w-full p-0">
+        <DialogHeader className="border-b bg-background px-4 py-2 -mb-6">
           <DialogTitle className="text-2xl font-bold">ঠিকানা</DialogTitle>
         </DialogHeader>
 
@@ -74,31 +77,37 @@ export default function EditAddressInfo({ isOpen, onClose }) {
           defaultValues={defaultValues}
           className="w-full p-4"
         >
-          <AddressInput name="presentAddress" label="বর্তমান ঠিকানা" />
-
-          {/* <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
-          স্থায়ী ঠিকানা
-        </p>
-
-        <RadioInput
-          label="বর্তমান ও স্থায়ী ঠিকানা একই"
-          checked={isAddressEqual}
-          onClick={() => setIsAddressEqual(true)}
-        />
-
-        <RadioInput
-          label="বর্তমান ও স্থায়ী ঠিকানা একই নয়"
-          checked={!isAddressEqual}
-          onClick={() => setIsAddressEqual(false)}
-        />
-
-        {!isAddressEqual && (
-          <AddressFields
-            address={permanentAddress}
-            setAddress={setPermanentAddress}
-            villageType="select"
-          />
-        )} */}
+          <Accordion type="multiple" collapsible>
+            <AccordionItem value="presentAddress">
+              <AccordionTrigger>
+                <p className="font-bold">বর্তমান ঠিকানা</p>
+              </AccordionTrigger>
+              <AccordionContent>
+                <AddressInput name="presentAddress" />
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="permanentAddress">
+              <AccordionTrigger>
+                <p className="font-bold">স্থায়ী ঠিকানা</p>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="flex items-center space-x-2 mb-4">
+                  <Checkbox
+                    id="isAddressEqual"
+                    checked={isAddressEqual}
+                    onCheckedChange={setIsAddressEqual}
+                  />
+                  <label
+                    htmlFor="isAddressEqual"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    বর্তমান ও স্থায়ী ঠিকানা একই
+                  </label>
+                </div>
+                {!isAddressEqual && <AddressInput name="permanentAddress" />}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
           <SaveButton isLoading={isPending} />
         </Form>
       </DialogContent>
