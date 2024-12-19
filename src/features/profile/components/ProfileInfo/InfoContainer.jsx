@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 import {
-  EditAddress,
   EditContactInfo,
   EditManualLocation,
   EditOwnerInfo,
@@ -9,28 +8,31 @@ import {
   EditServiceInfo,
   EditVehicleInfo,
   EditVideoURL,
-} from "../EditProfile";
+} from '../EditProfile';
+import EditAddressInfo from '../EditProfile/EditAddress';
 
 const getCategoryModal = (category, editModal, editButton) => {
   switch (category) {
-    case "ব্যক্তিগত তথ্য":
+    case 'ব্যক্তিগত তথ্য':
       return <EditPersonalInfo />;
-    case "কন্টাক্ট ইনফো":
+    case 'কন্টাক্ট ইনফো':
       return <EditContactInfo />;
+    case 'ঠিকানা':
+      return <EditAddressInfo />;
     default:
       return editModal ? editButton : null;
   }
 };
 
 export default function InfoContainer({ category, children, editModal }) {
-  const [modal, setModal] = useState("");
+  const [modal, setModal] = useState('');
 
   const openModal = (modalName) => {
     setModal(modalName);
   };
 
   const closeModal = () => {
-    setModal("");
+    setModal('');
   };
   return children.length > 0 ? (
     <div className="mb-3">
@@ -41,21 +43,20 @@ export default function InfoContainer({ category, children, editModal }) {
           editModal,
           <Button variant="link" onClick={() => openModal(editModal)}>
             Edit
-          </Button>,
+          </Button>
         )}
       </div>
 
       {children}
 
-      <EditAddress isOpen={modal === "address"} onClose={closeModal} />
-      <EditVehicleInfo isOpen={modal === "vehicle"} onClose={closeModal} />
+      <EditVehicleInfo isOpen={modal === 'vehicle'} onClose={closeModal} />
       <EditManualLocation
-        isOpen={modal === "manual-location"}
+        isOpen={modal === 'manual-location'}
         onClose={closeModal}
       />
-      <EditServiceInfo isOpen={modal === "service"} onClose={closeModal} />
-      <EditVideoURL isOpen={modal === "video"} onClose={closeModal} />
-      <EditOwnerInfo isOpen={modal === "owner"} onClose={closeModal} />
+      <EditServiceInfo isOpen={modal === 'service'} onClose={closeModal} />
+      <EditVideoURL isOpen={modal === 'video'} onClose={closeModal} />
+      <EditOwnerInfo isOpen={modal === 'owner'} onClose={closeModal} />
     </div>
   ) : null;
 }

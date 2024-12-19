@@ -1,5 +1,5 @@
-import axios from "../lib/api";
-import generateErrorMessage from "../utils/generateErrorMessage";
+import axios from '../lib/api';
+import generateErrorMessage from '../utils/generateErrorMessage';
 
 export const getDistricts = async (divisionId) => {
   if (!divisionId) return [];
