@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { BsTelephoneFill } from "react-icons/bs";
-import { PiPaperPlaneTiltFill } from "react-icons/pi";
-import { Link, useParams } from "react-router-dom";
-import { useUser } from "../../../../hooks/user.hook";
+import { Button } from '@/components/ui/button';
+import { BsTelephoneFill } from 'react-icons/bs';
+import { PiPaperPlaneTiltFill } from 'react-icons/pi';
+import { Link, useParams } from 'react-router-dom';
+import { useGetUser } from '../../../../hooks/user.hook';
 
 export default function CallButtons() {
   const { id } = useParams();
-  const { user } = useUser(id);
+  const { user } = useGetUser(id);
 
   return (
     <div className="grid w-full grid-cols-2 gap-3">

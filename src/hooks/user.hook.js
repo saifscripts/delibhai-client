@@ -1,16 +1,16 @@
-import { getMe } from "@/services/auth.service";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
+import { getMe } from '@/services/auth.service';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import {
   getUser,
   removeAvatar,
   updateAvatar,
   updateRider,
-} from "../services/user.service";
+} from '../services/user.service';
 
-export const useUser = (id) => {
+export const useGetUser = (id) => {
   const result = useQuery({
-    queryKey: ["USER"],
+    queryKey: ['USER', id],
     queryFn: async () => await getUser(id),
   });
 
@@ -21,7 +21,7 @@ export const useUser = (id) => {
 
 export const useGetMe = () => {
   const result = useQuery({
-    queryKey: ["ME"],
+    queryKey: ['ME'],
     queryFn: async () => await getMe(),
   });
 
@@ -34,13 +34,13 @@ export const useUpdateRider = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ["UPDATE_RIDER"],
+    mutationKey: ['UPDATE_RIDER'],
     mutationFn: updateRider,
     onSuccess: (data) => {
       if (data?.success) {
-        queryClient.invalidateQueries({ queryKey: ["ME"] });
-        queryClient.invalidateQueries({ queryKey: ["USER"] });
-        toast.success("Profile updated successfully");
+        queryClient.invalidateQueries({ queryKey: ['ME'] });
+        queryClient.invalidateQueries({ queryKey: ['USER'] });
+        toast.success('Profile updated successfully');
       } else {
         toast.error(data?.message);
       }
@@ -55,13 +55,13 @@ export const useUpdateAvatar = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ["UPDATE_AVATAR"],
+    mutationKey: ['UPDATE_AVATAR'],
     mutationFn: updateAvatar,
     onSuccess: (data) => {
       if (data?.success) {
-        queryClient.invalidateQueries({ queryKey: ["ME"] });
-        queryClient.invalidateQueries({ queryKey: ["USER"] });
-        toast.success("Avatar updated successfully");
+        queryClient.invalidateQueries({ queryKey: ['ME'] });
+        queryClient.invalidateQueries({ queryKey: ['USER'] });
+        toast.success('Avatar updated successfully');
       } else {
         toast.error(data?.message);
       }
@@ -76,12 +76,12 @@ export const useRemoveAvatar = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ["REMOVE_AVATAR"],
+    mutationKey: ['REMOVE_AVATAR'],
     mutationFn: removeAvatar,
     onSuccess: (data) => {
       if (data?.success) {
-        queryClient.invalidateQueries({ queryKey: ["ME"] });
-        queryClient.invalidateQueries({ queryKey: ["USER"] });
+        queryClient.invalidateQueries({ queryKey: ['ME'] });
+        queryClient.invalidateQueries({ queryKey: ['USER'] });
       } else {
         toast.error(data?.message);
       }

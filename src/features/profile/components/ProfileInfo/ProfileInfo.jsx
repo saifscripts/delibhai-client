@@ -1,20 +1,20 @@
-import { useParams } from "react-router-dom";
-import { useMe } from "../../../../hooks/auth.hook";
-import { useUser } from "../../../../hooks/user.hook";
-import profileSchema from "../../data/profileSchema";
-import { GPSLocation } from "../GPSLocation";
-import { ManualLocation } from "../ManualLocation";
-import { Ratings } from "../Ratings";
-import { Reviews } from "../Reviews";
-import { RiderActivity } from "../RiderActivity";
-import { VehiclePhotos } from "../VehiclePhotos";
-import { Video } from "../Video";
-import Field from "./Field";
-import InfoContainer from "./InfoContainer";
+import { useParams } from 'react-router-dom';
+import { useMe } from '../../../../hooks/auth.hook';
+import { useGetUser } from '../../../../hooks/user.hook';
+import profileSchema from '../../data/profileSchema';
+import { GPSLocation } from '../GPSLocation';
+import { ManualLocation } from '../ManualLocation';
+import { Ratings } from '../Ratings';
+import { Reviews } from '../Reviews';
+import { RiderActivity } from '../RiderActivity';
+import { VehiclePhotos } from '../VehiclePhotos';
+import { Video } from '../Video';
+import Field from './Field';
+import InfoContainer from './InfoContainer';
 
 export default function ProfileInfo() {
-  const { category = "general", id } = useParams();
-  const { user } = useUser(id);
+  const { category = 'general', id } = useParams();
+  const { user } = useGetUser(id);
   const { user: authUser } = useMe();
 
   return (
@@ -33,34 +33,34 @@ export default function ProfileInfo() {
                     !user[field.dataKey] ||
                     user[field.dataKey]?.length === 0) &&
                   id !== authUser?._id
-                ),
+                )
             )
             .map(({ dataKey, label, icon, dataModifier, isPrivate }) => {
-              if (dataKey === "vehiclePhotos") {
+              if (dataKey === 'vehiclePhotos') {
                 return <VehiclePhotos key={dataKey} />;
               }
 
-              if (dataKey === "manualLocation") {
+              if (dataKey === 'manualLocation') {
                 return <ManualLocation key={dataKey} />;
               }
 
-              if (dataKey === "liveLocation") {
+              if (dataKey === 'liveLocation') {
                 return <GPSLocation key={dataKey} />;
               }
 
-              if (dataKey === "videoURL") {
+              if (dataKey === 'videoURL') {
                 return <Video key={dataKey} />;
               }
 
-              if (dataKey === "riderActivity") {
+              if (dataKey === 'riderActivity') {
                 return <RiderActivity key={dataKey} />;
               }
 
-              if (dataKey === "ratings") {
+              if (dataKey === 'ratings') {
                 return <Ratings key={dataKey} />;
               }
 
-              if (dataKey === "reviews") {
+              if (dataKey === 'reviews') {
                 return <Reviews key={dataKey} />;
               }
 

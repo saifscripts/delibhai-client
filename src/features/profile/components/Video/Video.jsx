@@ -1,10 +1,10 @@
-import ReactPlayer from "react-player";
-import { useParams } from "react-router-dom";
-import { useUser } from "../../../../hooks/user.hook";
+import ReactPlayer from 'react-player';
+import { useParams } from 'react-router-dom';
+import { useGetUser } from '../../../../hooks/user.hook';
 
 export default function Video() {
   const { id } = useParams();
-  const { user } = useUser(id);
+  const { user } = useGetUser(id);
 
   if (user?.videoURL) {
     return (

@@ -1,14 +1,14 @@
-import { useParams } from "react-router-dom";
-import vehicles from "../../../../data/vehicles";
-import { useUser } from "../../../../hooks/user.hook";
-import ProfileAvatar from "./ProfileAvatar";
+import { useParams } from 'react-router-dom';
+import vehicles from '../../../../data/vehicles';
+import { useGetUser } from '../../../../hooks/user.hook';
+import ProfileAvatar from './ProfileAvatar';
 
 export default function ProfileHeader() {
   const { id } = useParams();
-  const { user } = useUser(id);
+  const { user } = useGetUser(id);
 
   const vehicleIcon = vehicles.find(
-    ({ title }) => title === user?.vehicleType,
+    ({ title }) => title === user?.vehicleType
   )?.icon;
 
   return (
@@ -25,7 +25,7 @@ export default function ProfileHeader() {
 
           <div className="relative z-10 flex h-10 items-center rounded-full bg-gradient-to-b from-tone-400 to-tone-600 py-3 pl-4 pr-10 text-xs min-[500px]:text-base">
             <span className="dark:text-background">
-              {user?.vehicleType && user?.vehicleType + " রাইডার"}
+              {user?.vehicleType && user?.vehicleType + ' রাইডার'}
             </span>
             <div className="absolute right-0 top-1/2 h-16 w-16 -translate-y-1/2 translate-x-1/2">
               <img

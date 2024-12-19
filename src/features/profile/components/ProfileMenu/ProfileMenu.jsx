@@ -1,15 +1,15 @@
-import { cn } from "@/lib/utils";
-import { useEffect, useState } from "react";
-import "react-circular-progressbar/dist/styles.css";
-import { useParams } from "react-router-dom";
-import { useUser } from "../../../../hooks/user.hook";
-import categories from "../../data/categories";
-import profileSchema from "../../data/profileSchema";
-import Category from "./Category";
+import { cn } from '@/lib/utils';
+import { useEffect, useState } from 'react';
+import 'react-circular-progressbar/dist/styles.css';
+import { useParams } from 'react-router-dom';
+import { useGetUser } from '../../../../hooks/user.hook';
+import categories from '../../data/categories';
+import profileSchema from '../../data/profileSchema';
+import Category from './Category';
 
 export default function ProfileMenu() {
   const { id } = useParams();
-  const { user } = useUser(id);
+  const { user } = useGetUser(id);
   const [visible, setVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
@@ -21,10 +21,10 @@ export default function ProfileMenu() {
       setPrevScrollPos(currentScrollPos);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [prevScrollPos, visible]);
 
@@ -48,11 +48,11 @@ export default function ProfileMenu() {
   return (
     <div
       className={cn(
-        "transition-top sticky top-0 z-20 mb-6 overflow-y-hidden bg-background duration-300",
+        'transition-top sticky top-0 z-20 mb-6 overflow-y-hidden bg-background duration-300',
         {
-          "top-[64px]": visible,
-          "top-0": !visible,
-        },
+          'top-[64px]': visible,
+          'top-0': !visible,
+        }
       )}
     >
       <div className="-mb-5 flex gap-2 overflow-x-scroll pb-5 pt-2">

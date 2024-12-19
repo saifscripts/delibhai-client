@@ -1,18 +1,18 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { toast } from "sonner";
-import camera from "../../../../assets/icons/camera.svg";
-import { useMe } from "../../../../hooks/auth.hook";
-import { useUpdateRider, useUser } from "../../../../hooks/user.hook";
-import VehiclePhoto from "./VehiclePhoto";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { toast } from 'sonner';
+import camera from '../../../../assets/icons/camera.svg';
+import { useMe } from '../../../../hooks/auth.hook';
+import { useGetUser, useUpdateRider } from '../../../../hooks/user.hook';
+import VehiclePhoto from './VehiclePhoto';
 
 export default function VehiclePhotos() {
   const [isLoading, setIsLoading] = useState(false);
   const { mutate: updateRider, isPending } = useUpdateRider();
   const { id } = useParams();
   const { user: authUser } = useMe();
-  const { user } = useUser(id);
+  const { user } = useGetUser(id);
 
   const handleSubmit = async (event) => {
     setIsLoading(true);
@@ -26,7 +26,7 @@ export default function VehiclePhotos() {
     // create formData from the image
     let files = event.target.files;
     const formData = new FormData();
-    formData.append("image", files[0]);
+    formData.append('image', files[0]);
 
     let response;
 
@@ -36,10 +36,10 @@ export default function VehiclePhotos() {
         `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_IMGBB_API_KEY
         }`,
-        formData,
+        formData
       );
     } catch (error) {
-      toast.error("Failed to upload image");
+      toast.error('Failed to upload image');
       setIsLoading(false);
     }
 
@@ -65,7 +65,7 @@ export default function VehiclePhotos() {
           user?._id === authUser?._id && (
             <form
               className={`relative z-10 flex aspect-square w-28 flex-shrink-0 flex-col items-center justify-center rounded-lg bg-muted-foreground ${
-                isLoading && "opacity-30"
+                isLoading && 'opacity-30'
               }`}
             >
               <img src={camera} alt="Camera" />

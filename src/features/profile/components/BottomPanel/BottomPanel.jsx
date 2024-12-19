@@ -1,12 +1,12 @@
-import { useParams } from "react-router-dom";
-import { useMe } from "../../../../hooks/auth.hook";
-import { useUser } from "../../../../hooks/user.hook";
-import CallButtons from "./CallButtons";
-import ServiceStatusButtons from "./ServiceStatusButtons";
+import { useParams } from 'react-router-dom';
+import { useMe } from '../../../../hooks/auth.hook';
+import { useGetUser } from '../../../../hooks/user.hook';
+import CallButtons from './CallButtons';
+import ServiceStatusButtons from './ServiceStatusButtons';
 
 export default function BottomPanel() {
   const { id } = useParams();
-  const { user } = useUser(id);
+  const { user } = useGetUser(id);
   const { user: authUser } = useMe();
 
   return (
