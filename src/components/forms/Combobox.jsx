@@ -1,4 +1,4 @@
-import { Check, ChevronsUpDown } from 'lucide-react';
+import { Check, ChevronsDown } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -65,13 +65,16 @@ export default function Combobox({
                     ? options.find((option) => option.value === field.value)
                         ?.label
                     : placeholder}
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  <ChevronsDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-full p-0">
               <Command>
-                <CommandInput placeholder={searchPlaceholder} />
+                <CommandInput
+                  autoFocus={false}
+                  placeholder={searchPlaceholder}
+                />
                 <CommandList>
                   <CommandEmpty>{emptyMessage}</CommandEmpty>
                   <CommandGroup>
