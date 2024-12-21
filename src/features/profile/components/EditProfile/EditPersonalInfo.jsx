@@ -1,40 +1,40 @@
-import uploadIcon from "@/assets/icons/upload-icon.png";
-import DatePicker from "@/components/forms/DatePicker";
-import Form from "@/components/forms/Form";
-import Input from "@/components/forms/Input";
-import Select from "@/components/forms/Select";
-import { Button } from "@/components/ui/button";
+import uploadIcon from '@/assets/icons/upload-icon.png';
+import DatePicker from '@/components/forms/DatePicker';
+import Form from '@/components/forms/Form';
+import Input from '@/components/forms/Input';
+import Select from '@/components/forms/Select';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import axios from "axios";
-import { XIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
-import { useMe } from "../../../../hooks/auth.hook";
-import { useUpdateRider } from "../../../../hooks/user.hook";
-import { PersonalInfoSchema } from "../../schemas/personal-info.schema";
-import SaveButton from "./SaveButton";
+} from '@/components/ui/dialog';
+import axios from 'axios';
+import { XIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+import { useMe } from '../../../../hooks/auth.hook';
+import { useUpdateRider } from '../../../../hooks/user.hook';
+import { PersonalInfoSchema } from '../../schemas/personal-info.schema';
+import SaveButton from './SaveButton';
 
 const genderOptions = [
-  { value: "পুরুষ", label: "পুরুষ" },
-  { value: "মহিলা", label: "মহিলা" },
-  { value: "অন্যান্য", label: "অন্যান্য" },
+  { value: 'পুরুষ', label: 'পুরুষ' },
+  { value: 'মহিলা', label: 'মহিলা' },
+  { value: 'অন্যান্য', label: 'অন্যান্য' },
 ];
 
 const bloodGroupOptions = [
-  { value: "এ+", label: "এ+" },
-  { value: "বি+", label: "বি+" },
-  { value: "এবি+", label: "এবি+" },
-  { value: "ও+", label: "ও+" },
-  { value: "এ-", label: "এ-" },
-  { value: "বি-", label: "বি-" },
-  { value: "এবি-", label: "এবি-" },
-  { value: "ও-", label: "ও-" },
+  { value: 'এ+', label: 'এ+' },
+  { value: 'বি+', label: 'বি+' },
+  { value: 'এবি+', label: 'এবি+' },
+  { value: 'ও+', label: 'ও+' },
+  { value: 'এ-', label: 'এ-' },
+  { value: 'বি-', label: 'বি-' },
+  { value: 'এবি-', label: 'এবি-' },
+  { value: 'ও-', label: 'ও-' },
 ];
 
 export default function EditPersonalInfo() {
@@ -55,20 +55,20 @@ export default function EditPersonalInfo() {
     if (image) {
       // Create formData and append the image file
       const formData = new FormData();
-      formData.append("image", image);
+      formData.append('image', image);
 
       // Upload the image to the imagebb
       const imgbbResult = await axios.post(
         `https://api.imgbb.com/1/upload?key=${
           import.meta.env.VITE_IMGBB_API_KEY
         }`,
-        formData,
+        formData
       );
 
       // If image upload is not successful, setError message and return
       if (!imgbbResult?.data?.success) {
         return toast.error(
-          imgbbResult.data.error.message || "Something went wrong",
+          imgbbResult.data.error.message || 'Something went wrong'
         );
       }
 
@@ -117,7 +117,7 @@ export default function EditPersonalInfo() {
       <DialogTrigger asChild>
         <Button variant="link">Edit</Button>
       </DialogTrigger>
-      <DialogContent className="hide-scrollbar max-h-[100svh] w-[512px] max-w-full overflow-y-auto p-0">
+      <DialogContent className="p-0">
         <DialogHeader className="border-b bg-background px-4 py-2">
           <DialogTitle className="text-2xl font-bold">
             ব্যক্তিগত তথ্য
