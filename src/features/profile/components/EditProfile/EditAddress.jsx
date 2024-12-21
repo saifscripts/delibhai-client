@@ -63,7 +63,7 @@ export default function EditAddressInfo({ isOpen, onClose }) {
       <DialogTrigger asChild>
         <Button variant="link">Edit</Button>
       </DialogTrigger>
-      <DialogContent className="w-[512px] max-w-full p-0">
+      <DialogContent className="p-0">
         <DialogHeader className="border-b bg-background px-4 py-2 -mb-6">
           <DialogTitle className="text-2xl font-bold">ঠিকানা</DialogTitle>
         </DialogHeader>
