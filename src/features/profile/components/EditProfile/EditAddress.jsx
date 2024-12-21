@@ -1,4 +1,4 @@
-import AddressInput from '@/components/forms/AddressInput';
+import AddressInput from '@/components/address/AddressInput';
 import Form from '@/components/forms/Form';
 import {
   Accordion,
@@ -17,10 +17,9 @@ import {
 } from '@/components/ui/dialog';
 import isEqual from 'lodash/isEqual';
 import { useEffect, useState } from 'react';
-import { z } from 'zod';
 import { useMe } from '../../../../hooks/auth.hook';
 import { useUpdateRider } from '../../../../hooks/user.hook';
-import { AddressSchema } from '../../schemas/address.schema';
+import { EditAddressSchema } from '../../schemas/address.schema';
 import SaveButton from './SaveButton';
 
 export default function EditAddressInfo({ isOpen, onClose }) {
@@ -42,8 +41,8 @@ export default function EditAddressInfo({ isOpen, onClose }) {
     data.permanentAddress = isAddressEqual
       ? data.presentAddress
       : data.permanentAddress;
-    console.log(data);
-    // updateRider(data);
+
+    updateRider(data);
   };
 
   useEffect(() => {
@@ -70,10 +69,7 @@ export default function EditAddressInfo({ isOpen, onClose }) {
 
         <Form
           onSubmit={onSubmit}
-          schema={z.object({
-            presentAddress: AddressSchema.optional(),
-            permanentAddress: AddressSchema.optional(),
-          })}
+          schema={EditAddressSchema}
           defaultValues={defaultValues}
           className="w-full p-4"
         >

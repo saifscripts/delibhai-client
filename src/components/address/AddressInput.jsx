@@ -4,9 +4,10 @@ import {
   useGetUpazilas,
   useGetVillages,
 } from '@/hooks/address.hook';
+import englishToBengaliNumber from '@/utils/englishToBengaliNumber';
 import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
-import Combobox from './Combobox';
+import SelectAddress from './SelectAddress';
 
 const divisions = [
   {
@@ -50,34 +51,60 @@ export default function AddressInput({ name, label }) {
   const district = watch(`${name}.district`);
   const upazila = watch(`${name}.upazila`);
   const union = watch(`${name}.union`);
+  const ward = watch(`${name}.ward`);
   const village = watch(`${name}.village`);
 
-  const { districts } = useGetDistricts(division);
-  const { upazilas } = useGetUpazilas(district);
-  const { unions } = useGetUnions(upazila);
-  const { villages } = useGetVillages(union);
+  const { districts } = useGetDistricts(division?._id);
+  const { upazilas } = useGetUpazilas(district?._id);
+  const { unions } = useGetUnions(upazila?._id);
+  const { villages } = useGetVillages(union?._id);
+
+  const wardOptions = villages
+    ?.filter(
+      (village, i, self) =>
+        self.findIndex((v) => v.wardId === village.wardId) === i
+    )
+    .map((village) => ({
+      value: village.wardId,
+      label: `${englishToBengaliNumber(village.wardId.padStart(2, '0'))}`,
+    }));
+
+  const villageOptions = villages
+    ?.filter((village) => (ward?._id ? village.wardId === ward?._id : true))
+    .map((village) => ({
+      value: village._id,
+      label: village.title,
+    }));
 
   useEffect(() => {
     resetField(`${name}.district`);
     resetField(`${name}.upazila`);
     resetField(`${name}.union`);
+    resetField(`${name}.ward`);
     resetField(`${name}.village`);
-  }, [division]);
+  }, [division?._id]);
 
   useEffect(() => {
     resetField(`${name}.upazila`);
     resetField(`${name}.union`);
+    resetField(`${name}.ward`);
     resetField(`${name}.village`);
-  }, [district]);
+  }, [district?._id]);
 
   useEffect(() => {
     resetField(`${name}.union`);
+    resetField(`${name}.ward`);
     resetField(`${name}.village`);
-  }, [upazila]);
+  }, [upazila?._id]);
+
+  useEffect(() => {
+    resetField(`${name}.ward`);
+    resetField(`${name}.village`);
+  }, [union?._id]);
 
   useEffect(() => {
     resetField(`${name}.village`);
-  }, [union]);
+  }, [ward?._id]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -85,7 +112,7 @@ export default function AddressInput({ name, label }) {
         <p className="border-light mb-3 pb-2 border-b font-bold">{label}</p>
       )}
 
-      <Combobox
+      <SelectAddress
         label="বিভাগ"
         name={`${name}.division`}
         options={divisions?.map((division) => ({
@@ -93,12 +120,9 @@ export default function AddressInput({ name, label }) {
           label: division.title,
         }))}
         placeholder="বিভাগ নির্বাচন করুন"
-        searchPlaceholder="বিভাগ সার্চ করুন"
-        emptyMessage="কোনো বিভাগ পাওয়া যায়নি"
-        className="w-full"
       />
 
-      <Combobox
+      <SelectAddress
         label="জেলা"
         name={`${name}.district`}
         options={districts?.map((district) => ({
@@ -106,11 +130,9 @@ export default function AddressInput({ name, label }) {
           label: district.title,
         }))}
         placeholder="জেলা নির্বাচন করুন"
-        searchPlaceholder="জেলা সার্চ করুন"
-        emptyMessage="কোনো জেলা পাওয়া যায়নি"
       />
 
-      <Combobox
+      <SelectAddress
         label="উপজেলা"
         name={`${name}.upazila`}
         options={upazilas?.map((upazila) => ({
@@ -118,11 +140,9 @@ export default function AddressInput({ name, label }) {
           label: upazila.title,
         }))}
         placeholder="উপজেলা নির্বাচন করুন"
-        searchPlaceholder="উপজেলা সার্চ করুন"
-        emptyMessage="কোনো উপজেলা পাওয়া যায়নি"
       />
 
-      <Combobox
+      <SelectAddress
         label="ইউনিয়ন"
         name={`${name}.union`}
         options={unions?.map((union) => ({
@@ -130,21 +150,23 @@ export default function AddressInput({ name, label }) {
           label: union.title,
         }))}
         placeholder="ইউনিয়ন নির্বাচন করুন"
-        searchPlaceholder="ইউনিয়ন সার্চ করুন"
-        emptyMessage="কোনো ইউনিয়ন পাওয়া যায়নি"
       />
 
-      {villages.length > 0 && (
-        <Combobox
+      {wardOptions.length > 0 && (
+        <SelectAddress
+          label="ওয়ার্ড"
+          name={`${name}.ward`}
+          options={wardOptions}
+          placeholder="ওয়ার্ড নির্বাচন করুন"
+        />
+      )}
+
+      {villageOptions.length > 0 && (
+        <SelectAddress
           label="গ্রাম"
           name={`${name}.village`}
-          options={villages?.map((village) => ({
-            value: village._id,
-            label: village.title,
-          }))}
+          options={villageOptions}
           placeholder="গ্রাম নির্বাচন করুন"
-          searchPlaceholder="গ্রাম সার্চ করুন"
-          emptyMessage="কোনো গ্রাম পাওয়া যায়নি"
         />
       )}
     </div>

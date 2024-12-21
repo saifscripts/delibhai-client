@@ -8,13 +8,12 @@ import {
 import { cn } from '@/lib/utils';
 import { useFormContext } from 'react-hook-form';
 
-export default function Select({
+export default function SelectAddress({
   name,
   label,
   placeholder,
   className,
   options,
-  ...props
 }) {
   const form = useFormContext();
 
@@ -29,14 +28,20 @@ export default function Select({
           )}
           <FormControl>
             <select
-              onChange={(e) => field.onChange(e.target.value)}
-              value={field.value}
+              onChange={(e) =>
+                field.onChange({
+                  _id: e.target.value,
+                  title: options.find(
+                    (option) => option.value === e.target.value
+                  )?.label,
+                })
+              }
+              value={field.value?._id}
               placeholder={placeholder}
               className={cn(
-                'block w-full bg-transparent border-b border-primary px-0 focus:ring-0',
+                'block w-full bg-transparent border-b border-primary px-0 py-2 outline-none',
                 className
               )}
-              {...props}
             >
               <option value="">{placeholder}</option>
               {options.map((option) => (

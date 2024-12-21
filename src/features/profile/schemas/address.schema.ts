@@ -1,9 +1,19 @@
 import { z } from 'zod';
 
+const AddressFieldSchema = z.object({
+  _id: z.string(),
+  title: z.string(),
+});
+
 export const AddressSchema = z.object({
-  division: z.string().optional(),
-  district: z.string().optional(),
-  upazila: z.string().optional(),
-  union: z.string().optional(),
-  village: z.string().optional(),
+  division: AddressFieldSchema.optional(),
+  district: AddressFieldSchema.optional(),
+  upazila: AddressFieldSchema.optional(),
+  union: AddressFieldSchema.optional(),
+  village: AddressFieldSchema.optional(),
+});
+
+export const EditAddressSchema = z.object({
+  presentAddress: AddressSchema.optional(),
+  permanentAddress: AddressSchema.optional(),
 });
