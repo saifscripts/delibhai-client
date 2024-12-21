@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { z } from "zod";
+import { cn } from '@/lib/utils';
+import { z } from 'zod';
 
 export default function Field({ value, label, icon }) {
   return (
@@ -10,7 +10,7 @@ export default function Field({ value, label, icon }) {
 
       <div className="text-foreground/80">
         {z.string().url().safeParse(value).success &&
-        !value.includes("facebook") ? (
+        !value.includes('facebook') ? (
           <div className="flex flex-col">
             <p className="mb-1 font-bold">{label}</p>
             <img
@@ -18,6 +18,22 @@ export default function Field({ value, label, icon }) {
               alt={label}
               className="w-full max-w-md rounded-lg"
             />
+          </div>
+        ) : z.string().url().safeParse(value).success ? (
+          <div className="flex flex-col">
+            <a
+              className={cn(
+                'text-lg font-bold text-blue-600 underline break-all',
+                {
+                  'text-destructive/80': !value,
+                }
+              )}
+              href={value}
+              target="_blank"
+            >
+              {value || 'তথ্য প্রদান করুন'}
+            </a>
+            <p>{label}</p>
           </div>
         ) : Array.isArray(value) ? (
           <div className="flex flex-col">
@@ -37,11 +53,11 @@ export default function Field({ value, label, icon }) {
         ) : (
           <div className="flex flex-col">
             <p
-              className={cn("text-lg font-bold", {
-                "text-destructive/80": !value,
+              className={cn('text-lg font-bold', {
+                'text-destructive/80': !value,
               })}
             >
-              {value || "তথ্য প্রদান করুন"}
+              {value || 'তথ্য প্রদান করুন'}
             </p>
             <p>{label}</p>
           </div>
