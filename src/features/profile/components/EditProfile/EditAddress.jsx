@@ -14,7 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from '@/components/ui/dialog-popover';
 import isEqual from 'lodash/isEqual';
 import { useEffect, useState } from 'react';
 import { z } from 'zod';
@@ -77,7 +77,7 @@ export default function EditAddressInfo({ isOpen, onClose }) {
           defaultValues={defaultValues}
           className="w-full p-4"
         >
-          <Accordion type="multiple" collapsible>
+          <Accordion type="multiple">
             <AccordionItem value="presentAddress">
               <AccordionTrigger>
                 <p className="font-bold">বর্তমান ঠিকানা</p>
