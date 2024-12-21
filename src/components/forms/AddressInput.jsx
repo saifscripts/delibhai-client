@@ -7,7 +7,6 @@ import {
 import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import Combobox from './Combobox';
-import Select from './Select';
 
 const divisions = [
   {
@@ -86,7 +85,7 @@ export default function AddressInput({ name, label }) {
         <p className="border-light mb-3 pb-2 border-b font-bold">{label}</p>
       )}
 
-      <Select
+      <Combobox
         label="বিভাগ"
         name={`${name}.division`}
         options={divisions?.map((division) => ({
@@ -94,10 +93,12 @@ export default function AddressInput({ name, label }) {
           label: division.title,
         }))}
         placeholder="বিভাগ নির্বাচন করুন"
+        searchPlaceholder="বিভাগ সার্চ করুন"
+        emptyMessage="কোনো বিভাগ পাওয়া যায়নি"
         className="w-full"
       />
 
-      <Select
+      <Combobox
         label="জেলা"
         name={`${name}.district`}
         options={districts?.map((district) => ({
@@ -105,9 +106,11 @@ export default function AddressInput({ name, label }) {
           label: district.title,
         }))}
         placeholder="জেলা নির্বাচন করুন"
+        searchPlaceholder="জেলা সার্চ করুন"
+        emptyMessage="কোনো জেলা পাওয়া যায়নি"
       />
 
-      <Select
+      <Combobox
         label="উপজেলা"
         name={`${name}.upazila`}
         options={upazilas?.map((upazila) => ({
@@ -115,9 +118,11 @@ export default function AddressInput({ name, label }) {
           label: upazila.title,
         }))}
         placeholder="উপজেলা নির্বাচন করুন"
+        searchPlaceholder="উপজেলা সার্চ করুন"
+        emptyMessage="কোনো উপজেলা পাওয়া যায়নি"
       />
 
-      <Select
+      <Combobox
         label="ইউনিয়ন"
         name={`${name}.union`}
         options={unions?.map((union) => ({
@@ -125,6 +130,8 @@ export default function AddressInput({ name, label }) {
           label: union.title,
         }))}
         placeholder="ইউনিয়ন নির্বাচন করুন"
+        searchPlaceholder="ইউনিয়ন সার্চ করুন"
+        emptyMessage="কোনো ইউনিয়ন পাওয়া যায়নি"
       />
 
       {villages.length > 0 && (
