@@ -1,9 +1,10 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { useRiders } from "../../../../hooks/rider.hook";
-import Container from "../../../../layouts/Container";
-import RiderCard from "./RiderCard";
-import RiderSkeleton from "./RiderSkeleton";
+import MiniContainer from '@/layouts/MiniContainer';
+import VehicleTypeHorizontal from '@/modules/vehicles/components/vehicle-type-horizontal';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useRiders } from '../../../../hooks/rider.hook';
+import RiderCard from './RiderCard';
+import RiderSkeleton from './RiderSkeleton';
 
 export default function SearchResults() {
   const { riders, hasMore, loader } = useRiders();
@@ -14,7 +15,8 @@ export default function SearchResults() {
   }, [pathname]);
 
   return (
-    <Container>
+    <MiniContainer>
+      <VehicleTypeHorizontal />
       <div className="mx-auto mb-3 flex w-fit max-w-full flex-col gap-3">
         {riders?.length > 0 &&
           riders?.map((rider) => <RiderCard rider={rider} key={rider._id} />)}
@@ -29,6 +31,6 @@ export default function SearchResults() {
           </div>
         )}
       </div>
-    </Container>
+    </MiniContainer>
   );
 }

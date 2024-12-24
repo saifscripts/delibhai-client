@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { useGeolocation } from "../contexts/location.context";
-import { getRiders } from "../services/rider.service";
+import { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { useGeolocation } from '../contexts/location.context';
+import { getRiders } from '../services/rider.service';
 
 export const useRiders = () => {
   const [searchParams] = useSearchParams();
@@ -13,7 +13,6 @@ export const useRiders = () => {
   const { location, error } = useGeolocation();
 
   useEffect(() => {
-    console.log(error);
     if (!geoLocation) {
       setGeoLocation(location);
     }
@@ -29,12 +28,18 @@ export const useRiders = () => {
   //   });
 
   useEffect(() => {
+    setRiders([]);
+    setHasMore(true);
+    setPage(0);
+  }, [searchParams]);
+
+  useEffect(() => {
     if (page > 0) {
       (async () => {
         const params = new URLSearchParams(searchParams);
         if (geoLocation) {
-          params.set("latitude", geoLocation?.latitude);
-          params.set("longitude", geoLocation?.longitude);
+          params.set('latitude', geoLocation?.latitude);
+          params.set('longitude', geoLocation?.longitude);
           const newRiders = (await getRiders(params, page))?.data;
 
           if (newRiders?.length > 0) {
@@ -47,7 +52,7 @@ export const useRiders = () => {
         }
       })();
     }
-  }, [page, searchParams, geoLocation]);
+  }, [page, geoLocation]);
 
   useEffect(() => {
     const handleObserver = (entries) => {

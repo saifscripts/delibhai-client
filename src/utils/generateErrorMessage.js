@@ -1,8 +1,8 @@
 const generateErrorMessage = (error) => {
   return (
-    error.response.data?.errorSources
+    error?.response?.data?.errorSources
       ?.map?.(({ message }) => message)
-      ?.join?.(", ") || error.message
+      ?.join?.(', ') || error.message
   );
 };
 

@@ -1,9 +1,9 @@
-import { useRef, useState } from "react";
+import { cn } from '@/lib/utils';
+import { useRef, useState } from 'react';
 import {
   MdOutlineArrowBackIos,
   MdOutlineArrowForwardIos,
-} from "react-icons/md";
-import cn from "./cn";
+} from 'react-icons/md';
 
 export function ScrollMenu({ children, className, arrow, ...restProps }) {
   const [leftArrow, setLeftArrow] = useState(false);
@@ -42,8 +42,8 @@ export function ScrollMenu({ children, className, arrow, ...restProps }) {
     <div className="relative w-full overflow-hidden">
       <div
         className={cn(
-          "flex-no-wrap hide-scrollbar flex gap-4 overflow-x-auto scroll-smooth py-3",
-          className,
+          'flex-no-wrap hide-scrollbar flex gap-4 overflow-x-auto scroll-smooth py-3',
+          className
         )}
         onScroll={handleScroll}
         ref={scrollElementRef}
@@ -59,7 +59,7 @@ export function ScrollMenu({ children, className, arrow, ...restProps }) {
 
 export function ScrollItem({ children, className, ...restProps }) {
   return (
-    <div className={cn("flex-shrink-0", className)} {...restProps}>
+    <div className={cn('flex-shrink-0', className)} {...restProps}>
       {children}
     </div>
   );
@@ -68,7 +68,7 @@ export function ScrollItem({ children, className, ...restProps }) {
 function LeftArrow(props) {
   return (
     <div
-      className="absolute left-0 top-1/2 flex aspect-square w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary bg-opacity-70 text-3xl text-white transition-all duration-300 hover:bg-opacity-100"
+      className="absolute left-0 top-1/2 flex aspect-square w-8 sm:w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary bg-opacity-70 text-xl sm:text-3xl text-white transition-all duration-300 hover:bg-opacity-100"
       {...props}
     >
       <MdOutlineArrowBackIos />
@@ -79,7 +79,7 @@ function LeftArrow(props) {
 function RightArrow(props) {
   return (
     <div
-      className="absolute right-0 top-1/2 flex aspect-square w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary bg-opacity-70  text-3xl text-white transition-all duration-300 hover:bg-opacity-100"
+      className="absolute right-0 top-1/2 flex aspect-square w-8 sm:w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary bg-opacity-70  text-xl sm:text-3xl text-white transition-all duration-300 hover:bg-opacity-100"
       {...props}
     >
       <MdOutlineArrowForwardIos />
