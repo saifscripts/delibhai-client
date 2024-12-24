@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useResendOTP, useVerifyOTP } from "../../../hooks/auth.hook";
-import MiniContainer from "../../../layouts/MiniContainer";
-import Title from "../../../layouts/Title";
-import { SubmitModal, Timer } from "../index";
+import { Button } from '@/components/ui/button';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useResendOTP, useVerifyOTP } from '../../../hooks/auth.hook';
+import MiniContainer from '../../../layouts/MiniContainer';
+import Title from '../../../layouts/Title';
+import { SubmitModal, Timer } from '../index';
 
 function OTPVerification() {
   const {
@@ -24,7 +24,7 @@ function OTPVerification() {
   const { state } = useLocation();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
   const [timerRunning, setTimerRunning] = useState(true);
-  const [OTP, setOTP] = useState(["", "", "", "", "", ""]);
+  const [OTP, setOTP] = useState(['', '', '', '', '', '']);
 
   const inputRefs = [
     useRef(null),
@@ -39,8 +39,8 @@ function OTPVerification() {
     const value = e.target.value;
     const _OTP = [...OTP];
 
-    if (e.nativeEvent.inputType === "deleteContentBackward" && index > 0) {
-      _OTP[index] = "";
+    if (e.nativeEvent.inputType === 'deleteContentBackward' && index > 0) {
+      _OTP[index] = '';
       setOTP(_OTP);
       inputRefs[index - 1].current.focus();
       return;
@@ -78,14 +78,14 @@ function OTPVerification() {
 
     verifyOTP({
       _id: state._id,
-      otp: OTP.join(""),
+      otp: OTP.join(''),
     });
   };
 
   useEffect(() => {
     if (isResendSuccess && resendData?.success) {
       setTimerRunning(true);
-      setOTP(resendData?.data?.otp?.split(""));
+      setOTP(resendData?.data?.otp?.split(''));
     }
   }, [isResendSuccess, resendData]);
 
@@ -97,7 +97,7 @@ function OTPVerification() {
 
   // autofill otp (for testing purpose) --- delete this later
   useEffect(() => {
-    setOTP(state?.otp?.split(""));
+    setOTP(state?.otp?.split(''));
   }, [state]);
 
   return (
@@ -138,12 +138,12 @@ function OTPVerification() {
               </div>
 
               <p className="mx-auto w-fit">
-                আমি কোনো কোড পাই নি{" "}
+                আমি কোনো কোড পাই নি{' '}
                 <Button
                   onClick={handleResendOTP}
                   disabled={timerRunning || isVerifyPending || isResendPending}
                   variant="link"
-                  className={`cursor-pointer p-0 text-base ${timerRunning || isVerifyPending || isResendPending ? "text-muted-foreground" : ""}`}
+                  className={`cursor-pointer p-0 text-base ${timerRunning || isVerifyPending || isResendPending ? 'text-muted-foreground' : ''}`}
                 >
                   পুনরায় পাঠান
                 </Button>
@@ -154,7 +154,7 @@ function OTPVerification() {
                 disabled={
                   isVerifyPending ||
                   isResendPending ||
-                  OTP.some((field) => field === "")
+                  OTP.some((field) => field === '')
                 }
                 onClick={handleSubmit}
               >
@@ -162,7 +162,7 @@ function OTPVerification() {
               </Button>
             </form>
           </MiniContainer>
-          <SubmitModal isOpen={isSubmitModalOpen} id={state.id} />
+          <SubmitModal isOpen={isSubmitModalOpen} id={state._id} />
         </>
       )}
     </>
