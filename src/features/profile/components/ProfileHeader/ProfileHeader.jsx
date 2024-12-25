@@ -35,7 +35,7 @@ export default function ProfileHeader() {
               <img
                 src={vehicleIcon}
                 alt={user?.vehicleType}
-                className="mx-auto h-full"
+                className="h-full w-full object-contain"
               />
             </div>
             <div className="absolute right-0 top-1/2 -z-20 aspect-square w-24 -translate-y-1/2 translate-x-1/2 rounded-full bg-tone p-4 opacity-10"></div>
