@@ -13,6 +13,7 @@ import {
 import vehicles from '@/data/vehicles';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import { useMe } from '../../../../hooks/auth.hook';
 import { useUpdateRider } from '../../../../hooks/user.hook';
 import { VehicleInfoSchema } from '../../schemas/vehicle-info.schema';
@@ -48,11 +49,16 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
     vehicleName: user?.vehicleName,
   };
 
+  const { id } = useParams();
+  const selfView = id === user?._id;
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogTrigger asChild>
-        <Button variant="link">Edit</Button>
-      </DialogTrigger>
+      {selfView && (
+        <DialogTrigger asChild>
+          <Button variant="link">Edit</Button>
+        </DialogTrigger>
+      )}
       <DialogContent className="hide-scrollbar max-h-[100svh] w-[512px] max-w-full overflow-y-scroll p-0">
         <DialogHeader className="border-b bg-background px-4 py-2">
           <DialogTitle className="text-2xl font-bold">

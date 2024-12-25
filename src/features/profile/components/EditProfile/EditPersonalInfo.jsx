@@ -14,6 +14,7 @@ import {
 import axios from 'axios';
 import { XIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useMe } from '../../../../hooks/auth.hook';
 import { useUpdateRider } from '../../../../hooks/user.hook';
@@ -112,11 +113,16 @@ export default function EditPersonalInfo() {
     dateOfBirth: user?.dateOfBirth,
   };
 
+  const { id } = useParams();
+  const selfView = id === user?._id;
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogTrigger asChild>
-        <Button variant="link">Edit</Button>
-      </DialogTrigger>
+      {selfView && (
+        <DialogTrigger asChild>
+          <Button variant="link">Edit</Button>
+        </DialogTrigger>
+      )}
       <DialogContent className="p-0">
         <DialogHeader className="border-b bg-background px-4 py-2">
           <DialogTitle className="text-2xl font-bold">

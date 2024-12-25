@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/dialog';
 import isEqual from 'lodash/isEqual';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useMe } from '../../../../hooks/auth.hook';
 import { useUpdateRider } from '../../../../hooks/user.hook';
 import { EditAddressSchema } from '../../schemas/address.schema';
@@ -57,11 +58,16 @@ export default function EditAddressInfo({ isOpen, onClose }) {
     permanentAddress: user?.permanentAddress,
   };
 
+  const { id } = useParams();
+  const selfView = id === user?._id;
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogTrigger asChild>
-        <Button variant="link">Edit</Button>
-      </DialogTrigger>
+      {selfView && (
+        <DialogTrigger asChild>
+          <Button variant="link">Edit</Button>
+        </DialogTrigger>
+      )}
       <DialogContent className="p-0">
         <DialogHeader className="border-b bg-background px-4 py-2 -mb-6">
           <DialogTitle className="text-2xl font-bold">ঠিকানা</DialogTitle>
