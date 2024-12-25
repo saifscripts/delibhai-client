@@ -10,9 +10,9 @@ export const VehicleInfoSchema = z.object({
   vehicleType: z.enum(vehicleTitles, {
     message: 'Invalid vehicle type!',
   }),
-  vehicleSubType: z.string().trim(),
-  vehicleBrand: z.string().trim(),
-  vehicleModel: z.string().trim(),
-  vehicleNumber: z.string().trim(),
-  vehicleName: z.string().trim(),
+  vehicleSubType: z.string().trim().optional(),
+  vehicleBrand: z.string().trim().optional(),
+  vehicleModel: z.string().trim().optional(),
+  vehicleNumber: z.string().trim().optional(),
+  vehicleName: z.string().trim().optional(),
 });
