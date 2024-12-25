@@ -1,11 +1,11 @@
+import { ScrollItem, ScrollMenu } from '@/components/scrollable-menu';
 import vehicles from '@/data/vehicles';
 import Container from '@/layouts/Container';
 import { cn } from '@/lib/utils';
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import VehicleSubTypeFilter from './VehicleSubTypeFilter';
+import Filter from './Filter';
 import VehicleTypeFilter from './VehicleTypeFilter';
-import { FilterProvider } from './filter.context';
 
 export default function Filters() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,28 +34,51 @@ export default function Filters() {
     );
   }, [searchParams]);
 
+  const vehicleSubTypeFilterValues = useMemo(() => {
+    const vehicleType = searchParams.get('vehicleType');
+    const vehicleSubType =
+      searchParams.get('vehicleSubType')?.split?.(',') || [];
+
+    return (
+      vehicles.find((vehicle) => vehicle.title === vehicleType)?.subTypes || []
+    ).map((subType) => subType.title);
+  }, [searchParams]);
+
+  const rentTypeFilterValues = ['লোকাল', 'রিজার্ভ', 'কন্টাক্ট'];
+
   return (
-    <FilterProvider>
-      <div
-        className={cn(
-          'transition-top sticky top-0 z-20 overflow-y-hidden duration-300 space-y-1.5 bg-muted dark:bg-black pb-1.5',
-          {
-            'top-[64px]': visible,
-            'top-0': !visible,
-          }
-        )}
-      >
-        <VehicleTypeFilter />
-        {vehicleSubTypes && vehicleSubTypes.length > 0 && (
-          <div className="p-2 bg-background">
-            <Container>
-              <div className="flex gap-2">
-                <VehicleSubTypeFilter />
-              </div>
-            </Container>
-          </div>
-        )}
-      </div>
-    </FilterProvider>
+    <div
+      className={cn(
+        'transition-top sticky top-0 z-20 overflow-y-hidden duration-300 space-y-1.5 bg-muted dark:bg-black pb-1.5',
+        {
+          'top-[64px]': visible,
+          'top-0': !visible,
+        }
+      )}
+    >
+      <VehicleTypeFilter />
+      {vehicleSubTypes && vehicleSubTypes.length > 0 && (
+        <div className="bg-background">
+          <Container>
+            <ScrollMenu className="gap-2">
+              <ScrollItem>
+                <Filter
+                  field="vehicleSubType"
+                  values={vehicleSubTypeFilterValues}
+                  label="গাড়ির ধরণ"
+                />
+              </ScrollItem>
+              <ScrollItem>
+                <Filter
+                  field="rentType"
+                  values={rentTypeFilterValues}
+                  label="ভাড়ার ধরণ"
+                />
+              </ScrollItem>
+            </ScrollMenu>
+          </Container>
+        </div>
+      )}
+    </div>
   );
 }

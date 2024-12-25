@@ -2,21 +2,19 @@ import { Button } from '@/components/ui/button';
 import { XIcon } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 
-export default function ClearVehicleSubType() {
+export default function ClearValues({ field }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const selectedVehicleSubTypes =
-    searchParams.get('vehicleSubType')?.split(',') || [];
+  const selectedValues = searchParams.get(field)?.split(',') || [];
 
-  if (selectedVehicleSubTypes.length === 0) {
+  if (selectedValues.length === 0) {
     return <div />;
   }
 
   const handleClear = () => {
-    setSearchParams(
-      { vehicleType: searchParams.get('vehicleType') },
-      { replace: true }
-    );
+    const params = new URLSearchParams(searchParams);
+    params.delete(field);
+    setSearchParams(params, { replace: true });
   };
 
   return (
