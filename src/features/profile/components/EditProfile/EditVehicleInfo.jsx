@@ -41,6 +41,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
 
   const defaultValues = {
     vehicleType: user?.vehicleType,
+    vehicleSubType: user?.vehicleSubType,
     vehicleBrand: user?.vehicleBrand,
     vehicleModel: user?.vehicleModel,
     vehicleNumber: user?.vehicleNumber,
@@ -108,15 +109,21 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
 function VehicleSubTypeSelect() {
   const { watch, setValue } = useFormContext();
   const vehicleType = watch('vehicleType');
+  const vehicleSubType = watch('vehicleSubType');
+
   const vehicleSubTypes = vehicles.find(
     ({ title }) => title === vehicleType
   )?.subTypes;
 
-  if (!vehicleSubTypes || vehicleSubTypes.length === 0) return null;
-
   useEffect(() => {
-    setValue('vehicleSubType', '');
+    if (
+      !vehicleSubTypes?.find?.(({ title }) => title === vehicleSubType)?.title
+    ) {
+      setValue('vehicleSubType', '');
+    }
   }, [vehicleType]);
+
+  if (!vehicleSubTypes || vehicleSubTypes.length === 0) return null;
 
   return (
     <Select
