@@ -1,4 +1,5 @@
 import MiniContainer from '@/layouts/MiniContainer';
+import Filters from '@/modules/vehicles/components/filters';
 import VehicleTypeHorizontal from '@/modules/vehicles/components/vehicle-type-horizontal';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -17,6 +18,7 @@ export default function SearchResults() {
   return (
     <MiniContainer>
       <VehicleTypeHorizontal />
+      <Filters />
       <div className="mx-auto mb-3 flex w-fit max-w-full flex-col gap-3">
         {riders?.length > 0 &&
           riders?.map((rider) => <RiderCard rider={rider} key={rider._id} />)}

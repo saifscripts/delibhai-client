@@ -26,6 +26,12 @@ export default function VehicleTypeHorizontal() {
     };
   }, [prevScrollPos, visible]);
 
+  const handleChangeVehicleType = (vehicleType) => {
+    if (vehicleType !== searchParams.get('vehicleType')) {
+      setSearchParams({ vehicleType }, { replace: true });
+    }
+  };
+
   return (
     <div
       className={cn(
@@ -40,9 +46,7 @@ export default function VehicleTypeHorizontal() {
         {vehicles.map(({ title, icon }) => (
           <ScrollItem
             key={title}
-            onClick={() =>
-              setSearchParams({ vehicleType: title }, { replace: true })
-            }
+            onClick={() => handleChangeVehicleType(title)}
             className={cn(
               'group flex aspect-square cursor-pointer flex-col items-center justify-between gap-2 rounded-lg border bg-muted px-2 py-2 hover:border-tone-600 hover:bg-tone-200 sm:gap-4 sm:px-3 sm:py-2 size-20 sm:size-28 md:size-32',
               {
