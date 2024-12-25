@@ -1,3 +1,4 @@
+import vehicles from '@/data/vehicles';
 import { useParams } from 'react-router-dom';
 import { useMe } from '../../../../hooks/auth.hook';
 import { useGetUser } from '../../../../hooks/user.hook';
@@ -35,6 +36,17 @@ export default function ProfileInfo() {
                   id !== authUser?._id
                 )
             )
+            // filter out vehicleSubType if user's selected vehicleType doesn't have any subTypes
+            .filter((field) => {
+              if (field.dataKey === 'vehicleSubType') {
+                const vehicleSubTypes = vehicles.find(
+                  (vehicle) => vehicle.title === user.vehicleType
+                )?.subTypes;
+                return vehicleSubTypes && vehicleSubTypes.length > 0;
+              } else {
+                return true;
+              }
+            })
             .map(({ dataKey, label, icon, dataModifier, isPrivate }) => {
               if (dataKey === 'vehiclePhotos') {
                 return <VehiclePhotos key={dataKey} />;
