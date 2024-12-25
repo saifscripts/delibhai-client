@@ -106,13 +106,17 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
 }
 
 function VehicleSubTypeSelect() {
-  const { watch } = useFormContext();
+  const { watch, setValue } = useFormContext();
   const vehicleType = watch('vehicleType');
   const vehicleSubTypes = vehicles.find(
     ({ title }) => title === vehicleType
   )?.subTypes;
 
   if (!vehicleSubTypes || vehicleSubTypes.length === 0) return null;
+
+  useEffect(() => {
+    setValue('vehicleSubType', '');
+  }, [vehicleType]);
 
   return (
     <Select

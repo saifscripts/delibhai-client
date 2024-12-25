@@ -31,14 +31,17 @@ const vehicles = [
     subTypes: [
       {
         id: 1,
-        title: 'কার 1',
+        icon: 'https://res.cloudinary.com/dz6h5okzp/image/upload/v1733593133/microbus_h2bfag.png',
+        title: 'মাইক্রোবাস',
       },
       {
         id: 2,
+        icon: 'https://res.cloudinary.com/dz6h5okzp/image/upload/v1733593130/cng_oolhgr.png',
         title: 'কার 2',
       },
       {
         id: 3,
+        icon: 'https://res.cloudinary.com/dz6h5okzp/image/upload/v1733593140/tomtom_vxyaqr.png',
         title: 'কার 3',
       },
     ],
