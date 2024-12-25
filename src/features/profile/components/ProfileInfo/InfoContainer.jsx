@@ -19,6 +19,8 @@ const getCategoryModal = (category, editModal, editButton) => {
       return <EditContactInfo />;
     case 'ঠিকানা':
       return <EditAddressInfo />;
+    case 'গাড়ির সাধারণ তথ্য':
+      return <EditVehicleInfo />;
     default:
       return editModal ? editButton : null;
   }
@@ -49,7 +51,6 @@ export default function InfoContainer({ category, children, editModal }) {
 
       {children}
 
-      <EditVehicleInfo isOpen={modal === 'vehicle'} onClose={closeModal} />
       <EditManualLocation
         isOpen={modal === 'manual-location'}
         onClose={closeModal}
