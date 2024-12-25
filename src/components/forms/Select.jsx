@@ -33,7 +33,7 @@ export default function Select({
               value={field.value}
               placeholder={placeholder}
               className={cn(
-                'block w-full bg-transparent border-b border-primary px-0 focus:ring-0',
+                'block w-full bg-transparent border-b border-primary px-0 focus:ring-0 py-1.5',
                 className
               )}
               {...props}
