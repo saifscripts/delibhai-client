@@ -7,9 +7,13 @@ export default function ProfileHeader() {
   const { id } = useParams();
   const { user } = useGetUser(id);
 
-  const vehicleIcon = vehicles.find(
-    ({ title }) => title === user?.vehicleType
-  )?.icon;
+  const vehicleType = vehicles.find(({ title }) => title === user?.vehicleType);
+
+  const vehicleSubTypes = vehicleType?.subTypes;
+
+  const vehicleIcon = user?.vehicleSubType
+    ? vehicleSubTypes.find(({ title }) => title === user?.vehicleSubType)?.icon
+    : vehicleType?.icon;
 
   return (
     <>
