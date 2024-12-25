@@ -17,9 +17,10 @@ export default function SearchResults() {
     <>
       <Filters />
       <div className="mx-auto mb-3 flex w-fit max-w-full flex-col gap-3">
-        {riders?.length > 0 ? (
-          riders?.map((rider) => <RiderCard rider={rider} key={rider._id} />)
-        ) : (
+        {riders?.length > 0 &&
+          riders?.map((rider) => <RiderCard rider={rider} key={rider._id} />)}
+
+        {riders?.length === 0 && !hasMore && (
           <div className="flex flex-col items-center justify-center h-[60svh]">
             <p className="text-muted-foreground p-6 text-lg sm:text-2xl">
               কোনো গাড়ি পাওয়া যায়নি
