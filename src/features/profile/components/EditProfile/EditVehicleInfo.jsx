@@ -59,7 +59,7 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
           <Button variant="link">Edit</Button>
         </DialogTrigger>
       )}
-      <DialogContent className="hide-scrollbar max-h-[100svh] w-[512px] max-w-full overflow-y-scroll p-0">
+      <DialogContent className="p-0">
         <DialogHeader className="border-b bg-background px-4 py-2">
           <DialogTitle className="text-2xl font-bold">
             গাড়ির সাধারণ তথ্য
