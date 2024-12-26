@@ -42,8 +42,8 @@ export default function Filter({ field, label, values }) {
                 .map((value) => (
                   <Button
                     size="sm"
-                    variant="outline"
-                    className="bg-primary-50 text-primary-700 rounded-full px-2 h-6"
+                    variant="ghost"
+                    className="bg-primary-500/20 text-primary-700 rounded-full px-2 h-6"
                     onClick={() => handleRemoveValue(value)}
                   >
                     <span className="text-xs">{value}</span>
