@@ -39,14 +39,14 @@ export default function Filter({ field, label, values }) {
               {searchParams
                 .get(field)
                 ?.split(',')
-                .map((subType) => (
+                .map((value) => (
                   <Button
                     size="sm"
                     variant="outline"
                     className="bg-primary-50 text-primary-700 rounded-full px-2 h-6"
-                    onClick={() => handleRemoveValue(subType)}
+                    onClick={() => handleRemoveValue(value)}
                   >
-                    {subType}
+                    <span className="text-xs">{value}</span>
                     <XIcon className="size-2" />
                   </Button>
                 ))}

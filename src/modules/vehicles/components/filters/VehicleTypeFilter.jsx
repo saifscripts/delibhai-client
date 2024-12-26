@@ -18,7 +18,7 @@ export default function VehicleTypeFilter() {
   return (
     <div className="bg-background">
       <Container>
-        <ScrollMenu arrow className="gap-2">
+        <ScrollMenu arrow className="gap-2 py-2">
           {vehicles.map(({ title, icon }) => (
             <ScrollItem
               key={title}

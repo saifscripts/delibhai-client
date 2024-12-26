@@ -57,10 +57,10 @@ export default function Filters() {
       )}
     >
       <VehicleTypeFilter />
-      {vehicleSubTypes && vehicleSubTypes.length > 0 && (
-        <div className="bg-background">
-          <Container>
-            <ScrollMenu className="gap-2">
+      <div className="bg-background">
+        <Container>
+          <ScrollMenu className="gap-2 py-2">
+            {vehicleSubTypes && vehicleSubTypes.length > 0 && (
               <ScrollItem>
                 <Filter
                   field="vehicleSubType"
@@ -68,17 +68,17 @@ export default function Filters() {
                   label="গাড়ির ধরণ"
                 />
               </ScrollItem>
-              <ScrollItem>
-                <Filter
-                  field="rentType"
-                  values={rentTypeFilterValues}
-                  label="ভাড়ার ধরণ"
-                />
-              </ScrollItem>
-            </ScrollMenu>
-          </Container>
-        </div>
-      )}
+            )}
+            <ScrollItem>
+              <Filter
+                field="rentType"
+                values={rentTypeFilterValues}
+                label="ভাড়ার ধরণ"
+              />
+            </ScrollItem>
+          </ScrollMenu>
+        </Container>
+      </div>
     </div>
   );
 }
