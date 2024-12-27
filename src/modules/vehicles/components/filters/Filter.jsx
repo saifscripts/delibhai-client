@@ -6,6 +6,7 @@ import {
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import { XIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { AddValue } from './AddValue';
 import ClearValues from './ClearValues';
@@ -13,6 +14,13 @@ import ClearValues from './ClearValues';
 export default function Filter({ field, label, values }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedValues = searchParams.get(field)?.split(',');
+  const [value, setValue] = useState(undefined);
+
+  useEffect(() => {
+    if (searchParams.get(field)) {
+      setValue(field);
+    }
+  }, [searchParams]);
 
   const handleRemoveValue = (value) => {
     const params = new URLSearchParams(searchParams);
@@ -28,7 +36,7 @@ export default function Filter({ field, label, values }) {
   };
 
   return (
-    <Accordion type="multiple">
+    <Accordion type="single" collapsible value={value} onValueChange={setValue}>
       <AccordionItem value={field} className="w-[200px] border rounded-lg">
         <AccordionTrigger className="p-2 hover:no-underline border-b rounded-lg">
           <p className="font-bold">{label}</p>
