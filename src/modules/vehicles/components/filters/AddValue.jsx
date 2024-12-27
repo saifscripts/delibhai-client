@@ -65,13 +65,13 @@ export function AddValue({ field, values, label }) {
           <CommandList>
             <CommandEmpty>{label} পাওয়া যায় নি</CommandEmpty>
             <CommandGroup>
-              {unselectedValues.map((subType) => (
+              {unselectedValues.map((value) => (
                 <CommandItem
-                  key={subType.value}
-                  value={subType.value}
-                  onSelect={() => handleAddValue(subType.value)}
+                  key={value.value}
+                  value={value.value}
+                  onSelect={() => handleAddValue(value.value)}
                 >
-                  {subType.label}
+                  {value.label}
                 </CommandItem>
               ))}
             </CommandGroup>
