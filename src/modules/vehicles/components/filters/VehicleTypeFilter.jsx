@@ -18,7 +18,7 @@ export default function VehicleTypeFilter() {
   return (
     <div className="bg-background">
       <Container>
-        <ScrollMenu arrow className="gap-2 py-2">
+        <ScrollMenu arrow className="gap-2 py-2 snap-x">
           {vehicles.map(({ title, icon }) => (
             <ScrollItem
               key={title}
@@ -26,7 +26,7 @@ export default function VehicleTypeFilter() {
               className={cn(
                 'group flex aspect-square cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border bg-muted p-2 hover:border-tone-600 hover:bg-tone-200 size-16',
                 {
-                  'bg-tone-200': vehicleType === title,
+                  'bg-tone-200 snap-center': vehicleType === title,
                 }
               )}
             >
