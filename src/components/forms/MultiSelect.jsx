@@ -7,6 +7,13 @@ import {
   CommandList,
 } from '@/components/ui/command';
 import {
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import {
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -14,14 +21,6 @@ import {
 import { Plus, Square, SquareCheckBig, X } from 'lucide-react';
 import * as React from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-
-import {
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
 
 export function MultiSelect({
   options,
