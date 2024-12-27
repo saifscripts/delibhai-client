@@ -71,12 +71,13 @@ export default function EditContactInfo({ isOpen, onClose }) {
             type="number"
             label="মোবাইল নাম্বার"
             placeholder="মোবাইল নাম্বার লিখুন"
+            description="পাবলিক যে নাম্বারে কল করবে"
           />
           <Input
             name="contactNo2"
             type="number"
-            label="বিকল্প মোবাইল নাম্বার"
-            placeholder="বিকল্প মোবাইল নাম্বার লিখুন"
+            label="হোয়াটসঅ্যাপ নাম্বার"
+            placeholder="হোয়াটসঅ্যাপ নাম্বার লিখুন"
           />
           <Input name="email" label="ই-মেইল" placeholder="ই-মেইল লিখুন" />
           <Input
