@@ -21,6 +21,8 @@ const getCategoryModal = (category, editModal, editButton) => {
       return <EditAddressInfo />;
     case 'গাড়ির সাধারণ তথ্য':
       return <EditVehicleInfo />;
+    case 'সার্ভিস তথ্য':
+      return <EditServiceInfo />;
     default:
       return editModal ? editButton : null;
   }
@@ -55,7 +57,6 @@ export default function InfoContainer({ category, children, editModal }) {
         isOpen={modal === 'manual-location'}
         onClose={closeModal}
       />
-      <EditServiceInfo isOpen={modal === 'service'} onClose={closeModal} />
       <EditVideoURL isOpen={modal === 'video'} onClose={closeModal} />
       <EditOwnerInfo isOpen={modal === 'owner'} onClose={closeModal} />
     </div>

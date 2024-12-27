@@ -200,7 +200,6 @@ export default function EditPersonalInfo() {
               )}
             </label>
           </div>
-
           <SaveButton isLoading={isPending} />
         </Form>
       </DialogContent>

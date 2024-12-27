@@ -192,8 +192,9 @@ const profileSchema = {
         },
         {
           dataKey: 'rentType',
-          label: 'গাড়ির সেবা',
+          label: 'ভাড়ার ধরণ',
           icon: rentType,
+          dataModifier: (value) => value.join(', '),
         },
         {
           dataKey: 'mainStation',
