@@ -45,7 +45,7 @@ export default function RiderCard({ rider }) {
         onClick={handleClick}
         className="bg-background hover:bg-tone-400/20 active:bg-tone-400/20 shadow-sm rounded-lg p-2"
       >
-        <div className="flex cursor-pointer items-center gap-3 rounded-lg">
+        <div className="flex cursor-pointer items-center gap-2 rounded-lg">
           <div className="relative aspect-square w-20 rounded-full flex-shrink-0">
             <img
               src={avatarURL || dp}
@@ -60,8 +60,8 @@ export default function RiderCard({ rider }) {
             ></div>
           </div>
 
-          <div className="flex-1">
-            <div className="flex gap-4 justify-between">
+          <div className="">
+            <div className="flex gap-2 justify-between">
               <div className="">
                 <h3 className="text-lg font-bold">{name}</h3>
                 <div className="flex items-center gap-1 text-sm">
@@ -117,7 +117,7 @@ export default function RiderCard({ rider }) {
               </div>
             </div>
 
-            <div className="flex justify-between items-center gap-4">
+            <div className="flex justify-between items-center gap-1">
               <div
                 className="flex gap-1 mt-1"
                 onClick={(e) => e.stopPropagation()}
