@@ -6,8 +6,10 @@ import RiderCard from './RiderCard';
 import RiderSkeleton from './RiderSkeleton';
 
 export default function SearchResults() {
-  const { riders, hasMore, loader } = useRiders();
+  const { riders, loader } = useRiders();
   const { pathname } = useLocation();
+
+  const hasMore = true;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -16,7 +18,7 @@ export default function SearchResults() {
   return (
     <>
       <Filters />
-      <div className="mx-auto pb-2 flex flex-col gap-1.5 bg-muted dark:bg-black">
+      <div className="space-y-1.5 bg-muted dark:bg-black">
         {riders?.length > 0 &&
           riders?.map((rider) => <RiderCard rider={rider} key={rider._id} />)}
 
@@ -28,10 +30,7 @@ export default function SearchResults() {
           </div>
         )}
         {hasMore && (
-          <div
-            ref={loader}
-            className="mx-auto flex w-fit max-w-full flex-col gap-3"
-          >
+          <div ref={loader} className="space-y-1.5 bg-muted dark:bg-black">
             {Array.from({ length: 10 }).map((_, index) => (
               <RiderSkeleton key={index} />
             ))}

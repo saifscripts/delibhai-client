@@ -87,6 +87,14 @@ export default function RiderCard({ rider }) {
                   </div>
                 )}
 
+                <a
+                  href="whatsapp://send?text=The text to share!"
+                  data-action="share/whatsapp/share"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Share via Whatsapp
+                </a>
+
                 <div className="flex items-center gap-1 text-sm">
                   <MapPin
                     className={cn('size-3', {
