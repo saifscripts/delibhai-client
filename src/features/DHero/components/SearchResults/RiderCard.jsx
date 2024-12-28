@@ -22,12 +22,12 @@ export default function RiderCard({ rider }) {
   };
 
   return (
-    <div
-      onClick={handleClick}
-      className="bg-background hover:bg-tone-400/20 active:bg-tone-400/20"
-    >
-      <Container>
-        <div className="flex cursor-pointer items-center gap-5 rounded-lg py-4">
+    <Container>
+      <div
+        onClick={handleClick}
+        className="bg-background hover:bg-tone-400/20 active:bg-tone-400/20 shadow-md rounded-lg p-4"
+      >
+        <div className="flex cursor-pointer items-center gap-5 rounded-lg">
           <div className="relative aspect-square w-24 rounded-full">
             <img
               src={avatarURL || dp}
@@ -118,7 +118,7 @@ export default function RiderCard({ rider }) {
             </div>
           </div>
         </div>
-      </Container>
-    </div>
+      </div>
+    </Container>
   );
 }
