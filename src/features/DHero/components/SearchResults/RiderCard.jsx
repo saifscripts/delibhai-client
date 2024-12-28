@@ -46,7 +46,7 @@ export default function RiderCard({ rider }) {
         className="bg-background hover:bg-tone-400/20 active:bg-tone-400/20 shadow-sm rounded-lg p-2"
       >
         <div className="flex cursor-pointer items-center gap-3 rounded-lg">
-          <div className="relative aspect-square w-20 rounded-full">
+          <div className="relative aspect-square w-20 rounded-full flex-shrink-0">
             <img
               src={avatarURL || dp}
               alt="name"
@@ -62,7 +62,7 @@ export default function RiderCard({ rider }) {
 
           <div className="flex-1">
             <div className="flex gap-4 justify-between">
-              <div>
+              <div className="">
                 <h3 className="text-lg font-bold">{name}</h3>
                 <div className="flex items-center gap-1 text-sm">
                   <img src={rentIcon} alt="" />
@@ -112,7 +112,7 @@ export default function RiderCard({ rider }) {
                 </div>
               </div>
 
-              <div className="w-[30px]">
+              <div className="w-[30px] flex-shrink-0">
                 <img src={vehicleIcon} alt="" className="w-full" />
               </div>
             </div>
