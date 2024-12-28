@@ -62,7 +62,7 @@ export default function RiderCard({ rider }) {
 
           <div className="flex-1">
             <div className="flex gap-2 justify-between">
-              <div className="">
+              <div>
                 <h3 className="text-lg font-bold">{name}</h3>
                 <div className="flex items-center gap-1 text-sm">
                   <img src={rentIcon} alt="" />
