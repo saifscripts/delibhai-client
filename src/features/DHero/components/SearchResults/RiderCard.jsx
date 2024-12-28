@@ -43,7 +43,7 @@ export default function RiderCard({ rider }) {
     <Container>
       <div
         onClick={handleClick}
-        className="bg-background hover:bg-tone-400/20 shadow-sm rounded-lg p-2"
+        className="bg-background sm:hover:bg-tone-400/20 shadow-sm rounded-lg p-2"
       >
         <div className="flex cursor-pointer items-center gap-2 rounded-lg">
           <div className="relative aspect-square w-20 rounded-full flex-shrink-0">
