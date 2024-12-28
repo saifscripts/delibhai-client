@@ -1,19 +1,17 @@
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import vehicles from '@/data/vehicles.js';
 import Container from '@/layouts/Container.jsx';
 import { MapPin } from 'lucide-react';
 import { useState } from 'react';
-import {
-  PiPhoneFill,
-  PiStar,
-  PiStarFill,
-  PiWhatsappLogoFill,
-} from 'react-icons/pi';
+import { PiPhone, PiStar, PiStarFill } from 'react-icons/pi';
+import { TbBrandWhatsapp } from 'react-icons/tb';
 import { Link, useNavigate } from 'react-router-dom';
 import dp from '../../../../assets/default.jpg';
 import cn from '../../../../lib/cn.js';
 import getVillageTitle from '../../../../utils/getVillageTitle.js';
 import rentIcon from './rent.png';
+import { Share } from './Share.jsx';
 import stationActiveIcon from './station-active.png';
 import stationIcon from './station.png';
 
@@ -35,17 +33,15 @@ export default function RiderCard({ rider }) {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate(`/profile/${_id}`);
-  };
-
   return (
     <Container>
-      <div
-        onClick={handleClick}
-        className="bg-background sm:hover:bg-tone-400/20 shadow-sm rounded-lg p-2"
-      >
-        <div className="flex cursor-pointer items-center gap-2 rounded-lg">
+      <div className="bg-background shadow-sm rounded-lg">
+        <div
+          className="flex cursor-pointer items-center gap-3 rounded-tl-lg rounded-tr-lg hover:bg-tone-400/20 py-2 px-3"
+          onClick={() => {
+            navigate(`/profile/${_id}`);
+          }}
+        >
           <div className="relative aspect-square w-20 rounded-full flex-shrink-0">
             <img
               src={avatarURL || dp}
@@ -87,13 +83,13 @@ export default function RiderCard({ rider }) {
                   </div>
                 )}
 
-                <a
+                {/* <a
                   href="whatsapp://send?text=The text to share!"
                   data-action="share/whatsapp/share"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Share via Whatsapp
-                </a>
+                </a> */}
 
                 <div className="flex items-center gap-1 text-sm">
                   <MapPin
@@ -120,12 +116,12 @@ export default function RiderCard({ rider }) {
                 </div>
               </div>
 
-              <div className="w-[30px] flex-shrink-0">
+              <div className="w-8 flex-shrink-0">
                 <img src={vehicleIcon} alt="" className="w-full" />
               </div>
             </div>
 
-            <div className="flex justify-between items-center gap-1">
+            {/* <div className="flex justify-between items-center gap-1">
               <div
                 className="flex gap-1 mt-1"
                 onClick={(e) => e.stopPropagation()}
@@ -182,8 +178,50 @@ export default function RiderCard({ rider }) {
                   <span>{isSaved ? 'Saved' : 'Save'}</span>
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
+        </div>
+
+        <Separator className="h-[0.5px] bg-foreground/5" />
+
+        <div className="flex justify-between items-center gap-4 px-3 py-2 text-sm text-foreground/80">
+          <button
+            className={cn('flex items-center gap-1', {
+              'text-primary': isSaved,
+            })}
+            onClick={() => setIsSaved(!isSaved)}
+          >
+            <span>
+              {isSaved ? (
+                <PiStarFill className="text-primary" size={16} />
+              ) : (
+                <PiStar className="" size={16} />
+              )}
+            </span>
+            <span>Save</span>
+          </button>
+
+          <Link
+            to={`https://wa.me/+88${rider.contactNo2 || rider.contactNo1}`}
+            className="flex items-center gap-1"
+          >
+            <span>
+              <TbBrandWhatsapp className="" size={16} />
+            </span>
+            <span>Send</span>
+          </Link>
+
+          <Link
+            to={`tel:${rider.contactNo1}`}
+            className="flex items-center gap-1"
+          >
+            <span>
+              <PiPhone className="" size={16} />
+            </span>
+            <span>Call</span>
+          </Link>
+
+          <Share rider={rider} />
         </div>
       </div>
     </Container>
