@@ -71,7 +71,7 @@ export default function RiderCard({ rider }) {
                   </span>
                 </div>
 
-                {rider?.mainStation && (
+                {getVillageTitle(rider.mainStation) && (
                   <div className="flex items-center gap-1 text-sm">
                     <img
                       src={rider.isHighlight ? stationActiveIcon : stationIcon}
