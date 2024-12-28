@@ -24,17 +24,15 @@ export default function ProfileHeader() {
       <div className="mb-8 flex items-center gap-5">
         <ProfileAvatar avatarURL={user?.avatarURL} />
 
-        <div>
+        <div className="flex-1">
           <h3 className="mb-1 text-2xl">{user?.name}</h3>
 
           <span className="border-grey-500 font-inter mb-4 inline-block rounded-lg border px-3 text-foreground/50">
             #{user?._id?.slice(0, 5)}
           </span>
 
-          <div className="relative z-10 flex h-10 items-center rounded-full bg-gradient-to-b from-tone-400 to-tone-600 py-3 pl-4 pr-10 text-xs min-[500px]:text-base">
-            <span className="dark:text-background">
-              {vehicleTitle && vehicleTitle + ' রাইডার'}
-            </span>
+          <div className="relative z-10 flex items-center rounded-full bg-gradient-to-b from-tone-400 to-tone-600 py-3 pl-[16px] pr-[calc(76px/2)] text-xs min-[500px]:text-base w-[calc(100%-76px)] max-w-[240px]">
+            <span className="dark:text-background">{vehicleTitle}</span>
             <div className="absolute right-0 top-1/2 h-16 w-16 -translate-y-1/2 translate-x-1/2">
               <img
                 src={vehicleIcon}
