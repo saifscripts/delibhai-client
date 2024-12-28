@@ -1,27 +1,19 @@
-import { Button } from "@/components/ui/button";
-import { BsTelephoneFill } from "react-icons/bs";
-import { HiOutlineStar } from "react-icons/hi";
-import { PiPaperPlaneTiltFill } from "react-icons/pi";
-import { Link, useNavigate } from "react-router-dom";
-import dp from "../../../../assets/default.jpg";
-import cn from "../../../../lib/cn.js";
-import getVillageTitle from "../../../../utils/getVillageTitle.js";
-import Distance from "./Distance.jsx";
+import { Button } from '@/components/ui/button';
+import Container from '@/layouts/Container.jsx';
+import { MapPin, Phone } from 'lucide-react';
+import { BsWhatsapp } from 'react-icons/bs';
+import { Link, useNavigate } from 'react-router-dom';
+import dp from '../../../../assets/default.jpg';
+import cn from '../../../../lib/cn.js';
+import getVillageTitle from '../../../../utils/getVillageTitle.js';
+import rentIcon from './rent.png';
+import stationActiveIcon from './station-active.png';
+import stationIcon from './station.png';
 
 export default function RiderCard({ rider }) {
-  const {
-    _id,
-    name,
-    avatarURL,
-    contactNo1,
-    isOnline,
-    distance,
-    // isHighlight,
-    isLive,
-    mainStation,
-  } = rider;
+  const { _id, name, avatarURL, isOnline, distance } = rider;
 
-  const isHighlight = false;
+  rider.isHighlight = false; // TODO: remove this when we have a real data
 
   const navigate = useNavigate();
 
@@ -29,62 +21,104 @@ export default function RiderCard({ rider }) {
     navigate(`/profile/${_id}`);
   };
 
-  const station = getVillageTitle(mainStation);
-
   return (
     <div
       onClick={handleClick}
-      className="flex cursor-pointer items-center gap-5 rounded-lg px-4 py-2 hover:bg-primary/10 active:bg-primary/10"
+      className="bg-background hover:bg-tone-400/20 active:bg-tone-400/20"
     >
-      <div className="relative aspect-square w-28 rounded-full">
-        <img src={avatarURL || dp} alt="name" className="w-full rounded-full" />
-        <div
-          className={cn(
-            "absolute bottom-[5%] right-[5%] aspect-square w-[20%] rounded-full border-2 border-white",
-            { "bg-primary": isOnline, "bg-foreground/40": !isOnline },
-          )}
-        ></div>
-      </div>
-
-      <div>
-        <h3 className="text-xl">{name}</h3>
-
-        <div className="flex items-center gap-1">
-          <div className="relative">
-            {isHighlight && (
-              <span className="absolute animate-ping">
-                <HiOutlineStar className="text-destructive" />
-              </span>
-            )}
-            <span className="relative">
-              <HiOutlineStar
-                className={cn({
-                  "text-destructive": isHighlight,
-                  "": !isHighlight,
-                })}
-              />
-            </span>
+      <Container>
+        <div className="flex cursor-pointer items-center gap-5 rounded-lg py-4">
+          <div className="relative aspect-square w-24 rounded-full">
+            <img
+              src={avatarURL || dp}
+              alt="name"
+              className="w-full rounded-full"
+            />
+            <div
+              className={cn(
+                'absolute bottom-[5%] right-[5%] aspect-square w-[20%] rounded-full border-2 border-white',
+                { 'bg-primary': isOnline, 'bg-muted-foreground': !isOnline }
+              )}
+            ></div>
           </div>
 
-          <span>স্ট্যাশন: {station}</span>
+          <div className="flex-1">
+            <h3 className="text-xl font-bold">{name}</h3>
+
+            <div className="flex items-center gap-1 text-sm">
+              <img src={rentIcon} alt="" />
+              <span>
+                {rider?.rentType?.map((type) => `${type}  ভাড়া`).join(', ')}
+              </span>
+            </div>
+
+            {rider?.mainStation && (
+              <div className="flex items-center gap-1 text-sm">
+                <img
+                  src={rider.isHighlight ? stationActiveIcon : stationIcon}
+                  alt=""
+                />
+                <span
+                  className={cn({
+                    'text-destructive': rider.isHighlight,
+                  })}
+                >
+                  {getVillageTitle(rider.mainStation)}
+                </span>
+              </div>
+            )}
+
+            <div className="flex items-center gap-1 text-sm">
+              <MapPin
+                className={cn('size-3', { 'text-destructive': rider.isLive })}
+              />
+              <span
+                className={cn({
+                  'text-destructive': rider.isLive,
+                })}
+              >
+                {rider.distance.toFixed(2)} km
+              </span>
+              {rider.isLive && (
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="text-[11px] h-4 px-1.5 rounded-sm"
+                >
+                  Live
+                </Button>
+              )}
+            </div>
+
+            <div
+              className="flex gap-2 mt-2"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Link
+                to={
+                  rider.contactNo2 ? `https://wa.me/+88${rider.contactNo2}` : ''
+                }
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Button size="sm" disabled={!rider.contactNo2}>
+                  <BsWhatsapp />
+                  WhatsApp
+                </Button>
+              </Link>
+
+              <Link
+                to={`tel:${rider.contactNo1}`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Button size="sm">
+                  <Phone />
+                  Call
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
-
-        <Distance currentDistance={distance} isLive={isLive} />
-
-        <div className="flex gap-3">
-          <Link onClick={(e) => e.stopPropagation()}>
-            <Button className="px-8">
-              <PiPaperPlaneTiltFill />
-            </Button>
-          </Link>
-
-          <Link to={`tel:${contactNo1}`} onClick={(e) => e.stopPropagation()}>
-            <Button className="px-8">
-              <BsTelephoneFill />
-            </Button>
-          </Link>
-        </div>
-      </div>
+      </Container>
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function SearchResults() {
   return (
     <>
       <Filters />
-      <div className="mx-auto mb-3 flex w-fit max-w-full flex-col gap-3">
+      <div className="mx-auto mb-3 flex flex-col gap-1.5 bg-muted dark:bg-black">
         {riders?.length > 0 &&
           riders?.map((rider) => <RiderCard rider={rider} key={rider._id} />)}
 
