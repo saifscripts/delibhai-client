@@ -31,10 +31,10 @@ export default function RiderCard({ rider }) {
 
   return (
     <Container>
-      <div className="bg-background shadow-sm rounded-lg">
+      <div className="bg-background shadow-sm hover:shadow-md rounded-lg">
         {/* Body */}
         <div
-          className="flex cursor-pointer items-center gap-3 rounded-tl-lg rounded-tr-lg hover:bg-tone-400/20 py-2 px-3"
+          className="flex cursor-pointer items-center gap-3 rounded-tl-lg rounded-tr-lg py-2 px-3 hover:bg-primary/5"
           onClick={() => {
             navigate(`/profile/${_id}`);
           }}
@@ -48,22 +48,22 @@ export default function RiderCard({ rider }) {
             />
             <div
               className={cn(
-                'absolute bottom-[5%] right-[5%] aspect-square w-[20%] rounded-full border-2 border-white',
+                'absolute bottom-[5%] right-[5%] aspect-square w-[20%] rounded-full border-2 border-background',
                 { 'bg-primary': isOnline, 'bg-muted-foreground': !isOnline }
               )}
             ></div>
           </div>
 
           {/* Information */}
-          <div className="flex-1">
-            <div className="flex gap-2 justify-between">
+          <div className="flex-1 text-foreground/80">
+            <div className="flex gap3 justify-between items-center">
               <div>
                 {/* Name */}
                 <h3 className="text-lg font-bold">{name}</h3>
 
                 {/* Rent Type */}
                 <div className="flex items-center gap-1">
-                  <MapSpin size={16} />
+                  <MapSpin size={16} className="fill-foreground/70" />
                   <span>
                     {rider?.rentType?.map((type) => `${type}  ভাড়া`).join(', ')}
                   </span>
@@ -74,7 +74,7 @@ export default function RiderCard({ rider }) {
                   <div className="flex items-center gap-1">
                     <Station
                       className={cn({
-                        'fill-foreground': !rider.isHighlight,
+                        'fill-foreground/70': !rider.isHighlight,
                         'fill-destructive': rider.isHighlight,
                       })}
                       size={16}
@@ -93,7 +93,8 @@ export default function RiderCard({ rider }) {
                 <div className="flex items-center gap-1">
                   <MapPin
                     className={cn({
-                      'text-destructive': rider.isLive,
+                      'fill-destructive': rider.isLive,
+                      'fill-foreground/70': !rider.isLive,
                     })}
                     size={16}
                   />
@@ -127,7 +128,7 @@ export default function RiderCard({ rider }) {
         <Separator className="h-[0.5px] bg-foreground/5" />
 
         {/* Actions */}
-        <div className="flex justify-between items-center gap-4 px-3 py-2 text-sm text-foreground/80">
+        <div className="flex justify-between items-center gap-4 px-3 py-2 text-sm text-foreground/50">
           {/* Save */}
           <button
             className={cn('flex items-center gap-1', {
@@ -139,7 +140,7 @@ export default function RiderCard({ rider }) {
               {isSaved ? (
                 <TbStarFilled className="text-primary" size={24} />
               ) : (
-                <TbStar className="text-foreground/50" size={24} />
+                <TbStar size={24} />
               )}
             </span>
             <span>Save</span>
