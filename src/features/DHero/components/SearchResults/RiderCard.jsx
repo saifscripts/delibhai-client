@@ -43,9 +43,9 @@ export default function RiderCard({ rider }) {
     <Container>
       <div
         onClick={handleClick}
-        className="bg-background hover:bg-tone-400/20 active:bg-tone-400/20 shadow-sm rounded-lg p-4"
+        className="bg-background hover:bg-tone-400/20 active:bg-tone-400/20 shadow-sm rounded-lg p-2"
       >
-        <div className="flex cursor-pointer items-center gap-5 rounded-lg">
+        <div className="flex cursor-pointer items-center gap-3 rounded-lg">
           <div className="relative aspect-square w-20 rounded-full">
             <img
               src={avatarURL || dp}
@@ -63,8 +63,8 @@ export default function RiderCard({ rider }) {
           <div className="flex-1">
             <div className="flex gap-4 justify-between">
               <div>
-                <h3 className="text-base font-bold">{name}</h3>
-                <div className="flex items-center gap-1 text-xs">
+                <h3 className="text-lg font-bold">{name}</h3>
+                <div className="flex items-center gap-1 text-sm">
                   <img src={rentIcon} alt="" />
                   <span>
                     {rider?.rentType?.map((type) => `${type}  ভাড়া`).join(', ')}
@@ -72,7 +72,7 @@ export default function RiderCard({ rider }) {
                 </div>
 
                 {rider?.mainStation && (
-                  <div className="flex items-center gap-1 text-xs">
+                  <div className="flex items-center gap-1 text-sm">
                     <img
                       src={rider.isHighlight ? stationActiveIcon : stationIcon}
                       alt=""
@@ -87,7 +87,7 @@ export default function RiderCard({ rider }) {
                   </div>
                 )}
 
-                <div className="flex items-center gap-1 text-xs">
+                <div className="flex items-center gap-1 text-sm">
                   <MapPin
                     className={cn('size-3', {
                       'text-destructive': rider.isLive,
@@ -128,7 +128,7 @@ export default function RiderCard({ rider }) {
                 >
                   <Button
                     size="sm"
-                    className="text-[8px] h-6 gap-1 px-2 rounded-md"
+                    className="text-[10px] h-7 gap-1 px-2 rounded-md"
                   >
                     <PiWhatsappLogoFill />
                     WhatsApp
@@ -141,7 +141,7 @@ export default function RiderCard({ rider }) {
                 >
                   <Button
                     size="sm"
-                    className="text-[8px] h-6 gap-1 px-2 rounded-md"
+                    className="text-[10px] h-7 gap-1 px-2 rounded-md"
                   >
                     <PiPhoneFill />
                     Call
