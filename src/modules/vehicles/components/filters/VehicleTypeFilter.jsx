@@ -3,11 +3,13 @@ import vehicles from '@/data/vehicles';
 import Container from '@/layouts/Container';
 
 import { cn } from '@/lib/utils';
+import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 export default function VehicleTypeFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
   const vehicleType = searchParams.get('vehicleType');
+  const ref = useRef(null);
 
   const handleChangeVehicleType = (vehicleType) => {
     if (vehicleType !== searchParams.get('vehicleType')) {
@@ -15,22 +17,35 @@ export default function VehicleTypeFilter() {
     }
   };
 
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center',
+      });
+    }
+  }, [vehicleType]);
+
   return (
     <div className="bg-background">
       <Container>
-        <ScrollMenu arrow className="gap-2 py-2 snap-x">
+        <ScrollMenu arrow className="gap-2 py-2">
           {vehicles.map(({ title, icon }) => (
             <ScrollItem
               key={title}
               onClick={() => handleChangeVehicleType(title)}
               className={cn(
-                'group flex aspect-square cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border bg-muted p-2 hover:border-tone-600 hover:bg-tone-200 size-16',
+                'group flex aspect-square cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border bg-muted p-2 hover:border-tone-600 hover:bg-tone-200 size-16 will-change-contents',
                 {
-                  'bg-tone-200 snap-center': vehicleType === title,
+                  'bg-tone-200': vehicleType === title,
                 }
               )}
             >
-              <div className="flex h-full w-full items-center justify-center">
+              <div
+                className="flex h-full w-full items-center justify-center"
+                ref={vehicleType === title ? ref : null}
+              >
                 <img
                   src={icon}
                   alt={title}
