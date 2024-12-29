@@ -5,8 +5,7 @@ import vehicles from '@/data/vehicles.js';
 import Container from '@/layouts/Container.jsx';
 import { useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa6';
-import { GoStar, GoStarFill } from 'react-icons/go';
-import { IoCallOutline } from 'react-icons/io5';
+import { PiPhoneLight, PiStarFill, PiStarLight } from 'react-icons/pi';
 import { Link, useNavigate } from 'react-router-dom';
 import dp from '../../../../assets/default.jpg';
 import cn from '../../../../lib/cn.js';
@@ -163,9 +162,9 @@ export default function RiderCard({ rider }) {
           >
             <span>
               {isSaved ? (
-                <GoStarFill className="text-primary" size={24} />
+                <PiStarFill className="text-primary" size={24} />
               ) : (
-                <GoStar className="text-foreground/50" size={24} />
+                <PiStarLight className="text-foreground/50" size={24} />
               )}
             </span>
             <span>Save</span>
@@ -188,7 +187,7 @@ export default function RiderCard({ rider }) {
             className="flex items-center gap-1"
           >
             <span>
-              <IoCallOutline className="text-foreground/50" size={24} />
+              <PiPhoneLight className="text-foreground/50" size={24} />
             </span>
             <span>Call</span>
           </Link>
