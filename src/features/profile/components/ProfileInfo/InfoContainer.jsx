@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import Edit from '@/components/ui/Edit';
 import { useState } from 'react';
 import {
   EditContactInfo,
@@ -45,9 +45,8 @@ export default function InfoContainer({ category, children, editModal }) {
         {getCategoryModal(
           category,
           editModal,
-          <Button variant="link" onClick={() => openModal(editModal)}>
-            Edit
-          </Button>
+
+          <Edit onClick={() => openModal(editModal)} />
         )}
       </div>
 

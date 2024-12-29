@@ -1,6 +1,5 @@
 import Form from '@/components/forms/Form';
 import Input from '@/components/forms/Input';
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -8,6 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import Edit from '@/components/ui/Edit';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMe } from '../../../../hooks/auth.hook';
@@ -49,8 +49,8 @@ export default function EditContactInfo({ isOpen, onClose }) {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       {selfView && (
-        <DialogTrigger asChild>
-          <Button variant="link">Edit</Button>
+        <DialogTrigger>
+          <Edit />
         </DialogTrigger>
       )}
       <DialogContent className="p-0">

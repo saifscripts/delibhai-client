@@ -1,20 +1,20 @@
 import AddressInput from '@/components/address/AddressInput';
 import Form from '@/components/forms/Form';
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from '@/components/ui/dialog';
+import Edit from '@/components/ui/Edit';
 import isEqual from 'lodash/isEqual';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -64,8 +64,8 @@ export default function EditAddressInfo({ isOpen, onClose }) {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       {selfView && (
-        <DialogTrigger asChild>
-          <Button variant="link">Edit</Button>
+        <DialogTrigger>
+          <Edit />
         </DialogTrigger>
       )}
       <DialogContent className="p-0">

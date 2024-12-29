@@ -3,7 +3,6 @@ import DatePicker from '@/components/forms/DatePicker';
 import Form from '@/components/forms/Form';
 import Input from '@/components/forms/Input';
 import Select from '@/components/forms/Select';
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -11,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import Edit from '@/components/ui/Edit';
 import axios from 'axios';
 import { XIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -119,8 +119,8 @@ export default function EditPersonalInfo() {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       {selfView && (
-        <DialogTrigger asChild>
-          <Button variant="link">Edit</Button>
+        <DialogTrigger>
+          <Edit />
         </DialogTrigger>
       )}
       <DialogContent className="p-0">

@@ -2,7 +2,6 @@
 import Form from '@/components/forms/Form';
 import Input from '@/components/forms/Input';
 import Select from '@/components/forms/Select';
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -10,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import Edit from '@/components/ui/Edit';
 import vehicles from '@/data/vehicles';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -55,8 +55,8 @@ export default function EditVehicleInfo({ isOpen, onClose }) {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       {selfView && (
-        <DialogTrigger asChild>
-          <Button variant="link">Edit</Button>
+        <DialogTrigger>
+          <Edit />
         </DialogTrigger>
       )}
       <DialogContent className="p-0">
