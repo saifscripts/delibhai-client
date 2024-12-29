@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   MdOutlineArrowBackIos,
   MdOutlineArrowForwardIos,
@@ -7,8 +7,15 @@ import {
 
 export function ScrollMenu({ children, className, arrow, ...restProps }) {
   const [leftArrow, setLeftArrow] = useState(false);
-  const [rightArrow, setRightArrow] = useState(true);
+  const [rightArrow, setRightArrow] = useState(false);
   const scrollElementRef = useRef(null);
+
+  useEffect(() => {
+    const scrollWidth = scrollElementRef.current.scrollWidth;
+    const clientWidth = scrollElementRef.current.clientWidth;
+    if (scrollWidth > clientWidth) setRightArrow(true);
+    if (scrollWidth <= clientWidth) setRightArrow(false);
+  }, [scrollElementRef.current]);
 
   const handleScroll = () => {
     const scrollPosition = scrollElementRef.current.scrollLeft;
