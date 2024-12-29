@@ -1,4 +1,6 @@
+import { ScrollItem, ScrollMenu } from '@/components/scrollable-menu';
 import { cn } from '@/lib/utils';
+import UserActionsButton from '@/modules/shared/user-actions-button';
 import { useEffect, useState } from 'react';
 import 'react-circular-progressbar/dist/styles.css';
 import { useParams } from 'react-router-dom';
@@ -48,25 +50,28 @@ export default function ProfileMenu() {
   return (
     <div
       className={cn(
-        'transition-top sticky top-0 z-20 mb-6 overflow-y-hidden bg-background duration-300',
+        'transition-top sticky top-0 z-20 mb-6 bg-background duration-300',
         {
           'top-[64px]': visible,
           'top-0': !visible,
         }
       )}
     >
-      <div className="-mb-5 flex gap-2 overflow-x-scroll pb-5 pt-2">
+      <UserActionsButton user={user} />
+
+      <ScrollMenu className="gap-0" arrow>
         {categories.map(({ name, title, icon, index }) => (
-          <Category
-            key={name}
-            name={name}
-            title={title}
-            icon={icon}
-            index={index}
-            percent={calculatePercent(name)}
-          />
+          <ScrollItem key={name}>
+            <Category
+              name={name}
+              title={title}
+              icon={icon}
+              index={index}
+              percent={calculatePercent(name)}
+            />
+          </ScrollItem>
         ))}
-      </div>
+      </ScrollMenu>
     </div>
   );
 }

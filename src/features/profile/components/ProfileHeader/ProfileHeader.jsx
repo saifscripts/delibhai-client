@@ -21,7 +21,7 @@ export default function ProfileHeader() {
 
   return (
     <>
-      <div className="mb-8 flex items-center gap-5">
+      <div className="mb-6 flex items-center gap-3">
         <ProfileAvatar avatarURL={user?.avatarURL} />
 
         <div className="flex-1">
@@ -31,7 +31,7 @@ export default function ProfileHeader() {
             #{user?._id?.slice(0, 5)}
           </span>
 
-          <div className="relative z-10 flex items-center rounded-full bg-gradient-to-b from-tone-400 to-tone-600 py-3 pl-[16px] pr-[calc(76px/2)] text-xs min-[500px]:text-base w-[calc(100%-76px)] max-w-[240px]">
+          <div className="relative z-10 flex items-center rounded-full bg-gradient-to-b from-tone-400 to-tone-600 py-3 pl-[16px] pr-[calc(76px/2)] text-sm w-[calc(100%-38px)] max-w-[240px]">
             <span className="dark:text-background">{vehicleTitle}</span>
             <div className="absolute right-0 top-1/2 h-16 w-16 -translate-y-1/2 translate-x-1/2">
               <img

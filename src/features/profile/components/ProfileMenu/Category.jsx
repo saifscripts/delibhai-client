@@ -1,7 +1,7 @@
-import { CircularProgressbar } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
-import { NavLink, useParams } from "react-router-dom";
-import cn from "../../../../lib/cn";
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { NavLink, useParams } from 'react-router-dom';
+import cn from '../../../../lib/cn';
 
 export default function Category({ name, title, icon, percent, index }) {
   const { category } = useParams();
@@ -11,8 +11,11 @@ export default function Category({ name, title, icon, percent, index }) {
       to={`${name}`}
       className={({ isActive }) =>
         cn(
-          "relative z-10 flex w-24 flex-shrink-0 flex-col items-center justify-center p-1",
-          { "border-b-2 border-tone": isActive || (!category && index) },
+          'relative flex w-24 flex-shrink-0 flex-col items-center justify-center p-1 rounded-tl-lg rounded-tr-lg',
+          {
+            'border-b-2 border-tone bg-primary-500/5':
+              isActive || (!category && index),
+          }
         )
       }
       preventScrollReset
@@ -25,13 +28,13 @@ export default function Category({ name, title, icon, percent, index }) {
           value={percent}
           styles={{
             path: {
-              stroke: "#00E1A9",
-              strokeLinecap: "butt",
-              transition: "stroke-dashoffset 0.5s ease 0s",
+              stroke: '#00E1A9',
+              strokeLinecap: 'butt',
+              transition: 'stroke-dashoffset 0.5s ease 0s',
             },
             trail: {
-              stroke: "#8a8a8a",
-              strokeLinecap: "butt",
+              stroke: '#8a8a8a',
+              strokeLinecap: 'butt',
             },
           }}
         />

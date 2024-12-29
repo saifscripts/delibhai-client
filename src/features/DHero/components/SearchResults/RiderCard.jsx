@@ -4,13 +4,11 @@ import { Separator } from '@/components/ui/separator';
 import vehicles from '@/data/vehicles.js';
 import Container from '@/layouts/Container.jsx';
 import { useState } from 'react';
-import { FaWhatsapp } from 'react-icons/fa6';
-import { PiPhoneLight, PiStarFill, PiStarLight } from 'react-icons/pi';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import dp from '../../../../assets/default.jpg';
 import cn from '../../../../lib/cn.js';
+import UserActions from '../../../../modules/shared/user-actions/index.jsx';
 import getVillageTitle from '../../../../utils/getVillageTitle.js';
-import { Share } from './Share.jsx';
 
 export default function RiderCard({ rider }) {
   const { _id, name, avatarURL, isOnline, distance } = rider;
@@ -124,7 +122,7 @@ export default function RiderCard({ rider }) {
                   </span>
                 </div>
                 <span
-                  className={cn({
+                  className={cn('mt-[2px]', {
                     'text-destructive': rider.isLive,
                   })}
                 >
@@ -152,49 +150,7 @@ export default function RiderCard({ rider }) {
         <Separator className="h-[0.5px] bg-foreground/5" />
 
         {/* Actions */}
-        <div className="flex justify-between items-center gap-4 px-3 py-2 text-sm text-foreground/50">
-          {/* Save */}
-          <button
-            className={cn('flex items-center gap-1', {
-              'text-primary': isSaved,
-            })}
-            onClick={() => setIsSaved(!isSaved)}
-          >
-            <span>
-              {isSaved ? (
-                <PiStarFill className="text-primary" size={24} />
-              ) : (
-                <PiStarLight className="text-foreground/50" size={24} />
-              )}
-            </span>
-            <span>Save</span>
-          </button>
-
-          {/* Send */}
-          <Link
-            to={`https://wa.me/+88${rider.contactNo2 || rider.contactNo1}`}
-            className="flex items-center gap-1"
-          >
-            <span>
-              <FaWhatsapp className="text-foreground/40" size={24} />
-            </span>
-            <span>Send</span>
-          </Link>
-
-          {/* Call */}
-          <Link
-            to={`tel:${rider.contactNo1}`}
-            className="flex items-center gap-1"
-          >
-            <span>
-              <PiPhoneLight className="text-foreground/50" size={24} />
-            </span>
-            <span>Call</span>
-          </Link>
-
-          {/* Share */}
-          <Share rider={rider} />
-        </div>
+        <UserActions user={rider} />
       </div>
     </Container>
   );

@@ -14,18 +14,22 @@ import { PiShareFat, PiShareFatLight } from 'react-icons/pi';
 import { TbBrandWhatsapp } from 'react-icons/tb';
 import { toast } from 'sonner';
 
-export function Share({ rider }) {
+export function Share({ user }) {
   const [open, setOpen] = React.useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button className="flex items-center gap-1">
+        <Button
+          size="sm"
+          variant="secondary"
+          className="flex items-center gap-1"
+        >
           <span>
-            <PiShareFatLight className="text-foreground/50" size={24} />
+            <PiShareFatLight className="text-foreground" size={24} />
           </span>
           <span>Share</span>
-        </button>
+        </Button>
       </DialogTrigger>
       <DialogContent className="p-16 text-center m-8 rounded-2xl">
         <div className="flex items-center justify-center">
@@ -50,7 +54,7 @@ export function Share({ rider }) {
         <div className="flex flex-col py-1 gap-2">
           <Button asChild>
             <a
-              href={`whatsapp://send?text=${window.location.origin}/profile/${rider._id}`}
+              href={`whatsapp://send?text=${window.location.origin}/profile/${user._id}`}
               data-action="share/whatsapp/share"
             >
               <TbBrandWhatsapp />
@@ -62,7 +66,7 @@ export function Share({ rider }) {
             variant="outline"
             onClick={() => {
               navigator.clipboard.writeText(
-                `${window.location.origin}/profile/${rider._id}`
+                `${window.location.origin}/profile/${user._id}`
               );
               toast.success('Link copied to clipboard');
             }}

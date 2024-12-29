@@ -68,7 +68,7 @@ export function ScrollItem({ children, className, ...restProps }) {
 function LeftArrow(props) {
   return (
     <div
-      className="absolute left-0 top-1/2 flex aspect-square w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary bg-opacity-70 text-xl text-white transition-all duration-300 hover:bg-opacity-100"
+      className="absolute left-0 top-1/2 flex aspect-square w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary bg-opacity-70 text-xl text-white transition-all duration-300 hover:bg-opacity-100 shadow-lg"
       {...props}
     >
       <MdOutlineArrowBackIos />
@@ -79,7 +79,7 @@ function LeftArrow(props) {
 function RightArrow(props) {
   return (
     <div
-      className="absolute right-0 top-1/2 flex aspect-square w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary bg-opacity-70 text-xl text-white transition-all duration-300 hover:bg-opacity-100"
+      className="absolute right-0 top-1/2 flex aspect-square w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-primary bg-opacity-70 text-xl text-white transition-all duration-300 hover:bg-opacity-100 shadow-lg"
       {...props}
     >
       <MdOutlineArrowForwardIos />

@@ -19,7 +19,7 @@ export default function ProfileInfo() {
   const { user: authUser } = useMe();
 
   return (
-    <div className="pb-20">
+    <div>
       {profileSchema[category]?.map((item) => (
         <InfoContainer
           key={item.category}
