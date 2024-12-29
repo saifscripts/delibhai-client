@@ -54,7 +54,7 @@ export default function RiderCard({ rider }) {
           </div>
 
           {/* Information */}
-          <div className="flex-1 text-foreground/80 flex gap3 justify-between items-center">
+          <div className="flex-1 text-foreground/80 flex gap-3 justify-between items-center">
             <div>
               {/* Name */}
               <h3 className="text-lg font-bold">{name}</h3>
@@ -62,9 +62,7 @@ export default function RiderCard({ rider }) {
               {/* Rent Type */}
               <div className="flex items-center gap-1">
                 <MapSpin size={16} className="fill-foreground/70" />
-                <span>
-                  {rider?.rentType?.map((type) => `${type}  ভাড়া`).join(', ')}
-                </span>
+                <span>{rider?.rentType?.sort().reverse().join(', ')}</span>
               </div>
 
               {/* Station */}

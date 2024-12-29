@@ -21,11 +21,11 @@ export default function ClearValues({ field }) {
     <Button
       variant="outline"
       size="sm"
-      className="gap-1 px-2 h-8"
+      className="gap-[2px] px-1.5 h-7"
       onClick={handleClear}
     >
-      <XIcon className="size-1" />
-      <p className="text-xs">ক্লিয়ার করুন</p>
+      <XIcon />
+      <span className="text-[10px]">ক্লিয়ার করুন</span>
     </Button>
   );
 }

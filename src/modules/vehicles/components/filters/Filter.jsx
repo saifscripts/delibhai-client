@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { XIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -37,11 +38,16 @@ export default function Filter({ field, label, values }) {
 
   return (
     <Accordion type="single" collapsible value={value} onValueChange={setValue}>
-      <AccordionItem value={field} className="w-[200px] border rounded-lg">
-        <AccordionTrigger className="p-2 hover:no-underline border-b rounded-lg">
-          <p className="font-bold">{label}</p>
+      <AccordionItem value={field} className="w-[170px] border rounded-lg">
+        <AccordionTrigger
+          className={cn('px-2 py-1.5 hover:no-underline', {
+            'rounded-lg': value !== field,
+            'border-b': value === field,
+          })}
+        >
+          <p className="text-sm">{label}</p>
         </AccordionTrigger>
-        <AccordionContent className="p-2 overflow-visible">
+        <AccordionContent className="px-2 py-1.5 overflow-visible">
           <div className="flex flex-col gap-2">
             <div className="flex gap-1 flex-wrap w-full">
               {searchParams
@@ -59,7 +65,7 @@ export default function Filter({ field, label, values }) {
                   </Button>
                 ))}
             </div>
-            <div className="flex justify-between gap-1">
+            <div className="flex justify-between gap-[2px]">
               <ClearValues field={field} />
               <AddValue field={field} values={values} label={label} />
             </div>

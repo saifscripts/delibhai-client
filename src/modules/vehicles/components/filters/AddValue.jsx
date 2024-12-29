@@ -54,13 +54,13 @@ export function AddValue({ field, values, label }) {
           size="sm"
           role="combobox"
           aria-expanded={open}
-          className="gap-1 px-2 h-8"
+          className="gap-[2px] px-1.5 h-7"
         >
-          <PlusIcon className="size-1" />
-          <p className="text-xs">{label}</p>
+          <PlusIcon />
+          <span className="text-[10px]">{label}</span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="w-[170px] p-0">
         <Command>
           <CommandList>
             <CommandEmpty>{label} পাওয়া যায় নি</CommandEmpty>
