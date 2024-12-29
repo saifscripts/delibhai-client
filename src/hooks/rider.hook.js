@@ -90,17 +90,26 @@ export const useUpdateServiceStatus = () => {
   return useMutation({
     mutationKey: ['UPDATE_RIDER'],
     mutationFn: (serviceStatus) => updateRider({ serviceStatus }),
-    onSuccess: (data) => {
-      if (data?.success) {
-        queryClient.invalidateQueries({ queryKey: ['ME'] });
-        queryClient.invalidateQueries({ queryKey: ['USER'] });
-        //   toast.success('Profile updated successfully');
-      } else {
-        toast.error(data?.message);
-      }
+    onMutate: async (serviceStatus) => {
+      await queryClient.cancelQueries({ queryKey: ['ME'] });
+      const oldData = queryClient.getQueryData(['ME']);
+      queryClient.setQueryData(['ME'], (old) => ({
+        ...old,
+        data: {
+          ...old.data,
+          serviceStatus,
+        },
+      }));
+
+      return { oldData };
     },
-    onError: (error) => {
+    onError: (error, _serviceStatus, context) => {
+      queryClient.setQueryData(['ME'], context.oldData);
       toast.error(error.message);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['ME'] });
+      //   queryClient.invalidateQueries({ queryKey: ['USER'] });
     },
   });
 };
