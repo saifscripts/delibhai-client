@@ -31,7 +31,7 @@ export function Share({ user }) {
           <span>Share</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="p-16 text-center m-8 rounded-2xl">
+      <DialogContent className="p-16 text-center rounded-2xl">
         <div className="flex items-center justify-center">
           <div className="relative size-16">
             <Shield
