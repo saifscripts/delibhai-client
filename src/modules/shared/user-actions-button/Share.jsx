@@ -23,7 +23,7 @@ export function Share({ user }) {
         <Button
           size="sm"
           variant="secondary"
-          className="flex items-center gap-1"
+          className="flex items-center gap-1 h-10"
         >
           <span>
             <PiShareFatLight className="text-foreground" size={24} />
