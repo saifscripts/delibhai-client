@@ -9,7 +9,7 @@ import {
   EditVehicleInfo,
   EditVideoURL,
 } from '../EditProfile';
-import EditAddressInfo from '../EditProfile/EditAddress';
+import EditAddress from '../EditProfile/EditAddress';
 
 const getCategoryModal = (category, editModal, editButton) => {
   switch (category) {
@@ -18,7 +18,7 @@ const getCategoryModal = (category, editModal, editButton) => {
     case 'কন্টাক্ট ইনফো':
       return <EditContactInfo />;
     case 'ঠিকানা':
-      return <EditAddressInfo />;
+      return <EditAddress />;
     case 'গাড়ির সাধারণ তথ্য':
       return <EditVehicleInfo />;
     case 'সার্ভিস তথ্য':

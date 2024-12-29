@@ -1,18 +1,18 @@
 import AddressInput from '@/components/address/AddressInput';
 import Form from '@/components/forms/Form';
 import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog';
 import Edit from '@/components/ui/Edit';
 import isEqual from 'lodash/isEqual';
@@ -23,7 +23,7 @@ import { useUpdateRider } from '../../../../hooks/user.hook';
 import { EditAddressSchema } from '../../schemas/address.schema';
 import SaveButton from './SaveButton';
 
-export default function EditAddressInfo({ isOpen, onClose }) {
+export default function EditAddress() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAddressEqual, setIsAddressEqual] = useState(true);
   const {

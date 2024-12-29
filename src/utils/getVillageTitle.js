@@ -1,5 +1,5 @@
-const getVillageTitle = (address) => {
-  return address?.village?.title;
+const getMainStationTitle = (address) => {
+  return address?.village?.title || address?.union?.title;
 };
 
-export default getVillageTitle;
+export default getMainStationTitle;

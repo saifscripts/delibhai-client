@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import dp from '../../../../assets/default.jpg';
 import cn from '../../../../lib/cn.js';
 import UserActions from '../../../../modules/shared/user-actions/UserActions.jsx';
-import getVillageTitle from '../../../../utils/getVillageTitle.js';
+import getMainStationTitle from '../../../../utils/getVillageTitle.js';
 
 export default function RiderCard({ rider }) {
   const { _id, name, avatarURL, isOnline, distance } = rider;
@@ -66,7 +66,7 @@ export default function RiderCard({ rider }) {
               </div>
 
               {/* Station */}
-              {getVillageTitle(rider.mainStation) && (
+              {getMainStationTitle(rider.mainStation) && (
                 <div className="flex items-center gap-1">
                   <div className="relative">
                     {rider.isHighlight && (
@@ -90,7 +90,7 @@ export default function RiderCard({ rider }) {
                       'text-destructive': rider.isHighlight,
                     })}
                   >
-                    {getVillageTitle(rider.mainStation)}
+                    {getMainStationTitle(rider.mainStation)}
                   </span>
                 </div>
               )}

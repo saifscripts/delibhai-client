@@ -47,7 +47,7 @@ export default function ProfileInfo() {
                 return true;
               }
             })
-            .map(({ dataKey, label, icon, dataModifier, isPrivate }) => {
+            .map(({ dataKey, label, icon, dataModifier, isPrivate, edit }) => {
               if (dataKey === 'vehiclePhotos') {
                 return <VehiclePhotos key={dataKey} />;
               }
@@ -91,6 +91,7 @@ export default function ProfileInfo() {
                   value={fieldValue}
                   label={label}
                   icon={icon}
+                  edit={edit}
                 />
               );
             })}
