@@ -5,7 +5,7 @@ import {
   useGetVillages,
 } from '@/hooks/address.hook';
 import englishToBengaliNumber from '@/utils/englishToBengaliNumber';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import SelectAddress from './SelectAddress';
 
@@ -45,7 +45,9 @@ const divisions = [
 ];
 
 export default function AddressInput({ name, label }) {
-  const { watch, setValue, resetField } = useFormContext();
+  const { watch, setValue, resetField, formState } = useFormContext();
+
+  console.log({ formState });
 
   const division = watch(`${name}.division`);
   const district = watch(`${name}.district`);
@@ -76,40 +78,72 @@ export default function AddressInput({ name, label }) {
       label: village.title,
     }));
 
+  // detect first render
+  const [isDivisionSelected, setIsDivisionSelected] = useState(false);
+  const [isDistrictSelected, setIsDistrictSelected] = useState(false);
+  const [isUpazilaSelected, setIsUpazilaSelected] = useState(false);
+  const [isUnionSelected, setIsUnionSelected] = useState(false);
+  const [isWardSelected, setIsWardSelected] = useState(false);
+
   useEffect(() => {
-    resetField(`${name}.district`);
-    resetField(`${name}.upazila`);
-    resetField(`${name}.union`);
-    resetField(`${name}.ward`);
-    resetField(`${name}.village`);
+    if (!isDivisionSelected) {
+      setIsDivisionSelected(true);
+      return;
+    }
+
+    setValue(`${name}.district`, undefined);
+    setValue(`${name}.upazila`, undefined);
+    setValue(`${name}.union`, undefined);
+    setValue(`${name}.ward`, undefined);
+    setValue(`${name}.village`, undefined);
   }, [division?._id]);
 
   useEffect(() => {
-    resetField(`${name}.upazila`);
-    resetField(`${name}.union`);
-    resetField(`${name}.ward`);
-    resetField(`${name}.village`);
+    if (!isDistrictSelected) {
+      setIsDistrictSelected(true);
+      return;
+    }
+
+    setValue(`${name}.upazila`, undefined);
+    setValue(`${name}.union`, undefined);
+    setValue(`${name}.ward`, undefined);
+    setValue(`${name}.village`, undefined);
   }, [district?._id]);
 
   useEffect(() => {
-    resetField(`${name}.union`);
-    resetField(`${name}.ward`);
-    resetField(`${name}.village`);
+    if (!isUpazilaSelected) {
+      setIsUpazilaSelected(true);
+      return;
+    }
+
+    setValue(`${name}.union`, undefined);
+    setValue(`${name}.ward`, undefined);
+    setValue(`${name}.village`, undefined);
   }, [upazila?._id]);
 
   useEffect(() => {
-    resetField(`${name}.ward`);
-    resetField(`${name}.village`);
+    if (!isUnionSelected) {
+      setIsUnionSelected(true);
+      return;
+    }
+
+    setValue(`${name}.ward`, undefined);
+    setValue(`${name}.village`, undefined);
   }, [union?._id]);
 
   useEffect(() => {
-    resetField(`${name}.village`);
+    if (!isWardSelected) {
+      setIsWardSelected(true);
+      return;
+    }
+
+    setValue(`${name}.village`, undefined);
   }, [ward?._id]);
 
   return (
     <div className="flex flex-col gap-4">
       {label && (
-        <p className="border-light mb-3 pb-2 border-b font-bold">{label}</p>
+        <p className="border-light mb-1 pb-2 border-b font-bold">{label}</p>
       )}
 
       <SelectAddress
