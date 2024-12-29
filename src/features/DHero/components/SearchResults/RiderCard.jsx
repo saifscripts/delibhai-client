@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dp from '../../../../assets/default.jpg';
 import cn from '../../../../lib/cn.js';
-import UserActions from '../../../../modules/shared/user-actions/index.jsx';
+import UserActions from '../../../../modules/shared/user-actions/UserActions.jsx';
 import getVillageTitle from '../../../../utils/getVillageTitle.js';
 
 export default function RiderCard({ rider }) {

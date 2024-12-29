@@ -10,23 +10,16 @@ import {
 } from '@/components/ui/dialog';
 import { Link, Shield } from 'lucide-react';
 import * as React from 'react';
-import { PiShareFat, PiShareFatLight } from 'react-icons/pi';
+import { PiShareFat } from 'react-icons/pi';
 import { TbBrandWhatsapp } from 'react-icons/tb';
 import { toast } from 'sonner';
 
-export function Share({ user }) {
+export function Share({ user, children }) {
   const [open, setOpen] = React.useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <button className="flex items-center gap-1">
-          <span>
-            <PiShareFatLight className="text-foreground/50" size={24} />
-          </span>
-          <span>Share</span>
-        </button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="p-16 text-center rounded-2xl">
         <div className="flex items-center justify-center">
           <div className="relative size-16">

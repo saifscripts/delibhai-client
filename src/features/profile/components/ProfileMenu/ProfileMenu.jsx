@@ -1,6 +1,6 @@
 import { ScrollItem, ScrollMenu } from '@/components/scrollable-menu';
 import { cn } from '@/lib/utils';
-import UserActionsButton from '@/modules/shared/user-actions-button';
+import UserActionsButton from '@/modules/shared/user-actions/UserActionsButton';
 import { useEffect, useState } from 'react';
 import 'react-circular-progressbar/dist/styles.css';
 import { useParams } from 'react-router-dom';

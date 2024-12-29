@@ -2,9 +2,14 @@ import { Button } from '@/components/ui/button';
 import cn from '@/lib/cn.js';
 import { useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa6';
-import { PiPhoneFill, PiStarFill, PiStarLight } from 'react-icons/pi';
+import {
+  PiPhoneFill,
+  PiShareFatLight,
+  PiStarFill,
+  PiStarLight,
+} from 'react-icons/pi';
 import { Link } from 'react-router-dom';
-import { Share } from './Share.jsx';
+import { Share } from './Share';
 
 export default function UserActionsButton({ user }) {
   const [isSaved, setIsSaved] = useState(false);
@@ -59,7 +64,18 @@ export default function UserActionsButton({ user }) {
       </Button>
 
       {/* Share */}
-      <Share user={user} />
+      <Share user={user}>
+        <Button
+          size="sm"
+          variant="secondary"
+          className="flex items-center gap-1 h-10"
+        >
+          <span>
+            <PiShareFatLight className="text-foreground" size={24} />
+          </span>
+          <span>Share</span>
+        </Button>
+      </Share>
     </div>
   );
 }
