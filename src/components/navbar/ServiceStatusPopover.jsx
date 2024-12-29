@@ -11,12 +11,12 @@ import { PencilIcon } from 'lucide-react';
 import { useState } from 'react';
 import StatusIcon from './StatusIcon';
 
-const serviceStatusOptions = {
-  on: 'Online',
-  scheduled: 'Scheduled',
-  off: 'Offline',
-  deactivated: 'Deactivated',
-};
+const serviceStatusOptions = [
+  { label: 'Online', value: 'on' },
+  { label: 'Scheduled', value: 'scheduled' },
+  { label: 'Offline', value: 'off' },
+  { label: 'Deactivated', value: 'deactivated' },
+];
 
 export function ServiceStatusPopover({ field, values, label }) {
   const [open, setOpen] = useState();
@@ -33,43 +33,30 @@ export function ServiceStatusPopover({ field, values, label }) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <div
-          className="flex items-center gap-1 text-[10px] tracking-tighter text-muted-foreground hover:bg-foreground/10 px-1 rounded-full -ml-1"
+          className="flex items-center gap-2 tracking-tighter text-muted-foreground px-1 rounded-full -ml-1 group border border-foreground/10"
           onClick={(e) => e.stopPropagation()}
         >
           <StatusIcon status={user?.serviceStatus} />
-          <span>{serviceStatusOptions[user?.serviceStatus]}</span>
+          <span>
+            {
+              serviceStatusOptions.find(
+                (option) => option.value === user?.serviceStatus
+              )?.label
+            }
+          </span>
           <PencilIcon size={10} className="stroke-3" />
         </div>
       </PopoverTrigger>
-      <PopoverContent className="w-[120px] px-1 py-[2px]" align="start">
-        <div
-          onClick={(e) => handleUpdateServiceStatus(e, 'on')}
-          className="flex items-center gap-1 text-[12px] tracking-tighter text-muted-foreground hover:bg-foreground/10 px-1 py-[2px] rounded-sm"
-        >
-          <StatusIcon status="on" />
-          <span>Online</span>
-        </div>
-        <div
-          onClick={(e) => handleUpdateServiceStatus(e, 'scheduled')}
-          className="flex items-center gap-1 text-[12px] tracking-tighter text-muted-foreground hover:bg-foreground/10 px-1 py-[2px] rounded-sm"
-        >
-          <StatusIcon status="scheduled" />
-          <span>Scheduled</span>
-        </div>
-        <div
-          onClick={(e) => handleUpdateServiceStatus(e, 'off')}
-          className="flex items-center gap-1 text-[12px] tracking-tighter text-muted-foreground hover:bg-foreground/10 px-1 py-[2px] rounded-sm"
-        >
-          <StatusIcon status="off" />
-          <span>Offline</span>
-        </div>
-        <div
-          onClick={(e) => handleUpdateServiceStatus(e, 'deactivated')}
-          className="flex items-center gap-1 text-[12px] tracking-tighter text-muted-foreground hover:bg-foreground/10 px-1 py-[2px] rounded-sm"
-        >
-          <StatusIcon status="deactivated" />
-          <span>Deactivate</span>
-        </div>
+      <PopoverContent className="w-[120px] p-1" align="start">
+        {serviceStatusOptions.map((option) => (
+          <div
+            onClick={(e) => handleUpdateServiceStatus(e, option.value)}
+            className="flex items-center gap-1 tracking-tighter text-muted-foreground hover:bg-foreground/10 px-1 py-[2px] rounded-sm"
+          >
+            <StatusIcon status={option.value} />
+            <span>{option.label}</span>
+          </div>
+        ))}
       </PopoverContent>
     </Popover>
   );

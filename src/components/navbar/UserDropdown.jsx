@@ -27,28 +27,10 @@ export default function UserDropdown() {
 
   if (!user) return null;
 
-  const Avatar = function () {
-    return (
-      <div className="relative">
-        <AvatarComponent>
-          <AvatarImage src={user?.avatarURL || avatar} />
-          <AvatarFallback>
-            {user?.name?.split(' ')[0].charAt(0).toUpperCase()}
-            {user?.name?.split(' ')[1].charAt(0).toUpperCase()}
-          </AvatarFallback>
-        </AvatarComponent>
-        <StatusIcon
-          status={user?.serviceStatus}
-          className="absolute bottom-[5%] right-[5%]"
-        />
-      </div>
-    );
-  };
-
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger>
-        <Avatar />
+        <Avatar user={user} statusIcon />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-56">
@@ -59,7 +41,7 @@ export default function UserDropdown() {
           }}
           className="flex cursor-pointer items-center gap-2 rounded-lg px-1 py-1 transition-colors duration-300 hover:bg-foreground/10 md:px-2"
         >
-          <Avatar />
+          <Avatar user={user} />
           {/* Name and email */}
           <div>
             <p className="font-medium leading-tight tracking-tighter">
@@ -107,3 +89,23 @@ export default function UserDropdown() {
     </DropdownMenu>
   );
 }
+
+const Avatar = function ({ user, statusIcon }) {
+  return (
+    <div className="relative">
+      <AvatarComponent>
+        <AvatarImage src={user?.avatarURL || avatar} />
+        <AvatarFallback>
+          {user?.name?.split(' ')[0].charAt(0).toUpperCase()}
+          {user?.name?.split(' ')[1].charAt(0).toUpperCase()}
+        </AvatarFallback>
+      </AvatarComponent>
+      {statusIcon && (
+        <StatusIcon
+          status={user?.serviceStatus}
+          className="size-[13px] border-2 border-background absolute bottom-[2%] right-[2%]"
+        />
+      )}
+    </div>
+  );
+};
