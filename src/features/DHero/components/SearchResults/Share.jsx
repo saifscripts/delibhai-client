@@ -10,8 +10,8 @@ import {
 } from '@/components/ui/dialog';
 import { Link, Shield } from 'lucide-react';
 import * as React from 'react';
-import { PiShareFat } from 'react-icons/pi';
-import { TbBrandWhatsapp, TbShare3 } from 'react-icons/tb';
+import { PiShareFat, PiShareFatLight } from 'react-icons/pi';
+import { TbBrandWhatsapp } from 'react-icons/tb';
 import { toast } from 'sonner';
 
 export function Share({ rider }) {
@@ -22,7 +22,7 @@ export function Share({ rider }) {
       <DialogTrigger asChild>
         <button className="flex items-center gap-1">
           <span>
-            <TbShare3 className="text-foreground/50" size={24} />
+            <PiShareFatLight className="text-foreground/50" size={24} />
           </span>
           <span>Share</span>
         </button>
