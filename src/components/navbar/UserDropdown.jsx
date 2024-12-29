@@ -39,7 +39,7 @@ export default function UserDropdown() {
             navigate(`/profile/${user?._id}`);
             setIsOpen(false);
           }}
-          className="flex cursor-pointer items-center gap-2 rounded-lg px-1 py-1 transition-colors duration-300 hover:bg-foreground/10 md:px-2"
+          className="flex cursor-pointer items-center gap-2 rounded-lg px-1 py-1 transition-colors duration-300 md:px-2"
         >
           <Avatar user={user} />
           {/* Name and email */}

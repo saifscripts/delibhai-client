@@ -33,7 +33,7 @@ export function ServiceStatusPopover({ field, values, label }) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <div
-          className="flex items-center gap-2 tracking-tighter text-muted-foreground px-1 rounded-full -ml-1 group border border-foreground/10"
+          className="flex items-center gap-2 tracking-tighter text-muted-foreground px-1 rounded-md -ml-1 group border border-foreground/10"
           onClick={(e) => e.stopPropagation()}
         >
           <StatusIcon status={user?.serviceStatus} />
