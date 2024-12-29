@@ -55,72 +55,95 @@ export default function RiderCard({ rider }) {
           </div>
 
           {/* Information */}
-          <div className="flex-1 text-foreground/80">
-            <div className="flex gap3 justify-between items-center">
-              <div>
-                {/* Name */}
-                <h3 className="text-lg font-bold">{name}</h3>
+          <div className="flex-1 text-foreground/80 flex gap3 justify-between items-center">
+            <div>
+              {/* Name */}
+              <h3 className="text-lg font-bold">{name}</h3>
 
-                {/* Rent Type */}
+              {/* Rent Type */}
+              <div className="flex items-center gap-1">
+                <MapSpin size={16} className="fill-foreground/70" />
+                <span>
+                  {rider?.rentType?.map((type) => `${type}  ভাড়া`).join(', ')}
+                </span>
+              </div>
+
+              {/* Station */}
+              {getVillageTitle(rider.mainStation) && (
                 <div className="flex items-center gap-1">
-                  <MapSpin size={16} className="fill-foreground/70" />
-                  <span>
-                    {rider?.rentType?.map((type) => `${type}  ভাড়া`).join(', ')}
+                  <div className="relative">
+                    {rider.isHighlight && (
+                      <span className="absolute animate-ping">
+                        <Station className="fill-destructive" size={16} />
+                      </span>
+                    )}
+                    <span className="relative">
+                      <Station
+                        className={cn({
+                          'fill-foreground/70': !rider.isHighlight,
+                          'fill-destructive': rider.isHighlight,
+                        })}
+                        size={16}
+                      />
+                    </span>
+                  </div>
+
+                  <span
+                    className={cn({
+                      'text-destructive': rider.isHighlight,
+                    })}
+                  >
+                    {getVillageTitle(rider.mainStation)}
                   </span>
                 </div>
+              )}
 
-                {/* Station */}
-                {getVillageTitle(rider.mainStation) && (
-                  <div className="flex items-center gap-1">
-                    <Station
+              {/* Distance */}
+              <div className="flex items-center gap-1">
+                <div className="relative">
+                  {rider.isLive && (
+                    <span className="absolute animate-ping">
+                      <MapPin
+                        className={cn({
+                          'fill-destructive': rider.isLive,
+                          'fill-foreground/70': !rider.isLive,
+                        })}
+                        size={16}
+                      />
+                    </span>
+                  )}
+                  <span className="relative">
+                    <MapPin
                       className={cn({
-                        'fill-foreground/70': !rider.isHighlight,
-                        'fill-destructive': rider.isHighlight,
+                        'fill-destructive': rider.isLive,
+                        'fill-foreground/70': !rider.isLive,
                       })}
                       size={16}
                     />
-                    <span
-                      className={cn({
-                        'text-destructive': rider.isHighlight,
-                      })}
-                    >
-                      {getVillageTitle(rider.mainStation)}
-                    </span>
-                  </div>
-                )}
-
-                {/* Distance */}
-                <div className="flex items-center gap-1">
-                  <MapPin
-                    className={cn({
-                      'fill-destructive': rider.isLive,
-                      'fill-foreground/70': !rider.isLive,
-                    })}
-                    size={16}
-                  />
-                  <span
-                    className={cn({
-                      'text-destructive': rider.isLive,
-                    })}
-                  >
-                    {rider.distance.toFixed(2)} km
                   </span>
-                  {rider.isLive && (
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      className="text-[11px] h-4 px-1.5 rounded-sm"
-                    >
-                      Live
-                    </Button>
-                  )}
                 </div>
+                <span
+                  className={cn({
+                    'text-destructive': rider.isLive,
+                  })}
+                >
+                  {rider.distance.toFixed(2)} km
+                </span>
+                {rider.isLive && (
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    className="text-[11px] h-4 px-1.5 rounded-sm"
+                  >
+                    Live
+                  </Button>
+                )}
               </div>
+            </div>
 
-              {/* Vehicle Icon */}
-              <div className="w-12 flex-shrink-0">
-                <img src={vehicleIcon} alt="" className="w-full" />
-              </div>
+            {/* Vehicle Icon */}
+            <div className="w-12 flex-shrink-0">
+              <img src={vehicleIcon} alt="" className="w-full" />
             </div>
           </div>
         </div>

@@ -6,17 +6,15 @@ import RiderCard from './RiderCard';
 import RiderSkeleton from './RiderSkeleton';
 
 export default function SearchResults() {
-  const { riders, loader } = useRiders();
+  const { riders, hasMore, loader } = useRiders();
   const { pathname } = useLocation();
-
-  const hasMore = true;
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
   return (
-    <>
+    <div className="space-y-1.5 bg-muted dark:bg-black min-h-screen">
       <Filters />
       <div className="space-y-1.5 bg-muted dark:bg-black">
         {riders?.length > 0 &&
@@ -37,6 +35,6 @@ export default function SearchResults() {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

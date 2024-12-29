@@ -1,32 +1,36 @@
+import { Separator } from '@/components/ui/separator';
+import { Skeleton } from '@/components/ui/skeleton';
 import Container from '@/layouts/Container';
 
 export default function RiderSkeleton() {
   return (
-    <Container className="w-full">
-      <div className="bg-background shadow-sm rounded-lg p-2 w-full">
-        <div className="flex items-center gap-2 rounded-lg w-full">
-          <div className="aspect-square w-20 rounded-full flex-shrink-0 bg-slate-400" />
-          <div className="flex-1 w-full">
-            <div className="flex gap-2 justify-between w-full">
-              <div className="flex flex-col gap-2">
-                <div className="h-4 w-32 rounded bg-slate-400" />
-                <div className="h-2 w-36 rounded bg-slate-400" />
-                <div className="h-2 w-32 rounded bg-slate-400" />
-              </div>
-              <div className="size-[30px] flex-shrink-0 rounded-lg bg-slate-400" />
-            </div>
+    <Container>
+      <div className="bg-background shadow-sm rounded-lg">
+        {/* Body */}
+        <div className="flex items-center gap-2 rounded-lg py-2 px-3">
+          {/* Avatar */}
+          <Skeleton className="aspect-square w-20 rounded-full flex-shrink-0" />
 
-            <div className="flex justify-between items-center gap-1 mt-2">
-              <div className="flex gap-1">
-                <div className="h-5 w-14 rounded bg-slate-400" />
-                <div className="h-5 w-14 rounded bg-slate-400" />
-              </div>
-              <div className="flex items-center gap-1">
-                <div className="h-3 w-3 rounded bg-slate-400" />
-                <div className="h-4 w-10 rounded bg-slate-400" />
-              </div>
+          {/* Information */}
+          <div className="flex-1 flex gap-2 justify-between items-center">
+            <div className="flex flex-col gap-2 flex-1">
+              <Skeleton className="h-4 w-[80%]" />
+              <Skeleton className="h-2 w-[70%]" />
+              <Skeleton className="h-2 w-[60%]" />
+              <Skeleton className="h-2 w-[60%]" />
             </div>
+            <Skeleton className="size-12 flex-shrink-0 rounded-lg" />
           </div>
+        </div>
+
+        <Separator className="h-[0.5px] bg-foreground/5" />
+
+        {/* Actions */}
+        <div className="flex justify-between items-center gap-4 px-3 py-2 text-sm text-foreground/50">
+          <Skeleton className="h-5 w-16" />
+          <Skeleton className="h-5 w-16" />
+          <Skeleton className="h-5 w-16" />
+          <Skeleton className="h-5 w-16" />
         </div>
       </div>
     </Container>
