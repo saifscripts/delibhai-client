@@ -1,50 +1,65 @@
-import avatar from "@/assets/avatar.gif";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import avatar from '@/assets/avatar.gif';
+import {
+  Avatar as AvatarComponent,
+  AvatarFallback,
+  AvatarImage,
+} from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useAuth } from "@/contexts/auth.context";
-import { useGetMe } from "@/hooks/user.hook";
-import { LayoutDashboard, LogOutIcon, UserPenIcon } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+} from '@/components/ui/dropdown-menu';
+import { useAuth } from '@/contexts/auth.context';
+import { useGetMe } from '@/hooks/user.hook';
+import { LayoutDashboard, LogOutIcon, UserPenIcon } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ServiceStatusPopover } from './ServiceStatusPopover';
+import StatusIcon from './StatusIcon';
 
 export default function UserDropdown() {
   const { logout } = useAuth();
   const { user } = useGetMe();
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   if (!user) return null;
 
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <Avatar>
+  const Avatar = function () {
+    return (
+      <div className="relative">
+        <AvatarComponent>
           <AvatarImage src={user?.avatarURL || avatar} />
           <AvatarFallback>
-            {user?.name?.split(" ")[0].charAt(0).toUpperCase()}
-            {user?.name?.split(" ")[1].charAt(0).toUpperCase()}
+            {user?.name?.split(' ')[0].charAt(0).toUpperCase()}
+            {user?.name?.split(' ')[1].charAt(0).toUpperCase()}
           </AvatarFallback>
-        </Avatar>
+        </AvatarComponent>
+        <StatusIcon
+          status={user?.serviceStatus}
+          className="absolute bottom-[5%] right-[5%]"
+        />
+      </div>
+    );
+  };
+
+  return (
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+      <DropdownMenuTrigger>
+        <Avatar />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuItem
+        <div
           onClick={() => {
             navigate(`/profile/${user?._id}`);
+            setIsOpen(false);
           }}
           className="flex cursor-pointer items-center gap-2 rounded-lg px-1 py-1 transition-colors duration-300 hover:bg-foreground/10 md:px-2"
         >
-          <Avatar>
-            <AvatarImage src={user?.avatarURL || avatar} />
-            <AvatarFallback>
-              {user?.name?.split(" ")[0].charAt(0).toUpperCase()}
-              {user?.name?.split(" ")[1].charAt(0).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
+          <Avatar />
           {/* Name and email */}
           <div>
             <p className="font-medium leading-tight tracking-tighter">
@@ -53,8 +68,9 @@ export default function UserDropdown() {
             <p className="text-[12px] tracking-tighter text-muted-foreground">
               {user?.mobile}
             </p>
+            <ServiceStatusPopover />
           </div>
-        </DropdownMenuItem>
+        </div>
         <DropdownMenuItem
           className="cursor-pointer gap-2 text-base"
           onClick={() => {
@@ -65,7 +81,7 @@ export default function UserDropdown() {
           Profile
         </DropdownMenuItem>
 
-        {user?.role === "admin" && (
+        {user?.role === 'admin' && (
           <DropdownMenuItem
             className="cursor-pointer gap-2 text-base"
             onClick={() => {

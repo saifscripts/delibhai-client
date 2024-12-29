@@ -1,5 +1,8 @@
+import { updateRider } from '@/services/user.service';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { toast } from 'sonner';
 import { useGeolocation } from '../contexts/location.context';
 import { getRiders } from '../services/rider.service';
 
@@ -79,4 +82,25 @@ export const useRiders = () => {
   }, [hasMore]);
 
   return { riders, hasMore, page, setPage, loader };
+};
+
+export const useUpdateServiceStatus = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ['UPDATE_RIDER'],
+    mutationFn: (serviceStatus) => updateRider({ serviceStatus }),
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: ['ME'] });
+        queryClient.invalidateQueries({ queryKey: ['USER'] });
+        //   toast.success('Profile updated successfully');
+      } else {
+        toast.error(data?.message);
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
 };
