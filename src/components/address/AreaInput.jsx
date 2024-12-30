@@ -44,7 +44,7 @@ const divisions = [
   },
 ];
 
-export default function AddressInput({ name, label }) {
+export default function AreaInput({ name, label }) {
   const { watch, setValue, resetField } = useFormContext();
 
   const division = watch(`${name}.division`);

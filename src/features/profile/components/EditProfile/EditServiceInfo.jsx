@@ -2,11 +2,11 @@ import Form from '@/components/forms/Form';
 import { MultiSelect } from '@/components/forms/MultiSelect';
 import Select from '@/components/forms/Select';
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog';
 import Edit from '@/components/ui/Edit';
 import { useEffect, useState } from 'react';
@@ -32,7 +32,7 @@ const userSchema = yup.object({
     ),
 });
 
-export default function EditServiceInfo({ isOpen, onClose }) {
+export default function EditServiceInfo() {
   //   const [serviceArea, setServiceArea] = useState([]);
   //   const [address, setAddress] = useState(null);
   //   const [mainStationAddress, setMainStationAddress] = useState({});
@@ -72,8 +72,6 @@ export default function EditServiceInfo({ isOpen, onClose }) {
   }, [isSuccess, updatedRider]);
 
   if (!user) return null;
-
-  console.log({ user: user.rentType });
 
   const defaultValues = {
     serviceType: user?.serviceType,

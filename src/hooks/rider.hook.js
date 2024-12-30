@@ -4,7 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useGeolocation } from '../contexts/location.context';
-import { getRiders } from '../services/rider.service';
+import {
+  addRiderServiceArea,
+  deleteRiderServiceArea,
+  getRiders,
+} from '../services/rider.service';
 
 export const useRiders = () => {
   const [searchParams] = useSearchParams();
@@ -110,6 +114,45 @@ export const useUpdateServiceStatus = () => {
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['ME'] });
       //   queryClient.invalidateQueries({ queryKey: ['USER'] });
+    },
+  });
+};
+
+export const useAddRiderServiceArea = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ['RIDER_SERVICE_AREA'],
+    mutationFn: addRiderServiceArea,
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: ['ME'] });
+        queryClient.invalidateQueries({ queryKey: ['USER'] });
+      } else {
+        toast.error(data?.message);
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const useDeleteRiderServiceArea = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteRiderServiceArea,
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: ['ME'] });
+        queryClient.invalidateQueries({ queryKey: ['USER'] });
+      } else {
+        toast.error(data?.message);
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 };
