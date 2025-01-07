@@ -12,7 +12,7 @@ import router from './router.jsx';
 
 const queryClient = new QueryClient();
 
-const socket = io('http://localhost:5000');
+const socket = io('https://delibhai-server.vercel.app');
 
 socket.on('connection', (value) => {
   console.log(value);
