@@ -76,7 +76,7 @@ npm install
 To run the app, create a `.env` file in the root folder with the following properties (I have included a few demo values here for testing):
 
 ```
-VITE_BASE_URL=http://localhost:5000/api/v1
+VITE_BASE_URL=http://localhost:5000
 VITE_IMGBB_API_KEY=your_imgbb_api_key
 ```
 

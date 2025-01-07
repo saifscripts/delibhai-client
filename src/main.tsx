@@ -12,7 +12,7 @@ import router from './router.jsx';
 
 const queryClient = new QueryClient();
 
-const socket = io('https://delibhai-server.vercel.app');
+const socket = io(import.meta.env.VITE_BASE_URL as string);
 
 socket.on('connection', (value) => {
   console.log(value);
