@@ -12,7 +12,13 @@ import router from './router.jsx';
 
 const queryClient = new QueryClient();
 
-const socket = io(import.meta.env.VITE_BASE_URL as string);
+const socket = io(import.meta.env.VITE_BASE_URL as string, {
+  transports: ['websocket'],
+  reconnection: true,
+  reconnectionAttempts: 10,
+  reconnectionDelay: 1000,
+  timeout: 5000,
+});
 
 socket.on('connection', (value) => {
   console.log(value);
