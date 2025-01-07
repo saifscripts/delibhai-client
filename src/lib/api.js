@@ -1,10 +1,10 @@
-import AXIOS from "axios";
-import { getAuthToken } from "../utils/authToken";
+import AXIOS from 'axios';
+import { getAuthToken } from '../utils/authToken';
 
 const axios = AXIOS.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: `${import.meta.env.VITE_BASE_URL}/api/v1`,
   timeout: 10000,
-  headers: { "Content-Type": "application/json" },
+  headers: { 'Content-Type': 'application/json' },
 });
 
 axios.interceptors.request.use((config) => {
