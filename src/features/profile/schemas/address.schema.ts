@@ -82,3 +82,7 @@ export const EditMainStationSchema = z.object({
 export const AddServiceAreaSchema = z.object({
   serviceArea: FlexibleAddressSchema,
 });
+
+export const UpdateServiceAreaSchema = z.object({
+  address: FlexibleAddressSchema,
+});

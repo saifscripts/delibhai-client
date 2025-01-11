@@ -30,3 +30,12 @@ export const deleteRiderServiceArea = async (id) => {
     throw new Error(generateErrorMessage(error));
   }
 };
+
+export const updateRiderServiceArea = async ({ id, body }) => {
+  try {
+    const { data } = await axios.put(`/rider/service-area/${id}`, body);
+    return data;
+  } catch (error) {
+    console.log(generateErrorMessage(error));
+  }
+};

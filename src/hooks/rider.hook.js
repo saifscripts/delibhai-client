@@ -8,6 +8,7 @@ import {
   addRiderServiceArea,
   deleteRiderServiceArea,
   getRiders,
+  updateRiderServiceArea,
 } from '../services/rider.service';
 
 export const useRiders = () => {
@@ -143,6 +144,25 @@ export const useDeleteRiderServiceArea = () => {
 
   return useMutation({
     mutationFn: deleteRiderServiceArea,
+    onSuccess: (data) => {
+      if (data?.success) {
+        queryClient.invalidateQueries({ queryKey: ['ME'] });
+        queryClient.invalidateQueries({ queryKey: ['USER'] });
+      } else {
+        toast.error(data?.message);
+      }
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+};
+
+export const useUpdateRiderServiceArea = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: updateRiderServiceArea,
     onSuccess: (data) => {
       if (data?.success) {
         queryClient.invalidateQueries({ queryKey: ['ME'] });

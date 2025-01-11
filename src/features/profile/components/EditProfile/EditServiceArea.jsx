@@ -8,25 +8,12 @@ import {
 } from '@/components/ui/dialog';
 import Edit from '@/components/ui/Edit';
 import { useDeleteRiderServiceArea } from '@/hooks/rider.hook';
-import { ChevronRightIcon, Trash2Icon } from 'lucide-react';
+import { Trash2Icon } from 'lucide-react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMe } from '../../../../hooks/auth.hook';
 import AddServiceArea from './AddServiceArea';
-
-const getTitle = (address) => {
-  return address?.village?.length
-    ? `${address?.union?.title} ইউনিয়ন`
-    : address?.union?.title
-      ? `সমগ্র ${address?.union?.title} ইউনিয়ন`
-      : address?.upazila?.title
-        ? `সমগ্র ${address?.upazila?.title} উপজেলা`
-        : address?.district?.title
-          ? `সমগ্র ${address?.district?.title} জেলা`
-          : address?.division?.title
-            ? `সমগ্র ${address?.division?.title} বিভাগ`
-            : '';
-};
+import UpdateServiceArea from './UpdateServiceArea';
 
 export default function EditServiceArea() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -58,17 +45,7 @@ export default function EditServiceArea() {
               key={index}
               className="flex justify-between items-center gap-2"
             >
-              <div className="py-2 px-3 border flex-1 rounded-lg flex items-center justify-between hover:bg-muted cursor-pointer">
-                <div>
-                  <p className="font-bold">{getTitle(address)}</p>
-                  {address?.village?.length ? (
-                    <p>
-                      {address?.village?.map(({ title }) => title).join(', ')}
-                    </p>
-                  ) : null}
-                </div>
-                <ChevronRightIcon />
-              </div>
+              <UpdateServiceArea address={address} />
               <Button
                 variant="ghost"
                 size="icon"
