@@ -1,41 +1,44 @@
-import { Button } from "@/components/ui/button";
-import cloneDeep from "lodash/cloneDeep";
-import { useEffect, useState } from "react";
-import { AiFillPlusSquare } from "react-icons/ai";
-import { MdDelete, MdEdit } from "react-icons/md";
-import { toast } from "sonner";
-import { convertTimeFormat } from "../../../../utils/convertTime";
+import { Button } from '@/components/ui/button';
+import cloneDeep from 'lodash/cloneDeep';
+import { useEffect, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
+import { AiFillPlusSquare } from 'react-icons/ai';
+import { MdDelete, MdEdit } from 'react-icons/md';
+import { toast } from 'sonner';
+import { convertTimeFormat } from '../../../../utils/convertTime';
 import {
   hasMinimumTimeGap,
   is24Hour,
   isSlotOverlapping,
   isValidTimeSlot,
   remove24HourSlot,
-} from "../../../../utils/timeHelpers";
+} from '../../../../utils/timeHelpers';
 
 const getCurrentTime = () => {
   const currentDate = new Date();
 
-  const hours = currentDate.getHours().toString().padStart(2, "0");
-  const minutes = currentDate.getMinutes().toString().padStart(2, "0");
+  const hours = currentDate.getHours().toString().padStart(2, '0');
+  const minutes = currentDate.getMinutes().toString().padStart(2, '0');
 
   return `${hours}:${minutes}`;
 };
 
 export default function ServiceTimes({
-  serviceTimes,
-  setServiceTimes,
   is24HourServiceTime,
   setIs24HourServiceTime,
 }) {
+  const { watch, setValue } = useFormContext();
+
+  const serviceTimeSlots = Object.values(watch('serviceTimeSlots')) || [];
+
   const [newTimeSlot, setNewTimeSlot] = useState({
     start: getCurrentTime(),
     end: getCurrentTime(),
   });
 
   useEffect(() => {
-    setIs24HourServiceTime(is24Hour(serviceTimes));
-  }, [serviceTimes, setIs24HourServiceTime]);
+    is24Hour(serviceTimeSlots) && setIs24HourServiceTime(true);
+  }, [serviceTimeSlots]);
 
   const onStartTimeChange = (e) => {
     setNewTimeSlot((prevSlot) => ({
@@ -53,7 +56,7 @@ export default function ServiceTimes({
 
   const toggle24Hour = () => {
     if (is24HourServiceTime) {
-      setServiceTimes(remove24HourSlot(serviceTimes));
+      setValue('serviceTimeSlots', remove24HourSlot(serviceTimeSlots));
       setIs24HourServiceTime(false);
     } else {
       setIs24HourServiceTime(true);
@@ -64,31 +67,31 @@ export default function ServiceTimes({
     e.preventDefault();
 
     if (!isValidTimeSlot(newTimeSlot)) {
-      return toast.error("সঠিক সময় প্রদান করুন");
+      return toast.error('সঠিক সময় প্রদান করুন');
     }
 
     if (!hasMinimumTimeGap(newTimeSlot)) {
-      return toast.error("ন্যূনতম ৩০ মিনিট ব্যবধান থাকা বাধ্যতামূলক");
+      return toast.error('ন্যূনতম ৩০ মিনিট ব্যবধান থাকা বাধ্যতামূলক');
     }
 
-    if (isSlotOverlapping(newTimeSlot, serviceTimes)) {
-      return toast.error("উক্ত সময় ইতিমধ্যে প্রদান করা হয়েছে");
+    if (isSlotOverlapping(newTimeSlot, serviceTimeSlots)) {
+      return toast.error('উক্ত সময় ইতিমধ্যে প্রদান করা হয়েছে');
     }
 
-    const _serviceTimes = cloneDeep(serviceTimes);
+    const _serviceTimes = cloneDeep(serviceTimeSlots);
     _serviceTimes.push(newTimeSlot);
-    setServiceTimes(_serviceTimes);
+    setValue('serviceTimeSlots', _serviceTimes);
   };
 
   const removeTime = (e, startTime, endTime) => {
     e.preventDefault();
 
-    let _serviceTimes = cloneDeep(serviceTimes);
+    let _serviceTimes = cloneDeep(serviceTimeSlots);
     _serviceTimes = _serviceTimes.filter(
-      ({ start, end }) => !(start === startTime && end === endTime),
+      ({ start, end }) => !(start === startTime && end === endTime)
     );
 
-    setServiceTimes(_serviceTimes);
+    setValue('serviceTimeSlots', _serviceTimes);
   };
 
   return (
@@ -102,7 +105,7 @@ export default function ServiceTimes({
             type="checkbox"
             checked={is24HourServiceTime}
             onChange={toggle24Hour}
-          />{" "}
+          />{' '}
           দিনরাত ২৪ ঘণ্টা
         </label>
       </div>
@@ -110,13 +113,13 @@ export default function ServiceTimes({
       {!is24HourServiceTime && (
         <>
           <div className="flex flex-col gap-2">
-            {serviceTimes.map(({ start, end }, index) => (
+            {serviceTimeSlots?.map(({ start, end }, index) => (
               <div
                 key={index}
                 className="bg-tone/30 flex items-center justify-between rounded-lg  px-3 py-2 "
               >
                 <span>{`${convertTimeFormat(start)} থেকে ${convertTimeFormat(
-                  end,
+                  end
                 )} পর্যন্ত`}</span>
 
                 <div>

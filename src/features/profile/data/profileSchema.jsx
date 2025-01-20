@@ -22,6 +22,7 @@ import vehicleNumber from '../assets/icons/vehicle-number.svg';
 import vehicleType from '../assets/icons/vehicle.svg';
 import EditMainStation from '../components/EditProfile/EditMainStation';
 import EditServiceArea from '../components/EditProfile/EditServiceArea';
+import EditServiceTime from '../components/EditProfile/EditServiceTime';
 import getAddressTitles from '../utils/getAddressTitles';
 import modifyAge from '../utils/modifyAge';
 import modifyServiceAddress from '../utils/modifyServiceAddress';
@@ -217,6 +218,7 @@ const profileSchema = {
           dataModifier: getServiceTimes,
           label: 'সার্ভিস প্রদানের সময়',
           icon: clock,
+          edit: <EditServiceTime />,
         },
       ],
     },

@@ -120,48 +120,6 @@ export default function EditServiceInfo() {
             description="একাধিক নির্বাচন করা যাবে"
           />
 
-          {/* <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
-            প্রধান স্ট্যাশন
-          </p> */}
-
-          {/* <AddressFields
-            villageType="select"
-            address={mainStationAddress}
-            setAddress={setMainStationAddress}
-          /> */}
-
-          {/* <p className="border-light mb-3 mt-4 border-b py-3 font-bold">
-            সার্ভিস প্রদানের এলাকা
-          </p> */}
-
-          {/* <div className="my-6 flex flex-col gap-2">
-            {serviceArea?.map((address, index) => (
-              <ServiceAddressCard
-                key={index}
-                index={index}
-                address={address}
-                setAddress={setAddress}
-                setAddressIndex={setAddressIndex}
-                setIsAddressModalOpen={setIsAddressModalOpen}
-                serviceAddress={serviceArea}
-                setServiceAddress={setServiceArea}
-              />
-            ))}
-          </div> */}
-
-          {/* <button
-            onClick={(e) => {
-              e.preventDefault();
-              setIsAddressModalOpen(true);
-              setAddress(null);
-              setAddressIndex(serviceArea.length);
-            }}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-2 py-2 text-xl text-white"
-          >
-            <AiFillPlusSquare />
-            <span>নতুন এলাকা যোগ করুন</span>
-          </button> */}
-
           {/* <ServiceTimes
             serviceTimes={serviceTimes}
             setServiceTimes={setServiceTimes}
