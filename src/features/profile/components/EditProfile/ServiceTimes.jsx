@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import cloneDeep from 'lodash/cloneDeep';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
@@ -27,6 +28,7 @@ export default function ServiceTimes({
   is24HourServiceTime,
   setIs24HourServiceTime,
 }) {
+  const [isOpen, setIsOpen] = useState(false);
   const { watch, setValue } = useFormContext();
 
   const serviceTimeSlots = Object.values(watch('serviceTimeSlots')) || [];
@@ -81,6 +83,7 @@ export default function ServiceTimes({
     const _serviceTimes = cloneDeep(serviceTimeSlots);
     _serviceTimes.push(newTimeSlot);
     setValue('serviceTimeSlots', _serviceTimes);
+    setIsOpen(false);
   };
 
   const removeTime = (e, startTime, endTime) => {
@@ -146,34 +149,41 @@ export default function ServiceTimes({
             ))}
           </div>
 
-          <div className="bg-tone/10 my-6 flex flex-col gap-2 rounded-lg p-3">
-            <label className="bg-light flex items-center justify-between rounded-lg p-2">
-              শুরুর সময়
-              <input
-                className="rounded-lg border bg-inherit p-1"
-                type="time"
-                value={newTimeSlot.start}
-                onChange={onStartTimeChange}
-              />
-            </label>
-            <label className="bg-light flex items-center justify-between rounded-lg p-2">
-              শেষের সময়
-              <input
-                className="rounded-lg border bg-inherit p-1"
-                type="time"
-                value={newTimeSlot.end}
-                onChange={onEndTimeChange}
-              />
-            </label>
+          <Dialog open={isOpen} onOpenChange={setIsOpen}>
+            <DialogTrigger asChild>
+              <Button>
+                <AiFillPlusSquare />
+                <span>যোগ করুন</span>
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <div className="bg-tone/10 my-6 flex flex-col gap-2 rounded-lg p-3">
+                <label className="bg-light flex items-center justify-between rounded-lg p-2">
+                  শুরুর সময়
+                  <input
+                    className="rounded-lg border bg-inherit p-1"
+                    type="time"
+                    value={newTimeSlot.start}
+                    onChange={onStartTimeChange}
+                  />
+                </label>
+                <label className="bg-light flex items-center justify-between rounded-lg p-2">
+                  শেষের সময়
+                  <input
+                    className="rounded-lg border bg-inherit p-1"
+                    type="time"
+                    value={newTimeSlot.end}
+                    onChange={onEndTimeChange}
+                  />
+                </label>
 
-            <button
-              onClick={addTime}
-              className="flex items-center justify-center gap-2 rounded-lg bg-primary px-2 py-2 text-xl text-white"
-            >
-              <AiFillPlusSquare />
-              <span>যোগ করুন</span>
-            </button>
-          </div>
+                <Button onClick={addTime}>
+                  <AiFillPlusSquare />
+                  <span>যোগ করুন</span>
+                </Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </>
       )}
     </>
